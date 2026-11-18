@@ -1,0 +1,13 @@
+[
+  {"id": "R-01", "risco": "Dois clientes agendados para o mesmo barbeiro em horários sobrepostos", "probabilidade": "Média", "impacto": "Alto", "prioridade": "Alta", "resposta": "Sobreposição total, parcial e encostada (valor limite); testes de unidade e de API; regressão a cada correção"},
+  {"id": "R-02", "risco": "Agendamento aceito fora do funcionamento, no domingo ou fora dos intervalos de 30 minutos", "probabilidade": "Média", "impacto": "Alto", "prioridade": "Alta", "resposta": "Valor limite de início e término; domingo; minutos fora de 00/30; testes de unidade com relógio fixo"},
+  {"id": "R-03", "risco": "Acesso à área administrativa ou a dados pessoais sem autenticação", "probabilidade": "Média", "impacto": "Alto", "prioridade": "Alta", "resposta": "Acesso sem login, com senha errada e sem token CSRF; verificar 401/403 e corpo sem dados"},
+  {"id": "R-04", "risco": "Regras de data falham perto dos limites (horário recém-passado, 30 e 31 dias)", "probabilidade": "Média", "impacto": "Médio", "prioridade": "Média", "resposta": "Valor limite de antecedência; testes de unidade com Clock fixo"},
+  {"id": "R-05", "risco": "Dados inválidos aceitos no cadastro de cliente ou de serviço", "probabilidade": "Média", "impacto": "Médio", "prioridade": "Média", "resposta": "Partições e limites de nome, telefone, e-mail, duração e preço"},
+  {"id": "R-06", "risco": "Cliente ultrapassa o limite de 3 agendamentos ativos", "probabilidade": "Baixa", "impacto": "Médio", "prioridade": "Média", "resposta": "Casos do 3º e do 4º agendamento; cancelamento libera vaga"},
+  {"id": "R-07", "risco": "Pessoa consulta ou cancela agendamento de outra", "probabilidade": "Baixa", "impacto": "Alto", "prioridade": "Média", "resposta": "Consulta com e-mail divergente, código inexistente e id numérico"},
+  {"id": "R-08", "risco": "Texto digitado com HTML/script é executado na página", "probabilidade": "Baixa", "impacto": "Alto", "prioridade": "Média", "resposta": "Cadastro com <script> e verificação nas telas de consulta e agenda"},
+  {"id": "R-09", "risco": "Interface inutilizável no celular ou no Firefox", "probabilidade": "Média", "impacto": "Médio", "prioridade": "Média", "resposta": "Fluxos e Selenium em Chrome/Firefox e em 375×667"},
+  {"id": "R-10", "risco": "Perda de agendamentos após reinício da aplicação", "probabilidade": "Baixa", "impacto": "Alto", "prioridade": "Média", "resposta": "Criar dados, reiniciar no perfil dev e comparar"},
+  {"id": "R-11", "risco": "Consulta de horários lenta, prejudicando o agendamento", "probabilidade": "Baixa", "impacto": "Baixo", "prioridade": "Baixa", "resposta": "30 repetições com média e p95"}
+]
