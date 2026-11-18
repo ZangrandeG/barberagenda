@@ -30,6 +30,8 @@ import jakarta.servlet.http.HttpServletRequest;
  *       token CSRF inválido, 403.</li>
  *   <li>Listagem e consulta de clientes por id (GET /api/clientes/**) também exigem administrador,
  *       pois expõem dados pessoais.</li>
+ *   <li>A restauração de dados (/api/dev/**, só existe nos perfis dev e test) apaga registros e por
+ *       isso também exige administrador e segue a mesma regra de CSRF da área administrativa.</li>
  *   <li>CSRF: exigido nas requisições de alteração da área administrativa feitas com sessão
  *       (navegador). Requisições com cabeçalho Authorization (HTTP Basic, ex.: Postman) não usam
  *       cookie de sessão e por isso dispensam o token.</li>
@@ -51,7 +53,8 @@ public class SecurityConfig {
         RequestMatcher api = req -> caminho(req).startsWith("/api/");
         RequestMatcher areaAdministrativa = req -> {
             String caminho = caminho(req);
-            return caminho.startsWith("/api/admin/") || caminho.startsWith("/admin/");
+            return caminho.startsWith("/api/admin/") || caminho.startsWith("/admin/")
+                    || caminho.startsWith("/api/dev/");
         };
         RequestMatcher semCabecalhoAuthorization = req -> req.getHeader(HttpHeaders.AUTHORIZATION) == null;
         RequestMatcher exigeCsrf = new AndRequestMatcher(
@@ -74,7 +77,7 @@ public class SecurityConfig {
                 .requireCsrfProtectionMatcher(exigeCsrf))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(PAGINA_LOGIN, "/admin/login").permitAll()
-                .requestMatchers("/admin/**", "/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**", "/api/admin/**", "/api/dev/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/clientes", "/api/clientes/**").hasRole("ADMIN")
                 .anyRequest().permitAll())
             .formLogin(form -> form

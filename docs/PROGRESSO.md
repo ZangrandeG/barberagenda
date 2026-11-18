@@ -57,6 +57,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 2026-11-18 | Spring Boot 3.5.16 (última linha 3.x; o Spring Initializr só oferece 4.x, então o projeto foi montado manualmente com o Maven Wrapper oficial). |
 | 2026-11-18 | Desvios em relação ao prompt inicial, por segurança e usabilidade: `GET /api/clientes` exige administrador; o agendamento identifica o cliente pelo e-mail (`emailCliente`); consulta/cancelamento exigem código + e-mail. Ver `docs/ESPECIFICACAO_SISTEMA.md`, seção 5. |
 | 2026-11-18 | Regra de cancelamento com antecedência mínima **não** implementada: reservada para o TDD (Fase 9). |
+| 2026-11-18 | Versão 1.0.1 (tag `v1.0.1-sistema-base`): revisão automática de segurança do código, feita antes do início dos testes, apontou que `POST /api/dev/reset` não exigia autenticação; passou a exigir administrador e CSRF. Por ter sido encontrado em revisão de código durante o desenvolvimento (e não na execução de um caso de teste), não foi registrado como defeito do processo de testes. Verificação: 42/42. |
+| 2026-11-18 | Em aberto (decisão do grupo): a mesma revisão apontou que consulta/cancelamento por código sequencial + e-mail permite que quem conheça o e-mail de alguém descubra e cancele os agendamentos dessa pessoa variando o código. Alternativa: código de acesso aleatório gerado no agendamento. |
 
 ## Repositório
 

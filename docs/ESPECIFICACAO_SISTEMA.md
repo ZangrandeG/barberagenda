@@ -3,6 +3,7 @@
 | Versão | Data | Descrição |
 |---|---|---|
 | v1.0 | 2026-11-18 | Especificação da versão base (tag `v1.0-sistema-base`) |
+| v1.1 | 2026-11-18 | `POST /api/dev/reset` passa a exigir administrador (versão 1.0.1) |
 
 Documento de referência para os requisitos (P02) e para os casos de teste (P04). Descreve o comportamento **implementado** na versão base.
 
@@ -27,7 +28,7 @@ Documento de referência para os requisitos (P02) e para os casos de teste (P04)
 | RN-08 | Um cliente pode ter no máximo 3 agendamentos com status `AGENDADO` ao mesmo tempo (o 4º é recusado). | `AgendamentoService.agendar` | 409 |
 | RN-09 | Serviço: duração de 15 a 180 minutos, múltipla de 15; preço de R$ 1,00 a R$ 1.000,00, com até 2 casas decimais. | `ServicoRequest` | 400, campos `duracaoMinutos` / `preco` |
 | RN-10 | Somente barbeiros e serviços ativos recebem agendamentos e aparecem para o cliente. | `AgendamentoService` e consultas públicas | 400, campo `barbeiroId` / `servicoId` |
-| RN-11 | Área administrativa somente com autenticação. API administrativa sem credenciais responde 401; com token CSRF ausente ou inválido (sessão do navegador), 403. | `SecurityConfig` | 401 / 403 |
+| RN-11 | Área administrativa somente com autenticação. Sem credenciais: consultas (GET) respondem 401; alterações (POST, PUT, PATCH, DELETE) respondem 403, porque o token CSRF é verificado antes da autenticação. Com sessão do navegador e token CSRF ausente ou inválido: 403. Com HTTP Basic e senha errada: 401. Páginas `/admin/**` sem login redirecionam para o login. | `SecurityConfig` | 401 / 403 / 302 |
 
 **Ordem das verificações ao criar um agendamento:** cliente, barbeiro e serviço existem (404) → barbeiro e serviço ativos, RN-10 (400) → RN-06, RN-04, RN-05, nesta ordem (400) → limite de ativos, RN-08 (409) → sobreposição, RN-07 (409).
 
@@ -63,6 +64,8 @@ Base: `http://localhost:8080`. Corpo e respostas em JSON (UTF-8). Datas: `AAAA-M
 
 ### 4.2 Administrativa (exige perfil ADMIN)
 
+Na coluna Erros, "401" nas rotas de alteração significa credencial inválida via HTTP Basic. Sem nenhuma credencial, as alterações respondem 403 (ver RN-11).
+
 | Método e rota | Descrição | Sucesso | Erros |
 |---|---|---|---|
 | `GET /api/clientes` | Lista clientes (dados pessoais) | 200 | 401 |
@@ -81,11 +84,13 @@ Base: `http://localhost:8080`. Corpo e respostas em JSON (UTF-8). Datas: `AAAA-M
 | `POST /admin/login` | Login por formulário (`username`, `password`) | 200 `{login}` | 401 |
 | `POST /admin/logout` | Encerra a sessão | 204 | 403 (sem CSRF) |
 
-### 4.3 Apoio aos testes (somente perfis `dev` e `test`)
+### 4.3 Apoio aos testes (somente perfis `dev` e `test`; exige perfil ADMIN)
 
-| Método e rota | Descrição | Sucesso |
-|---|---|---|
-| `POST /api/dev/reset` | Apaga barbeiros, serviços, clientes e agendamentos e recarrega a massa fictícia | 200 `{barbeiros, servicos, clientes, agendamentos}` |
+| Método e rota | Descrição | Sucesso | Erros |
+|---|---|---|---|
+| `POST /api/dev/reset` | Apaga barbeiros, serviços, clientes e agendamentos e recarrega a massa fictícia | 200 `{barbeiros, servicos, clientes, agendamentos}` | 403 (sem credenciais ou sessão sem token CSRF), 401 (HTTP Basic com senha errada) |
+
+Em outros perfis a rota não existe (404).
 
 ### 4.4 Formato de erro
 

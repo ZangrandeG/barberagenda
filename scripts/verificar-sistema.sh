@@ -62,7 +62,10 @@ print(d.isoformat())"
 echo "== BarberAgenda — verificação da versão base em $BASE =="
 echo "== $(date '+%Y-%m-%d %H:%M:%S') =="
 
-verificar "POST /api/dev/reset restaura a massa fictícia" 200 "$(chamar POST /api/dev/reset)"
+# Alterações sem credenciais: o filtro de CSRF roda antes da autenticação, por isso 403 (e não 401).
+verificar "POST /api/dev/reset sem credenciais é recusado (CSRF)" 403 "$(chamar POST /api/dev/reset)"
+verificar "POST /api/dev/reset restaura a massa fictícia (administrador)" 200 \
+    "$(chamar POST /api/dev/reset '' "$ADMIN")"
 
 verificar "GET /api/barbeiros lista barbeiros ativos" 200 "$(chamar GET /api/barbeiros)"
 BARBEIRO=$(json "d[0]['id']")
@@ -120,6 +123,8 @@ verificar "PATCH cancelar novamente (já cancelado)" 409 \
 
 verificar "GET /api/admin/barbeiros sem credenciais (RN-11)" 401 "$(chamar GET /api/admin/barbeiros)"
 verificar "  resposta 401 não contém stack trace" "False" "$(json "'trace' in d or 'exception' in str(d).lower()")"
+verificar "POST /api/admin/barbeiros sem credenciais (CSRF)" 403 \
+    "$(chamar POST /api/admin/barbeiros '{"nome":"Sem Login","ativo":true}')"
 verificar "GET /api/admin/barbeiros com senha errada" 401 "$(chamar GET /api/admin/barbeiros '' 'admin:errada')"
 verificar "GET /api/admin/barbeiros como administrador" 200 "$(chamar GET /api/admin/barbeiros '' "$ADMIN")"
 verificar "POST /api/admin/servicos com duração 20 (RN-09)" 400 \
@@ -146,7 +151,7 @@ verificar "GET /admin/index.html sem login redireciona ao login" 302 \
     "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/admin/index.html")"
 verificar "GET /index.html (página pública)" 200 "$(curl -s -o /dev/null -w '%{http_code}' "$BASE/index.html")"
 
-verificar "POST /api/dev/reset restaura a massa fictícia ao final" 200 "$(chamar POST /api/dev/reset)"
+verificar "POST /api/dev/reset restaura a massa fictícia ao final" 200 "$(chamar POST /api/dev/reset '' "$ADMIN")"
 
 rm -f "$CORPO" "$ENVIO"
 echo "== Resultado: $((TOTAL - FALHAS))/$TOTAL verificações OK =="

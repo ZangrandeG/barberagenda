@@ -15,7 +15,12 @@ Turma A — Grupo [PREENCHER número do grupo]
 
 ## 2. Nome e versão do sistema
 
-**BarberAgenda 1.0.0** — versão base marcada com a tag Git `v1.0-sistema-base`.
+**BarberAgenda 1.0.1** — tag Git `v1.0.1-sistema-base` (versão que será testada).
+
+| Versão | Tag | Data | Mudança |
+|---|---|---|---|
+| 1.0.0 | `v1.0-sistema-base` | 2026-11-18 | Versão base |
+| 1.0.1 | `v1.0.1-sistema-base` | 2026-11-18 | A restauração de dados (`POST /api/dev/reset`) passa a exigir administrador e CSRF, apontado pela revisão de segurança do código antes do início dos testes |
 
 ## 3. Link do repositório
 
@@ -77,7 +82,7 @@ Variáveis de ambiente opcionais:
 
 - O esquema é criado automaticamente pelo Hibernate.
 - Nos perfis `dev` e `test`, uma **massa de dados fictícios** é carregada quando o banco está vazio: 3 barbeiros (1 inativo), 5 serviços (1 inativo), 10 clientes e 5 agendamentos com datas relativas ao dia atual. Detalhes na seção 6 de [docs/ESPECIFICACAO_SISTEMA.md](docs/ESPECIFICACAO_SISTEMA.md).
-- **Restaurar o ambiente entre execuções** (apaga os dados e recarrega a massa; disponível somente em `dev` e `test`):
+- **Restaurar o ambiente entre execuções** (apaga os dados e recarrega a massa; disponível somente em `dev` e `test` e somente para o administrador — os scripts usam a credencial fictícia ou as variáveis `ADMIN_LOGIN`/`ADMIN_SENHA`):
 
 ```bash
 bash scripts/reset-dados.sh                                         # Linux/macOS/Git Bash
@@ -92,7 +97,7 @@ powershell -ExecutionPolicy Bypass -File scripts\reset-dados.ps1    # Windows
 ```bash
 ./mvnw spring-boot:run                                        # perfil dev
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=test        # perfil test (banco em memória)
-java -jar target/barberagenda-1.0.0.jar                       # a partir do pacote gerado
+java -jar target/barberagenda-1.0.1.jar                       # a partir do pacote gerado
 ```
 
 Acesse:
@@ -111,7 +116,7 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 
 | Tipo | Comando | Situação |
 |---|---|---|
-| Verificação rápida da versão base | Com a aplicação rodando: `bash scripts/verificar-sistema.sh` | Disponível — 40 verificações; resultado em [entrega/01_SISTEMA_ALVO](entrega/01_SISTEMA_ALVO) |
+| Verificação rápida da versão base | Com a aplicação rodando: `bash scripts/verificar-sistema.sh` | Disponível — 42 verificações; resultados em [entrega/01_SISTEMA_ALVO](entrega/01_SISTEMA_ALVO) |
 | Unitários (JUnit 5 + Mockito) | `./mvnw test` | A implementar no Marco 5 |
 | Cobertura (JaCoCo) | `./mvnw verify` → `target/site/jacoco/index.html` | A configurar no Marco 5 |
 | Análise de qualidade (SonarQube) | A documentar no Marco 5 | A configurar |

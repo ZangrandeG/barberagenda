@@ -11,6 +11,7 @@ import br.com.barberagenda.seed.ResumoCarga;
 /**
  * Restauração do ambiente entre execuções de teste (manual, seção 9.1, item 6).
  * Existe SOMENTE nos perfis dev e test; em outros perfis a rota responde 404.
+ * Por apagar dados, exige perfil ADMIN (ver SecurityConfig).
  */
 @RestController
 @RequestMapping("/api/dev")
