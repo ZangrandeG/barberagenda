@@ -137,6 +137,7 @@ GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions (pipeline a c
 | `entrega/` | Espelho das 17 pastas obrigatórias do Drive (seção 11.3 do manual) |
 | `entrega/00_IDENTIFICACAO_E_README/` | Ficha de proposta do sistema (P01) |
 | `entrega/01_SISTEMA_ALVO/` | Ambiente e verificação da versão base |
+| `entrega/03_PLANO_DE_TESTES/` | Marco 1: níveis, tipos e estratégia de teste (o Plano de Testes P03 virá no Marco 2) |
 | `entrega/15_DIARIO_DE_PARTICIPACAO/` | Diário de participação (P14) |
 | `docs/PROGRESSO.md` | Situação de cada fase e produto |
 | `docs/ESPECIFICACAO_SISTEMA.md` | Regras de negócio, API, códigos de resposta e decisões de projeto |

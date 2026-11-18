@@ -7,15 +7,16 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 ## Situação atual
 
 - Fase 1 concluída: ficha P01 (v1.2) e sistema base, versão atual 1.1.0 (tag `v1.1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
-- Próxima: Fase 2 (Marco 1 — níveis e tipos de teste). Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
+- Fase 2 concluída: Marco 1 (níveis, tipos e estratégia) — tag `marco-1`.
+- Próxima: Fase 3 (Marco 2 — P02 requisitos/escopo/riscos e P03 plano de testes). O manual pede o sistema **aprovado** no Marco 2. Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
 
 ## Fases
 
 | Fase | Marco | Situação |
 |---|---|---|
-| 1a — Ficha de proposta (P01) | Marco 1 (parcial) | Concluída v1.1 — aguardando decisão do professor |
-| 1b — Sistema base + README + ambiente | — | Concluída em 2026-11-18 — tag `v1.0-sistema-base`; verificação 40/40 |
-| 2 — Fundamentos | Marco 1 | Não iniciada |
+| 1a — Ficha de proposta (P01) | Marco 1 (parcial) | Concluída v1.2 — aguardando decisão do professor |
+| 1b — Sistema base + README + ambiente | — | Concluída em 2026-11-18 — versão atual 1.1.0 (tag `v1.1.0-sistema-base`); verificação 46/46 |
+| 2 — Fundamentos | Marco 1 | Concluída em 2026-11-18 — `entrega/03_PLANO_DE_TESTES/M1_Niveis_Tipos_e_Estrategia.md`; tag `marco-1` |
 | 3 — Planejamento (P02, P03) | Marco 2 | Não iniciada |
 | 4 — Especificação (P04, P05) | Marco 3 | Não iniciada |
 | 5 — Execução manual e defeitos (P06, P07) | Marco 4 | Não iniciada |
@@ -30,8 +31,9 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 | Código | Produto | Arquivo | Situação |
 |---|---|---|---|
-| P01 | Ficha de identificação e aprovação | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` | v1.1 — aguardando professor |
-| — | Sistema base, README, ambiente | `README.md`, `docs/ESPECIFICACAO_SISTEMA.md`, `entrega/01_SISTEMA_ALVO/` | v1.0 — concluído |
+| P01 | Ficha de identificação e aprovação | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` | v1.2 — aguardando professor |
+| — | Sistema base, README, ambiente | `README.md`, `docs/ESPECIFICACAO_SISTEMA.md`, `entrega/01_SISTEMA_ALVO/` | Versão 1.1.0 — concluído |
+| — | Marco 1: níveis, tipos e estratégia (insumo do P03) | `entrega/03_PLANO_DE_TESTES/M1_Niveis_Tipos_e_Estrategia.md` | v1.0 — concluído |
 | P02 | Requisitos, escopo e riscos | — | Não iniciado |
 | P03 | Plano de testes | — | Não iniciado |
 | P04 | Catálogo de casos de teste | — | Não iniciado |
