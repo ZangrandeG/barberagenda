@@ -1,0 +1,29 @@
+# Build Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Banco H2 em modo arquivo (dados locais de desenvolvimento)
+data/
+*.mv.db
+*.trace.db
+
+# Logs e relatórios temporários
+*.log
+node_modules/
+
+# Configuração local de ferramentas (não faz parte do projeto)
+CLAUDE.md
+.mcp.json
+.claude/
+
+# Manual da disciplina: material do professor, mantido apenas localmente
+# (não redistribuir em repositório possivelmente público)
+MANUAL_P2.pdf
