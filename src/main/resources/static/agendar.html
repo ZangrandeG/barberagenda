@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agendar horário — BarberAgenda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/index.html">BarberAgenda</a>
+        <nav>
+            <a href="/cadastro.html">Cadastro</a>
+            <a href="/agendar.html">Agendar</a>
+            <a href="/consulta.html">Meu agendamento</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Agendar horário</h1>
+    <div class="cartao">
+        <form id="form-agendamento" novalidate>
+            <div class="campo">
+                <label for="campo-email-agendamento">E-mail cadastrado</label>
+                <input type="email" id="campo-email-agendamento" name="emailCliente" maxlength="150"
+                       autocomplete="email" data-testid="campo-email-agendamento">
+                <span class="dica">Ainda não tem cadastro? <a href="/cadastro.html">Cadastre-se</a>.</span>
+                <span class="erro-campo" id="erro-email-agendamento" data-testid="erro-email-agendamento"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-barbeiro">Barbeiro</label>
+                <select id="campo-barbeiro" name="barbeiroId" data-testid="campo-barbeiro">
+                    <option value="">Selecione...</option>
+                </select>
+                <span class="erro-campo" id="erro-barbeiro" data-testid="erro-barbeiro"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-servico">Serviço</label>
+                <select id="campo-servico" name="servicoId" data-testid="campo-servico">
+                    <option value="">Selecione...</option>
+                </select>
+                <span class="erro-campo" id="erro-servico" data-testid="erro-servico"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-data">Data</label>
+                <input type="date" id="campo-data" name="data" data-testid="campo-data">
+                <span class="dica">De segunda a sábado, com até 30 dias de antecedência.</span>
+                <span class="erro-campo" id="erro-data" data-testid="erro-data"></span>
+            </div>
+            <button type="button" id="botao-buscar-horarios" class="secundario" data-testid="botao-buscar-horarios">
+                Ver horários disponíveis
+            </button>
+
+            <h2 id="titulo-horarios" class="oculto">Horários disponíveis</h2>
+            <div id="lista-horarios" class="lista-horarios" data-testid="lista-horarios" aria-live="polite"></div>
+            <div id="mensagem-horarios" class="mensagem" data-testid="mensagem-horarios"></div>
+            <span class="erro-campo" id="erro-horario" data-testid="erro-horario"></span>
+
+            <div class="acoes">
+                <button type="submit" id="botao-confirmar-agendamento" data-testid="botao-confirmar-agendamento" disabled>
+                    Confirmar agendamento
+                </button>
+            </div>
+        </form>
+        <div id="mensagem-agendamento" class="mensagem" role="status" aria-live="polite"
+             data-testid="mensagem-agendamento"></div>
+    </div>
+
+    <div id="resumo-agendamento" class="cartao oculto" data-testid="resumo-agendamento">
+        <h2>Agendamento confirmado</h2>
+        <dl class="detalhes">
+            <dt>Código</dt>
+            <dd id="codigo-agendamento" data-testid="codigo-agendamento"></dd>
+            <dt>Barbeiro</dt>
+            <dd id="resumo-barbeiro" data-testid="resumo-barbeiro"></dd>
+            <dt>Serviço</dt>
+            <dd id="resumo-servico" data-testid="resumo-servico"></dd>
+            <dt>Data e horário</dt>
+            <dd id="resumo-data-hora" data-testid="resumo-data-hora"></dd>
+            <dt>Status</dt>
+            <dd id="resumo-status" data-testid="resumo-status"></dd>
+        </dl>
+        <p class="dica">Guarde o código: ele é necessário para consultar ou cancelar o agendamento.</p>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/agendar.js"></script>
+</body>
+</html>

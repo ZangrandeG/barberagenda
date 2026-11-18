@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro de cliente — BarberAgenda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/index.html">BarberAgenda</a>
+        <nav>
+            <a href="/cadastro.html">Cadastro</a>
+            <a href="/agendar.html">Agendar</a>
+            <a href="/consulta.html">Meu agendamento</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Cadastro de cliente</h1>
+    <div class="cartao">
+        <form id="form-cadastro-cliente" novalidate>
+            <div class="campo">
+                <label for="campo-nome-cliente">Nome completo</label>
+                <input type="text" id="campo-nome-cliente" name="nome" maxlength="80" autocomplete="name"
+                       data-testid="campo-nome-cliente">
+                <span class="dica">De 3 a 60 caracteres.</span>
+                <span class="erro-campo" id="erro-nome-cliente" data-testid="erro-nome-cliente"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-telefone-cliente">Telefone (com DDD, somente números)</label>
+                <input type="tel" id="campo-telefone-cliente" name="telefone" maxlength="20" inputmode="numeric"
+                       placeholder="14999998888" data-testid="campo-telefone-cliente">
+                <span class="dica">10 ou 11 dígitos.</span>
+                <span class="erro-campo" id="erro-telefone-cliente" data-testid="erro-telefone-cliente"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-email-cliente">E-mail</label>
+                <input type="email" id="campo-email-cliente" name="email" maxlength="150" autocomplete="email"
+                       placeholder="nome@exemplo.com" data-testid="campo-email-cliente">
+                <span class="erro-campo" id="erro-email-cliente" data-testid="erro-email-cliente"></span>
+            </div>
+            <button type="submit" id="botao-cadastrar-cliente" data-testid="botao-cadastrar-cliente">Cadastrar</button>
+        </form>
+        <div id="mensagem-cadastro" class="mensagem" role="status" aria-live="polite"
+             data-testid="mensagem-cadastro"></div>
+        <p id="proximo-passo" class="oculto">
+            <a id="link-agendar-apos-cadastro" class="botao" href="/agendar.html">Agendar um horário</a>
+        </p>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/cadastro.js"></script>
+</body>
+</html>

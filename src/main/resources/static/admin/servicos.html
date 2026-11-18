@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Serviços — BarberAgenda Admin</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/admin/index.html">BarberAgenda — Admin</a>
+        <nav>
+            <a href="/admin/barbeiros.html">Barbeiros</a>
+            <a href="/admin/servicos.html">Serviços</a>
+            <a href="/admin/agenda.html">Agenda</a>
+            <span class="usuario" id="usuario-logado" data-testid="usuario-logado"></span>
+            <button type="button" id="botao-sair" class="secundario" data-testid="botao-sair">Sair</button>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Serviços</h1>
+    <div class="cartao">
+        <h2 id="titulo-form-servico">Novo serviço</h2>
+        <form id="form-servico" novalidate>
+            <input type="hidden" id="campo-id-servico">
+            <div class="campo">
+                <label for="campo-nome-servico">Nome</label>
+                <input type="text" id="campo-nome-servico" name="nome" maxlength="80"
+                       data-testid="campo-nome-servico">
+                <span class="erro-campo" id="erro-nome-servico" data-testid="erro-nome-servico"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-duracao-servico">Duração (minutos)</label>
+                <input type="number" id="campo-duracao-servico" name="duracaoMinutos" step="15"
+                       data-testid="campo-duracao-servico">
+                <span class="dica">De 15 a 180 minutos, em múltiplos de 15.</span>
+                <span class="erro-campo" id="erro-duracao-servico" data-testid="erro-duracao-servico"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-preco-servico">Preço (R$)</label>
+                <input type="number" id="campo-preco-servico" name="preco" step="0.01"
+                       data-testid="campo-preco-servico">
+                <span class="dica">De R$ 1,00 a R$ 1.000,00.</span>
+                <span class="erro-campo" id="erro-preco-servico" data-testid="erro-preco-servico"></span>
+            </div>
+            <div class="campo campo-checkbox">
+                <input type="checkbox" id="campo-ativo-servico" name="ativo" checked
+                       data-testid="campo-ativo-servico">
+                <label for="campo-ativo-servico">Ativo (pode ser agendado)</label>
+            </div>
+            <div class="acoes">
+                <button type="submit" id="botao-salvar-servico" data-testid="botao-salvar-servico">Salvar</button>
+                <button type="button" id="botao-cancelar-edicao-servico" class="secundario oculto"
+                        data-testid="botao-cancelar-edicao-servico">Cancelar edição</button>
+            </div>
+        </form>
+        <div id="mensagem-servico" class="mensagem" role="status" aria-live="polite"
+             data-testid="mensagem-servico"></div>
+    </div>
+
+    <div class="tabela-container">
+        <table id="tabela-servicos" data-testid="tabela-servicos">
+            <thead>
+            <tr><th>Código</th><th>Nome</th><th>Duração</th><th>Preço</th><th>Situação</th><th>Ações</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/admin-comum.js"></script>
+<script src="/js/admin-servicos.js"></script>
+</body>
+</html>

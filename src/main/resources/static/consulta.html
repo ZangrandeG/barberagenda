@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meu agendamento — BarberAgenda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/index.html">BarberAgenda</a>
+        <nav>
+            <a href="/cadastro.html">Cadastro</a>
+            <a href="/agendar.html">Agendar</a>
+            <a href="/consulta.html">Meu agendamento</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Consultar ou cancelar agendamento</h1>
+    <div class="cartao">
+        <form id="form-consulta" novalidate>
+            <div class="campo">
+                <label for="campo-codigo-agendamento">Código do agendamento</label>
+                <input type="number" id="campo-codigo-agendamento" name="codigo" min="1"
+                       data-testid="campo-codigo-agendamento">
+                <span class="erro-campo" id="erro-codigo-agendamento" data-testid="erro-codigo-agendamento"></span>
+            </div>
+            <div class="campo">
+                <label for="campo-email-consulta">E-mail usado no agendamento</label>
+                <input type="email" id="campo-email-consulta" name="email" maxlength="150" autocomplete="email"
+                       data-testid="campo-email-consulta">
+                <span class="erro-campo" id="erro-email-consulta" data-testid="erro-email-consulta"></span>
+            </div>
+            <button type="submit" id="botao-consultar" data-testid="botao-consultar">Consultar</button>
+        </form>
+        <div id="mensagem-consulta" class="mensagem" role="status" aria-live="polite"
+             data-testid="mensagem-consulta"></div>
+    </div>
+
+    <div id="detalhes-agendamento" class="cartao oculto" data-testid="detalhes-agendamento">
+        <h2>Agendamento <span id="detalhe-codigo" data-testid="detalhe-codigo"></span></h2>
+        <dl class="detalhes">
+            <dt>Cliente</dt>
+            <dd id="detalhe-cliente" data-testid="detalhe-cliente"></dd>
+            <dt>Barbeiro</dt>
+            <dd id="detalhe-barbeiro" data-testid="detalhe-barbeiro"></dd>
+            <dt>Serviço</dt>
+            <dd id="detalhe-servico" data-testid="detalhe-servico"></dd>
+            <dt>Data e horário</dt>
+            <dd id="detalhe-data-hora" data-testid="detalhe-data-hora"></dd>
+            <dt>Valor</dt>
+            <dd id="detalhe-preco" data-testid="detalhe-preco"></dd>
+            <dt>Status</dt>
+            <dd id="detalhe-status" data-testid="detalhe-status"></dd>
+        </dl>
+        <div class="acoes">
+            <button type="button" id="botao-cancelar-agendamento" class="perigo oculto"
+                    data-testid="botao-cancelar-agendamento">Cancelar agendamento</button>
+        </div>
+        <div id="confirmacao-cancelamento" class="oculto" data-testid="confirmacao-cancelamento">
+            <p>Tem certeza de que deseja cancelar este agendamento?</p>
+            <div class="acoes">
+                <button type="button" id="botao-confirmar-cancelamento" class="perigo"
+                        data-testid="botao-confirmar-cancelamento">Sim, cancelar</button>
+                <button type="button" id="botao-desistir-cancelamento" class="secundario"
+                        data-testid="botao-desistir-cancelamento">Não, manter</button>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/consulta.js"></script>
+</body>
+</html>

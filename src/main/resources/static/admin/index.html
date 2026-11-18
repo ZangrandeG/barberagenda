@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administração — BarberAgenda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/admin/index.html">BarberAgenda — Admin</a>
+        <nav>
+            <a href="/admin/barbeiros.html">Barbeiros</a>
+            <a href="/admin/servicos.html">Serviços</a>
+            <a href="/admin/agenda.html">Agenda</a>
+            <span class="usuario" id="usuario-logado" data-testid="usuario-logado"></span>
+            <button type="button" id="botao-sair" class="secundario" data-testid="botao-sair">Sair</button>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1 data-testid="titulo-painel">Painel administrativo</h1>
+    <div class="grade-opcoes">
+        <a href="/admin/barbeiros.html" id="link-admin-barbeiros" data-testid="link-admin-barbeiros">
+            <div class="cartao"><h2>Barbeiros</h2><p>Cadastrar, editar, ativar ou excluir.</p></div>
+        </a>
+        <a href="/admin/servicos.html" id="link-admin-servicos" data-testid="link-admin-servicos">
+            <div class="cartao"><h2>Serviços</h2><p>Duração, preço e disponibilidade.</p></div>
+        </a>
+        <a href="/admin/agenda.html" id="link-admin-agenda" data-testid="link-admin-agenda">
+            <div class="cartao"><h2>Agenda do dia</h2><p>Atendimentos por barbeiro e conclusão.</p></div>
+        </a>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/admin-comum.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda do dia — BarberAgenda Admin</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/admin/index.html">BarberAgenda — Admin</a>
+        <nav>
+            <a href="/admin/barbeiros.html">Barbeiros</a>
+            <a href="/admin/servicos.html">Serviços</a>
+            <a href="/admin/agenda.html">Agenda</a>
+            <span class="usuario" id="usuario-logado" data-testid="usuario-logado"></span>
+            <button type="button" id="botao-sair" class="secundario" data-testid="botao-sair">Sair</button>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Agenda do dia</h1>
+    <div class="cartao">
+        <form id="form-agenda" novalidate>
+            <div class="campo">
+                <label for="campo-barbeiro-agenda">Barbeiro</label>
+                <select id="campo-barbeiro-agenda" data-testid="campo-barbeiro-agenda"></select>
+            </div>
+            <div class="campo">
+                <label for="campo-data-agenda">Data</label>
+                <input type="date" id="campo-data-agenda" data-testid="campo-data-agenda">
+            </div>
+            <button type="submit" id="botao-carregar-agenda" data-testid="botao-carregar-agenda">Ver agenda</button>
+        </form>
+        <div id="mensagem-agenda" class="mensagem" role="status" aria-live="polite" data-testid="mensagem-agenda"></div>
+    </div>
+
+    <div class="tabela-container">
+        <table id="tabela-agenda" data-testid="tabela-agenda">
+            <thead>
+            <tr><th>Código</th><th>Horário</th><th>Cliente</th><th>Serviço</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/admin-comum.js"></script>
+<script src="/js/admin-agenda.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login administrativo — BarberAgenda</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/index.html">BarberAgenda</a>
+        <nav><a href="/index.html">Área do cliente</a></nav>
+    </div>
+</header>
+<main>
+    <h1>Acesso administrativo</h1>
+    <div class="cartao">
+        <form id="form-login" novalidate>
+            <div class="campo">
+                <label for="campo-usuario">Usuário</label>
+                <input type="text" id="campo-usuario" name="username" maxlength="40" autocomplete="username"
+                       data-testid="campo-usuario">
+            </div>
+            <div class="campo">
+                <label for="campo-senha">Senha</label>
+                <input type="password" id="campo-senha" name="password" maxlength="100"
+                       autocomplete="current-password" data-testid="campo-senha">
+            </div>
+            <button type="submit" id="botao-entrar" data-testid="botao-entrar">Entrar</button>
+        </form>
+        <div id="mensagem-login" class="mensagem" role="status" aria-live="polite" data-testid="mensagem-login"></div>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/admin-login.js"></script>
+</body>
+</html>

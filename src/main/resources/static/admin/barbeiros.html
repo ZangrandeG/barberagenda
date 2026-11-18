@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Barbeiros — BarberAgenda Admin</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="conteudo">
+        <a class="marca" href="/admin/index.html">BarberAgenda — Admin</a>
+        <nav>
+            <a href="/admin/barbeiros.html">Barbeiros</a>
+            <a href="/admin/servicos.html">Serviços</a>
+            <a href="/admin/agenda.html">Agenda</a>
+            <span class="usuario" id="usuario-logado" data-testid="usuario-logado"></span>
+            <button type="button" id="botao-sair" class="secundario" data-testid="botao-sair">Sair</button>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Barbeiros</h1>
+    <div class="cartao">
+        <h2 id="titulo-form-barbeiro">Novo barbeiro</h2>
+        <form id="form-barbeiro" novalidate>
+            <input type="hidden" id="campo-id-barbeiro">
+            <div class="campo">
+                <label for="campo-nome-barbeiro">Nome</label>
+                <input type="text" id="campo-nome-barbeiro" name="nome" maxlength="80"
+                       data-testid="campo-nome-barbeiro">
+                <span class="erro-campo" id="erro-nome-barbeiro" data-testid="erro-nome-barbeiro"></span>
+            </div>
+            <div class="campo campo-checkbox">
+                <input type="checkbox" id="campo-ativo-barbeiro" name="ativo" checked
+                       data-testid="campo-ativo-barbeiro">
+                <label for="campo-ativo-barbeiro">Ativo (pode receber agendamentos)</label>
+            </div>
+            <div class="acoes">
+                <button type="submit" id="botao-salvar-barbeiro" data-testid="botao-salvar-barbeiro">Salvar</button>
+                <button type="button" id="botao-cancelar-edicao-barbeiro" class="secundario oculto"
+                        data-testid="botao-cancelar-edicao-barbeiro">Cancelar edição</button>
+            </div>
+        </form>
+        <div id="mensagem-barbeiro" class="mensagem" role="status" aria-live="polite"
+             data-testid="mensagem-barbeiro"></div>
+    </div>
+
+    <div class="tabela-container">
+        <table id="tabela-barbeiros" data-testid="tabela-barbeiros">
+            <thead>
+            <tr><th>Código</th><th>Nome</th><th>Situação</th><th>Ações</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script src="/js/admin-comum.js"></script>
+<script src="/js/admin-barbeiros.js"></script>
+</body>
+</html>
