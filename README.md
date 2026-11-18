@@ -123,7 +123,9 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 | Análise de qualidade (SonarQube) | A documentar no Marco 5 | A configurar |
 | Integração/API (Postman + Newman) | A documentar no Marco 6 (`postman/`) | A implementar |
 | Sistema/interface (Selenium) | A documentar no Marco 6 | A implementar |
-| Gerar catálogo de casos (P04) e matriz de rastreabilidade (P05) | `python scripts/gerar_artefatos.py` (requer `pip install openpyxl`; com LibreOffice instalado, a planilha já sai com os valores calculados) | Disponível |
+| Gerar catálogo (P04), matriz (P05), checklist e registro de execução (P06) | `python scripts/gerar_artefatos.py` (requer `pip install openpyxl`; com LibreOffice instalado, a planilha já sai com os valores calculados) | Disponível |
+| Execução manual (P06) | Roteiro em `entrega/05_EXECUCAO_MANUAL/P06_Roteiro_Execucao.md`; datas e ids do dia: `python scripts/datas_teste.py` | Disponível — execução pelo grupo |
+| Exportar defeitos do GitHub Issues (P07) | `python scripts/exportar_defeitos.py` (requer `gh auth login`) | Disponível |
 
 > A verificação rápida apenas confirma que as funções selecionadas estão disponíveis (seção 9.1 do manual). Ela não substitui os casos de teste formais nem a automação.
 
@@ -141,7 +143,9 @@ GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions (pipeline a c
 | `entrega/02_REQUISITOS_ESCOPO_RISCOS/` | Requisitos, escopo e riscos (P02) |
 | `entrega/03_PLANO_DE_TESTES/` | Plano de testes (P03) e documento do Marco 1 (níveis, tipos e estratégia) |
 | `entrega/04_CASOS_E_RASTREABILIDADE/` | Catálogo de casos de teste (P04) e matriz de rastreabilidade em XLSX (P05) |
-| `dados/` | Fonte única de requisitos, riscos, casos (JSON), execuções e defeitos (CSV) usada para gerar P04 e P05 |
+| `entrega/05_EXECUCAO_MANUAL/` | Roteiro, checklist, registro de execução (P06) e `evidencias/` |
+| `entrega/06_DEFEITOS/` | Exportação dos defeitos do GitHub Issues (P07) |
+| `dados/` | Fonte única de requisitos, riscos, casos (JSON), execuções e defeitos (CSV) usada para gerar P04, P05 e P06 |
 | `entrega/15_DIARIO_DE_PARTICIPACAO/` | Diário de participação (P14) |
 | `docs/PROGRESSO.md` | Situação de cada fase e produto |
 | `docs/ESPECIFICACAO_SISTEMA.md` | Regras de negócio, API, códigos de resposta e decisões de projeto |

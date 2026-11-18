@@ -29,6 +29,10 @@ DADOS = RAIZ / "dados"
 SAIDA = RAIZ / "entrega" / "04_CASOS_E_RASTREABILIDADE"
 P04 = SAIDA / "P04_Catalogo_Casos_de_Teste.md"
 P05 = SAIDA / "P05_Matriz_Rastreabilidade.xlsx"
+SAIDA_P06 = RAIZ / "entrega" / "05_EXECUCAO_MANUAL"
+P06_CHECKLIST = SAIDA_P06 / "P06_Checklist_Execucao.md"
+P06_REGISTRO = SAIDA_P06 / "P06_Registro_Execucao.md"
+ORDEM_PRIORIDADE = {"Alta": 0, "Média": 1, "Baixa": 2}
 
 LIMITE_LINHAS = 500  # linhas preparadas com fórmulas nas abas de execuções e defeitos
 
@@ -128,6 +132,60 @@ def gerar_p04(requisitos, casos):
     partes += ["", f"**Total de casos manuais: {len(casos)}** (mínimo do manual: 24).", ""]
 
     P04.write_text("\n".join(partes), encoding="utf-8")
+
+
+# ---------------------------------------------------------------- P06 (checklist e registro)
+def gerar_p06(casos, execucoes):
+    ordem = sorted(casos, key=lambda c: (ORDEM_PRIORIDADE[c["prioridade"]], c["id"]))
+    linhas = [
+        "# P06 — Checklist de execução manual",
+        "",
+        "> Arquivo gerado por `scripts/gerar_artefatos.py`. Ordem de execução: prioridade do risco (Alta → Média → Baixa).",
+        "> Instruções completas em `P06_Roteiro_Execucao.md`. Use este checklist impresso ou como cópia de trabalho;",
+        "> o registro oficial dos resultados é `dados/execucoes.csv` (que gera `P06_Registro_Execucao.md` e a aba Execuções do P05).",
+        "",
+        "Executor(es): [PREENCHER] — Data: [PREENCHER] — Versão sob teste: [PREENCHER tag/commit]",
+        "",
+        "| ✓ | Ordem | Caso | Título | Prioridade | Interface | Requisito | Execução | Resultado | Evidência | Defeito |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for n, c in enumerate(ordem, 1):
+        linhas.append(f"| ☐ | {n} | {c['id']} | {c['titulo']} | {c['prioridade']} | {c['interface']} | "
+                      f"{', '.join(c['requisitos'])} | EX-___ | | | |")
+    linhas += ["", "Resultado: Aprovado, Reprovado, Bloqueado ou Não executado. "
+               "Evidência: `EX-NNN_CT-NNN_AAAA-MM-DD.png` (tela) ou `.txt` (resposta da API).", ""]
+    P06_CHECKLIST.write_text("\n".join(linhas), encoding="utf-8")
+
+    por_caso = defaultdict(list)
+    for e in execucoes:
+        por_caso[e["caso"]].append(e)
+    reg = [
+        "# P06 — Registro de execução (Apêndice F)",
+        "",
+        "> Arquivo gerado por `scripts/gerar_artefatos.py` a partir de `dados/execucoes.csv`. Não editar à mão.",
+        "",
+        "## 1. Execuções",
+        "",
+        "| Execução | Caso | Data | Versão | Executor | Resultado | Evidência | Defeito | Observações |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
+    if execucoes:
+        for e in execucoes:
+            reg.append(f"| {e['execucao']} | {e['caso']} | {e['data']} | {e['versao']} | {e['executor']} | "
+                       f"{e['resultado']} | {e['evidencia'] or '—'} | {e['defeito'] or '—'} | {e['observacoes'] or ''} |")
+    else:
+        reg.append("| — | — | — | — | — | Nenhuma execução registrada | — | — | |")
+    reg += ["", "## 2. Situação atual de cada caso", "",
+            "| Caso | Título | Execuções | Resultado atual |", "|---|---|---|---|"]
+    for c in casos:
+        lista = por_caso.get(c["id"], [])
+        atual = lista[-1]["resultado"] if lista else "Não executado"
+        reg.append(f"| {c['id']} | {c['titulo']} | {', '.join(e['execucao'] for e in lista) or '—'} | {atual} |")
+    contagem = Counter((por_caso[c["id"]][-1]["resultado"] if por_caso.get(c["id"]) else "Não executado") for c in casos)
+    reg += ["", "## 3. Resumo", "", "| Resultado atual | Casos |", "|---|---|"]
+    reg += [f"| {k} | {contagem.get(k, 0)} |" for k in ("Aprovado", "Reprovado", "Bloqueado", "Não executado")]
+    reg.append("")
+    P06_REGISTRO.write_text("\n".join(reg), encoding="utf-8")
 
 
 # ---------------------------------------------------------------- P05 (XLSX)
@@ -355,9 +413,12 @@ def main():
     defeitos = ler_csv("defeitos.csv")
     validar(requisitos, riscos, casos, execucoes, defeitos)
     SAIDA.mkdir(parents=True, exist_ok=True)
+    SAIDA_P06.mkdir(parents=True, exist_ok=True)
     gerar_p04(requisitos, casos)
+    gerar_p06(casos, execucoes)
     gerar_p05(requisitos, riscos, casos, execucoes, defeitos)
     print(f"P04: {P04.relative_to(RAIZ)} ({len(casos)} casos)")
+    print(f"P06: {P06_CHECKLIST.relative_to(RAIZ)} e {P06_REGISTRO.name}")
     print(f"P05: {P05.relative_to(RAIZ)} ({len(requisitos)} requisitos, {len(riscos)} riscos, "
           f"{len(execucoes)} execuções, {len(defeitos)} defeitos)")
 
