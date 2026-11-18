@@ -8,7 +8,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 - Fase 1 concluída: ficha P01 (v1.2) e sistema base, versão atual 1.1.0 (tag `v1.1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
 - Fase 2 concluída: Marco 1 (níveis, tipos e estratégia) — tag `marco-1`.
-- Próxima: Fase 3 (Marco 2 — P02 requisitos/escopo/riscos e P03 plano de testes). O manual pede o sistema **aprovado** no Marco 2. Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
+- Fase 3 concluída: Marco 2 (P02 e P03) — tag `marco-2`. Feita antes da aprovação do professor, por decisão do grupo (o manual pede o sistema aprovado no Marco 2).
+- Próxima: Fase 4 (Marco 3 — P04 catálogo de casos e P05 matriz de rastreabilidade em XLSX). Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
 
 ## Fases
 
@@ -17,7 +18,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 1a — Ficha de proposta (P01) | Marco 1 (parcial) | Concluída v1.2 — aguardando decisão do professor |
 | 1b — Sistema base + README + ambiente | — | Concluída em 2026-11-18 — versão atual 1.1.0 (tag `v1.1.0-sistema-base`); verificação 46/46 |
 | 2 — Fundamentos | Marco 1 | Concluída em 2026-11-18 — `entrega/03_PLANO_DE_TESTES/M1_Niveis_Tipos_e_Estrategia.md`; tag `marco-1` |
-| 3 — Planejamento (P02, P03) | Marco 2 | Não iniciada |
+| 3 — Planejamento (P02, P03) | Marco 2 | Concluída em 2026-11-18 — tag `marco-2` |
 | 4 — Especificação (P04, P05) | Marco 3 | Não iniciada |
 | 5 — Execução manual e defeitos (P06, P07) | Marco 4 | Não iniciada |
 | 6 — Automação unitária + Sonar linha de base (P08) | Marco 5 | Não iniciada |
@@ -34,8 +35,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P01 | Ficha de identificação e aprovação | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` | v1.2 — aguardando professor |
 | — | Sistema base, README, ambiente | `README.md`, `docs/ESPECIFICACAO_SISTEMA.md`, `entrega/01_SISTEMA_ALVO/` | Versão 1.1.0 — concluído |
 | — | Marco 1: níveis, tipos e estratégia (insumo do P03) | `entrega/03_PLANO_DE_TESTES/M1_Niveis_Tipos_e_Estrategia.md` | v1.0 — concluído |
-| P02 | Requisitos, escopo e riscos | — | Não iniciado |
-| P03 | Plano de testes | — | Não iniciado |
+| P02 | Requisitos, escopo e riscos | `entrega/02_REQUISITOS_ESCOPO_RISCOS/P02_Requisitos_Escopo_Riscos.md` | v1.0 — 8 RF, 5 RNF, 11 riscos |
+| P03 | Plano de testes | `entrega/03_PLANO_DE_TESTES/P03_Plano_de_Testes.md` | v1.0 — completo; responsabilidades, IDE, canal e datas a preencher |
 | P04 | Catálogo de casos de teste | — | Não iniciado |
 | P05 | Matriz de rastreabilidade | — | Não iniciado |
 | P06 | Evidências de execução manual | — | Não iniciado |
