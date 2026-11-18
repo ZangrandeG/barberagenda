@@ -13,4 +13,6 @@
 | Data | Atividade | Responsável principal | Colaboradores | Tempo aproximado | Evidência associada |
 |---|---|---|---|---|---|
 | 2026-11-18 | Leitura do manual do projeto; elaboração da ficha de proposta com duas opções de sistema (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` |
+| 2026-11-18 | Instalação do JDK 21 e do GitHub CLI; criação do repositório no GitHub (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | https://github.com/ZangrandeG/barberagenda |
+| 2026-11-18 | Construção do sistema base BarberAgenda, README e verificação da versão base (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | Tag `v1.0-sistema-base`; `entrega/01_SISTEMA_ALVO/verificacao_versao_base_2026-11-18.txt` |
 | | | | | | |

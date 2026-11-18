@@ -6,15 +6,15 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 ## Situação atual
 
-- Fase 1 dividida a pedido do grupo: **primeiro a ficha (P01)**, depois o sistema, somente após a aprovação do professor (seção 5.5, item 4).
-- Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
+- Fase 1 concluída: ficha P01 (v1.1) e sistema base (tag `v1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
+- Próxima: Fase 2 (Marco 1 — níveis e tipos de teste). Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
 
 ## Fases
 
 | Fase | Marco | Situação |
 |---|---|---|
-| 1a — Ficha de proposta (P01) | Marco 1 (parcial) | Concluída v1.0 — aguardando decisão do professor |
-| 1b — Sistema base + README + ambiente | — | Não iniciada (depende da aprovação) |
+| 1a — Ficha de proposta (P01) | Marco 1 (parcial) | Concluída v1.1 — aguardando decisão do professor |
+| 1b — Sistema base + README + ambiente | — | Concluída em 2026-11-18 — tag `v1.0-sistema-base`; verificação 40/40 |
 | 2 — Fundamentos | Marco 1 | Não iniciada |
 | 3 — Planejamento (P02, P03) | Marco 2 | Não iniciada |
 | 4 — Especificação (P04, P05) | Marco 3 | Não iniciada |
@@ -30,7 +30,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 | Código | Produto | Arquivo | Situação |
 |---|---|---|---|
-| P01 | Ficha de identificação e aprovação | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` | v1.0 — aguardando professor |
+| P01 | Ficha de identificação e aprovação | `entrega/00_IDENTIFICACAO_E_README/P01_Ficha_Sistema.md` | v1.1 — aguardando professor |
+| — | Sistema base, README, ambiente | `README.md`, `docs/ESPECIFICACAO_SISTEMA.md`, `entrega/01_SISTEMA_ALVO/` | v1.0 — concluído |
 | P02 | Requisitos, escopo e riscos | — | Não iniciado |
 | P03 | Plano de testes | — | Não iniciado |
 | P04 | Catálogo de casos de teste | — | Não iniciado |
@@ -53,6 +54,9 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 2026-11-18 | Estrutura `entrega/` criada com as 17 pastas da seção 11.3. |
 | 2026-11-18 | `MANUAL_P2.pdf` mantido apenas localmente (fora do Git), por ser material do professor. |
 | 2026-11-18 | Proposta de ramificação: `main` com o sistema base; branch `testes-p2` para o trabalho de testes, integrada por pull request (seção 9.1, item 2). [CONFIRMAR PELO GRUPO] |
+| 2026-11-18 | Spring Boot 3.5.16 (última linha 3.x; o Spring Initializr só oferece 4.x, então o projeto foi montado manualmente com o Maven Wrapper oficial). |
+| 2026-11-18 | Desvios em relação ao prompt inicial, por segurança e usabilidade: `GET /api/clientes` exige administrador; o agendamento identifica o cliente pelo e-mail (`emailCliente`); consulta/cancelamento exigem código + e-mail. Ver `docs/ESPECIFICACAO_SISTEMA.md`, seção 5. |
+| 2026-11-18 | Regra de cancelamento com antecedência mínima **não** implementada: reservada para o TDD (Fase 9). |
 
 ## Repositório
 
@@ -63,7 +67,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 | Ferramenta | Situação |
 |---|---|
-| Java | JDK 21.0.13 (Eclipse Temurin) instalado em 2026-11-18; Java 1.8 continua presente |
+| Java | JDK 21.0.13 (Eclipse Temurin) instalado em 2026-11-18; Java 1.8 continua presente (usar `JAVA_HOME`) |
+| Maven | 3.10.1 via Maven Wrapper |
 | Git | 2.56.0 |
 | GitHub CLI (`gh`) | 2.105.0, autenticado como `ZangrandeG` |
 | Node / npm | 24.21.0 / 11.19.0 |

@@ -1,0 +1,43 @@
+== BarberAgenda — verificação da versão base em http://localhost:8080 ==
+== 2026-11-18 17:18:27 ==
+OK      POST /api/dev/reset restaura a massa fictícia                         esperado=200 obtido=200
+OK      GET /api/barbeiros lista barbeiros ativos                              esperado=200 obtido=200
+OK      GET /api/servicos lista serviços ativos                               esperado=200 obtido=200
+OK      POST /api/clientes com dados válidos                                  esperado=201 obtido=201
+OK      POST /api/clientes com e-mail repetido (RN-03)                         esperado=409 obtido=409
+OK      POST /api/clientes com nome de 2 caracteres (RN-01)                    esperado=400 obtido=400
+OK        resposta 400 traz o campo 'nome' em 'campos'                         esperado=True obtido=True
+OK      POST /api/clientes com telefone de 9 dígitos (RN-02)                  esperado=400 obtido=400
+OK      GET /api/clientes sem autenticação (dados pessoais)                  esperado=401 obtido=401
+OK      GET /api/clientes como administrador (HTTP Basic)                      esperado=200 obtido=200
+OK      GET /api/horarios-disponiveis em 2026-11-20                            esperado=200 obtido=200
+OK        primeiro horário livre é 09:00                                     esperado=09:00 obtido=09:00
+OK      POST /api/agendamentos válido (2026-11-20 18:30, serviço de 30 min)  esperado=201 obtido=201
+OK        status do novo agendamento                                           esperado=AGENDADO obtido=AGENDADO
+OK      POST /api/agendamentos no mesmo horário/barbeiro (RN-07)              esperado=409 obtido=409
+OK      POST /api/agendamentos às 08:30 (RN-04)                               esperado=400 obtido=400
+OK      POST /api/agendamentos às 10:15 (RN-05)                               esperado=400 obtido=400
+OK      POST /api/agendamentos no domingo 2026-11-22 (RN-04)                   esperado=400 obtido=400
+OK      POST /api/agendamentos para daqui a 45 dias (RN-06)                    esperado=400 obtido=400
+OK      POST /api/agendamentos com e-mail não cadastrado                      esperado=404 obtido=404
+OK      GET /api/agendamentos/{id} com o e-mail correto                        esperado=200 obtido=200
+OK      GET /api/agendamentos/{id} com outro e-mail                            esperado=404 obtido=404
+OK      PATCH /api/agendamentos/{id}/cancelar                                  esperado=200 obtido=200
+OK        status após cancelamento                                            esperado=CANCELADO obtido=CANCELADO
+OK      PATCH cancelar novamente (já cancelado)                               esperado=409 obtido=409
+OK      GET /api/admin/barbeiros sem credenciais (RN-11)                       esperado=401 obtido=401
+OK        resposta 401 não contém stack trace                                esperado=False obtido=False
+OK      GET /api/admin/barbeiros com senha errada                              esperado=401 obtido=401
+OK      GET /api/admin/barbeiros como administrador                            esperado=200 obtido=200
+OK      POST /api/admin/servicos com duração 20 (RN-09)                      esperado=400 obtido=400
+OK      POST /api/admin/servicos com preço 1000.01 (RN-09)                    esperado=400 obtido=400
+OK      POST /api/admin/servicos válido                                       esperado=201 obtido=201
+OK      DELETE /api/admin/servicos/{id} sem agendamentos                       esperado=204 obtido=204
+OK      DELETE /api/admin/barbeiros/{id} com agendamentos                      esperado=409 obtido=409
+OK      GET /api/admin/agenda do barbeiro em 2026-11-19                        esperado=200 obtido=200
+OK      PATCH /api/admin/agendamentos/{id}/concluir                            esperado=200 obtido=200
+OK        status após conclusão                                              esperado=CONCLUIDO obtido=CONCLUIDO
+OK      GET /admin/index.html sem login redireciona ao login                   esperado=302 obtido=302
+OK      GET /index.html (página pública)                                     esperado=200 obtido=200
+OK      POST /api/dev/reset restaura a massa fictícia ao final                esperado=200 obtido=200
+== Resultado: 40/40 verificações OK ==
