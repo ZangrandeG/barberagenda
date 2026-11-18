@@ -79,8 +79,9 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 - [x] Identidade do Git configurada neste computador (Guilherme). José Paulo configura a própria no computador dele.
 - [x] Turma (A) e integrantes preenchidos na ficha P01.
 - [x] JDK 21 e GitHub CLI instalados; repositório criado no GitHub.
-- [ ] Preencher número do grupo e RAs na ficha P01.
+- [x] RAs preenchidos na ficha P01.
+- [x] Convite de colaborador (escrita) enviado para `zepadf` em 2026-11-18 — José Paulo precisa aceitar em https://github.com/ZangrandeG/barberagenda/invitations
+- [ ] Preencher número do grupo na ficha P01.
 - [ ] Confirmar a licença (MIT) e a opção preferencial.
 - [ ] Apresentar a ficha ao professor e registrar a decisão, os ajustes e a data.
-- [ ] Informar o usuário do GitHub do José Paulo (convite de colaborador).
 - [ ] Informar: orientação do professor sobre uso de IA, data da P2, marcos já entregues, repositório público ou privado.
