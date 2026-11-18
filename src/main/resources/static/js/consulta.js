@@ -2,7 +2,7 @@
 
 (() => {
     const form = document.getElementById("form-consulta");
-    const campoCodigo = document.getElementById("campo-codigo-agendamento");
+    const campoCodigo = document.getElementById("campo-codigo-acesso");
     const campoEmail = document.getElementById("campo-email-consulta");
     const mensagem = document.getElementById("mensagem-consulta");
     const detalhes = document.getElementById("detalhes-agendamento");
@@ -10,13 +10,13 @@
     const confirmacao = document.getElementById("confirmacao-cancelamento");
     const botaoConfirmar = document.getElementById("botao-confirmar-cancelamento");
     const botaoDesistir = document.getElementById("botao-desistir-cancelamento");
-    const mapaErros = { codigo: "erro-codigo-agendamento", email: "erro-email-consulta" };
+    const mapaErros = { codigo: "erro-codigo-acesso", email: "erro-email-consulta" };
 
     let consultado = null;
 
     function mostrar(agendamento) {
         consultado = agendamento;
-        document.getElementById("detalhe-codigo").textContent = "#" + agendamento.id;
+        document.getElementById("detalhe-codigo").textContent = agendamento.codigoAcesso;
         document.getElementById("detalhe-cliente").textContent = agendamento.clienteNome;
         document.getElementById("detalhe-barbeiro").textContent = agendamento.barbeiroNome;
         document.getElementById("detalhe-servico").textContent =
@@ -35,12 +35,12 @@
         Tela.mensagem(mensagem, "", "");
         detalhes.classList.add("oculto");
         const campos = {};
-        if (!campoCodigo.value) campos.codigo = "Informe o código do agendamento.";
+        if (!campoCodigo.value.trim()) campos.codigo = "Informe o código de acesso.";
         if (!campoEmail.value.trim()) campos.email = "Informe o e-mail.";
         Tela.errosCampos(campos, mapaErros);
         if (Object.keys(campos).length) return;
 
-        const url = "/api/agendamentos/" + encodeURIComponent(campoCodigo.value)
+        const url = "/api/agendamentos/" + encodeURIComponent(campoCodigo.value.trim())
             + "?email=" + encodeURIComponent(campoEmail.value.trim());
         try {
             mostrar(await Api.get(url));
@@ -62,7 +62,8 @@
     botaoConfirmar.addEventListener("click", async () => {
         botaoConfirmar.disabled = true;
         try {
-            const atualizado = await Api.patch("/api/agendamentos/" + consultado.id + "/cancelar",
+            const atualizado = await Api.patch(
+                "/api/agendamentos/" + encodeURIComponent(consultado.codigoAcesso) + "/cancelar",
                 { email: campoEmail.value.trim() });
             mostrar(atualizado);
             Tela.mensagem(mensagem, "Agendamento cancelado com sucesso.", "sucesso");

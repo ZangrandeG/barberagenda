@@ -26,25 +26,29 @@ public class AgendamentoService {
 
     public static final int LIMITE_AGENDAMENTOS_ATIVOS = 3;
 
+    private static final int TENTATIVAS_CODIGO_UNICO = 5;
     private static final String NAO_ENCONTRADO_PARA_CLIENTE =
-            "Agendamento não encontrado para o código e o e-mail informados.";
+            "Agendamento não encontrado para o código de acesso e o e-mail informados.";
 
     private final AgendamentoRepository agendamentoRepository;
     private final ClienteRepository clienteRepository;
     private final BarbeiroRepository barbeiroRepository;
     private final ServicoRepository servicoRepository;
     private final RegrasAgendamento regras;
+    private final GeradorCodigoAcesso geradorCodigo;
 
     public AgendamentoService(AgendamentoRepository agendamentoRepository,
                               ClienteRepository clienteRepository,
                               BarbeiroRepository barbeiroRepository,
                               ServicoRepository servicoRepository,
-                              RegrasAgendamento regras) {
+                              RegrasAgendamento regras,
+                              GeradorCodigoAcesso geradorCodigo) {
         this.agendamentoRepository = agendamentoRepository;
         this.clienteRepository = clienteRepository;
         this.barbeiroRepository = barbeiroRepository;
         this.servicoRepository = servicoRepository;
         this.regras = regras;
+        this.geradorCodigo = geradorCodigo;
     }
 
     /**
@@ -79,23 +83,26 @@ public class AgendamentoService {
             throw new ConflitoException("O barbeiro já possui agendamento nesse horário.");
         }
 
-        Agendamento agendamento = new Agendamento(cliente, barbeiro, servico, inicio,
+        Agendamento agendamento = new Agendamento(gerarCodigoUnico(), cliente, barbeiro, servico, inicio,
                 StatusAgendamento.AGENDADO, regras.agora());
         return agendamentoRepository.save(agendamento);
     }
 
-    /** Consulta feita pelo cliente: o e-mail precisa corresponder ao do agendamento. */
+    /**
+     * Consulta feita pelo cliente: exige o código de acesso recebido no agendamento e o e-mail do cliente.
+     * Código inexistente ou e-mail divergente geram a mesma resposta (404), sem indicar qual dos dois falhou.
+     */
     @Transactional(readOnly = true)
-    public Agendamento consultarPeloCliente(Long id, String email) {
-        return agendamentoRepository.findById(id)
+    public Agendamento consultarPeloCliente(String codigoAcesso, String email) {
+        return agendamentoRepository.findByCodigoAcesso(GeradorCodigoAcesso.normalizar(codigoAcesso))
                 .filter(a -> a.getCliente().getEmail().equalsIgnoreCase(email.strip()))
                 .orElseThrow(() -> new RecursoNaoEncontradoException(NAO_ENCONTRADO_PARA_CLIENTE));
     }
 
     /** Cancelamento feito pelo cliente. Somente agendamentos com status AGENDADO podem ser cancelados. */
     @Transactional
-    public Agendamento cancelarPeloCliente(Long id, String email) {
-        Agendamento agendamento = consultarPeloCliente(id, email);
+    public Agendamento cancelarPeloCliente(String codigoAcesso, String email) {
+        Agendamento agendamento = consultarPeloCliente(codigoAcesso, email);
         if (!agendamento.isAgendado()) {
             throw new ConflitoException("Somente agendamentos com status AGENDADO podem ser cancelados.");
         }
@@ -144,6 +151,16 @@ public class AgendamentoService {
         return regras.gerarHorariosDoDia(data, duracao).stream()
                 .filter(inicio -> ocupados.stream().noneMatch(a -> sobrepoe(a, inicio, inicio.plusMinutes(duracao))))
                 .toList();
+    }
+
+    private String gerarCodigoUnico() {
+        for (int tentativa = 0; tentativa < TENTATIVAS_CODIGO_UNICO; tentativa++) {
+            String codigo = geradorCodigo.gerar();
+            if (!agendamentoRepository.existsByCodigoAcesso(codigo)) {
+                return codigo;
+            }
+        }
+        throw new IllegalStateException("Não foi possível gerar um código de acesso único.");
     }
 
     /** RN-10: somente barbeiros e serviços ativos podem receber agendamentos. */

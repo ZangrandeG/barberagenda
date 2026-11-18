@@ -15,12 +15,13 @@ Turma A — Grupo [PREENCHER número do grupo]
 
 ## 2. Nome e versão do sistema
 
-**BarberAgenda 1.0.1** — tag Git `v1.0.1-sistema-base` (versão que será testada).
+**BarberAgenda 1.1.0** — tag Git `v1.1.0-sistema-base` (versão que será testada).
 
 | Versão | Tag | Data | Mudança |
 |---|---|---|---|
 | 1.0.0 | `v1.0-sistema-base` | 2026-11-18 | Versão base |
 | 1.0.1 | `v1.0.1-sistema-base` | 2026-11-18 | A restauração de dados (`POST /api/dev/reset`) passa a exigir administrador e CSRF, apontado pela revisão de segurança do código antes do início dos testes |
+| 1.1.0 | `v1.1.0-sistema-base` | 2026-11-18 | Consulta e cancelamento pelo cliente passam a exigir um código de acesso aleatório (em vez do id sequencial) + e-mail, também apontado pela revisão de segurança |
 
 ## 3. Link do repositório
 
@@ -97,7 +98,7 @@ powershell -ExecutionPolicy Bypass -File scripts\reset-dados.ps1    # Windows
 ```bash
 ./mvnw spring-boot:run                                        # perfil dev
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=test        # perfil test (banco em memória)
-java -jar target/barberagenda-1.0.1.jar                       # a partir do pacote gerado
+java -jar target/barberagenda-1.1.0.jar                       # a partir do pacote gerado
 ```
 
 Acesse:
@@ -116,7 +117,7 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 
 | Tipo | Comando | Situação |
 |---|---|---|
-| Verificação rápida da versão base | Com a aplicação rodando: `bash scripts/verificar-sistema.sh` | Disponível — 42 verificações; resultados em [entrega/01_SISTEMA_ALVO](entrega/01_SISTEMA_ALVO) |
+| Verificação rápida da versão base | Com a aplicação rodando: `bash scripts/verificar-sistema.sh` | Disponível — 46 verificações; resultados em [entrega/01_SISTEMA_ALVO](entrega/01_SISTEMA_ALVO) |
 | Unitários (JUnit 5 + Mockito) | `./mvnw test` | A implementar no Marco 5 |
 | Cobertura (JaCoCo) | `./mvnw verify` → `target/site/jacoco/index.html` | A configurar no Marco 5 |
 | Análise de qualidade (SonarQube) | A documentar no Marco 5 | A configurar |
@@ -158,7 +159,8 @@ GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions (pipeline a c
 | Com mais de um Java instalado, o wrapper pode usar uma versão antiga e falhar na compilação. | Definir `JAVA_HOME` apontando para o JDK 21 (seção 6). |
 | No Windows, o `curl` executado pelo Git Bash corrompe acentos passados diretamente em `--data`, e a API responde 400 ("Corpo da requisição ausente ou em formato inválido"). | Enviar o corpo por arquivo (`--data-binary @arquivo.json`), como faz `scripts/verificar-sistema.sh`. |
 | O perfil `postgres` ainda não foi executado pelo grupo (Docker não instalado na máquina de desenvolvimento). | Usar o H2 (perfis `dev`/`test`), que atende a todo o escopo do projeto. |
-| O cliente não tem login: quem souber o código e o e-mail de um agendamento consegue consultá-lo e cancelá-lo. | Limitação aceita no escopo acadêmico (autenticação de clientes fora do escopo). |
+| O cliente não tem login: o código de acesso e o e-mail funcionam como credencial do agendamento. Não há limite de tentativas na consulta. | Limitação aceita no escopo acadêmico. O código tem 8 caracteres aleatórios (~31^8 combinações), o que torna inviável adivinhá-lo. |
+| Ao atualizar uma cópia local da versão 1.0.x para a 1.1.0, o banco do perfil `dev` (pasta `data/`) não tem a nova coluna de código de acesso. | Parar a aplicação e apagar a pasta `data/`; a massa fictícia é recriada na próxima inicialização. |
 
 ## 15. Contato do grupo
 

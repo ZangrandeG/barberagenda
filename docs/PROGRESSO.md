@@ -6,7 +6,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 ## Situação atual
 
-- Fase 1 concluída: ficha P01 (v1.1) e sistema base (tag `v1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
+- Fase 1 concluída: ficha P01 (v1.2) e sistema base, versão atual 1.1.0 (tag `v1.1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
 - Próxima: Fase 2 (Marco 1 — níveis e tipos de teste). Aguardando: decisão do professor sobre a ficha e respostas do grupo (ver Pendências).
 
 ## Fases
@@ -58,7 +58,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 2026-11-18 | Desvios em relação ao prompt inicial, por segurança e usabilidade: `GET /api/clientes` exige administrador; o agendamento identifica o cliente pelo e-mail (`emailCliente`); consulta/cancelamento exigem código + e-mail. Ver `docs/ESPECIFICACAO_SISTEMA.md`, seção 5. |
 | 2026-11-18 | Regra de cancelamento com antecedência mínima **não** implementada: reservada para o TDD (Fase 9). |
 | 2026-11-18 | Versão 1.0.1 (tag `v1.0.1-sistema-base`): revisão automática de segurança do código, feita antes do início dos testes, apontou que `POST /api/dev/reset` não exigia autenticação; passou a exigir administrador e CSRF. Por ter sido encontrado em revisão de código durante o desenvolvimento (e não na execução de um caso de teste), não foi registrado como defeito do processo de testes. Verificação: 42/42. |
-| 2026-11-18 | Em aberto (decisão do grupo): a mesma revisão apontou que consulta/cancelamento por código sequencial + e-mail permite que quem conheça o e-mail de alguém descubra e cancele os agendamentos dessa pessoa variando o código. Alternativa: código de acesso aleatório gerado no agendamento. |
+| 2026-11-18 | Versão 1.1.0 (tag `v1.1.0-sistema-base`), por decisão do grupo: a mesma revisão apontou que consulta/cancelamento por id sequencial + e-mail permitia, a quem conhecesse o e-mail de alguém, descobrir e cancelar os agendamentos dessa pessoa variando o id. Agora cada agendamento recebe um código de acesso aleatório de 8 caracteres, exigido junto com o e-mail; o código não aparece nas respostas administrativas. Massa fictícia com códigos fixos `SEMENTE2`…`SEMENTE6`. Verificação: 46/46 (`verificacao_v1.1.0_2026-11-18.txt`). |
 
 ## Repositório
 

@@ -2,6 +2,7 @@ package br.com.barberagenda.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +14,10 @@ import br.com.barberagenda.model.StatusAgendamento;
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 
     long countByClienteIdAndStatus(Long clienteId, StatusAgendamento status);
+
+    Optional<Agendamento> findByCodigoAcesso(String codigoAcesso);
+
+    boolean existsByCodigoAcesso(String codigoAcesso);
 
     boolean existsByBarbeiroId(Long barbeiroId);
 

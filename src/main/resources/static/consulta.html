@@ -22,10 +22,12 @@
     <div class="cartao">
         <form id="form-consulta" novalidate>
             <div class="campo">
-                <label for="campo-codigo-agendamento">Código do agendamento</label>
-                <input type="number" id="campo-codigo-agendamento" name="codigo" min="1"
-                       data-testid="campo-codigo-agendamento">
-                <span class="erro-campo" id="erro-codigo-agendamento" data-testid="erro-codigo-agendamento"></span>
+                <label for="campo-codigo-acesso">Código de acesso</label>
+                <input type="text" id="campo-codigo-acesso" name="codigoAcesso" maxlength="8"
+                       autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Ex.: K7Q2M9XD"
+                       data-testid="campo-codigo-acesso">
+                <span class="dica">Informado na confirmação do agendamento (8 caracteres).</span>
+                <span class="erro-campo" id="erro-codigo-acesso" data-testid="erro-codigo-acesso"></span>
             </div>
             <div class="campo">
                 <label for="campo-email-consulta">E-mail usado no agendamento</label>

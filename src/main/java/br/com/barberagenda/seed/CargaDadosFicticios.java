@@ -90,20 +90,22 @@ public class CargaDadosFicticios {
         LocalDate depoisUtil = diaDeFuncionamento(hoje, 2);
         LocalDate anteriorUtil = diaDeFuncionamento(hoje, -1);
 
+        // Códigos de acesso FIXOS apenas na massa fictícia (dev/test), para facilitar testes manuais.
+        // Agendamentos criados pela API recebem códigos aleatórios.
         List<Agendamento> agendamentos = List.of(
-                novo(clientes.get(0), carlos, corte, amanhaUtil.atTime(10, 0), StatusAgendamento.AGENDADO, agora),
-                novo(clientes.get(1), rafael, corteBarba, amanhaUtil.atTime(14, 0), StatusAgendamento.AGENDADO, agora),
-                novo(clientes.get(2), carlos, barba, depoisUtil.atTime(9, 30), StatusAgendamento.CANCELADO, agora),
-                novo(clientes.get(3), rafael, corte, anteriorUtil.atTime(11, 0), StatusAgendamento.CONCLUIDO, agora),
-                novo(clientes.get(4), carlos, sobrancelha, depoisUtil.atTime(16, 0), StatusAgendamento.AGENDADO, agora));
+                new Agendamento("SEMENTE2", clientes.get(0), carlos, corte, amanhaUtil.atTime(10, 0),
+                        StatusAgendamento.AGENDADO, agora),
+                new Agendamento("SEMENTE3", clientes.get(1), rafael, corteBarba, amanhaUtil.atTime(14, 0),
+                        StatusAgendamento.AGENDADO, agora),
+                new Agendamento("SEMENTE4", clientes.get(2), carlos, barba, depoisUtil.atTime(9, 30),
+                        StatusAgendamento.CANCELADO, agora),
+                new Agendamento("SEMENTE5", clientes.get(3), rafael, corte, anteriorUtil.atTime(11, 0),
+                        StatusAgendamento.CONCLUIDO, agora),
+                new Agendamento("SEMENTE6", clientes.get(4), carlos, sobrancelha, depoisUtil.atTime(16, 0),
+                        StatusAgendamento.AGENDADO, agora));
         agendamentoRepository.saveAll(agendamentos);
 
         return new ResumoCarga(3, 5, clientes.size(), agendamentos.size());
-    }
-
-    private static Agendamento novo(Cliente cliente, Barbeiro barbeiro, Servico servico, LocalDateTime inicio,
-                                    StatusAgendamento status, LocalDateTime criacao) {
-        return new Agendamento(cliente, barbeiro, servico, inicio, status, criacao);
     }
 
     /** Avança (ou recua, se negativo) a quantidade indicada de dias de funcionamento (segunda a sábado). */

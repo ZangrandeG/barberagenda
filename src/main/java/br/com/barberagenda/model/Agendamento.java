@@ -21,6 +21,10 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** Código aleatório entregue ao cliente; exigido (com o e-mail) para consultar e cancelar. */
+    @Column(name = "codigo_acesso", nullable = false, length = 8, unique = true)
+    private String codigoAcesso;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
@@ -51,8 +55,9 @@ public class Agendamento {
         // exigido pela JPA
     }
 
-    public Agendamento(Cliente cliente, Barbeiro barbeiro, Servico servico,
+    public Agendamento(String codigoAcesso, Cliente cliente, Barbeiro barbeiro, Servico servico,
                        LocalDateTime dataHoraInicio, StatusAgendamento status, LocalDateTime dataCriacao) {
+        this.codigoAcesso = codigoAcesso;
         this.cliente = cliente;
         this.barbeiro = barbeiro;
         this.servico = servico;
@@ -76,6 +81,10 @@ public class Agendamento {
 
     public Long getId() {
         return id;
+    }
+
+    public String getCodigoAcesso() {
+        return codigoAcesso;
     }
 
     public Cliente getCliente() {

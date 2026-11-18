@@ -97,7 +97,10 @@ verificar "  primeiro horário livre é 09:00" "09:00" "$(json "d['horarios'][0]
 verificar "POST /api/agendamentos válido ($DIA 18:30, serviço de 30 min)" 201 \
     "$(chamar POST /api/agendamentos "{\"emailCliente\":\"$EMAIL1\",\"barbeiroId\":$BARBEIRO,\"servicoId\":$SERVICO,\"dataHoraInicio\":\"${DIA}T18:30:00\"}")"
 AGENDAMENTO=$(json "d['id']")
+CODIGO=$(json "d['codigoAcesso']")
 verificar "  status do novo agendamento" "AGENDADO" "$(json "d['status']")"
+verificar "  código de acesso aleatório com 8 caracteres" "True" \
+    "$(json "__import__('re').fullmatch('[A-HJKMNP-Z2-9]{8}', d['codigoAcesso']) is not None")"
 verificar "POST /api/agendamentos no mesmo horário/barbeiro (RN-07)" 409 \
     "$(chamar POST /api/agendamentos "{\"emailCliente\":\"$EMAIL2\",\"barbeiroId\":$BARBEIRO,\"servicoId\":$SERVICO,\"dataHoraInicio\":\"${DIA}T18:30:00\"}")"
 verificar "POST /api/agendamentos às 08:30 (RN-04)" 400 \
@@ -113,13 +116,17 @@ verificar "POST /api/agendamentos para daqui a 45 dias (RN-06)" 400 \
 verificar "POST /api/agendamentos com e-mail não cadastrado" 404 \
     "$(chamar POST /api/agendamentos "{\"emailCliente\":\"ninguem.${SUFIXO}@exemplo.com\",\"barbeiroId\":$BARBEIRO,\"servicoId\":$SERVICO,\"dataHoraInicio\":\"${DIA}T11:00:00\"}")"
 
-verificar "GET /api/agendamentos/{id} com o e-mail correto" 200 "$(chamar GET "/api/agendamentos/$AGENDAMENTO?email=$EMAIL1")"
-verificar "GET /api/agendamentos/{id} com outro e-mail" 404 "$(chamar GET "/api/agendamentos/$AGENDAMENTO?email=$EMAIL2")"
-verificar "PATCH /api/agendamentos/{id}/cancelar" 200 \
-    "$(chamar PATCH "/api/agendamentos/$AGENDAMENTO/cancelar" "{\"email\":\"$EMAIL1\"}")"
+verificar "GET /api/agendamentos/{código} com o e-mail correto" 200 "$(chamar GET "/api/agendamentos/$CODIGO?email=$EMAIL1")"
+verificar "GET /api/agendamentos/{código} em minúsculas" 200 \
+    "$(chamar GET "/api/agendamentos/$(echo "$CODIGO" | tr 'A-Z' 'a-z')?email=$EMAIL1")"
+verificar "GET /api/agendamentos/{código} com outro e-mail" 404 "$(chamar GET "/api/agendamentos/$CODIGO?email=$EMAIL2")"
+verificar "GET /api/agendamentos/{id numérico} não dá acesso" 404 \
+    "$(chamar GET "/api/agendamentos/$AGENDAMENTO?email=$EMAIL1")"
+verificar "PATCH /api/agendamentos/{código}/cancelar" 200 \
+    "$(chamar PATCH "/api/agendamentos/$CODIGO/cancelar" "{\"email\":\"$EMAIL1\"}")"
 verificar "  status após cancelamento" "CANCELADO" "$(json "d['status']")"
 verificar "PATCH cancelar novamente (já cancelado)" 409 \
-    "$(chamar PATCH "/api/agendamentos/$AGENDAMENTO/cancelar" "{\"email\":\"$EMAIL1\"}")"
+    "$(chamar PATCH "/api/agendamentos/$CODIGO/cancelar" "{\"email\":\"$EMAIL1\"}")"
 
 verificar "GET /api/admin/barbeiros sem credenciais (RN-11)" 401 "$(chamar GET /api/admin/barbeiros)"
 verificar "  resposta 401 não contém stack trace" "False" "$(json "'trace' in d or 'exception' in str(d).lower()")"
@@ -142,6 +149,8 @@ verificar "DELETE /api/admin/barbeiros/{id} com agendamentos" 409 \
 AMANHA=$(proximo_dia_util 1)
 verificar "GET /api/admin/agenda do barbeiro em $AMANHA" 200 \
     "$(chamar GET "/api/admin/agenda?barbeiroId=$BARBEIRO&data=$AMANHA" '' "$ADMIN")"
+verificar "  agenda administrativa não expõe códigos de acesso" "False" \
+    "$(json "any('codigoAcesso' in a for a in d)")"
 PARA_CONCLUIR=$(json "[a['id'] for a in d if a['status']=='AGENDADO'][0]")
 verificar "PATCH /api/admin/agendamentos/{id}/concluir" 200 \
     "$(chamar PATCH "/api/admin/agendamentos/$PARA_CONCLUIR/concluir" '' "$ADMIN")"

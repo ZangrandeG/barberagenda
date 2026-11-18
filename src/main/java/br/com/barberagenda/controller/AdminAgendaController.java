@@ -31,12 +31,14 @@ public class AdminAgendaController {
     public List<AgendamentoResponse> agendaDoDia(
             @RequestParam Long barbeiroId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
-        return agendamentoService.agendaDoDia(barbeiroId, data).stream().map(AgendamentoResponse::de).toList();
+        return agendamentoService.agendaDoDia(barbeiroId, data).stream()
+                .map(AgendamentoResponse::paraAdministrador)
+                .toList();
     }
 
     @PatchMapping("/agendamentos/{id}/concluir")
     public AgendamentoResponse concluir(@PathVariable Long id) {
-        return AgendamentoResponse.de(agendamentoService.concluir(id));
+        return AgendamentoResponse.paraAdministrador(agendamentoService.concluir(id));
     }
 
     /** Usado pelas páginas administrativas para exibir o usuário autenticado. */

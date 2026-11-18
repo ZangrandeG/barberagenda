@@ -4,6 +4,7 @@
 |---|---|---|
 | v1.0 | 2026-11-18 | Especificação da versão base (tag `v1.0-sistema-base`) |
 | v1.1 | 2026-11-18 | `POST /api/dev/reset` passa a exigir administrador (versão 1.0.1) |
+| v1.2 | 2026-11-18 | Consulta e cancelamento pelo cliente passam a usar código de acesso aleatório + e-mail (versão 1.1.0) |
 
 Documento de referência para os requisitos (P02) e para os casos de teste (P04). Descreve o comportamento **implementado** na versão base.
 
@@ -59,8 +60,10 @@ Base: `http://localhost:8080`. Corpo e respostas em JSON (UTF-8). Datas: `AAAA-M
 | `GET /api/servicos` | Serviços ativos | 200 | — |
 | `GET /api/horarios-disponiveis?barbeiroId=&servicoId=&data=` | Horários de início livres (`["09:00", ...]`). Data de domingo, passada ou além de 30 dias devolve lista vazia. | 200 | 400 (parâmetro ausente/inválido; barbeiro ou serviço inativo), 404 |
 | `POST /api/agendamentos` | Agenda `{emailCliente, barbeiroId, servicoId, dataHoraInicio}` | 201 + `Location` | 400, 404, 409 |
-| `GET /api/agendamentos/{id}?email=` | Consulta pelo cliente (o e-mail precisa ser o do agendamento) | 200 | 400, 404 |
-| `PATCH /api/agendamentos/{id}/cancelar` | Cancela `{email}` | 200 | 400, 404, 409 |
+| `GET /api/agendamentos/{codigoAcesso}?email=` | Consulta pelo cliente. Exige o código de acesso recebido ao agendar (aceito em minúsculas) e o e-mail do agendamento. | 200 | 400, 404 |
+| `PATCH /api/agendamentos/{codigoAcesso}/cancelar` | Cancela `{email}` | 200 | 400, 404, 409 |
+
+A resposta de `POST /api/agendamentos` traz o campo `codigoAcesso` (8 caracteres aleatórios, alfabeto `ABCDEFGHJKMNPQRSTUVWXYZ23456789`, sem 0/O/1/I/L) e o cabeçalho `Location: /api/agendamentos/{codigoAcesso}`. O `id` numérico continua na resposta, mas não dá acesso às rotas do cliente (consultar com o id responde 404).
 
 ### 4.2 Administrativa (exige perfil ADMIN)
 
@@ -106,7 +109,7 @@ O objeto `campos` é sempre enviado (vazio quando o erro não se refere a um cam
 |---|---|
 | `GET /api/clientes` e `GET /api/clientes/{id}` exigem administrador. | Expõem nome, telefone e e-mail de todos os clientes (exposição indevida de dados pessoais). |
 | O agendamento identifica o cliente pelo e-mail (`emailCliente`), e não pelo id. | O cliente não tem login; o e-mail é o dado que ele conhece. O id do cliente não é exposto publicamente. |
-| Consulta e cancelamento exigem código **e** e-mail; e-mail divergente responde 404. | Evita que alguém consulte agendamentos de outras pessoas apenas variando o código, sem revelar se o código existe. |
+| Consulta e cancelamento exigem **código de acesso aleatório** (gerado com `SecureRandom` no agendamento) **e** e-mail; código inexistente ou e-mail divergente respondem igualmente 404. O código de acesso só aparece nas respostas ao próprio cliente, não nas respostas administrativas. | Na versão 1.0.x o código era o id sequencial: quem soubesse o e-mail de outra pessoa podia descobrir e cancelar os agendamentos dela testando ids em sequência (apontado pela revisão de segurança do código; trocado na versão 1.1.0 a pedido do grupo). Com ~31^8 combinações, adivinhar o código não é viável. |
 | 400 para regras que dependem só do pedido; 409 para conflito com dados existentes (e-mail repetido, horário ocupado, limite de ativos, status que não permite a operação). | Diferencia erro de preenchimento de conflito de estado. |
 | Exclusão de barbeiro/serviço com agendamentos é recusada (409). | Preserva o histórico; a desativação (`ativo=false`) atende ao caso de uso. |
 | Bloqueio pessimista do barbeiro ao criar agendamento. | Impede que dois pedidos simultâneos reservem o mesmo horário. |
@@ -123,4 +126,14 @@ O objeto `campos` é sempre enviado (vazio quando o erro não se refere a um cam
 | Clientes | 10 clientes com e-mails `@exemplo.com` (ex.: `ana.rocha@exemplo.com`) |
 | Agendamentos | 5, com datas relativas ao dia atual: 3 `AGENDADO` (próximos dias de funcionamento), 1 `CANCELADO`, 1 `CONCLUIDO` (dia de funcionamento anterior) |
 
-Os ids mudam a cada restauração; testes automatizados devem obter os ids pelas consultas, e não fixá-los.
+Códigos de acesso **fixos** dos agendamentos da massa fictícia (somente perfis `dev` e `test`, para facilitar os testes manuais; agendamentos criados pela API recebem códigos aleatórios):
+
+| Código | Cliente (e-mail) | Barbeiro | Serviço | Quando | Status |
+|---|---|---|---|---|---|
+| `SEMENTE2` | `ana.rocha@exemplo.com` | Carlos Navalha | Corte de cabelo | próximo dia de funcionamento, 10:00 | `AGENDADO` |
+| `SEMENTE3` | `bruno.lima@exemplo.com` | Rafael Tesoura | Corte e barba | próximo dia de funcionamento, 14:00 | `AGENDADO` |
+| `SEMENTE4` | `camila.prado@exemplo.com` | Carlos Navalha | Barba | 2º dia de funcionamento à frente, 09:30 | `CANCELADO` |
+| `SEMENTE5` | `daniel.alves@exemplo.com` | Rafael Tesoura | Corte de cabelo | dia de funcionamento anterior, 11:00 | `CONCLUIDO` |
+| `SEMENTE6` | `eduarda.costa@exemplo.com` | Carlos Navalha | Sobrancelha | 2º dia de funcionamento à frente, 16:00 | `AGENDADO` |
+
+Os ids numéricos mudam a cada restauração; testes automatizados devem obter os ids pelas consultas, e não fixá-los.

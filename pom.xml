@@ -12,7 +12,7 @@
 
     <groupId>br.com.barberagenda</groupId>
     <artifactId>barberagenda</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <name>BarberAgenda</name>
     <description>Sistema de agendamento de barbearia - objeto de teste do Projeto Integrado P2 (Testes e Qualidade de Software)</description>
 

@@ -51,18 +51,20 @@ public class AgendamentoController {
     @PostMapping("/agendamentos")
     public ResponseEntity<AgendamentoResponse> agendar(@Valid @RequestBody AgendamentoRequest pedido) {
         Agendamento agendamento = agendamentoService.agendar(pedido);
-        URI local = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(agendamento.getId()).toUri();
-        return ResponseEntity.created(local).body(AgendamentoResponse.de(agendamento));
+        URI local = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
+                .buildAndExpand(agendamento.getCodigoAcesso()).toUri();
+        return ResponseEntity.created(local).body(AgendamentoResponse.paraCliente(agendamento));
     }
 
-    @GetMapping("/agendamentos/{id}")
-    public AgendamentoResponse consultar(@PathVariable Long id, @RequestParam String email) {
-        return AgendamentoResponse.de(agendamentoService.consultarPeloCliente(id, email));
+    /** Consulta pelo cliente: código de acesso recebido no agendamento + e-mail do cliente. */
+    @GetMapping("/agendamentos/{codigoAcesso}")
+    public AgendamentoResponse consultar(@PathVariable String codigoAcesso, @RequestParam String email) {
+        return AgendamentoResponse.paraCliente(agendamentoService.consultarPeloCliente(codigoAcesso, email));
     }
 
-    @PatchMapping("/agendamentos/{id}/cancelar")
-    public AgendamentoResponse cancelar(@PathVariable Long id, @Valid @RequestBody CancelamentoRequest dados) {
-        return AgendamentoResponse.de(agendamentoService.cancelarPeloCliente(id, dados.email()));
+    @PatchMapping("/agendamentos/{codigoAcesso}/cancelar")
+    public AgendamentoResponse cancelar(@PathVariable String codigoAcesso,
+                                        @Valid @RequestBody CancelamentoRequest dados) {
+        return AgendamentoResponse.paraCliente(agendamentoService.cancelarPeloCliente(codigoAcesso, dados.email()));
     }
 }

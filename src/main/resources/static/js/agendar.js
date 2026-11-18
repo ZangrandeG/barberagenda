@@ -102,7 +102,7 @@
     }
 
     function mostrarResumo(agendamento) {
-        document.getElementById("codigo-agendamento").textContent = agendamento.id;
+        document.getElementById("codigo-acesso").textContent = agendamento.codigoAcesso;
         document.getElementById("resumo-barbeiro").textContent = agendamento.barbeiroNome;
         document.getElementById("resumo-servico").textContent = agendamento.servicoNome;
         document.getElementById("resumo-data-hora").textContent = Tela.dataHora(agendamento.dataHoraInicio);
@@ -128,7 +128,8 @@
         try {
             const agendamento = await Api.post("/api/agendamentos", pedido);
             Tela.errosCampos({}, mapaErros);
-            Tela.mensagem(mensagem, "Agendamento realizado com sucesso! Código: " + agendamento.id + ".", "sucesso");
+            Tela.mensagem(mensagem,
+                "Agendamento realizado com sucesso! Código de acesso: " + agendamento.codigoAcesso + ".", "sucesso");
             mostrarResumo(agendamento);
             limparHorarios();
         } catch (erro) {
