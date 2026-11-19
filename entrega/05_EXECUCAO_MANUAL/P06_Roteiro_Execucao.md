@@ -18,7 +18,7 @@
 2. Gerar o pacote e subir a aplicação no perfil `dev` (terminal separado, deixar aberto):
    ```bash
    ./mvnw -DskipTests package
-   java -jar target/barberagenda-1.1.0.jar
+   java -jar target/barberagenda-1.2.0.jar
    ```
 3. Em outro terminal, confirmar que o sistema responde:
    ```bash

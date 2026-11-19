@@ -5,6 +5,7 @@
 | v1.0 | 2026-11-18 | Especificação da versão base (tag `v1.0-sistema-base`) |
 | v1.1 | 2026-11-18 | `POST /api/dev/reset` passa a exigir administrador (versão 1.0.1) |
 | v1.2 | 2026-11-18 | Consulta e cancelamento pelo cliente passam a usar código de acesso aleatório + e-mail (versão 1.1.0) |
+| v1.3 | 2026-11-18 | RF-09: cancelamento somente com 2 horas de antecedência, criado por TDD (versão 1.2.0) |
 
 Documento de referência para os requisitos (P02) e para os casos de teste (P04). Descreve o comportamento **implementado** na versão base.
 
@@ -31,11 +32,13 @@ Documento de referência para os requisitos (P02) e para os casos de teste (P04)
 | RN-10 | Somente barbeiros e serviços ativos recebem agendamentos e aparecem para o cliente. | `AgendamentoService` e consultas públicas | 400, campo `barbeiroId` / `servicoId` |
 | RN-11 | Área administrativa somente com autenticação. Sem credenciais: consultas (GET) respondem 401; alterações (POST, PUT, PATCH, DELETE) respondem 403, porque o token CSRF é verificado antes da autenticação. Com sessão do navegador e token CSRF ausente ou inválido: 403. Com HTTP Basic e senha errada: 401. Páginas `/admin/**` sem login redirecionam para o login. | `SecurityConfig` | 401 / 403 / 302 |
 
+| RF-09 | O cliente só pode cancelar com **no mínimo 2 horas** de antecedência em relação ao início (exatamente 2 h é permitido). Criada por TDD na versão 1.2.0. | `PoliticaCancelamento` | 422 |
+
 **Ordem das verificações ao criar um agendamento:** cliente, barbeiro e serviço existem (404) → barbeiro e serviço ativos, RN-10 (400) → RN-06, RN-04, RN-05, nesta ordem (400) → limite de ativos, RN-08 (409) → sobreposição, RN-07 (409).
 
 **Fuso horário:** todas as datas e horas são locais da barbearia (`America/Sao_Paulo`), sem indicação de fuso no JSON.
 
-**Fora da versão base (reservado para a etapa de TDD):** regra de antecedência mínima para cancelamento pelo cliente.
+**Regra criada por TDD (versão 1.2.0):** RF-09, antecedência mínima de 2 horas para o cancelamento pelo cliente. No cancelamento, a verificação de status (409) vem antes da verificação de prazo (422).
 
 ## 3. Status de agendamento
 
@@ -61,7 +64,7 @@ Base: `http://localhost:8080`. Corpo e respostas em JSON (UTF-8). Datas: `AAAA-M
 | `GET /api/horarios-disponiveis?barbeiroId=&servicoId=&data=` | Horários de início livres (`["09:00", ...]`). Data de domingo, passada ou além de 30 dias devolve lista vazia. | 200 | 400 (parâmetro ausente/inválido; barbeiro ou serviço inativo), 404 |
 | `POST /api/agendamentos` | Agenda `{emailCliente, barbeiroId, servicoId, dataHoraInicio}` | 201 + `Location` | 400, 404, 409 |
 | `GET /api/agendamentos/{codigoAcesso}?email=` | Consulta pelo cliente. Exige o código de acesso recebido ao agendar (aceito em minúsculas) e o e-mail do agendamento. | 200 | 400, 404 |
-| `PATCH /api/agendamentos/{codigoAcesso}/cancelar` | Cancela `{email}` | 200 | 400, 404, 409 |
+| `PATCH /api/agendamentos/{codigoAcesso}/cancelar` | Cancela `{email}` (RF-09: no mínimo 2 h antes do início) | 200 | 400, 404, 409, 422 |
 
 A resposta de `POST /api/agendamentos` traz o campo `codigoAcesso` (8 caracteres aleatórios, alfabeto `ABCDEFGHJKMNPQRSTUVWXYZ23456789`, sem 0/O/1/I/L) e o cabeçalho `Location: /api/agendamentos/{codigoAcesso}`. O `id` numérico continua na resposta, mas não dá acesso às rotas do cliente (consultar com o id responde 404).
 

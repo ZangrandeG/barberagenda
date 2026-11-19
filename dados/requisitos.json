@@ -1,15 +1,133 @@
 [
-  {"id": "RF-01", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Cadastro de cliente (RN-01 nome 3–60, RN-02 telefone 10–11 dígitos, RN-03 e-mail válido e único)", "riscos": ["R-05"]},
-  {"id": "RF-02", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Consulta de horários disponíveis por barbeiro, serviço e data", "riscos": ["R-02", "R-04", "R-11"]},
-  {"id": "RF-03", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Criação de agendamento (RN-04 funcionamento, RN-05 intervalo de 30 min, RN-06 antecedência, RN-10 somente ativos)", "riscos": ["R-02", "R-04"]},
-  {"id": "RF-04", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Impedir sobreposição de horários do barbeiro (RN-07) e limitar a 3 agendamentos ativos por cliente (RN-08)", "riscos": ["R-01", "R-06"]},
-  {"id": "RF-05", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Consulta e cancelamento pelo cliente com código de acesso + e-mail", "riscos": ["R-07"]},
-  {"id": "RF-06", "tipo": "Funcional", "prioridade": "Alta", "descricao": "Autenticação do administrador e proteção da área administrativa (RN-11)", "riscos": ["R-03"]},
-  {"id": "RF-07", "tipo": "Funcional", "prioridade": "Média", "descricao": "Cadastro, edição, desativação e exclusão de barbeiros e serviços (RN-09, RN-10)", "riscos": ["R-05"]},
-  {"id": "RF-08", "tipo": "Funcional", "prioridade": "Média", "descricao": "Agenda do dia por barbeiro e conclusão de atendimentos", "riscos": ["R-03"]},
-  {"id": "RNF-01", "tipo": "Não funcional", "prioridade": "Média", "descricao": "Desempenho básico: p95 < 500 ms em 30 repetições (horários disponíveis e criação de agendamento)", "riscos": ["R-11"]},
-  {"id": "RNF-02", "tipo": "Não funcional", "prioridade": "Alta", "descricao": "Segurança básica: acesso restrito, senha com hash BCrypt, HTML/script não executado, erros sem stack trace", "riscos": ["R-03", "R-08"]},
-  {"id": "RNF-03", "tipo": "Não funcional", "prioridade": "Média", "descricao": "Compatibilidade: Chrome e Firefox, resoluções 1366×768 e 375×667", "riscos": ["R-09"]},
-  {"id": "RNF-04", "tipo": "Não funcional", "prioridade": "Média", "descricao": "Confiabilidade: dados preservados após reinício; entradas inválidas nunca geram HTTP 500", "riscos": ["R-10"]},
-  {"id": "RNF-05", "tipo": "Não funcional", "prioridade": "Média", "descricao": "Usabilidade: participante externo conclui cadastro + agendamento em até 5 min e avalia facilidade ≥ 4/5", "riscos": ["R-09"]}
+  {
+    "id": "RF-01",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Cadastro de cliente (RN-01 nome 3–60, RN-02 telefone 10–11 dígitos, RN-03 e-mail válido e único)",
+    "riscos": [
+      "R-05"
+    ]
+  },
+  {
+    "id": "RF-02",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Consulta de horários disponíveis por barbeiro, serviço e data",
+    "riscos": [
+      "R-02",
+      "R-04",
+      "R-11"
+    ]
+  },
+  {
+    "id": "RF-03",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Criação de agendamento (RN-04 funcionamento, RN-05 intervalo de 30 min, RN-06 antecedência, RN-10 somente ativos)",
+    "riscos": [
+      "R-02",
+      "R-04"
+    ]
+  },
+  {
+    "id": "RF-04",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Impedir sobreposição de horários do barbeiro (RN-07) e limitar a 3 agendamentos ativos por cliente (RN-08)",
+    "riscos": [
+      "R-01",
+      "R-06"
+    ]
+  },
+  {
+    "id": "RF-05",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Consulta e cancelamento pelo cliente com código de acesso + e-mail",
+    "riscos": [
+      "R-07"
+    ]
+  },
+  {
+    "id": "RF-06",
+    "tipo": "Funcional",
+    "prioridade": "Alta",
+    "descricao": "Autenticação do administrador e proteção da área administrativa (RN-11)",
+    "riscos": [
+      "R-03"
+    ]
+  },
+  {
+    "id": "RF-07",
+    "tipo": "Funcional",
+    "prioridade": "Média",
+    "descricao": "Cadastro, edição, desativação e exclusão de barbeiros e serviços (RN-09, RN-10)",
+    "riscos": [
+      "R-05"
+    ]
+  },
+  {
+    "id": "RF-08",
+    "tipo": "Funcional",
+    "prioridade": "Média",
+    "descricao": "Agenda do dia por barbeiro e conclusão de atendimentos",
+    "riscos": [
+      "R-03"
+    ]
+  },
+  {
+    "id": "RF-09",
+    "tipo": "Funcional",
+    "prioridade": "Média",
+    "descricao": "Cancelamento pelo cliente somente com no mínimo 2 horas de antecedência; caso contrário HTTP 422 com mensagem explicativa (criado por TDD, versão 1.2.0)",
+    "riscos": [
+      "R-12"
+    ]
+  },
+  {
+    "id": "RNF-01",
+    "tipo": "Não funcional",
+    "prioridade": "Média",
+    "descricao": "Desempenho básico: p95 < 500 ms em 30 repetições (horários disponíveis e criação de agendamento)",
+    "riscos": [
+      "R-11"
+    ]
+  },
+  {
+    "id": "RNF-02",
+    "tipo": "Não funcional",
+    "prioridade": "Alta",
+    "descricao": "Segurança básica: acesso restrito, senha com hash BCrypt, HTML/script não executado, erros sem stack trace",
+    "riscos": [
+      "R-03",
+      "R-08"
+    ]
+  },
+  {
+    "id": "RNF-03",
+    "tipo": "Não funcional",
+    "prioridade": "Média",
+    "descricao": "Compatibilidade: Chrome e Firefox, resoluções 1366×768 e 375×667",
+    "riscos": [
+      "R-09"
+    ]
+  },
+  {
+    "id": "RNF-04",
+    "tipo": "Não funcional",
+    "prioridade": "Média",
+    "descricao": "Confiabilidade: dados preservados após reinício; entradas inválidas nunca geram HTTP 500",
+    "riscos": [
+      "R-10"
+    ]
+  },
+  {
+    "id": "RNF-05",
+    "tipo": "Não funcional",
+    "prioridade": "Média",
+    "descricao": "Usabilidade: participante externo conclui cadastro + agendamento em até 5 min e avalia facilidade ≥ 4/5",
+    "riscos": [
+      "R-09"
+    ]
+  }
 ]

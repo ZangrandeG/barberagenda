@@ -7,6 +7,7 @@
 | Versão | Data | Descrição |
 |---|---|---|
 | v1.0 | 2026-11-18 | Primeira versão: 35 casos manuais com partições, valores limite, transição de estados e tabela de decisão |
+| v1.1 | 2026-11-18 | CT-036 (RF-09, regra criada por TDD na versão 1.2.0) |
 
 > **Arquivo gerado.** Este documento e a planilha P05 são gerados por `scripts/gerar_artefatos.py` a partir de `dados/casos.json`, `dados/requisitos.json` e `dados/riscos.json`. Para alterar um caso, edite o JSON e rode `python scripts/gerar_artefatos.py`.
 
@@ -58,6 +59,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | RN-09 | Duração do serviço | 15 a 180, múltiplo de 15 | < 15; > 180; não múltiplo de 15 | 14 ✗, 15 ✓, 20 ✗, 180 ✓, 195 ✗ | CT-030, CT-031 |
 | RN-09 | Preço do serviço | R$ 1,00 a R$ 1.000,00 | < 1,00; > 1.000,00 | 0,99 ✗, 1,00 ✓, 1.000,00 ✓, 1.000,01 ✗ | CT-030, CT-031 |
 | RN-10 | Situação de barbeiro/serviço | ativo | inativo | — | CT-017, CT-032 |
+| RF-09 | Antecedência do cancelamento | início ≥ agora + 2 h | início < agora + 2 h | 1h59 ✗ / 2h00 ✓ (unidade e integração com relógio fixo) | CT-036 |
 | RN-11 | Credencial | administrador autenticado | sem credencial; senha errada | — | CT-027, CT-028, CT-029 |
 
 ### 2.2 Transição de estados do agendamento

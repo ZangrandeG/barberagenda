@@ -42,6 +42,7 @@ Executor(es): [PREENCHER] — Data: [PREENCHER] — Versão sob teste: [PREENCHE
 | ☐ | 32 | CT-033 | Excluir barbeiro: recusado com agendamentos e aceito sem agendamentos | Média | Tela | RF-07 | EX-___ | | | |
 | ☐ | 33 | CT-034 | Agenda do dia exibe os agendamentos e permite concluir atendimento | Média | Tela | RF-08 | EX-___ | | | |
 | ☐ | 34 | CT-035 | Concluir agendamento cancelado é recusado | Média | API | RF-08 | EX-___ | | | |
-| ☐ | 35 | CT-032 | Barbeiro desativado deixa de aparecer para o cliente | Baixa | Tela | RF-07 | EX-___ | | | |
+| ☐ | 35 | CT-036 | Cancelamento com menos de 2 horas de antecedência é recusado (422) | Média | API | RF-09 | EX-___ | | | |
+| ☐ | 36 | CT-032 | Barbeiro desativado deixa de aparecer para o cliente | Baixa | Tela | RF-07 | EX-___ | | | |
 
 Resultado: Aprovado, Reprovado, Bloqueado ou Não executado. Evidência: `EX-NNN_CT-NNN_AAAA-MM-DD.png` (tela) ou `.txt` (resposta da API).

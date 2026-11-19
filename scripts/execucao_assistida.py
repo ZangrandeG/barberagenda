@@ -551,6 +551,22 @@ def ct_035(x):
     x.verificar("concluir: HTTP 409", r.status == 409 and r.json()["mensagem"] == "Somente agendamentos com status AGENDADO podem ser concluídos.", r.status)
 
 
+def ct_036(x):
+    agora = dt.datetime.now()
+    if HOJE.weekday() == 6 or not dt.time(9, 0) <= agora.time() <= dt.time(16, 30):
+        raise BloqueadoErro(f"pré-condição não atendida: executado às {agora:%H:%M} — exige segunda a sábado entre 09:00 e 16:30 "
+                            "(a regra é verificada a qualquer hora pelos testes de unidade e de integração com relógio fixo)")
+    b, s = ids()
+    livres = x.api("GET", f"/api/horarios-disponiveis?barbeiroId={b['Carlos Navalha']}&servicoId={s['Corte de cabelo']}&data={HOJE}").json()["horarios"]
+    limite = agora + dt.timedelta(hours=2)
+    h1 = next(h for h in livres if dt.datetime.combine(HOJE, dt.time.fromisoformat(h)) < limite)
+    h2 = next(h for h in livres if dt.datetime.combine(HOJE, dt.time.fromisoformat(h)) >= limite)
+    for rotulo, hora, status in (("H1 (menos de 2h)", h1, 422), ("H2 (2h ou mais)", h2, 200)):
+        codigo = agendar_api(x, "ana.rocha@exemplo.com", "Carlos Navalha", "Corte de cabelo", f"{HOJE}T{hora}:00").json()["codigoAcesso"]
+        r = x.api("PATCH", f"/api/agendamentos/{codigo}/cancelar", {"email": "ana.rocha@exemplo.com"})
+        x.verificar(f"{rotulo} às {hora}: cancelamento responde HTTP {status}", r.status == status, r.status)
+
+
 class BloqueadoErro(Exception):
     pass
 
@@ -570,6 +586,8 @@ def main():
     if len(sys.argv) > 1:
         selecionados = [c for c in selecionados if c in sys.argv[1:]]
     versao = subprocess.run(["git", "describe", "--tags"], capture_output=True, text=True, cwd=RAIZ).stdout.strip()
+    sistema = re.search(r"<artifactId>barberagenda</artifactId>\s*<version>([^<]+)</version>",
+                        (RAIZ / "pom.xml").read_text(encoding="utf-8")).group(1)
     EVID.mkdir(parents=True, exist_ok=True)
     opcoes = webdriver.ChromeOptions()
     opcoes.add_argument("--headless=new")
@@ -582,7 +600,7 @@ def main():
             driver.delete_all_cookies()
             ex = f"EX-{proximo_ex():03d}"
             x = Execucao(caso, ex, driver)
-            x.log(f"{ex} — {caso} — {comum.agora()} — BarberAgenda 1.1.0 ({versao}) — {EXECUTOR}")
+            x.log(f"{ex} — {caso} — {comum.agora()} — BarberAgenda {sistema} ({versao}) — {EXECUTOR}")
             x.log(datas)
             try:
                 globals()["ct_" + caso[3:]](x)
@@ -601,7 +619,7 @@ def main():
             (EVID / transcricao).write_text("\n".join(x.linhas) + f"\nRESULTADO: {resultado}\n", encoding="utf-8")
             evidencias = " ".join([transcricao] + x.capturas)
             with open(CSV, "a", encoding="utf-8", newline="") as f:
-                csv.writer(f).writerow([ex, caso, HOJE.isoformat(), f"1.1.0 ({versao})", EXECUTOR, resultado, evidencias, "", ""])
+                csv.writer(f).writerow([ex, caso, HOJE.isoformat(), f"{sistema} ({versao})", EXECUTOR, resultado, evidencias, "", ""])
             print(f"{ex} {caso}: {resultado}" + ("" if resultado == "Aprovado" else "  <-- ver " + transcricao))
     finally:
         driver.quit()

@@ -31,7 +31,7 @@ Fonte da coleção: `scripts/gerar_colecao_postman.py` (gera os dois JSON em `po
 ## 3. Como executar
 
 ```bash
-java -jar target/barberagenda-1.1.0.jar --spring.profiles.active=test     # terminal 1
+java -jar target/barberagenda-1.2.0.jar --spring.profiles.active=test     # terminal 1
 npm install -g newman newman-reporter-htmlextra                          # uma vez
 newman run postman/BarberAgenda.postman_collection.json \
        -e postman/BarberAgenda.postman_environment.json \

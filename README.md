@@ -98,7 +98,7 @@ powershell -ExecutionPolicy Bypass -File scripts\reset-dados.ps1    # Windows
 ```bash
 ./mvnw spring-boot:run                                        # perfil dev
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=test        # perfil test (banco em memória)
-java -jar target/barberagenda-1.1.0.jar                       # a partir do pacote gerado
+java -jar target/barberagenda-1.2.0.jar                       # a partir do pacote gerado
 ```
 
 Acesse:

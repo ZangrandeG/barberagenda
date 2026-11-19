@@ -1,0 +1,15 @@
+EX-043 — CT-022 — 2026-11-18 23:02:11 — BarberAgenda 1.2.0 (marco-4-3-g78b44e3 + correções S8696 não commitadas) [versão corrigida: o script gravava 1.1.0 fixo] — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/clientes  {"nome": "Cliente Limite", "telefone": "14977770022", "email": "ct022.20261118@exemplo.com"}
+< HTTP 201  {"id":42,"nome":"Cliente Limite","telefone":"14977770022","email":"ct022.20261118@exemplo.com","dataCadastro":"2026-11-18T23:02:11.4796357"}
+> POST /api/agendamentos  {"emailCliente": "ct022.20261118@exemplo.com", "barbeiroId": 10, "servicoId": 17, "dataHoraInicio": "2026-11-21T09:00:00"}
+< HTTP 201  {"id":23,"codigoAcesso":"3RR4BHRY","clienteId":42,"clienteNome":"Cliente Limite","clienteEmail":"ct022.20261118@exemplo.com","barbeiroId":10,"barbeiroNome":"Carlos Navalha","servicoId":17,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-21T09:00:00","dataHoraFim":"2026-11-21T09:30:00","status":"AGENDADO","dataCriacao":"2026-11-18T23:02:11.6390297"}
+> POST /api/agendamentos  {"emailCliente": "ct022.20261118@exemplo.com", "barbeiroId": 10, "servicoId": 17, "dataHoraInicio": "2026-11-21T09:30:00"}
+< HTTP 201  {"id":24,"codigoAcesso":"4AVF8CEW","clienteId":42,"clienteNome":"Cliente Limite","clienteEmail":"ct022.20261118@exemplo.com","barbeiroId":10,"barbeiroNome":"Carlos Navalha","servicoId":17,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-21T09:30:00","dataHoraFim":"2026-11-21T10:00:00","status":"AGENDADO","dataCriacao":"2026-11-18T23:02:11.8190632"}
+> POST /api/agendamentos  {"emailCliente": "ct022.20261118@exemplo.com", "barbeiroId": 10, "servicoId": 17, "dataHoraInicio": "2026-11-21T10:00:00"}
+< HTTP 201  {"id":25,"codigoAcesso":"Q2VVN5BM","clienteId":42,"clienteNome":"Cliente Limite","clienteEmail":"ct022.20261118@exemplo.com","barbeiroId":10,"barbeiroNome":"Carlos Navalha","servicoId":17,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-21T10:00:00","dataHoraFim":"2026-11-21T10:30:00","status":"AGENDADO","dataCriacao":"2026-11-18T23:02:11.9836957"}
+[OK] agendamento das 09:00 cancelado pela tela
+> POST /api/agendamentos  {"emailCliente": "ct022.20261118@exemplo.com", "barbeiroId": 10, "servicoId": 17, "dataHoraInicio": "2026-11-21T10:30:00"}
+< HTTP 201  {"id":26,"codigoAcesso":"F4985AXM","clienteId":42,"clienteNome":"Cliente Limite","clienteEmail":"ct022.20261118@exemplo.com","barbeiroId":10,"barbeiroNome":"Carlos Navalha","servicoId":17,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-21T10:30:00","dataHoraFim":"2026-11-21T11:00:00","status":"AGENDADO","dataCriacao":"2026-11-18T23:02:12.4686181"}
+[OK] novo agendamento após cancelar: HTTP 201 — obtido: 201
+RESULTADO: Aprovado

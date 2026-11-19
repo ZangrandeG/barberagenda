@@ -41,6 +41,10 @@
 | EX-040 | CT-034 | 2026-11-18 | 1.1.0 (marco-7) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-040_CT-034_2026-11-18.txt EX-040_CT-034_2026-11-18_a.png EX-040_CT-034_2026-11-18_b.png | — |  |
 | EX-041 | CT-035 | 2026-11-18 | 1.1.0 (marco-7) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-041_CT-035_2026-11-18.txt | — |  |
 | EX-042 | CT-032 | 2026-11-18 | 1.1.0 (marco-7) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-042_CT-032_2026-11-18.txt EX-042_CT-032_2026-11-18_a.png EX-042_CT-032_2026-11-18_b.png | — |  |
+| EX-043 | CT-022 | 2026-11-18 | 1.2.0 (marco-4-3-g78b44e3 + correções S8696 não commitadas) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-043_CT-022_2026-11-18.txt EX-043_CT-022_2026-11-18.png | — |  |
+| EX-044 | CT-025 | 2026-11-18 | 1.2.0 (marco-4-3-g78b44e3 + correções S8696 não commitadas) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-044_CT-025_2026-11-18.txt EX-044_CT-025_2026-11-18_a.png EX-044_CT-025_2026-11-18_b.png | — |  |
+| EX-045 | CT-026 | 2026-11-18 | 1.2.0 (marco-4-3-g78b44e3 + correções S8696 não commitadas) | Claude (IA) — execução assistida por script, a pedido do grupo | Aprovado | EX-045_CT-026_2026-11-18.txt EX-045_CT-026_2026-11-18.png | — |  |
+| EX-046 | CT-036 | 2026-11-18 | 1.2.0 (marco-4-3-g78b44e3 + correções S8696 não commitadas) | Claude (IA) — execução assistida por script, a pedido do grupo | Bloqueado | EX-046_CT-036_2026-11-18.txt | — |  |
 
 ## 2. Situação atual de cada caso
 
@@ -67,11 +71,11 @@
 | CT-019 | Agendamento sobreposto ao de outro cliente com o mesmo barbeiro é recusado | EX-015 | Aprovado |
 | CT-020 | Horário encostado e mesmo horário com outro barbeiro são aceitos | EX-016 | Aprovado |
 | CT-021 | Limite de agendamentos ativos: 3º aceito e 4º recusado | EX-031 | Aprovado |
-| CT-022 | Após cancelar um agendamento, cliente no limite volta a poder agendar | EX-032 | Aprovado |
+| CT-022 | Após cancelar um agendamento, cliente no limite volta a poder agendar | EX-032, EX-043 | Aprovado |
 | CT-023 | Consultar agendamento com código de acesso (em minúsculas) e e-mail | EX-033 | Aprovado |
 | CT-024 | Consulta recusada quando código e e-mail não conferem | EX-034 | Aprovado |
-| CT-025 | Cancelar agendamento pela tela libera o horário | EX-035 | Aprovado |
-| CT-026 | Cancelar agendamento já cancelado ou concluído é recusado | EX-036 | Aprovado |
+| CT-025 | Cancelar agendamento pela tela libera o horário | EX-035, EX-044 | Aprovado |
+| CT-026 | Cancelar agendamento já cancelado ou concluído é recusado | EX-036, EX-045 | Aprovado |
 | CT-027 | Login do administrador com credencial válida e saída | EX-017 | Aprovado |
 | CT-028 | Login com senha incorreta é recusado | EX-018 | Aprovado |
 | CT-029 | Área administrativa e dados de clientes inacessíveis sem login | EX-019 | Aprovado |
@@ -81,6 +85,7 @@
 | CT-033 | Excluir barbeiro: recusado com agendamentos e aceito sem agendamentos | EX-039 | Aprovado |
 | CT-034 | Agenda do dia exibe os agendamentos e permite concluir atendimento | EX-040 | Aprovado |
 | CT-035 | Concluir agendamento cancelado é recusado | EX-041 | Aprovado |
+| CT-036 | Cancelamento com menos de 2 horas de antecedência é recusado (422) | EX-046 | Bloqueado |
 
 ## 3. Resumo
 
@@ -88,5 +93,5 @@
 |---|---|
 | Aprovado | 35 |
 | Reprovado | 0 |
-| Bloqueado | 0 |
+| Bloqueado | 1 |
 | Não executado | 0 |

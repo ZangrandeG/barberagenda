@@ -115,7 +115,7 @@ public class CargaDadosFicticios {
         LocalDate data = base;
         while (restantes > 0) {
             data = data.plusDays(passo);
-            if (data.getDayOfWeek() != DayOfWeek.SUNDAY) {
+            if (!DayOfWeek.SUNDAY.equals(data.getDayOfWeek())) {
                 restantes--;
             }
         }

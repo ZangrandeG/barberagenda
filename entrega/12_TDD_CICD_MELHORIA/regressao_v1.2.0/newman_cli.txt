@@ -1,0 +1,174 @@
+(node:10460) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+BarberAgenda — testes de integração/API
+
+□ 00 Preparação
+└ Restaurar dados fictícios (administrador)
+  POST http://localhost:8080/api/dev/reset [200 OK, 462B, 202ms]
+  √  HTTP 200
+  √  massa restaurada: 3 barbeiros, 5 serviços, 10 clientes, 5 agendamentos
+
+└ Listar barbeiros ativos
+  GET http://localhost:8080/api/barbeiros [200 OK, 427B, 14ms]
+  √  HTTP 200
+  √  contrato: lista de {id: número, nome: texto, ativo: verdadeiro}
+  √  RN-10: barbeiro inativo (Diego Máquina) não é listado
+
+└ Listar serviços ativos
+  GET http://localhost:8080/api/servicos [200 OK, 643B, 10ms]
+  √  HTTP 200
+  √  contrato: duracaoMinutos e preco numéricos
+  √  RN-10: serviço inativo (Relaxamento capilar) não é listado
+
+□ 01 Clientes — POST /api/clientes
+└ CT-001 / RF-01 — cadastrar cliente válido
+  POST http://localhost:8080/api/clientes [201 Created, 536B, 101ms]
+  √  HTTP 201 Created
+  √  contrato: id, nome, telefone, email, dataCadastro
+  √  nome sem espaços nas pontas e e-mail em minúsculas
+  √  cabeçalho Location aponta para o cliente criado
+
+└ CT-005 / RF-01 — e-mail em formato inválido
+  POST http://localhost:8080/api/clientes [400 Bad Request, 443B, 10ms]
+  √  HTTP 400
+  √  contrato de erro padronizado, sem detalhes internos
+  √  mensagem do campo email
+
+└ CT-006 / RF-01 — e-mail já cadastrado (em maiúsculas)
+  POST http://localhost:8080/api/clientes [409 Conflict, 447B, 8ms]
+  √  HTTP 409 Conflict
+  √  contrato de erro padronizado
+  √  mensagem de e-mail repetido
+
+□ 02 Agendamento encadeado
+└ CT-010 / RF-03 — agendar para o cliente recém-cadastrado
+  POST http://localhost:8080/api/agendamentos [201 Created, 797B, 52ms]
+  √  HTTP 201 Created
+  √  código de acesso com 8 caracteres do alfabeto sem ambíguos
+  √  status AGENDADO, término = início + 30 min
+  √  dados encadeados: cliente, barbeiro e serviço corretos
+  √  Location aponta para o código de acesso
+
+└ CT-023 / RF-05 — consultar pelo código de acesso e e-mail
+  GET http://localhost:8080/api/agendamentos/CNG5D74E?email=postman.1795053727921@exemplo.com [200 OK, 732B, 14ms]
+  √  HTTP 200
+  √  é o agendamento criado, ainda AGENDADO
+
+└ CT-025 / RF-05 — cancelar o agendamento
+  PATCH http://localhost:8080/api/agendamentos/CNG5D74E/cancelar [200 OK, 733B, 21ms]
+  √  HTTP 200
+  √  status CANCELADO
+
+└ CT-026 / RF-05 — cancelar de novo é recusado
+  PATCH http://localhost:8080/api/agendamentos/CNG5D74E/cancelar [409 Conflict, 460B, 11ms]
+  √  HTTP 409
+  √  contrato de erro padronizado
+  √  mensagem de transição inválida
+
+□ 03 Regras de agendamento — POST /api/agendamentos
+└ Obter SEMENTE3 (base dos testes de conflito)
+  GET http://localhost:8080/api/agendamentos/SEMENTE3?email=bruno.lima@exemplo.com [200 OK, 722B, 8ms]
+  √  HTTP 200
+  √  SEMENTE3 é do Rafael Tesoura, 60 min, AGENDADO
+
+└ CT-019 / RF-04 — sobreposição com agendamento do mesmo barbeiro
+  POST http://localhost:8080/api/agendamentos [409 Conflict, 447B, 10ms]
+  √  HTTP 409
+  √  contrato de erro padronizado
+  √  mensagem de horário ocupado
+
+└ CT-020 / RF-04 — horário encostado no término é aceito
+  POST http://localhost:8080/api/agendamentos [201 Created, 790B, 13ms]
+  √  HTTP 201
+  √  começa exatamente quando o outro termina
+
+└ CT-012 / RF-03 — início às 08:30 é recusado
+  POST http://localhost:8080/api/agendamentos [400 Bad Request, 570B, 9ms]
+  √  HTTP 400
+  √  contrato de erro padronizado
+  √  erro no campo dataHoraInicio
+
+└ CT-018 / RF-03 — e-mail não cadastrado
+  POST http://localhost:8080/api/agendamentos [404 Not Found, 483B, 8ms]
+  √  HTTP 404
+  √  contrato de erro padronizado
+  √  mensagem orienta o cadastro
+
+□ 04 Consulta — GET /api/agendamentos/{codigo}
+└ CT-024 / RF-05 — código certo, e-mail de outro cliente
+  GET http://localhost:8080/api/agendamentos/SEMENTE2?email=bruno.lima@exemplo.com [404 Not Found, 475B, 7ms]
+  √  HTTP 404
+  √  contrato e mensagem sem revelar o agendamento
+
+└ CT-024 / RF-05 — número sequencial no lugar do código
+  GET http://localhost:8080/api/agendamentos/1?email=ana.rocha@exemplo.com [404 Not Found, 475B, 6ms]
+  √  HTTP 404
+  √  mesma mensagem
+
+□ 05 Segurança — sem credenciais (CT-029)
+└ CT-029 / RF-06 — listar barbeiros (admin) sem credenciais
+  GET http://localhost:8080/api/admin/barbeiros [401 Unauthorized, 528B, 13ms]
+  √  HTTP 401
+  √  corpo é só o erro padronizado, sem dados
+
+└ CT-029 / RF-06 — listar clientes sem credenciais
+  GET http://localhost:8080/api/clientes [401 Unauthorized, 439B, 3ms]
+  √  HTTP 401
+  √  nenhum e-mail de cliente no corpo
+
+└ CT-029 / RF-06 — cadastrar serviço sem credenciais
+  POST http://localhost:8080/api/admin/servicos [403 Forbidden, 438B, 4ms]
+  √  HTTP 403 (token CSRF verificado antes da autenticação)
+
+└ CT-029 / RF-06 — serviço invasor não foi criado
+  GET http://localhost:8080/api/servicos [200 OK, 643B, 5ms]
+  √  HTTP 200
+  √  "Serviço Invasor" não existe
+
+□ 06 Administração — HTTP Basic
+└ RF-07 — cadastrar serviço válido
+  POST http://localhost:8080/api/admin/servicos [201 Created, 479B, 81ms]
+  √  HTTP 201
+  √  contrato do serviço
+
+└ CT-031 / RF-07 — duração não múltipla de 15
+  POST http://localhost:8080/api/admin/servicos [400 Bad Request, 465B, 62ms]
+  √  HTTP 400
+  √  erro no campo duracaoMinutos
+
+└ RF-07 — excluir serviço sem agendamentos
+  DELETE http://localhost:8080/api/admin/servicos/11 [204 No Content, 282B, 71ms]
+  √  HTTP 204 No Content
+
+└ RF-08 — agenda do dia não expõe códigos de acesso
+  GET http://localhost:8080/api/admin/agenda?barbeiroId=5&data=2026-11-19 [200 OK, 1.07kB, 70ms]
+  √  HTTP 200
+  √  lista os agendamentos do dia em ordem de horário
+  √  nenhum agendamento traz codigoAcesso
+
+□ 07 Limpeza
+└ Restaurar dados fictícios ao final
+  POST http://localhost:8080/api/dev/reset [200 OK, 393B, 71ms]
+  √  HTTP 200
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                63 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 2.1s                                       │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 5.32kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 34ms [min: 3ms, max: 202ms, s.d.: 44ms] │
+└────────────────────────────────────────────────────────────────┘

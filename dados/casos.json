@@ -1164,5 +1164,39 @@
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarConclusaoDeAgendamentoCancelado"
     },
     "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "CT-036",
+    "titulo": "Cancelamento com menos de 2 horas de antecedência é recusado (422)",
+    "requisitos": [
+      "RF-09"
+    ],
+    "riscos": [
+      "R-12"
+    ],
+    "regras": [
+      "RF-09"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (antecedência de 2 horas)",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "API",
+    "precondicoes": "PC-PADRÃO. Executar de segunda a sábado entre 09:00 e 16:30: é preciso haver hoje um horário livre que comece em menos de 2 horas e outro que comece em 2 horas ou mais. Fora desse período, registrar \"Bloqueado\".",
+    "dados": "emailCliente: ana.rocha@exemplo.com; Carlos Navalha; Corte de cabelo; H1 = primeiro horário livre de hoje que comece em menos de 2 horas; H2 = primeiro horário livre de hoje que comece em 2 horas ou mais",
+    "passos": [
+      "Enviar POST /api/agendamentos para hoje às H1 e anotar o código de acesso.",
+      "Enviar PATCH /api/agendamentos/{codigo}/cancelar com {\"email\": \"ana.rocha@exemplo.com\"}.",
+      "Enviar POST /api/agendamentos para hoje às H2 e cancelar da mesma forma."
+    ],
+    "esperado": "Passo 2: HTTP 422 com mensagem \"O cancelamento só pode ser feito com no mínimo 2 horas de antecedência.\" e o agendamento continua AGENDADO. Passo 3: HTTP 200 com status CANCELADO.",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade e integração (MockMvc com relógio fixo)",
+      "justificativa": "Depende do horário atual; com relógio fixo o limite de 2h é testado a qualquer hora.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoComMenosDeDuasHorasDeAntecedencia; #deveAceitarCancelamentoComExatamenteDuasHorasDeAntecedencia; Integração: CancelamentoAntecedenciaIntegracaoTest"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   }
 ]

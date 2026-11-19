@@ -7,6 +7,7 @@
 | Versão | Data | Descrição |
 |---|---|---|
 | v1.0 | 2026-11-18 | Primeira versão: 8 requisitos funcionais, 5 não funcionais, escopo e 11 riscos |
+| v1.1 | 2026-11-18 | RF-09 e R-12: regra de antecedência para cancelamento, criada por TDD (Marco 9, versão 1.2.0) |
 
 > **Situação:** elaborado antes da decisão do professor sobre a ficha P01 (por decisão do grupo). Se houver ajustes na aprovação, este documento ganha nova versão.
 >
@@ -29,6 +30,8 @@
 | RF-07 | O administrador cadastra, edita, desativa e exclui barbeiros e serviços. Regras RN-09 e RN-10. | Funcional | Média | (a) Serviço com duração 15 a 180 minutos, múltipla de 15, e preço de R$ 1,00 a R$ 1.000,00 → HTTP 201. (b) Duração 14, 20 ou 195 e preço 0,99 ou 1.000,01 → HTTP 400 com mensagem do campo. (c) Barbeiro ou serviço desativado deixa de aparecer para o cliente. (d) Excluir item sem agendamentos → HTTP 204; com agendamentos → HTTP 409. |
 | RF-08 | O administrador consulta a agenda do dia de um barbeiro e marca atendimentos como concluídos. | Funcional | Média | (a) A agenda lista todos os agendamentos do barbeiro na data (qualquer status), em ordem de horário, sem exibir códigos de acesso. (b) Concluir agendamento `AGENDADO` → status `CONCLUIDO`. (c) Concluir agendamento já `CANCELADO` ou `CONCLUIDO` → HTTP 409. |
 
+| RF-09 | O cliente só pode cancelar um agendamento com no mínimo 2 horas de antecedência; caso contrário, o sistema recusa com mensagem explicativa. Criado por TDD no Marco 9. | Funcional | Média | (a) Cancelar 1h59 ou menos antes do início → HTTP 422 com a mensagem "O cancelamento só pode ser feito com no mínimo 2 horas de antecedência." e o agendamento continua AGENDADO. (b) Cancelar exatamente 2h antes ou mais → HTTP 200, status CANCELADO. |
+
 ### 1.2 Requisitos não funcionais
 
 | ID | Descrição verificável | Tipo | Prioridade | Critério de aceitação verificável |
@@ -39,7 +42,7 @@
 | RNF-04 | Confiabilidade: persistência e tratamento de falhas. | Não funcional (confiabilidade) | Média | (a) Após reinício controlado da aplicação no perfil `dev`, 100% dos clientes e agendamentos criados antes do reinício continuam disponíveis com os mesmos dados. (b) Entradas inválidas (JSON malformado, tipos errados, parâmetros ausentes) nunca produzem HTTP 500. |
 | RNF-05 | Usabilidade do fluxo de agendamento. | Não funcional (usabilidade) | Média | Participante externo ao grupo, sem instruções além do objetivo da tarefa, conclui cadastro + agendamento em **até 5 minutos**, sem ajuda, e avalia a facilidade com nota **≥ 4 em 5**. |
 
-**Totais:** 8 requisitos funcionais e 5 não funcionais (13 no escopo; mínimo do manual: 8, com ≥ 6 RF e ≥ 2 RNF).
+**Totais:** 9 requisitos funcionais e 5 não funcionais (14 no escopo; mínimo do manual: 8, com ≥ 6 RF e ≥ 2 RNF).
 
 ## 2. Escopo
 
@@ -54,7 +57,7 @@
 
 | Item | Motivo |
 |---|---|
-| Regra de antecedência mínima para cancelamento | Ainda não existe; será criada pelo ciclo de TDD no Marco 9 e só então entrará no escopo. |
+| ~~Regra de antecedência mínima para cancelamento~~ | Criada por TDD no Marco 9 e incluída no escopo como RF-09 (versão 1.2.0). |
 | Login de clientes, recuperação de código de acesso, cadastro de vários administradores | Não existem no sistema. |
 | Pagamentos, notificações por e-mail/SMS | Não existem no sistema. |
 | Perfil PostgreSQL (`docker-compose.yml`) | Opcional; não há Docker no ambiente do grupo. O banco testado é o H2. |
@@ -82,6 +85,7 @@
 | R-08 | Texto digitado com HTML/script é executado na página. | RNF-02 | Baixa | Alto | Média | Cadastro com `<script>` e `<img onerror>` e verificação visual nas telas de consulta e da agenda administrativa. |
 | R-09 | Interface inutilizável no celular ou no Firefox. | RNF-03 | Média | Médio | Média | Execução dos fluxos e da suíte Selenium em Chrome/Firefox e em 375×667. |
 | R-10 | Perda de agendamentos após reinício da aplicação. | RNF-04 | Baixa | Alto | Média | Criar dados, reiniciar no perfil `dev` e comparar. |
+| R-12 | Cancelamento em cima da hora deixa o horário ocioso sem tempo de reocupação. | RF-09 | Média | Médio | Média | Regra criada por TDD; limites 1h59/2h00 em unidade e integração; CT-036. |
 | R-11 | Consulta de horários lenta, prejudicando o agendamento. | RNF-01, RF-02 | Baixa | Baixo | Baixa | Medição de 30 repetições com média e p95. |
 
 ## 4. Relação requisito × risco
@@ -96,6 +100,7 @@
 | RF-06 | R-03 |
 | RF-07 | R-05 |
 | RF-08 | R-03 (área restrita) |
+| RF-09 | R-12 |
 | RNF-01 | R-11 |
 | RNF-02 | R-03, R-08 |
 | RNF-03 | R-09 |

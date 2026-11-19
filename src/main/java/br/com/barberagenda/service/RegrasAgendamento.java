@@ -58,7 +58,7 @@ public class RegrasAgendamento {
 
     /** RN-04: segunda a sábado, das 09:00 às 19:00; o serviço precisa terminar até 19:00. */
     public void validarFuncionamento(LocalDateTime inicio, int duracaoMinutos) {
-        if (inicio.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        if (DayOfWeek.SUNDAY.equals(inicio.getDayOfWeek())) {
             throw new RegraNegocioException(CAMPO_DATA_HORA, "A barbearia não abre aos domingos.");
         }
         LocalDateTime abertura = inicio.toLocalDate().atTime(ABERTURA);
@@ -81,7 +81,7 @@ public class RegrasAgendamento {
     /** Indica se a data aceita agendamentos: não é domingo, não é passada e está dentro de 30 dias. */
     public boolean dataAceitaAgendamentos(LocalDate data) {
         LocalDate hoje = agora().toLocalDate();
-        return data.getDayOfWeek() != DayOfWeek.SUNDAY
+        return !DayOfWeek.SUNDAY.equals(data.getDayOfWeek())
                 && !data.isBefore(hoje)
                 && !data.isAfter(hoje.plusDays(ANTECEDENCIA_MAXIMA_DIAS));
     }

@@ -7,6 +7,7 @@
 | Versão | Data | Descrição |
 |---|---|---|
 | v1.0 | 2026-11-18 | Primeira versão: 35 casos manuais com partições, valores limite, transição de estados e tabela de decisão |
+| v1.1 | 2026-11-18 | CT-036 (RF-09, regra criada por TDD na versão 1.2.0) |
 
 > **Arquivo gerado.** Este documento e a planilha P05 são gerados por `scripts/gerar_artefatos.py` a partir de `dados/casos.json`, `dados/requisitos.json` e `dados/riscos.json`. Para alterar um caso, edite o JSON e rode `python scripts/gerar_artefatos.py`.
 
@@ -58,6 +59,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | RN-09 | Duração do serviço | 15 a 180, múltiplo de 15 | < 15; > 180; não múltiplo de 15 | 14 ✗, 15 ✓, 20 ✗, 180 ✓, 195 ✗ | CT-030, CT-031 |
 | RN-09 | Preço do serviço | R$ 1,00 a R$ 1.000,00 | < 1,00; > 1.000,00 | 0,99 ✗, 1,00 ✓, 1.000,00 ✓, 1.000,01 ✗ | CT-030, CT-031 |
 | RN-10 | Situação de barbeiro/serviço | ativo | inativo | — | CT-017, CT-032 |
+| RF-09 | Antecedência do cancelamento | início ≥ agora + 2 h | início < agora + 2 h | 1h59 ✗ / 2h00 ✓ (unidade e integração com relógio fixo) | CT-036 |
 | RN-11 | Credencial | administrador autenticado | sem credencial; senha errada | — | CT-027, CT-028, CT-029 |
 
 ### 2.2 Transição de estados do agendamento
@@ -677,6 +679,23 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Candidato à automação | Sim — Unidade (AgendamentoService.concluir com mock). Transição inválida simples de isolar. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarConclusaoDeAgendamentoCancelado) |
 | Responsável | Guilherme Ribeiro Zangrande |
 
+### CT-036 — Cancelamento com menos de 2 horas de antecedência é recusado (422)
+
+| Campo | Conteúdo |
+|---|---|
+| ID do caso | CT-036 |
+| Título | Cancelamento com menos de 2 horas de antecedência é recusado (422) |
+| Requisito relacionado | RF-09 (regras: RF-09; riscos: R-12) |
+| Nível/tipo | Sistema / Funcional — classificação: Fronteira; interface: API |
+| Técnica aplicada | Análise de valor limite (antecedência de 2 horas) |
+| Prioridade | Média |
+| Pré-condições | PC-PADRÃO. Executar de segunda a sábado entre 09:00 e 16:30: é preciso haver hoje um horário livre que comece em menos de 2 horas e outro que comece em 2 horas ou mais. Fora desse período, registrar "Bloqueado". |
+| Dados de entrada | emailCliente: ana.rocha@exemplo.com; Carlos Navalha; Corte de cabelo; H1 = primeiro horário livre de hoje que comece em menos de 2 horas; H2 = primeiro horário livre de hoje que comece em 2 horas ou mais |
+| Passos numerados | 1. Enviar POST /api/agendamentos para hoje às H1 e anotar o código de acesso.<br>2. Enviar PATCH /api/agendamentos/{codigo}/cancelar com {"email": "ana.rocha@exemplo.com"}.<br>3. Enviar POST /api/agendamentos para hoje às H2 e cancelar da mesma forma. |
+| Resultado esperado | Passo 2: HTTP 422 com mensagem "O cancelamento só pode ser feito com no mínimo 2 horas de antecedência." e o agendamento continua AGENDADO. Passo 3: HTTP 200 com status CANCELADO. |
+| Candidato à automação | Sim — Unidade e integração (MockMvc com relógio fixo). Depende do horário atual; com relógio fixo o limite de 2h é testado a qualquer hora. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoComMenosDeDuasHorasDeAntecedencia; #deveAceitarCancelamentoComExatamenteDuasHorasDeAntecedencia; Integração: CancelamentoAntecedenciaIntegracaoTest) |
+| Responsável | Guilherme Ribeiro Zangrande |
+
 ## 4. Resumo
 
 ### 4.1 Casos por requisito
@@ -691,6 +710,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | RF-06 | CT-027, CT-028, CT-029 | 3 |
 | RF-07 | CT-030, CT-031, CT-032, CT-033 | 4 |
 | RF-08 | CT-034, CT-035 | 2 |
+| RF-09 | CT-036 | 1 |
 | RNF-01 | — (testes não funcionais no P09, Marco 7) | 0 |
 | RNF-02 | — (testes não funcionais no P09, Marco 7) | 0 |
 | RNF-03 | — (testes não funcionais no P09, Marco 7) | 0 |
@@ -703,7 +723,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 |---|---|
 | Alternativo | 6 |
 | Exceção | 5 |
-| Fronteira | 8 |
+| Fronteira | 9 |
 | Negativo | 9 |
 | Positivo | 7 |
 
@@ -712,19 +732,19 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Prioridade | Quantidade |
 |---|---|
 | Alta | 12 |
-| Média | 22 |
+| Média | 23 |
 | Baixa | 1 |
 
 ### 4.4 Candidatos à automação
 
-31 de 35 casos são candidatos à automação (base da taxa de automação, P10).
+32 de 36 casos são candidatos à automação (base da taxa de automação, P10).
 
 | Nível da automação | Casos |
 |---|---|
-| Unidade (JUnit) | CT-002, CT-003, CT-004, CT-006, CT-007, CT-008, CT-009, CT-011, CT-012, CT-013, CT-014, CT-015, CT-016, CT-017, CT-019, CT-021, CT-031, CT-033, CT-035 |
+| Unidade (JUnit) | CT-002, CT-003, CT-004, CT-006, CT-007, CT-008, CT-009, CT-011, CT-012, CT-013, CT-014, CT-015, CT-016, CT-017, CT-019, CT-021, CT-031, CT-033, CT-035, CT-036 |
 | API (Postman) | CT-001, CT-005, CT-006, CT-010, CT-018, CT-019, CT-020, CT-023, CT-024, CT-026, CT-029 |
 | Interface (Selenium) | CT-001, CT-010, CT-023, CT-025, CT-027, CT-030 |
 
-Situação da automação dos candidatos: 31 automatizados em todos os níveis planejados, 0 parcialmente (faltam API/interface) e 0 ainda não automatizados.
+Situação da automação dos candidatos: 32 automatizados em todos os níveis planejados, 0 parcialmente (faltam API/interface) e 0 ainda não automatizados.
 
-**Total de casos manuais: 35** (mínimo do manual: 24).
+**Total de casos manuais: 36** (mínimo do manual: 24).
