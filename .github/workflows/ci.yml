@@ -1,0 +1,115 @@
+# Pipeline de integração contínua do BarberAgenda (Projeto Integrado P2 — Marco 9)
+# Gatilhos: envio de código (push) e abertura/atualização de pull request; também pode ser disparado manualmente.
+name: CI BarberAgenda
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  TZ: America/Sao_Paulo
+
+jobs:
+  testes:
+    name: Unidade + integração + cobertura
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Java 21 (com cache do Maven)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Compilar, testar (unidade e integração) e gerar a cobertura JaCoCo
+        run: ./mvnw -B verify
+
+      - name: Publicar relatórios de testes e cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-unidade-integracao
+          path: |
+            target/surefire-reports/
+            target/site/jacoco/
+
+  api:
+    name: Integração/API (Postman + Newman)
+    runs-on: ubuntu-latest
+    needs: testes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Gerar o pacote da aplicação
+        run: ./mvnw -B -DskipTests package
+
+      - name: Subir a aplicação (perfil test) e aguardar
+        run: |
+          nohup java -jar target/barberagenda-*.jar --spring.profiles.active=test > aplicacao.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:8080/api/barbeiros > /dev/null && echo "aplicação no ar" && exit 0
+            sleep 2
+          done
+          cat aplicacao.log
+          exit 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar o Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Executar a coleção do Postman
+        run: |
+          mkdir -p newman
+          newman run postman/BarberAgenda.postman_collection.json \
+            -e postman/BarberAgenda.postman_environment.json \
+            --reporters cli,junit,htmlextra \
+            --reporter-junit-export newman/newman.xml \
+            --reporter-htmlextra-export newman/newman.html
+
+      - name: Publicar relatórios do Newman
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-newman
+          path: |
+            newman/
+            aplicacao.log
+
+  interface:
+    name: Sistema/interface (Selenium, Chrome headless)
+    runs-on: ubuntu-latest
+    needs: testes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Executar os testes de interface
+        run: ./mvnw -B test -Pe2e
+
+      - name: Publicar capturas de tela e relatórios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-selenium
+          path: |
+            target/selenium-evidencias/
+            target/surefire-reports/
