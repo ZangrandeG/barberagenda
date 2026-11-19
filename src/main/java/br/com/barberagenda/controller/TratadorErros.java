@@ -20,6 +20,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import br.com.barberagenda.dto.ErroResponse;
+import br.com.barberagenda.exception.CancelamentoForaDoPrazoException;
 import br.com.barberagenda.exception.ConflitoException;
 import br.com.barberagenda.exception.RecursoNaoEncontradoException;
 import br.com.barberagenda.exception.RegraNegocioException;
@@ -78,6 +79,11 @@ public class TratadorErros {
     @ExceptionHandler(ConflitoException.class)
     public ResponseEntity<ErroResponse> conflito(ConflitoException ex) {
         return resposta(HttpStatus.CONFLICT, ex.getMessage(), Map.of());
+    }
+
+    @ExceptionHandler(CancelamentoForaDoPrazoException.class)
+    public ResponseEntity<ErroResponse> cancelamentoForaDoPrazo(CancelamentoForaDoPrazoException ex) {
+        return resposta(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), Map.of());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

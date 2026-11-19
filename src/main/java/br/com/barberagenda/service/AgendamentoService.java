@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barberagenda.dto.AgendamentoRequest;
+import br.com.barberagenda.exception.CancelamentoForaDoPrazoException;
 import br.com.barberagenda.exception.ConflitoException;
 import br.com.barberagenda.exception.RecursoNaoEncontradoException;
 import br.com.barberagenda.exception.RegraNegocioException;
@@ -105,6 +106,10 @@ public class AgendamentoService {
         Agendamento agendamento = consultarPeloCliente(codigoAcesso, email);
         if (!agendamento.isAgendado()) {
             throw new ConflitoException("Somente agendamentos com status AGENDADO podem ser cancelados.");
+        }
+        if (agendamento.getDataHoraInicio().isBefore(regras.agora().plusHours(2))) {
+            throw new CancelamentoForaDoPrazoException(
+                    "O cancelamento só pode ser feito com no mínimo 2 horas de antecedência.");
         }
         agendamento.cancelar();
         return agendamento;
