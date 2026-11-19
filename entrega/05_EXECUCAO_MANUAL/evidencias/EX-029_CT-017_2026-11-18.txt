@@ -1,0 +1,10 @@
+EX-029 — CT-017 — 2026-11-18 22:55:15 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] Diego Máquina e Relaxamento capilar não aparecem na tela
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 178, "servicoId": 293, "dataHoraInicio": "2026-11-21T10:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"O barbeiro selecionado está inativo.","campos":{"barbeiroId":"O barbeiro selecionado está inativo."}}
+[OK] (a) barbeiro inativo: HTTP 400 — obtido: 400
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 176, "servicoId": 297, "dataHoraInicio": "2026-11-21T10:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"O serviço selecionado está inativo.","campos":{"servicoId":"O serviço selecionado está inativo."}}
+[OK] (b) serviço inativo: HTTP 400 — obtido: 400
+RESULTADO: Aprovado

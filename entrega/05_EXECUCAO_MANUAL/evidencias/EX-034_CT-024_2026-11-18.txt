@@ -1,0 +1,6 @@
+EX-034 — CT-024 — 2026-11-18 22:55:19 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) SEMENTE2 + bruno.lima@exemplo.com: não encontrado, sem dados — obtido: Agendamento não encontrado para o código de acesso e o e-mail informados.
+[OK] (b) ZZZZ9999 + ana.rocha@exemplo.com: não encontrado, sem dados — obtido: Agendamento não encontrado para o código de acesso e o e-mail informados.
+[OK] (c) 1 + ana.rocha@exemplo.com: não encontrado, sem dados — obtido: Agendamento não encontrado para o código de acesso e o e-mail informados.
+RESULTADO: Aprovado

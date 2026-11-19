@@ -1,0 +1,4 @@
+EX-018 — CT-028 — 2026-11-18 22:55:10 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] mensagem de credencial inválida e permanência no login — obtido: Usuário ou senha inválidos.
+RESULTADO: Aprovado

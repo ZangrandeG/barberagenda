@@ -1,0 +1,9 @@
+EX-037 — CT-030 — 2026-11-18 22:55:21 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) 'Acabamento' cadastrado e na tabela — obtido: 338 Acabamento 15 min R$ 1,00 Ativo
+Editar
+Excluir
+[OK] (b) 'Tratamento completo' cadastrado e na tabela — obtido: 339 Tratamento completo 180 min R$ 1.000,00 Ativo
+Editar
+Excluir
+RESULTADO: Aprovado

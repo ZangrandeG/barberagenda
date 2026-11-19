@@ -1,0 +1,6 @@
+EX-014 — CT-014 — 2026-11-18 22:55:08 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 131, "servicoId": 218, "dataHoraInicio": "2026-11-22T10:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"A barbearia não abre aos domingos.","campos":{"dataHoraInicio":"A barbearia não abre aos domingos."}}
+[OK] domingo 2026-11-22: HTTP 400 'A barbearia não abre aos domingos.' — obtido: 400
+RESULTADO: Aprovado

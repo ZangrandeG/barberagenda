@@ -1,0 +1,6 @@
+EX-023 — CT-004 — 2026-11-18 22:55:13 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) telefone '149887766' recusado — obtido: O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD).
+[OK] (b) telefone '149887766551' recusado — obtido: O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD).
+[OK] (c) telefone '14-98877-6655' recusado — obtido: O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD).
+RESULTADO: Aprovado

@@ -1,0 +1,9 @@
+EX-013 — CT-013 — 2026-11-18 22:55:08 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 128, "servicoId": 213, "dataHoraInicio": "2026-11-21T10:15:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30).","campos":{"dataHoraInicio":"Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30)."}}
+[OK] 10:15: HTTP 400, mensagem e campo dataHoraInicio — obtido: 400
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 128, "servicoId": 213, "dataHoraInicio": "2026-11-21T10:01:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30).","campos":{"dataHoraInicio":"Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30)."}}
+[OK] 10:01: HTTP 400, mensagem e campo dataHoraInicio — obtido: 400
+RESULTADO: Aprovado

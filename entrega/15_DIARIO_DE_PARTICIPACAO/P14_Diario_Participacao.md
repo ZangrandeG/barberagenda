@@ -23,4 +23,5 @@
 | 2026-11-18 | Marco 5: testes de unidade (JUnit/Mockito), cobertura JaCoCo e linha de base no SonarQube local (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/07_AUTOMACAO_UNITARIA/`; `entrega/11_METRICAS_E_QUALIDADE/sonar_baseline/`; tag `marco-5` |
 | 2026-11-18 | Marco 6: coleção Postman/Newman (API) e testes Selenium com Page Objects (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/08_INTEGRACAO_API/`; `entrega/09_SISTEMA_INTERFACE/`; tag `marco-6` |
 | 2026-11-18 | Marco 7: 7 testes não funcionais executados por scripts (desempenho, segurança, confiabilidade, compatibilidade) e roteiros de aceitação e usabilidade (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/10_ACEITACAO_NAO_FUNCIONAIS/`; tag `marco-7` |
+| 2026-11-18 | Marco 4: execução assistida dos 35 casos manuais (35 aprovados) e exportação de defeitos (nenhum) — executada por Claude (IA) a pedido do grupo [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/05_EXECUCAO_MANUAL/`; EX-008 a EX-042; tag `marco-4` |
 | | | | | | |

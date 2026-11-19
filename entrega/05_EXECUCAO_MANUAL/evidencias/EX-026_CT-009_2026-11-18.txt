@@ -1,0 +1,12 @@
+EX-026 — CT-009 — 2026-11-18 22:55:14 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> GET /api/horarios-disponiveis?barbeiroId=167&servicoId=278&data=2026-11-22
+< HTTP 200  {"barbeiroId":167,"servicoId":278,"data":"2026-11-22","horarios":[]}
+[OK] DOM (2026-11-22): HTTP 200 e lista vazia — obtido: 200
+> GET /api/horarios-disponiveis?barbeiroId=167&servicoId=278&data=2026-12-19
+< HTTP 200  {"barbeiroId":167,"servicoId":278,"data":"2026-12-19","horarios":[]}
+[OK] D+31 (2026-12-19): HTTP 200 e lista vazia — obtido: 200
+> GET /api/horarios-disponiveis?barbeiroId=167&servicoId=278&data=2026-11-17
+< HTTP 200  {"barbeiroId":167,"servicoId":278,"data":"2026-11-17","horarios":[]}
+[OK] ONTEM (2026-11-17): HTTP 200 e lista vazia — obtido: 200
+RESULTADO: Aprovado

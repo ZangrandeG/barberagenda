@@ -1,0 +1,7 @@
+EX-017 — CT-027 — 2026-11-18 22:55:09 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] passo 1: tela de login — obtido: http://localhost:8080/admin/login.html
+[OK] passo 2: painel com 'Usuário: admin'
+[OK] passo 3: mensagem de saída
+[OK] passo 4: volta a exigir login — obtido: http://localhost:8080/admin/login.html
+RESULTADO: Aprovado

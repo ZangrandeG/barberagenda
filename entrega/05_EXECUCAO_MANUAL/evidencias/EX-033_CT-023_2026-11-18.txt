@@ -1,0 +1,5 @@
+EX-033 — CT-023 — 2026-11-18 22:55:18 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] detalhes exibidos conforme o esperado — obtido: {'codigo': 'SEMENTE2', 'cliente': 'Ana Beatriz Rocha', 'barbeiro': 'Carlos Navalha', 'servico': 'Corte de cabelo (30 min)', 'data-hora': '19/11/2026 10:00', 'preco': 'R$ 45,00', 'status': 'AGENDADO'}
+[OK] botão 'Cancelar agendamento' visível
+RESULTADO: Aprovado

@@ -1,0 +1,9 @@
+EX-027 — CT-015 — 2026-11-18 22:55:15 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "heitor.moreira@exemplo.com", "barbeiroId": 170, "servicoId": 283, "dataHoraInicio": "2026-12-18T10:00:00"}
+< HTTP 201  {"id":308,"codigoAcesso":"YFZXNM2D","clienteId":576,"clienteNome":"Heitor Campos Moreira","clienteEmail":"heitor.moreira@exemplo.com","barbeiroId":170,"barbeiroNome":"Carlos Navalha","servicoId":283,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-12-18T10:00:00","dataHoraFim":"2026-12-18T10:30:00","status":"AGENDADO","dataCriacao":"2026-11-18T22:55:15.19342
+[OK] D+30 (2026-12-18): HTTP 201 AGENDADO — obtido: 201
+> POST /api/agendamentos  {"emailCliente": "heitor.moreira@exemplo.com", "barbeiroId": 170, "servicoId": 283, "dataHoraInicio": "2026-12-19T10:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"A antecedência máxima para agendamento é de 30 dias.","campos":{"dataHoraInicio":"A antecedência máxima para agendamento é de 30 dias."}}
+[OK] D+31 (2026-12-19): HTTP 400 antecedência máxima — obtido: 400
+RESULTADO: Aprovado

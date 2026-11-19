@@ -1,0 +1,5 @@
+EX-020 — CT-001 — 2026-11-18 22:55:11 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] mensagem de sucesso com código do cliente — obtido: Cadastro realizado com sucesso! Código do cliente: 506.
+[OK] botão 'Agendar um horário' visível
+RESULTADO: Aprovado

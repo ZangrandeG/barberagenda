@@ -1,0 +1,16 @@
+EX-019 — CT-029 — 2026-11-18 22:55:11 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] página administrativa redireciona ao login — obtido: http://localhost:8080/admin/login.html
+> GET /api/admin/barbeiros
+< HTTP 401  {"status":401,"erro":"Unauthorized","mensagem":"Autenticação necessária.","campos":{}}
+[OK] GET /api/admin/barbeiros: HTTP 401 sem dados — obtido: 401
+> GET /api/clientes
+< HTTP 401  {"status":401,"erro":"Unauthorized","mensagem":"Autenticação necessária.","campos":{}}
+[OK] GET /api/clientes: HTTP 401 sem dados — obtido: 401
+> POST /api/admin/servicos  {"nome": "Serviço Invasor", "duracaoMinutos": 30, "preco": 10.0}
+< HTTP 403  {"status":403,"erro":"Forbidden","mensagem":"Token CSRF ausente ou inválido.","campos":{}}
+[OK] POST sem credenciais: HTTP 403 — obtido: 403
+> GET /api/servicos
+< HTTP 200  [{"id":244,"nome":"Barba","duracaoMinutos":30,"preco":30.00,"ativo":true},{"id":243,"nome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"ativo":true},{"id":245,"nome":"Corte e barba","duracaoMinutos":60,"preco":70.00,"ativo":true},{"id":246,"nome":"Sobrancelha","duracaoMinutos":15,"preco":15.00,"ativo":true}]
+[OK] 'Serviço Invasor' não existe
+RESULTADO: Aprovado

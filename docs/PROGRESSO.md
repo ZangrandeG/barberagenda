@@ -26,7 +26,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 2 — Fundamentos | Marco 1 | Concluída em 2026-11-18 — `entrega/03_PLANO_DE_TESTES/M1_Niveis_Tipos_e_Estrategia.md`; tag `marco-1` |
 | 3 — Planejamento (P02, P03) | Marco 2 | Concluída em 2026-11-18 — tag `marco-2` |
 | 4 — Especificação (P04, P05) | Marco 3 | Concluída em 2026-11-18 — tag `marco-3` |
-| 5 — Execução manual e defeitos (P06, P07) | Marco 4 | Em andamento — preparação concluída; execução pelo grupo pendente |
+| 5 — Execução manual e defeitos (P06, P07) | Marco 4 | Concluída em 2026-11-18 — 35/35 aprovados (EX-008 a EX-042), executados por Claude (IA) com script, a pedido do grupo; 0 defeitos — tag `marco-4` |
 | 6 — Automação unitária + Sonar linha de base (P08) | Marco 5 | Concluída em 2026-11-18 — tag `marco-5` |
 | 7 — Integração/API e sistema/interface (P08) | Marco 6 | Concluída em 2026-11-18 — tag `marco-6` |
 | 8 — Aceitação e não funcionais (P09) | Marco 7 | Concluída em 2026-11-18 — tag `marco-7` (aceitação e usabilidade aguardam pessoa externa) |
@@ -45,8 +45,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P03 | Plano de testes | `entrega/03_PLANO_DE_TESTES/P03_Plano_de_Testes.md` | v1.0 — completo; responsabilidades, IDE, canal e datas a preencher |
 | P04 | Catálogo de casos de teste | `entrega/04_CASOS_E_RASTREABILIDADE/P04_Catalogo_Casos_de_Teste.md` | v1.0 — 35 casos (7 positivos, 9 negativos, 8 fronteira, 6 alternativos, 5 exceção); 31 candidatos à automação; responsáveis a preencher |
 | P05 | Matriz de rastreabilidade | `entrega/04_CASOS_E_RASTREABILIDADE/P05_Matriz_Rastreabilidade.xlsx` | v1.0 — 7 abas com fórmulas; execuções e defeitos vazios até o Marco 4 |
-| P06 | Evidências de execução manual | `entrega/05_EXECUCAO_MANUAL/` (roteiro, checklist, registro, evidencias/) | Preparado — 0 de 35 casos executados |
-| P07 | Registro de defeitos | GitHub Issues (etiqueta `defeito`) + `entrega/06_DEFEITOS/` | Preparado — modelo, etiquetas e exportação prontos; 0 defeitos |
+| P06 | Evidências de execução manual | `entrega/05_EXECUCAO_MANUAL/` (roteiro, checklist, registro, evidencias/) | 35/35 executados e aprovados, com transcrição e capturas por execução |
+| P07 | Registro de defeitos | GitHub Issues (etiqueta `defeito`) + `entrega/06_DEFEITOS/` | Nenhum defeito encontrado na execução dos casos; exportação em 2026-11-18 |
 | P08 | Scripts de automação | `src/test/java/.../unit/` e `.../e2e/`; `postman/`; `entrega/07`, `08` e `09` | Concluído: unidade (52 execuções), API (26 requisições/63 asserções), interface (5 testes); 31/31 candidatos automatizados |
 | P09 | Aceitação e não funcionais | `entrega/10_ACEITACAO_NAO_FUNCIONAIS/` | 7 testes não funcionais executados e aprovados (desempenho, segurança ×3, confiabilidade ×2, compatibilidade); usabilidade e 4 cenários de aceitação preparados, pendentes de pessoa externa |
 | P10 | Métricas e indicadores | — | Não iniciado |

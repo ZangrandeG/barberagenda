@@ -1,0 +1,7 @@
+EX-042 — CT-032 — 2026-11-18 22:55:27 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] Rafael atualizado como Inativo — obtido: Barbeiro atualizado. | 217 Rafael Tesoura Inativo
+Editar
+Excluir
+[OK] Rafael Tesoura não aparece para o cliente
+RESULTADO: Aprovado

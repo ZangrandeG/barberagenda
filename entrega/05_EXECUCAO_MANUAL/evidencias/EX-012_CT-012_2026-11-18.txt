@@ -1,0 +1,12 @@
+EX-012 — CT-012 — 2026-11-18 22:55:07 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 125, "servicoId": 208, "dataHoraInicio": "2026-11-21T08:30:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00.","campos":{"dataHoraInicio":"O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00."}}
+[OK] (a) Corte de cabelo às 08:30: HTTP 400 — obtido: 400
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 125, "servicoId": 210, "dataHoraInicio": "2026-11-21T18:30:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00.","campos":{"dataHoraInicio":"O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00."}}
+[OK] (b) Corte e barba às 18:30: HTTP 400 — obtido: 400
+> POST /api/agendamentos  {"emailCliente": "gabriela.teixeira@exemplo.com", "barbeiroId": 125, "servicoId": 210, "dataHoraInicio": "2026-11-21T18:00:00"}
+< HTTP 201  {"id":229,"codigoAcesso":"28PZEECS","clienteId":422,"clienteNome":"Gabriela Ramos Teixeira","clienteEmail":"gabriela.teixeira@exemplo.com","barbeiroId":125,"barbeiroNome":"Carlos Navalha","servicoId":210,"servicoNome":"Corte e barba","duracaoMinutos":60,"preco":70.00,"dataHoraInicio":"2026-11-21T18:00:00","dataHoraFim":"2026-11-21T19:00:00","status":"AGENDADO","dataCriacao":"2026-11-18T22:55:08.39
+[OK] (c) Corte e barba às 18:00: HTTP 201 — obtido: 201
+RESULTADO: Aprovado

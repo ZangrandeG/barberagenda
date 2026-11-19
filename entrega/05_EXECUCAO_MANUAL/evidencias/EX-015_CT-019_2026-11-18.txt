@@ -1,0 +1,9 @@
+EX-015 — CT-019 — 2026-11-18 22:55:09 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "joao.mendes@exemplo.com", "barbeiroId": 135, "servicoId": 223, "dataHoraInicio": "2026-11-19T14:30:00"}
+< HTTP 409  {"status":409,"erro":"Conflict","mensagem":"O barbeiro já possui agendamento nesse horário.","campos":{}}
+[OK] (a) 14:30: HTTP 409 horário ocupado — obtido: 409
+> POST /api/agendamentos  {"emailCliente": "joao.mendes@exemplo.com", "barbeiroId": 135, "servicoId": 225, "dataHoraInicio": "2026-11-19T13:30:00"}
+< HTTP 409  {"status":409,"erro":"Conflict","mensagem":"O barbeiro já possui agendamento nesse horário.","campos":{}}
+[OK] (b) 13:30: HTTP 409 horário ocupado — obtido: 409
+RESULTADO: Aprovado

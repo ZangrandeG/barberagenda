@@ -1,0 +1,5 @@
+EX-021 — CT-002 — 2026-11-18 22:55:12 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) nome com 3 caracteres e telefone com 10 dígitos aceitos — obtido: Cadastro realizado com sucesso! Código do cliente: 517.
+[OK] (b) nome com 60 caracteres e telefone com 11 dígitos aceitos — obtido: Cadastro realizado com sucesso! Código do cliente: 518.
+RESULTADO: Aprovado

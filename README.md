@@ -126,7 +126,7 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 | Não funcionais (P09) | Aplicação no ar (perfil `test`): `python scripts/nf/desempenho.py <pasta>`, `python scripts/nf/seguranca_robustez.py <pasta>`; com o pacote gerado: `python scripts/nf/reinicio_e_senha.py <pasta>`; compatibilidade: `./mvnw test -Pe2e -Dnavegador=firefox -Djanela=375x667` | Disponível — 7 de 8 executados e aprovados ([P09](entrega/10_ACEITACAO_NAO_FUNCIONAIS/P09_Aceitacao_e_Nao_Funcionais.md)) |
 | Aceitação (P09) | Roteiro com 4 cenários para pessoa externa | Preparado — execução pendente |
 | Gerar catálogo (P04), matriz (P05), checklist e registro de execução (P06) | `python scripts/gerar_artefatos.py` (requer `pip install openpyxl`; com LibreOffice instalado, a planilha já sai com os valores calculados) | Disponível |
-| Execução manual (P06) | Roteiro em `entrega/05_EXECUCAO_MANUAL/P06_Roteiro_Execucao.md`; datas e ids do dia: `python scripts/datas_teste.py` | Disponível — execução pelo grupo |
+| Execução manual (P06) | Roteiro em `entrega/05_EXECUCAO_MANUAL/P06_Roteiro_Execucao.md`; datas e ids do dia: `python scripts/datas_teste.py` | Executado — 35/35 aprovados; execução assistida: `python scripts/execucao_assistida.py` (aplicação no ar) |
 | Exportar defeitos do GitHub Issues (P07) | `python scripts/exportar_defeitos.py` (requer `gh auth login`) | Disponível |
 
 **SonarQube local (sem Docker).** O grupo usa a distribuição oficial em zip do SonarQube Community Build 26.11 (https://binaries.sonarsource.com/Distribution/sonarqube/), que roda com o próprio Java 21:

@@ -1,0 +1,9 @@
+EX-041 — CT-035 — 2026-11-18 22:55:26 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> GET /api/admin/agenda?barbeiroId=213&data=2026-11-20 (admin)
+< HTTP 200  [{"id":383,"clienteId":713,"clienteNome":"Camila Souza Prado","clienteEmail":"camila.prado@exemplo.com","barbeiroId":213,"barbeiroNome":"Carlos Navalha","servicoId":356,"servicoNome":"Barba","duracaoMinutos":30,"preco":30.00,"dataHoraInicio":"2026-11-20T09:30:00","dataHoraFim":"2026-11-20T10:00:00","status":"CANCELADO","dataCriacao":"2026-11-18T22:55:26.903084"},{"id":385,"clienteId":715,"clienteN
+[OK] agendamento das 09:30 está CANCELADO — obtido: CANCELADO
+> PATCH /api/admin/agendamentos/383/concluir (admin)
+< HTTP 409  {"status":409,"erro":"Conflict","mensagem":"Somente agendamentos com status AGENDADO podem ser concluídos.","campos":{}}
+[OK] concluir: HTTP 409 — obtido: 409
+RESULTADO: Aprovado

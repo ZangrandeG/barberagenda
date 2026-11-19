@@ -1,0 +1,6 @@
+EX-009 — CT-008 — 2026-11-18 22:55:02 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] 14:00 e 14:30 ausentes
+[OK] 13:30 e 15:00 presentes
+[OK] 18 horários — obtido: 18
+RESULTADO: Aprovado

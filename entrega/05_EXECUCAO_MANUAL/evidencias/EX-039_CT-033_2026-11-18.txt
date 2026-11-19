@@ -1,0 +1,5 @@
+EX-039 — CT-033 — 2026-11-18 22:55:24 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] Carlos não pode ser excluído — obtido: O barbeiro possui agendamentos e não pode ser excluído. Desative-o em vez de excluir.
+[OK] Barbeiro Temporário excluído e removido da tabela
+RESULTADO: Aprovado

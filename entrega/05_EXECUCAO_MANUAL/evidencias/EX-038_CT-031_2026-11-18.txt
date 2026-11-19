@@ -1,0 +1,11 @@
+EX-038 — CT-031 — 2026-11-18 22:55:22 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) duração 14, preço 10: mensagem esperada — obtido: A duração deve ser de no mínimo 15 minutos.
+[OK] (b) duração 20, preço 10: mensagem esperada — obtido: A duração deve ser múltipla de 15 minutos.
+[OK] (c) duração 195, preço 10: mensagem esperada — obtido: A duração deve ser de no máximo 180 minutos.
+[OK] (d) duração 30, preço 0.99: mensagem esperada — obtido: O preço deve ser de no mínimo R$ 1,00.
+[OK] (e) duração 30, preço 1000.01: mensagem esperada — obtido: O preço deve ser de no máximo R$ 1.000,00.
+> GET /api/admin/servicos (admin)
+< HTTP 200  [{"id":341,"nome":"Barba","duracaoMinutos":30,"preco":30.00,"ativo":true},{"id":340,"nome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"ativo":true},{"id":342,"nome":"Corte e barba","duracaoMinutos":60,"preco":70.00,"ativo":true},{"id":344,"nome":"Relaxamento capilar","duracaoMinutos":90,"preco":80.00,"ativo":false},{"id":343,"nome":"Sobrancelha","duracaoMinutos":15,"preco":15.00,"ativo":t
+[OK] nenhum 'Serviço Limite' cadastrado
+RESULTADO: Aprovado

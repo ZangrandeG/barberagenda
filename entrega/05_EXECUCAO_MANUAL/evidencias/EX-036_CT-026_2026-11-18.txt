@@ -1,0 +1,10 @@
+EX-036 — CT-026 — 2026-11-18 22:55:20 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] SEMENTE4 exibido como CANCELADO, sem botão de cancelar
+> PATCH /api/agendamentos/SEMENTE4/cancelar  {"email": "camila.prado@exemplo.com"}
+< HTTP 409  {"status":409,"erro":"Conflict","mensagem":"Somente agendamentos com status AGENDADO podem ser cancelados.","campos":{}}
+[OK] cancelar SEMENTE4: HTTP 409 — obtido: 409
+> PATCH /api/agendamentos/SEMENTE5/cancelar  {"email": "daniel.alves@exemplo.com"}
+< HTTP 409  {"status":409,"erro":"Conflict","mensagem":"Somente agendamentos com status AGENDADO podem ser cancelados.","campos":{}}
+[OK] cancelar SEMENTE5: HTTP 409 — obtido: 409
+RESULTADO: Aprovado

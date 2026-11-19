@@ -1,0 +1,7 @@
+EX-011 — CT-011 — 2026-11-18 22:55:05 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] (a) agendamento às 09:00 confirmado — obtido: Agendamento realizado com sucesso! Código de acesso: 26M4T3VS.
+[OK] (a) status AGENDADO
+[OK] (b) agendamento às 18:30 confirmado — obtido: Agendamento realizado com sucesso! Código de acesso: 2PNHVU8B.
+[OK] (b) status AGENDADO
+RESULTADO: Aprovado

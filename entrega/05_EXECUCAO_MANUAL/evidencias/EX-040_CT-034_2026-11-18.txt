@@ -1,0 +1,5 @@
+EX-040 — CT-034 — 2026-11-18 22:55:25 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+[OK] linha 14:00 – 15:00, Bruno Henrique Lima, Corte e barba, AGENDADO, sem código de acesso — obtido: 377 14:00 – 15:00 Bruno Henrique Lima Corte e barba AGENDADO Concluir
+[OK] atendimento concluído — obtido: Atendimento #377 marcado como concluído.
+RESULTADO: Aprovado

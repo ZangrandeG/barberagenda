@@ -9,6 +9,7 @@ Lista mantida durante o projeto, a pedido do grupo ("preencha o que falta e no f
 | P03, seção 10 (Responsabilidades) | Papéis distribuídos entre Guilherme e José Paulo | Não foi informada a divisão real |
 | P03, seções 9 e 20 | IDE e canal de comunicação do grupo | Não informados |
 | P04 (campo Responsável de cada caso) | Casos divididos entre os dois integrantes | Não informado |
+| Execução dos 35 casos manuais (P06) | Feita por Claude (IA) com `scripts/execucao_assistida.py`, pelos mesmos passos do P04, a pedido do grupo — permitido pelo prompt, mas o manual considera ideal a execução pelo grupo | Se quiserem, reexecutem alguns casos e registrem como novas execuções (o executor fica com o nome de vocês) |
 
 ## B. Depende de pessoas — não pode ser simulado (manual, seção 15)
 

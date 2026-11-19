@@ -1,0 +1,9 @@
+EX-028 — CT-016 — 2026-11-18 22:55:15 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "heitor.moreira@exemplo.com", "barbeiroId": 173, "servicoId": 288, "dataHoraInicio": "2026-11-17T10:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"Não é permitido agendar em data ou horário que já passou.","campos":{"dataHoraInicio":"Não é permitido agendar em data ou horário que já passou."}}
+[OK] (a) ontem 2026-11-17 10:00: HTTP 400 — obtido: 400
+> POST /api/agendamentos  {"emailCliente": "heitor.moreira@exemplo.com", "barbeiroId": 173, "servicoId": 288, "dataHoraInicio": "2026-11-18T09:00:00"}
+< HTTP 400  {"status":400,"erro":"Bad Request","mensagem":"Não é permitido agendar em data ou horário que já passou.","campos":{"dataHoraInicio":"Não é permitido agendar em data ou horário que já passou."}}
+[OK] (b) hoje 2026-11-18 09:00: HTTP 400 — obtido: 400
+RESULTADO: Aprovado

@@ -1,0 +1,12 @@
+EX-016 — CT-020 — 2026-11-18 22:55:09 — BarberAgenda 1.1.0 (marco-7) — Claude (IA) — execução assistida por script, a pedido do grupo
+D=2026-11-18 DF1=2026-11-19 DF2=2026-11-20 DF3=2026-11-21 ONTEM=2026-11-17 DOM=2026-11-22 D+30=2026-12-18 D+31=2026-12-19
+> POST /api/agendamentos  {"emailCliente": "isabela.pires@exemplo.com", "barbeiroId": 138, "servicoId": 228, "dataHoraInicio": "2026-11-19T13:30:00"}
+< HTTP 201  {"id":250,"codigoAcesso":"CPEZRF7Y","clienteId":464,"clienteNome":"Isabela Duarte Pires","clienteEmail":"isabela.pires@exemplo.com","barbeiroId":138,"barbeiroNome":"Rafael Tesoura","servicoId":228,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-19T13:30:00","dataHoraFim":"2026-11-19T14:00:00","status":"AGENDADO","dataCriacao":"2026-11-18T22:55:09.6006318
+[OK] (a) Rafael Tesoura 13:30: HTTP 201 — obtido: 201
+> POST /api/agendamentos  {"emailCliente": "isabela.pires@exemplo.com", "barbeiroId": 138, "servicoId": 228, "dataHoraInicio": "2026-11-19T15:00:00"}
+< HTTP 201  {"id":251,"codigoAcesso":"C9ETEQ6M","clienteId":464,"clienteNome":"Isabela Duarte Pires","clienteEmail":"isabela.pires@exemplo.com","barbeiroId":138,"barbeiroNome":"Rafael Tesoura","servicoId":228,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-19T15:00:00","dataHoraFim":"2026-11-19T15:30:00","status":"AGENDADO","dataCriacao":"2026-11-18T22:55:09.7471287
+[OK] (b) Rafael Tesoura 15:00: HTTP 201 — obtido: 201
+> POST /api/agendamentos  {"emailCliente": "isabela.pires@exemplo.com", "barbeiroId": 137, "servicoId": 228, "dataHoraInicio": "2026-11-19T14:00:00"}
+< HTTP 201  {"id":252,"codigoAcesso":"9J55XCEM","clienteId":464,"clienteNome":"Isabela Duarte Pires","clienteEmail":"isabela.pires@exemplo.com","barbeiroId":137,"barbeiroNome":"Carlos Navalha","servicoId":228,"servicoNome":"Corte de cabelo","duracaoMinutos":30,"preco":45.00,"dataHoraInicio":"2026-11-19T14:00:00","dataHoraFim":"2026-11-19T14:30:00","status":"AGENDADO","dataCriacao":"2026-11-18T22:55:09.9168267
+[OK] (c) Carlos Navalha 14:00: HTTP 201 — obtido: 201
+RESULTADO: Aprovado
