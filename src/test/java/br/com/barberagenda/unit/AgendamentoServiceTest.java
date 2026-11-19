@@ -207,6 +207,33 @@ class AgendamentoServiceTest {
                 .hasMessage("Somente agendamentos com status AGENDADO podem ser cancelados.");
     }
 
+    // ---------------------------------------------------------------- TDD: RF-09 (antecedência mínima para cancelar)
+
+    private static final String MSG_PRAZO_CANCELAMENTO =
+            "O cancelamento só pode ser feito com no mínimo 2 horas de antecedência.";
+
+    @org.junit.jupiter.params.ParameterizedTest(name = "início às {0} (agora = 10:00)")
+    @org.junit.jupiter.params.provider.ValueSource(strings = {"11:59", "11:30", "10:30"})
+    @DisplayName("RF-09 (TDD) / CT-036 — recusa cancelamento com menos de 2 horas de antecedência")
+    void deveRejeitarCancelamentoComMenosDeDuasHorasDeAntecedencia(String horario) {
+        Agendamento proximo = agendamento(DadosTeste.HOJE.atTime(java.time.LocalTime.parse(horario)), 30,
+                StatusAgendamento.AGENDADO);
+        when(agendamentoRepository.findByCodigoAcesso("TESTE234")).thenReturn(Optional.of(proximo));
+
+        assertThatThrownBy(() -> service.cancelarPeloCliente("TESTE234", EMAIL))
+                .hasMessage(MSG_PRAZO_CANCELAMENTO);
+        assertThat(proximo.getStatus()).isEqualTo(StatusAgendamento.AGENDADO);
+    }
+
+    @Test
+    @DisplayName("RF-09 (TDD) / CT-036 — aceita cancelamento com exatamente 2 horas de antecedência")
+    void deveAceitarCancelamentoComExatamenteDuasHorasDeAntecedencia() {
+        Agendamento limite = agendamento(DadosTeste.HOJE.atTime(12, 0), 30, StatusAgendamento.AGENDADO);
+        when(agendamentoRepository.findByCodigoAcesso("TESTE234")).thenReturn(Optional.of(limite));
+
+        assertThat(service.cancelarPeloCliente("TESTE234", EMAIL).getStatus()).isEqualTo(StatusAgendamento.CANCELADO);
+    }
+
     @Test
     @DisplayName("CT-035 / RF-08 — recusa concluir agendamento cancelado")
     void deveRejeitarConclusaoDeAgendamentoCancelado() {
