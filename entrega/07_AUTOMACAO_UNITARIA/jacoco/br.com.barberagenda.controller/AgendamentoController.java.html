@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendamentoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.controller</a> &gt; <span class="el_source">AgendamentoController.java</span></div><h1>AgendamentoController.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.controller;
+
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import br.com.barberagenda.dto.AgendamentoRequest;
+import br.com.barberagenda.dto.AgendamentoResponse;
+import br.com.barberagenda.dto.CancelamentoRequest;
+import br.com.barberagenda.dto.HorariosDisponiveisResponse;
+import br.com.barberagenda.model.Agendamento;
+import br.com.barberagenda.service.AgendamentoService;
+import jakarta.validation.Valid;
+
+/** Operações públicas do cliente: horários livres, agendar, consultar e cancelar. */
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class AgendamentoController {
+
+<span class="nc" id="L32">    private static final DateTimeFormatter HORA = DateTimeFormatter.ofPattern(&quot;HH:mm&quot;);</span>
+
+    private final AgendamentoService agendamentoService;
+
+<span class="nc" id="L36">    public AgendamentoController(AgendamentoService agendamentoService) {</span>
+<span class="nc" id="L37">        this.agendamentoService = agendamentoService;</span>
+<span class="nc" id="L38">    }</span>
+
+    @GetMapping(&quot;/horarios-disponiveis&quot;)
+    public HorariosDisponiveisResponse horariosDisponiveis(
+            @RequestParam Long barbeiroId,
+            @RequestParam Long servicoId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
+<span class="nc" id="L45">        var horarios = agendamentoService.horariosDisponiveis(barbeiroId, servicoId, data).stream()</span>
+<span class="nc" id="L46">                .map(inicio -&gt; inicio.format(HORA))</span>
+<span class="nc" id="L47">                .toList();</span>
+<span class="nc" id="L48">        return new HorariosDisponiveisResponse(barbeiroId, servicoId, data, horarios);</span>
+    }
+
+    @PostMapping(&quot;/agendamentos&quot;)
+    public ResponseEntity&lt;AgendamentoResponse&gt; agendar(@Valid @RequestBody AgendamentoRequest pedido) {
+<span class="nc" id="L53">        Agendamento agendamento = agendamentoService.agendar(pedido);</span>
+<span class="nc" id="L54">        URI local = ServletUriComponentsBuilder.fromCurrentRequest().path(&quot;/{codigo}&quot;)</span>
+<span class="nc" id="L55">                .buildAndExpand(agendamento.getCodigoAcesso()).toUri();</span>
+<span class="nc" id="L56">        return ResponseEntity.created(local).body(AgendamentoResponse.paraCliente(agendamento));</span>
+    }
+
+    /** Consulta pelo cliente: código de acesso recebido no agendamento + e-mail do cliente. */
+    @GetMapping(&quot;/agendamentos/{codigoAcesso}&quot;)
+    public AgendamentoResponse consultar(@PathVariable String codigoAcesso, @RequestParam String email) {
+<span class="nc" id="L62">        return AgendamentoResponse.paraCliente(agendamentoService.consultarPeloCliente(codigoAcesso, email));</span>
+    }
+
+    @PatchMapping(&quot;/agendamentos/{codigoAcesso}/cancelar&quot;)
+    public AgendamentoResponse cancelar(@PathVariable String codigoAcesso,
+                                        @Valid @RequestBody CancelamentoRequest dados) {
+<span class="nc" id="L68">        return AgendamentoResponse.paraCliente(agendamentoService.cancelarPeloCliente(codigoAcesso, dados.email()));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

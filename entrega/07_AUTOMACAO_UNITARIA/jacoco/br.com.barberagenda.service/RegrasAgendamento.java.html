@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegrasAgendamento.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.service</a> &gt; <span class="el_source">RegrasAgendamento.java</span></div><h1>RegrasAgendamento.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.service;
+
+import java.time.Clock;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import br.com.barberagenda.exception.RegraNegocioException;
+
+/**
+ * Regras de data e hora dos agendamentos (RN-04, RN-05 e RN-06).
+ * Usa o {@link Clock} injetado para obter o momento atual.
+ */
+@Component
+public class RegrasAgendamento {
+
+<span class="fc" id="L22">    public static final LocalTime ABERTURA = LocalTime.of(9, 0);</span>
+<span class="fc" id="L23">    public static final LocalTime FECHAMENTO = LocalTime.of(19, 0);</span>
+    public static final int INTERVALO_MINUTOS = 30;
+    public static final int ANTECEDENCIA_MAXIMA_DIAS = 30;
+
+    private static final String CAMPO_DATA_HORA = &quot;dataHoraInicio&quot;;
+
+    private final Clock relogio;
+
+<span class="fc" id="L31">    public RegrasAgendamento(Clock relogio) {</span>
+<span class="fc" id="L32">        this.relogio = relogio;</span>
+<span class="fc" id="L33">    }</span>
+
+    public LocalDateTime agora() {
+<span class="fc" id="L36">        return LocalDateTime.now(relogio);</span>
+    }
+
+    /** Valida RN-06, RN-04 e RN-05, nesta ordem, para um agendamento que começa em {@code inicio}. */
+    public void validarHorario(LocalDateTime inicio, int duracaoMinutos) {
+<span class="fc" id="L41">        validarAntecedencia(inicio);</span>
+<span class="fc" id="L42">        validarFuncionamento(inicio, duracaoMinutos);</span>
+<span class="fc" id="L43">        validarIntervalo(inicio);</span>
+<span class="fc" id="L44">    }</span>
+
+    /** RN-06: não pode ser no passado e a data pode estar no máximo 30 dias à frente de hoje. */
+    public void validarAntecedencia(LocalDateTime inicio) {
+<span class="fc" id="L48">        LocalDateTime agora = agora();</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (!inicio.isAfter(agora)) {</span>
+<span class="fc" id="L50">            throw new RegraNegocioException(CAMPO_DATA_HORA,</span>
+                    &quot;Não é permitido agendar em data ou horário que já passou.&quot;);
+        }
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (inicio.toLocalDate().isAfter(agora.toLocalDate().plusDays(ANTECEDENCIA_MAXIMA_DIAS))) {</span>
+<span class="fc" id="L54">            throw new RegraNegocioException(CAMPO_DATA_HORA,</span>
+                    &quot;A antecedência máxima para agendamento é de &quot; + ANTECEDENCIA_MAXIMA_DIAS + &quot; dias.&quot;);
+        }
+<span class="fc" id="L57">    }</span>
+
+    /** RN-04: segunda a sábado, das 09:00 às 19:00; o serviço precisa terminar até 19:00. */
+    public void validarFuncionamento(LocalDateTime inicio, int duracaoMinutos) {
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (inicio.getDayOfWeek() == DayOfWeek.SUNDAY) {</span>
+<span class="fc" id="L62">            throw new RegraNegocioException(CAMPO_DATA_HORA, &quot;A barbearia não abre aos domingos.&quot;);</span>
+        }
+<span class="fc" id="L64">        LocalDateTime abertura = inicio.toLocalDate().atTime(ABERTURA);</span>
+<span class="fc" id="L65">        LocalDateTime fechamento = inicio.toLocalDate().atTime(FECHAMENTO);</span>
+<span class="fc" id="L66">        LocalDateTime fim = inicio.plusMinutes(duracaoMinutos);</span>
+<span class="fc bfc" id="L67" title="All 4 branches covered.">        if (inicio.isBefore(abertura) || fim.isAfter(fechamento)) {</span>
+<span class="fc" id="L68">            throw new RegraNegocioException(CAMPO_DATA_HORA,</span>
+                    &quot;O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00.&quot;);
+        }
+<span class="fc" id="L71">    }</span>
+
+    /** RN-05: o início deve cair em intervalos de 30 minutos (09:00, 09:30, ...). */
+    public void validarIntervalo(LocalDateTime inicio) {
+<span class="pc bpc" id="L75" title="2 of 6 branches missed.">        if (inicio.getMinute() % INTERVALO_MINUTOS != 0 || inicio.getSecond() != 0 || inicio.getNano() != 0) {</span>
+<span class="fc" id="L76">            throw new RegraNegocioException(CAMPO_DATA_HORA,</span>
+                    &quot;Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30).&quot;);
+        }
+<span class="fc" id="L79">    }</span>
+
+    /** Indica se a data aceita agendamentos: não é domingo, não é passada e está dentro de 30 dias. */
+    public boolean dataAceitaAgendamentos(LocalDate data) {
+<span class="fc" id="L83">        LocalDate hoje = agora().toLocalDate();</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        return data.getDayOfWeek() != DayOfWeek.SUNDAY</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                &amp;&amp; !data.isBefore(hoje)</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">                &amp;&amp; !data.isAfter(hoje.plusDays(ANTECEDENCIA_MAXIMA_DIAS));</span>
+    }
+
+    /**
+     * Gera os horários de início possíveis no dia para um serviço com a duração informada,
+     * respeitando o funcionamento, o intervalo de 30 minutos e descartando horários já passados.
+     * Não considera a ocupação do barbeiro.
+     */
+    public List&lt;LocalDateTime&gt; gerarHorariosDoDia(LocalDate data, int duracaoMinutos) {
+<span class="fc" id="L95">        List&lt;LocalDateTime&gt; horarios = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (!dataAceitaAgendamentos(data)) {</span>
+<span class="fc" id="L97">            return horarios;</span>
+        }
+<span class="fc" id="L99">        LocalDateTime agora = agora();</span>
+<span class="fc" id="L100">        LocalDateTime fechamento = data.atTime(FECHAMENTO);</span>
+<span class="fc" id="L101">        for (LocalDateTime inicio = data.atTime(ABERTURA);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">             !inicio.plusMinutes(duracaoMinutos).isAfter(fechamento);</span>
+<span class="fc" id="L103">             inicio = inicio.plusMinutes(INTERVALO_MINUTOS)) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (inicio.isAfter(agora)) {</span>
+<span class="fc" id="L105">                horarios.add(inicio);</span>
+            }
+        }
+<span class="fc" id="L108">        return horarios;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

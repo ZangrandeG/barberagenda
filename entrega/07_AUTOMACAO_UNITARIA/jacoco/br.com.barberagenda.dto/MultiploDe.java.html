@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MultiploDe.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.dto</a> &gt; <span class="el_source">MultiploDe.java</span></div><h1>MultiploDe.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.dto;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.Payload;
+
+/** Exige que o número inteiro seja múltiplo de {@link #valor()}. Valores nulos são aceitos. */
+@Documented
+@Constraint(validatedBy = MultiploDe.Validador.class)
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.RECORD_COMPONENT})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MultiploDe {
+
+    int valor();
+
+    String message() default &quot;O valor deve ser múltiplo de {valor}.&quot;;
+
+    Class&lt;?&gt;[] groups() default {};
+
+    Class&lt;? extends Payload&gt;[] payload() default {};
+
+<span class="fc" id="L29">    class Validador implements ConstraintValidator&lt;MultiploDe, Integer&gt; {</span>
+
+        private int divisor;
+
+        @Override
+        public void initialize(MultiploDe anotacao) {
+<span class="fc" id="L35">            this.divisor = anotacao.valor();</span>
+<span class="fc" id="L36">        }</span>
+
+        @Override
+        public boolean isValid(Integer numero, ConstraintValidatorContext contexto) {
+<span class="pc bpc" id="L40" title="1 of 4 branches missed.">            return numero == null || numero % divisor == 0;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

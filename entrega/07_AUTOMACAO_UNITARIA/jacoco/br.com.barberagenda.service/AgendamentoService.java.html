@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendamentoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.service</a> &gt; <span class="el_source">AgendamentoService.java</span></div><h1>AgendamentoService.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.barberagenda.dto.AgendamentoRequest;
+import br.com.barberagenda.exception.ConflitoException;
+import br.com.barberagenda.exception.RecursoNaoEncontradoException;
+import br.com.barberagenda.exception.RegraNegocioException;
+import br.com.barberagenda.model.Agendamento;
+import br.com.barberagenda.model.Barbeiro;
+import br.com.barberagenda.model.Cliente;
+import br.com.barberagenda.model.Servico;
+import br.com.barberagenda.model.StatusAgendamento;
+import br.com.barberagenda.repository.AgendamentoRepository;
+import br.com.barberagenda.repository.BarbeiroRepository;
+import br.com.barberagenda.repository.ClienteRepository;
+import br.com.barberagenda.repository.ServicoRepository;
+
+@Service
+public class AgendamentoService {
+
+    public static final int LIMITE_AGENDAMENTOS_ATIVOS = 3;
+
+    private static final int TENTATIVAS_CODIGO_UNICO = 5;
+    private static final String NAO_ENCONTRADO_PARA_CLIENTE =
+            &quot;Agendamento não encontrado para o código de acesso e o e-mail informados.&quot;;
+
+    private final AgendamentoRepository agendamentoRepository;
+    private final ClienteRepository clienteRepository;
+    private final BarbeiroRepository barbeiroRepository;
+    private final ServicoRepository servicoRepository;
+    private final RegrasAgendamento regras;
+    private final GeradorCodigoAcesso geradorCodigo;
+
+    public AgendamentoService(AgendamentoRepository agendamentoRepository,
+                              ClienteRepository clienteRepository,
+                              BarbeiroRepository barbeiroRepository,
+                              ServicoRepository servicoRepository,
+                              RegrasAgendamento regras,
+<span class="fc" id="L45">                              GeradorCodigoAcesso geradorCodigo) {</span>
+<span class="fc" id="L46">        this.agendamentoRepository = agendamentoRepository;</span>
+<span class="fc" id="L47">        this.clienteRepository = clienteRepository;</span>
+<span class="fc" id="L48">        this.barbeiroRepository = barbeiroRepository;</span>
+<span class="fc" id="L49">        this.servicoRepository = servicoRepository;</span>
+<span class="fc" id="L50">        this.regras = regras;</span>
+<span class="fc" id="L51">        this.geradorCodigo = geradorCodigo;</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Cria um agendamento. Ordem das verificações:
+     * cliente/barbeiro/serviço existentes (404) → barbeiro e serviço ativos, RN-10 (400) →
+     * RN-06, RN-04 e RN-05 (400) → limite de agendamentos ativos, RN-08 (409) →
+     * sobreposição de horário do barbeiro, RN-07 (409).
+     */
+    @Transactional
+    public Agendamento agendar(AgendamentoRequest pedido) {
+<span class="fc" id="L62">        Cliente cliente = clienteRepository.findByEmailIgnoreCase(pedido.emailCliente())</span>
+<span class="fc" id="L63">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(</span>
+                        &quot;Cliente não encontrado para o e-mail informado. Faça o cadastro antes de agendar.&quot;));
+<span class="fc" id="L65">        Barbeiro barbeiro = barbeiroRepository.buscarComBloqueio(pedido.barbeiroId())</span>
+<span class="pc" id="L66">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Barbeiro não encontrado.&quot;));</span>
+<span class="fc" id="L67">        Servico servico = servicoRepository.findById(pedido.servicoId())</span>
+<span class="pc" id="L68">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Serviço não encontrado.&quot;));</span>
+
+<span class="fc" id="L70">        validarAtivos(barbeiro, servico);</span>
+
+<span class="fc" id="L72">        LocalDateTime inicio = pedido.dataHoraInicio();</span>
+<span class="fc" id="L73">        regras.validarHorario(inicio, servico.getDuracaoMinutos());</span>
+
+<span class="fc" id="L75">        long ativos = agendamentoRepository.countByClienteIdAndStatus(cliente.getId(), StatusAgendamento.AGENDADO);</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (ativos &gt;= LIMITE_AGENDAMENTOS_ATIVOS) {</span>
+<span class="fc" id="L77">            throw new ConflitoException(&quot;O cliente já possui &quot; + LIMITE_AGENDAMENTOS_ATIVOS</span>
+                    + &quot; agendamentos ativos, que é o limite permitido.&quot;);
+        }
+
+<span class="fc" id="L81">        LocalDateTime fim = inicio.plusMinutes(servico.getDuracaoMinutos());</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (agendamentoRepository.existeSobreposicao(barbeiro.getId(), inicio, fim)) {</span>
+<span class="fc" id="L83">            throw new ConflitoException(&quot;O barbeiro já possui agendamento nesse horário.&quot;);</span>
+        }
+
+<span class="fc" id="L86">        Agendamento agendamento = new Agendamento(gerarCodigoUnico(), cliente, barbeiro, servico, inicio,</span>
+<span class="fc" id="L87">                StatusAgendamento.AGENDADO, regras.agora());</span>
+<span class="fc" id="L88">        return agendamentoRepository.save(agendamento);</span>
+    }
+
+    /**
+     * Consulta feita pelo cliente: exige o código de acesso recebido no agendamento e o e-mail do cliente.
+     * Código inexistente ou e-mail divergente geram a mesma resposta (404), sem indicar qual dos dois falhou.
+     */
+    @Transactional(readOnly = true)
+    public Agendamento consultarPeloCliente(String codigoAcesso, String email) {
+<span class="fc" id="L97">        return agendamentoRepository.findByCodigoAcesso(GeradorCodigoAcesso.normalizar(codigoAcesso))</span>
+<span class="fc" id="L98">                .filter(a -&gt; a.getCliente().getEmail().equalsIgnoreCase(email.strip()))</span>
+<span class="fc" id="L99">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(NAO_ENCONTRADO_PARA_CLIENTE));</span>
+    }
+
+    /** Cancelamento feito pelo cliente. Somente agendamentos com status AGENDADO podem ser cancelados. */
+    @Transactional
+    public Agendamento cancelarPeloCliente(String codigoAcesso, String email) {
+<span class="fc" id="L105">        Agendamento agendamento = consultarPeloCliente(codigoAcesso, email);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!agendamento.isAgendado()) {</span>
+<span class="fc" id="L107">            throw new ConflitoException(&quot;Somente agendamentos com status AGENDADO podem ser cancelados.&quot;);</span>
+        }
+<span class="fc" id="L109">        agendamento.cancelar();</span>
+<span class="fc" id="L110">        return agendamento;</span>
+    }
+
+    /** Marcação de atendimento concluído (administrador). */
+    @Transactional
+    public Agendamento concluir(Long id) {
+<span class="fc" id="L116">        Agendamento agendamento = agendamentoRepository.findById(id)</span>
+<span class="pc" id="L117">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Agendamento não encontrado.&quot;));</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (!agendamento.isAgendado()) {</span>
+<span class="fc" id="L119">            throw new ConflitoException(&quot;Somente agendamentos com status AGENDADO podem ser concluídos.&quot;);</span>
+        }
+<span class="fc" id="L121">        agendamento.concluir();</span>
+<span class="fc" id="L122">        return agendamento;</span>
+    }
+
+    /** Agenda do barbeiro no dia (todos os status), em ordem de horário. */
+    @Transactional(readOnly = true)
+    public List&lt;Agendamento&gt; agendaDoDia(Long barbeiroId, LocalDate data) {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (!barbeiroRepository.existsById(barbeiroId)) {</span>
+<span class="nc" id="L129">            throw new RecursoNaoEncontradoException(&quot;Barbeiro não encontrado.&quot;);</span>
+        }
+<span class="nc" id="L131">        return agendamentoRepository.buscarDoBarbeiroNoPeriodo(barbeiroId, data.atStartOfDay(),</span>
+<span class="nc" id="L132">                data.plusDays(1).atStartOfDay());</span>
+    }
+
+    /** Horários de início livres para o barbeiro e o serviço na data informada. */
+    @Transactional(readOnly = true)
+    public List&lt;LocalDateTime&gt; horariosDisponiveis(Long barbeiroId, Long servicoId, LocalDate data) {
+<span class="fc" id="L138">        Barbeiro barbeiro = barbeiroRepository.findById(barbeiroId)</span>
+<span class="pc" id="L139">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Barbeiro não encontrado.&quot;));</span>
+<span class="fc" id="L140">        Servico servico = servicoRepository.findById(servicoId)</span>
+<span class="pc" id="L141">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Serviço não encontrado.&quot;));</span>
+<span class="fc" id="L142">        validarAtivos(barbeiro, servico);</span>
+
+<span class="fc" id="L144">        List&lt;Agendamento&gt; ocupados = agendamentoRepository</span>
+<span class="fc" id="L145">                .buscarDoBarbeiroNoPeriodo(barbeiroId, data.atStartOfDay(), data.plusDays(1).atStartOfDay())</span>
+<span class="fc" id="L146">                .stream()</span>
+<span class="fc" id="L147">                .filter(Agendamento::isAgendado)</span>
+<span class="fc" id="L148">                .toList();</span>
+
+<span class="fc" id="L150">        int duracao = servico.getDuracaoMinutos();</span>
+<span class="fc" id="L151">        return regras.gerarHorariosDoDia(data, duracao).stream()</span>
+<span class="fc" id="L152">                .filter(inicio -&gt; ocupados.stream().noneMatch(a -&gt; sobrepoe(a, inicio, inicio.plusMinutes(duracao))))</span>
+<span class="fc" id="L153">                .toList();</span>
+    }
+
+    private String gerarCodigoUnico() {
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        for (int tentativa = 0; tentativa &lt; TENTATIVAS_CODIGO_UNICO; tentativa++) {</span>
+<span class="fc" id="L158">            String codigo = geradorCodigo.gerar();</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">            if (!agendamentoRepository.existsByCodigoAcesso(codigo)) {</span>
+<span class="fc" id="L160">                return codigo;</span>
+            }
+        }
+<span class="nc" id="L163">        throw new IllegalStateException(&quot;Não foi possível gerar um código de acesso único.&quot;);</span>
+    }
+
+    /** RN-10: somente barbeiros e serviços ativos podem receber agendamentos. */
+    private static void validarAtivos(Barbeiro barbeiro, Servico servico) {
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (!barbeiro.isAtivo()) {</span>
+<span class="fc" id="L169">            throw new RegraNegocioException(&quot;barbeiroId&quot;, &quot;O barbeiro selecionado está inativo.&quot;);</span>
+        }
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (!servico.isAtivo()) {</span>
+<span class="fc" id="L172">            throw new RegraNegocioException(&quot;servicoId&quot;, &quot;O serviço selecionado está inativo.&quot;);</span>
+        }
+<span class="fc" id="L174">    }</span>
+
+    private static boolean sobrepoe(Agendamento existente, LocalDateTime inicio, LocalDateTime fim) {
+<span class="fc bfc" id="L177" title="All 4 branches covered.">        return existente.getDataHoraInicio().isBefore(fim) &amp;&amp; existente.getDataHoraFim().isAfter(inicio);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

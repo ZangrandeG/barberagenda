@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.security</a> &gt; <span class="el_source">SecurityConfig.java</span></div><h1>SecurityConfig.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfException;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import br.com.barberagenda.dto.SessaoResponse;
+import jakarta.servlet.http.HttpServletRequest;
+
+/**
+ * Segurança da aplicação (RN-11).
+ * &lt;ul&gt;
+ *   &lt;li&gt;Área pública: páginas do cliente e API de cadastro/agendamento.&lt;/li&gt;
+ *   &lt;li&gt;Área administrativa: páginas /admin/** (login por formulário, sessão) e API /api/admin/**
+ *       (sessão ou HTTP Basic). Sem credenciais a API responde 401; com perfil inadequado ou
+ *       token CSRF inválido, 403.&lt;/li&gt;
+ *   &lt;li&gt;Listagem e consulta de clientes por id (GET /api/clientes/**) também exigem administrador,
+ *       pois expõem dados pessoais.&lt;/li&gt;
+ *   &lt;li&gt;A restauração de dados (/api/dev/**, só existe nos perfis dev e test) apaga registros e por
+ *       isso também exige administrador e segue a mesma regra de CSRF da área administrativa.&lt;/li&gt;
+ *   &lt;li&gt;CSRF: exigido nas requisições de alteração da área administrativa feitas com sessão
+ *       (navegador). Requisições com cabeçalho Authorization (HTTP Basic, ex.: Postman) não usam
+ *       cookie de sessão e por isso dispensam o token.&lt;/li&gt;
+ * &lt;/ul&gt;
+ */
+@Configuration
+@EnableWebSecurity
+<span class="nc" id="L42">public class SecurityConfig {</span>
+
+    private static final String PAGINA_LOGIN = &quot;/admin/login.html&quot;;
+
+    @Bean
+    public PasswordEncoder codificadorSenha() {
+<span class="nc" id="L48">        return new BCryptPasswordEncoder();</span>
+    }
+
+    @Bean
+    public SecurityFilterChain cadeiaFiltros(HttpSecurity http, RespostaJson json) throws Exception {
+<span class="nc" id="L53">        RequestMatcher api = req -&gt; caminho(req).startsWith(&quot;/api/&quot;);</span>
+<span class="nc" id="L54">        RequestMatcher areaAdministrativa = req -&gt; {</span>
+<span class="nc" id="L55">            String caminho = caminho(req);</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">            return caminho.startsWith(&quot;/api/admin/&quot;) || caminho.startsWith(&quot;/admin/&quot;)</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                    || caminho.startsWith(&quot;/api/dev/&quot;);</span>
+        };
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        RequestMatcher semCabecalhoAuthorization = req -&gt; req.getHeader(HttpHeaders.AUTHORIZATION) == null;</span>
+<span class="nc" id="L60">        RequestMatcher exigeCsrf = new AndRequestMatcher(</span>
+                CsrfFilter.DEFAULT_CSRF_MATCHER, areaAdministrativa, semCabecalhoAuthorization);
+
+<span class="nc" id="L63">        AuthenticationEntryPoint pontoEntrada = (req, res, ex) -&gt; {</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (api.matches(req)) {</span>
+<span class="nc" id="L65">                json.erro(res, HttpStatus.UNAUTHORIZED, &quot;Autenticação necessária.&quot;);</span>
+            } else {
+<span class="nc" id="L67">                res.sendRedirect(req.getContextPath() + PAGINA_LOGIN);</span>
+            }
+<span class="nc" id="L69">        };</span>
+<span class="nc" id="L70">        AccessDeniedHandler acessoNegado = (req, res, ex) -&gt; json.erro(res, HttpStatus.FORBIDDEN,</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                ex instanceof CsrfException ? &quot;Token CSRF ausente ou inválido.&quot; : &quot;Acesso negado.&quot;);</span>
+
+<span class="nc" id="L73">        http</span>
+<span class="nc" id="L74">            .csrf(csrf -&gt; csrf</span>
+<span class="nc" id="L75">                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())</span>
+<span class="nc" id="L76">                .csrfTokenRequestHandler(new SpaCsrfTokenRequestHandler())</span>
+<span class="nc" id="L77">                .requireCsrfProtectionMatcher(exigeCsrf))</span>
+<span class="nc" id="L78">            .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="nc" id="L79">                .requestMatchers(PAGINA_LOGIN, &quot;/admin/login&quot;).permitAll()</span>
+<span class="nc" id="L80">                .requestMatchers(&quot;/admin/**&quot;, &quot;/api/admin/**&quot;, &quot;/api/dev/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
+<span class="nc" id="L81">                .requestMatchers(HttpMethod.GET, &quot;/api/clientes&quot;, &quot;/api/clientes/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
+<span class="nc" id="L82">                .anyRequest().permitAll())</span>
+<span class="nc" id="L83">            .formLogin(form -&gt; form</span>
+<span class="nc" id="L84">                .loginPage(PAGINA_LOGIN)</span>
+<span class="nc" id="L85">                .loginProcessingUrl(&quot;/admin/login&quot;)</span>
+<span class="nc" id="L86">                .successHandler((req, res, autenticacao) -&gt;</span>
+<span class="nc" id="L87">                        json.escrever(res, HttpStatus.OK, new SessaoResponse(autenticacao.getName())))</span>
+<span class="nc" id="L88">                .failureHandler((req, res, ex) -&gt;</span>
+<span class="nc" id="L89">                        json.erro(res, HttpStatus.UNAUTHORIZED, &quot;Usuário ou senha inválidos.&quot;))</span>
+<span class="nc" id="L90">                .permitAll())</span>
+<span class="nc" id="L91">            .logout(logout -&gt; logout</span>
+<span class="nc" id="L92">                .logoutUrl(&quot;/admin/logout&quot;)</span>
+<span class="nc" id="L93">                .logoutSuccessHandler((req, res, autenticacao) -&gt; res.setStatus(HttpStatus.NO_CONTENT.value())))</span>
+<span class="nc" id="L94">            .httpBasic(basic -&gt; basic.authenticationEntryPoint(pontoEntrada))</span>
+<span class="nc" id="L95">            .exceptionHandling(excecoes -&gt; excecoes</span>
+<span class="nc" id="L96">                .authenticationEntryPoint(pontoEntrada)</span>
+<span class="nc" id="L97">                .accessDeniedHandler(acessoNegado));</span>
+
+<span class="nc" id="L99">        return http.build();</span>
+    }
+
+    private static String caminho(HttpServletRequest req) {
+<span class="nc" id="L103">        return req.getRequestURI().substring(req.getContextPath().length());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

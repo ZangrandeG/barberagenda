@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CargaDadosFicticios.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.seed</a> &gt; <span class="el_source">CargaDadosFicticios.java</span></div><h1>CargaDadosFicticios.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.seed;
+
+import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.barberagenda.model.Agendamento;
+import br.com.barberagenda.model.Barbeiro;
+import br.com.barberagenda.model.Cliente;
+import br.com.barberagenda.model.Servico;
+import br.com.barberagenda.model.StatusAgendamento;
+import br.com.barberagenda.repository.AgendamentoRepository;
+import br.com.barberagenda.repository.BarbeiroRepository;
+import br.com.barberagenda.repository.ClienteRepository;
+import br.com.barberagenda.repository.ServicoRepository;
+
+/**
+ * Massa de dados FICTÍCIA para desenvolvimento e testes (perfis dev e test).
+ * Nomes, telefones e e-mails (@exemplo.com) são inventados.
+ * As datas dos agendamentos são relativas ao dia atual, para que a massa continue válida em qualquer data.
+ */
+@Component
+@Profile({&quot;dev&quot;, &quot;test&quot;})
+public class CargaDadosFicticios {
+
+    private final BarbeiroRepository barbeiroRepository;
+    private final ServicoRepository servicoRepository;
+    private final ClienteRepository clienteRepository;
+    private final AgendamentoRepository agendamentoRepository;
+    private final Clock relogio;
+
+    public CargaDadosFicticios(BarbeiroRepository barbeiroRepository, ServicoRepository servicoRepository,
+                               ClienteRepository clienteRepository, AgendamentoRepository agendamentoRepository,
+<span class="nc" id="L41">                               Clock relogio) {</span>
+<span class="nc" id="L42">        this.barbeiroRepository = barbeiroRepository;</span>
+<span class="nc" id="L43">        this.servicoRepository = servicoRepository;</span>
+<span class="nc" id="L44">        this.clienteRepository = clienteRepository;</span>
+<span class="nc" id="L45">        this.agendamentoRepository = agendamentoRepository;</span>
+<span class="nc" id="L46">        this.relogio = relogio;</span>
+<span class="nc" id="L47">    }</span>
+
+    /** Apaga barbeiros, serviços, clientes e agendamentos e carrega a massa inicial novamente. */
+    @Transactional
+    public ResumoCarga recarregar() {
+<span class="nc" id="L52">        agendamentoRepository.deleteAllInBatch();</span>
+<span class="nc" id="L53">        clienteRepository.deleteAllInBatch();</span>
+<span class="nc" id="L54">        servicoRepository.deleteAllInBatch();</span>
+<span class="nc" id="L55">        barbeiroRepository.deleteAllInBatch();</span>
+<span class="nc" id="L56">        return carregar();</span>
+    }
+
+    @Transactional
+    public ResumoCarga carregar() {
+<span class="nc" id="L61">        LocalDateTime agora = LocalDateTime.now(relogio);</span>
+
+<span class="nc" id="L63">        Barbeiro carlos = new Barbeiro(&quot;Carlos Navalha&quot;, true);</span>
+<span class="nc" id="L64">        Barbeiro rafael = new Barbeiro(&quot;Rafael Tesoura&quot;, true);</span>
+<span class="nc" id="L65">        Barbeiro diego = new Barbeiro(&quot;Diego Máquina&quot;, false);</span>
+<span class="nc" id="L66">        barbeiroRepository.saveAll(List.of(carlos, rafael, diego));</span>
+
+<span class="nc" id="L68">        Servico corte = new Servico(&quot;Corte de cabelo&quot;, 30, new BigDecimal(&quot;45.00&quot;), true);</span>
+<span class="nc" id="L69">        Servico barba = new Servico(&quot;Barba&quot;, 30, new BigDecimal(&quot;30.00&quot;), true);</span>
+<span class="nc" id="L70">        Servico corteBarba = new Servico(&quot;Corte e barba&quot;, 60, new BigDecimal(&quot;70.00&quot;), true);</span>
+<span class="nc" id="L71">        Servico sobrancelha = new Servico(&quot;Sobrancelha&quot;, 15, new BigDecimal(&quot;15.00&quot;), true);</span>
+<span class="nc" id="L72">        Servico relaxamento = new Servico(&quot;Relaxamento capilar&quot;, 90, new BigDecimal(&quot;80.00&quot;), false);</span>
+<span class="nc" id="L73">        servicoRepository.saveAll(List.of(corte, barba, corteBarba, sobrancelha, relaxamento));</span>
+
+<span class="nc" id="L75">        List&lt;Cliente&gt; clientes = List.of(</span>
+                new Cliente(&quot;Ana Beatriz Rocha&quot;, &quot;14991110001&quot;, &quot;ana.rocha@exemplo.com&quot;, agora),
+                new Cliente(&quot;Bruno Henrique Lima&quot;, &quot;14991110002&quot;, &quot;bruno.lima@exemplo.com&quot;, agora),
+                new Cliente(&quot;Camila Souza Prado&quot;, &quot;1432220003&quot;, &quot;camila.prado@exemplo.com&quot;, agora),
+                new Cliente(&quot;Daniel Ferreira Alves&quot;, &quot;14991110004&quot;, &quot;daniel.alves@exemplo.com&quot;, agora),
+                new Cliente(&quot;Eduarda Martins Costa&quot;, &quot;14991110005&quot;, &quot;eduarda.costa@exemplo.com&quot;, agora),
+                new Cliente(&quot;Felipe Augusto Nunes&quot;, &quot;1432220006&quot;, &quot;felipe.nunes@exemplo.com&quot;, agora),
+                new Cliente(&quot;Gabriela Ramos Teixeira&quot;, &quot;14991110007&quot;, &quot;gabriela.teixeira@exemplo.com&quot;, agora),
+                new Cliente(&quot;Heitor Campos Moreira&quot;, &quot;14991110008&quot;, &quot;heitor.moreira@exemplo.com&quot;, agora),
+                new Cliente(&quot;Isabela Duarte Pires&quot;, &quot;1432220009&quot;, &quot;isabela.pires@exemplo.com&quot;, agora),
+                new Cliente(&quot;João Victor Mendes&quot;, &quot;14991110010&quot;, &quot;joao.mendes@exemplo.com&quot;, agora));
+<span class="nc" id="L86">        clienteRepository.saveAll(clientes);</span>
+
+<span class="nc" id="L88">        LocalDate hoje = agora.toLocalDate();</span>
+<span class="nc" id="L89">        LocalDate amanhaUtil = diaDeFuncionamento(hoje, 1);</span>
+<span class="nc" id="L90">        LocalDate depoisUtil = diaDeFuncionamento(hoje, 2);</span>
+<span class="nc" id="L91">        LocalDate anteriorUtil = diaDeFuncionamento(hoje, -1);</span>
+
+        // Códigos de acesso FIXOS apenas na massa fictícia (dev/test), para facilitar testes manuais.
+        // Agendamentos criados pela API recebem códigos aleatórios.
+<span class="nc" id="L95">        List&lt;Agendamento&gt; agendamentos = List.of(</span>
+<span class="nc" id="L96">                new Agendamento(&quot;SEMENTE2&quot;, clientes.get(0), carlos, corte, amanhaUtil.atTime(10, 0),</span>
+                        StatusAgendamento.AGENDADO, agora),
+<span class="nc" id="L98">                new Agendamento(&quot;SEMENTE3&quot;, clientes.get(1), rafael, corteBarba, amanhaUtil.atTime(14, 0),</span>
+                        StatusAgendamento.AGENDADO, agora),
+<span class="nc" id="L100">                new Agendamento(&quot;SEMENTE4&quot;, clientes.get(2), carlos, barba, depoisUtil.atTime(9, 30),</span>
+                        StatusAgendamento.CANCELADO, agora),
+<span class="nc" id="L102">                new Agendamento(&quot;SEMENTE5&quot;, clientes.get(3), rafael, corte, anteriorUtil.atTime(11, 0),</span>
+                        StatusAgendamento.CONCLUIDO, agora),
+<span class="nc" id="L104">                new Agendamento(&quot;SEMENTE6&quot;, clientes.get(4), carlos, sobrancelha, depoisUtil.atTime(16, 0),</span>
+                        StatusAgendamento.AGENDADO, agora));
+<span class="nc" id="L106">        agendamentoRepository.saveAll(agendamentos);</span>
+
+<span class="nc" id="L108">        return new ResumoCarga(3, 5, clientes.size(), agendamentos.size());</span>
+    }
+
+    /** Avança (ou recua, se negativo) a quantidade indicada de dias de funcionamento (segunda a sábado). */
+    private static LocalDate diaDeFuncionamento(LocalDate base, int deslocamento) {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        int passo = deslocamento &gt;= 0 ? 1 : -1;</span>
+<span class="nc" id="L114">        int restantes = Math.abs(deslocamento);</span>
+<span class="nc" id="L115">        LocalDate data = base;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        while (restantes &gt; 0) {</span>
+<span class="nc" id="L117">            data = data.plusDays(passo);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (data.getDayOfWeek() != DayOfWeek.SUNDAY) {</span>
+<span class="nc" id="L119">                restantes--;</span>
+            }
+        }
+<span class="nc" id="L122">        return data;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

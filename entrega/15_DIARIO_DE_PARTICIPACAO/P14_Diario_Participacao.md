@@ -20,4 +20,5 @@
 | 2026-11-18 | Marco 2: requisitos, escopo e riscos (P02) e plano de testes (P03) (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | P02 e P03; tag `marco-2` |
 | 2026-11-18 | Marco 3: catálogo de 35 casos (P04) e matriz de rastreabilidade XLSX (P05), com gerador a partir de dados/ (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | P04 e P05; tag `marco-3` |
 | 2026-11-18 | Preparação da execução manual: roteiro, checklist, registro, modelo de defeito e etiquetas no GitHub (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/05_EXECUCAO_MANUAL/`; `.github/ISSUE_TEMPLATE/defeito.md` |
+| 2026-11-18 | Marco 5: testes de unidade (JUnit/Mockito), cobertura JaCoCo e linha de base no SonarQube local (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/07_AUTOMACAO_UNITARIA/`; `entrega/11_METRICAS_E_QUALIDADE/sonar_baseline/`; tag `marco-5` |
 | | | | | | |

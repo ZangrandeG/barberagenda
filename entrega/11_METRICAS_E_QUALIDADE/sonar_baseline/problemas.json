@@ -1,0 +1,289 @@
+{
+  "total": 5,
+  "p": 1,
+  "ps": 500,
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 5
+  },
+  "effortTotal": 30,
+  "issues": [
+    {
+      "key": "e77369ea-3278-4514-8fe8-a25b8f3fab12",
+      "rule": "java:S3330",
+      "severity": "MINOR",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "project": "barberagenda",
+      "line": 75,
+      "hash": "6c2f743661b309d0dc88368dda99bf8e",
+      "textRange": {
+        "startLine": 75,
+        "endLine": 75,
+        "startOffset": 80,
+        "endOffset": 82
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Make sure creating this cookie without the \"HttpOnly\" flag is safe.",
+      "effort": "10min",
+      "debt": "10min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "cwe",
+        "privacy",
+        "former-hotspot"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "VULNERABILITY",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "50656254-46bc-4a82-a82a-c45ecb337572",
+      "rule": "java:S4502",
+      "severity": "CRITICAL",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "project": "barberagenda",
+      "line": 77,
+      "hash": "fa18d05a8b192be7cb5c83b237b2bbcf",
+      "textRange": {
+        "startLine": 77,
+        "endLine": 77,
+        "startOffset": 17,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Make sure disabling Spring Security's CSRF protection is safe here.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "cwe",
+        "spring",
+        "former-hotspot"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "VULNERABILITY",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "fc781898-aac7-4d53-aeb6-aa56e485698d",
+      "rule": "java:S8696",
+      "severity": "CRITICAL",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/seed/CargaDadosFicticios.java",
+      "project": "barberagenda",
+      "line": 118,
+      "hash": "f8c43e306e63cbd57796417b08a40f92",
+      "textRange": {
+        "startLine": 118,
+        "endLine": 118,
+        "startOffset": 16,
+        "endOffset": 55
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \".equals()\" instead of \"==\" or \"!=\" to compare objects of value-based types.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "datetime",
+        "java8",
+        "suspicious"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "HIGH"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "97112978-202c-44a1-acbd-503a4adf0fb7",
+      "rule": "java:S8696",
+      "severity": "CRITICAL",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/service/RegrasAgendamento.java",
+      "project": "barberagenda",
+      "line": 61,
+      "hash": "4aa7d93b302a21f537ae03887a0e9b2d",
+      "textRange": {
+        "startLine": 61,
+        "endLine": 61,
+        "startOffset": 12,
+        "endOffset": 53
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \".equals()\" instead of \"==\" or \"!=\" to compare objects of value-based types.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "datetime",
+        "java8",
+        "suspicious"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "HIGH"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "2f863bd2-ae98-4bb3-968b-b31fc17d748f",
+      "rule": "java:S8696",
+      "severity": "CRITICAL",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/service/RegrasAgendamento.java",
+      "project": "barberagenda",
+      "line": 84,
+      "hash": "0faadc74fadbf62b93e4650fd857c450",
+      "textRange": {
+        "startLine": 84,
+        "endLine": 84,
+        "startOffset": 15,
+        "endOffset": 54
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \".equals()\" instead of \"==\" or \"!=\" to compare objects of value-based types.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "datetime",
+        "java8",
+        "suspicious"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "BUG",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "HIGH"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    }
+  ],
+  "components": [
+    {
+      "key": "barberagenda:src/main/java/br/com/barberagenda/seed/CargaDadosFicticios.java",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "CargaDadosFicticios.java",
+      "longName": "src/main/java/br/com/barberagenda/seed/CargaDadosFicticios.java",
+      "path": "src/main/java/br/com/barberagenda/seed/CargaDadosFicticios.java"
+    },
+    {
+      "key": "barberagenda:src/main/java/br/com/barberagenda/service/RegrasAgendamento.java",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "RegrasAgendamento.java",
+      "longName": "src/main/java/br/com/barberagenda/service/RegrasAgendamento.java",
+      "path": "src/main/java/br/com/barberagenda/service/RegrasAgendamento.java"
+    },
+    {
+      "key": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "SecurityConfig.java",
+      "longName": "src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "path": "src/main/java/br/com/barberagenda/security/SecurityConfig.java"
+    },
+    {
+      "key": "barberagenda",
+      "enabled": true,
+      "qualifier": "TRK",
+      "name": "BarberAgenda",
+      "longName": "BarberAgenda"
+    }
+  ],
+  "facets": []
+}

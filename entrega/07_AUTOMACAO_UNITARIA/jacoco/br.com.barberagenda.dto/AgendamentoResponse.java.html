@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendamentoResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.dto</a> &gt; <span class="el_source">AgendamentoResponse.java</span></div><h1>AgendamentoResponse.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.dto;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import br.com.barberagenda.model.Agendamento;
+import br.com.barberagenda.model.StatusAgendamento;
+
+/**
+ * Dados do agendamento. O código de acesso só é enviado nas respostas ao próprio cliente
+ * (agendar, consultar, cancelar); nas respostas administrativas ele é omitido.
+ */
+<span class="nc" id="L15">public record AgendamentoResponse(</span>
+        Long id,
+        @JsonInclude(JsonInclude.Include.NON_NULL) String codigoAcesso,
+        Long clienteId,
+        String clienteNome,
+        String clienteEmail,
+        Long barbeiroId,
+        String barbeiroNome,
+        Long servicoId,
+        String servicoNome,
+        int duracaoMinutos,
+        BigDecimal preco,
+        LocalDateTime dataHoraInicio,
+        LocalDateTime dataHoraFim,
+        StatusAgendamento status,
+        LocalDateTime dataCriacao) {
+
+    /** Resposta ao próprio cliente, com o código de acesso. */
+    public static AgendamentoResponse paraCliente(Agendamento a) {
+<span class="nc" id="L34">        return montar(a, a.getCodigoAcesso());</span>
+    }
+
+    /** Resposta administrativa, sem o código de acesso. */
+    public static AgendamentoResponse paraAdministrador(Agendamento a) {
+<span class="nc" id="L39">        return montar(a, null);</span>
+    }
+
+    private static AgendamentoResponse montar(Agendamento a, String codigoAcesso) {
+<span class="nc" id="L43">        return new AgendamentoResponse(</span>
+<span class="nc" id="L44">                a.getId(),</span>
+                codigoAcesso,
+<span class="nc" id="L46">                a.getCliente().getId(),</span>
+<span class="nc" id="L47">                a.getCliente().getNome(),</span>
+<span class="nc" id="L48">                a.getCliente().getEmail(),</span>
+<span class="nc" id="L49">                a.getBarbeiro().getId(),</span>
+<span class="nc" id="L50">                a.getBarbeiro().getNome(),</span>
+<span class="nc" id="L51">                a.getServico().getId(),</span>
+<span class="nc" id="L52">                a.getServico().getNome(),</span>
+<span class="nc" id="L53">                a.getServico().getDuracaoMinutos(),</span>
+<span class="nc" id="L54">                a.getServico().getPreco(),</span>
+<span class="nc" id="L55">                a.getDataHoraInicio(),</span>
+<span class="nc" id="L56">                a.getDataHoraFim(),</span>
+<span class="nc" id="L57">                a.getStatus(),</span>
+<span class="nc" id="L58">                a.getDataCriacao());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

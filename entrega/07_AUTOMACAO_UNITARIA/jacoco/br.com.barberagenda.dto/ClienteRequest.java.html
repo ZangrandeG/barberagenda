@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClienteRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.dto</a> &gt; <span class="el_source">ClienteRequest.java</span></div><h1>ClienteRequest.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.dto;
+
+import java.util.Locale;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+/** Dados de cadastro de cliente (RN-01, RN-02 e formato do RN-03). */
+public record ClienteRequest(
+
+        @NotBlank(message = &quot;O nome é obrigatório.&quot;)
+        @Size(min = 3, max = 60, message = &quot;O nome deve ter entre 3 e 60 caracteres.&quot;)
+        String nome,
+
+        @NotBlank(message = &quot;O telefone é obrigatório.&quot;)
+        @Pattern(regexp = &quot;\\d{10,11}&quot;, message = &quot;O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD).&quot;)
+        String telefone,
+
+        @NotBlank(message = &quot;O e-mail é obrigatório.&quot;)
+        @Size(max = 120, message = &quot;O e-mail deve ter no máximo 120 caracteres.&quot;)
+        @Email(regexp = &quot;^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$&quot;, message = &quot;O e-mail informado é inválido.&quot;)
+        String email) {
+
+    /** Remove espaços nas extremidades e padroniza o e-mail em minúsculas. */
+<span class="fc" id="L27">    public ClienteRequest {</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        nome = nome == null ? null : nome.strip();</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        telefone = telefone == null ? null : telefone.strip();</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        email = email == null ? null : email.strip().toLowerCase(Locale.ROOT);</span>
+<span class="fc" id="L31">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

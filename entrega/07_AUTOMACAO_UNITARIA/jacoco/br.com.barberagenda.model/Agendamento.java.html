@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Agendamento.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.model</a> &gt; <span class="el_source">Agendamento.java</span></div><h1>Agendamento.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.model;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = &quot;agendamento&quot;)
+public class Agendamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /** Código aleatório entregue ao cliente; exigido (com o e-mail) para consultar e cancelar. */
+    @Column(name = &quot;codigo_acesso&quot;, nullable = false, length = 8, unique = true)
+    private String codigoAcesso;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = &quot;cliente_id&quot;, nullable = false)
+    private Cliente cliente;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = &quot;barbeiro_id&quot;, nullable = false)
+    private Barbeiro barbeiro;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = &quot;servico_id&quot;, nullable = false)
+    private Servico servico;
+
+    @Column(name = &quot;data_hora_inicio&quot;, nullable = false)
+    private LocalDateTime dataHoraInicio;
+
+    /** Calculada a partir do início e da duração do serviço. */
+    @Column(name = &quot;data_hora_fim&quot;, nullable = false)
+    private LocalDateTime dataHoraFim;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private StatusAgendamento status;
+
+    @Column(name = &quot;data_criacao&quot;, nullable = false)
+    private LocalDateTime dataCriacao;
+
+<span class="nc" id="L54">    protected Agendamento() {</span>
+        // exigido pela JPA
+<span class="nc" id="L56">    }</span>
+
+    public Agendamento(String codigoAcesso, Cliente cliente, Barbeiro barbeiro, Servico servico,
+<span class="fc" id="L59">                       LocalDateTime dataHoraInicio, StatusAgendamento status, LocalDateTime dataCriacao) {</span>
+<span class="fc" id="L60">        this.codigoAcesso = codigoAcesso;</span>
+<span class="fc" id="L61">        this.cliente = cliente;</span>
+<span class="fc" id="L62">        this.barbeiro = barbeiro;</span>
+<span class="fc" id="L63">        this.servico = servico;</span>
+<span class="fc" id="L64">        this.dataHoraInicio = dataHoraInicio;</span>
+<span class="fc" id="L65">        this.dataHoraFim = dataHoraInicio.plusMinutes(servico.getDuracaoMinutos());</span>
+<span class="fc" id="L66">        this.status = status;</span>
+<span class="fc" id="L67">        this.dataCriacao = dataCriacao;</span>
+<span class="fc" id="L68">    }</span>
+
+    public void cancelar() {
+<span class="fc" id="L71">        this.status = StatusAgendamento.CANCELADO;</span>
+<span class="fc" id="L72">    }</span>
+
+    public void concluir() {
+<span class="fc" id="L75">        this.status = StatusAgendamento.CONCLUIDO;</span>
+<span class="fc" id="L76">    }</span>
+
+    public boolean isAgendado() {
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        return status == StatusAgendamento.AGENDADO;</span>
+    }
+
+    public Long getId() {
+<span class="nc" id="L83">        return id;</span>
+    }
+
+    public String getCodigoAcesso() {
+<span class="fc" id="L87">        return codigoAcesso;</span>
+    }
+
+    public Cliente getCliente() {
+<span class="fc" id="L91">        return cliente;</span>
+    }
+
+    public Barbeiro getBarbeiro() {
+<span class="nc" id="L95">        return barbeiro;</span>
+    }
+
+    public Servico getServico() {
+<span class="nc" id="L99">        return servico;</span>
+    }
+
+    public LocalDateTime getDataHoraInicio() {
+<span class="fc" id="L103">        return dataHoraInicio;</span>
+    }
+
+    public LocalDateTime getDataHoraFim() {
+<span class="fc" id="L107">        return dataHoraFim;</span>
+    }
+
+    public StatusAgendamento getStatus() {
+<span class="fc" id="L111">        return status;</span>
+    }
+
+    public LocalDateTime getDataCriacao() {
+<span class="nc" id="L115">        return dataCriacao;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

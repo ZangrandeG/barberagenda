@@ -1,0 +1,305 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24540 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-maven-plugin/5.9.0.7382/sonar-maven-plugin-5.9.0.7382.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-maven-plugin/5.9.0.7382/sonar-maven-plugin-5.9.0.7382.pom (18 kB at 58 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-scanner-maven/5.9.0.7382/sonar-scanner-maven-5.9.0.7382.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-scanner-maven/5.9.0.7382/sonar-scanner-maven-5.9.0.7382.pom (3.3 kB at 76 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/parent/parent/88.0.0.3367/parent-88.0.0.3367.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/parent/parent/88.0.0.3367/parent-88.0.0.3367.pom (32 kB at 747 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-maven-plugin/5.9.0.7382/sonar-maven-plugin-5.9.0.7382.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/maven/sonar-maven-plugin/5.9.0.7382/sonar-maven-plugin-5.9.0.7382.jar (131 kB at 2.4 MB/s)
+[INFO] 
+[INFO] ------------------< br.com.barberagenda:barberagenda >------------------
+[INFO] Building BarberAgenda 1.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.16:prepare-agent (preparar-agente) @ barberagenda ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Admin\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.16\\org.jacoco.agent-0.8.16-runtime.jar=destfile=C:\\Users\\Admin\\Desktop\\P2 ELVIO\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ barberagenda ---
+[INFO] Copying 4 resources from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ barberagenda ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ barberagenda ---
+[INFO] skip non existing resourceDirectory C:\Users\Admin\Desktop\P2 ELVIO\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ barberagenda ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ barberagenda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running AgendamentoService — criação, conflitos, consulta e mudança de status
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\Admin\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.922 s -- in AgendamentoService — criação, conflitos, consulta e mudança de status
+[INFO] Running ClienteService e BarbeiroService — unicidade de e-mail e exclusão de barbeiro
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in ClienteService e BarbeiroService — unicidade de e-mail e exclusão de barbeiro
+[INFO] Running RegrasAgendamento — funcionamento, intervalo e antecedência (RN-04, RN-05, RN-06)
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s -- in RegrasAgendamento — funcionamento, intervalo e antecedência (RN-04, RN-05, RN-06)
+[INFO] Running Validação de entrada — RN-01, RN-02, RN-03 e RN-09
+21:57:20.861 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.3.Final
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.698 s -- in Validação de entrada — RN-01, RN-02, RN-03 e RN-09
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 52, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.16:report (relatorio) @ barberagenda ---
+[INFO] Loading execution data file C:\Users\Admin\Desktop\P2 ELVIO\target\jacoco.exec
+[INFO] Analyzed bundle 'BarberAgenda' with 46 classes
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ barberagenda ---
+[INFO] Building jar: C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.1.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ barberagenda ---
+[INFO] Replacing main artifact C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.1.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.1.0.jar.original
+[INFO] 
+[INFO] ------------------< br.com.barberagenda:barberagenda >------------------
+[INFO] Building BarberAgenda 1.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- sonar:5.9.0.7382:sonar (default-cli) @ barberagenda ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library/4.3.0.11766/sonar-scanner-java-library-4.3.0.11766.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-sec-dispatcher/2.0/plexus-sec-dispatcher-2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.pom (32 kB at 562 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-sec-dispatcher/2.0/plexus-sec-dispatcher-2.0.pom (3.2 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/8/plexus-8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom (78 kB at 2.0 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/8/plexus-8.pom (25 kB at 652 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-cipher/2.0/plexus-cipher-2.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.4.1/plexus-utils-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.4.1/plexus-utils-3.4.1.pom (8.0 kB at 228 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-cipher/2.0/plexus-cipher-2.0.pom (4.4 kB at 94 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library/4.3.0.11766/sonar-scanner-java-library-4.3.0.11766.pom (6.5 kB at 6.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-parent/4.3.0.11766/sonar-scanner-java-library-parent-4.3.0.11766.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-parent/4.3.0.11766/sonar-scanner-java-library-parent-4.3.0.11766.pom (4.2 kB at 96 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.1.3/junit-bom-6.1.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.1.3/junit-bom-6.1.3.pom (5.4 kB at 139 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-download-cache/4.3.0.11766/sonar-scanner-download-cache-4.3.0.11766.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-batch-interface/4.3.0.11766/sonar-scanner-java-library-batch-interface-4.3.0.11766.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom (36 kB at 757 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0.pom (23 kB at 307 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson-parent/2.15.0/gson-parent-2.15.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom (80 kB at 1.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-batch-interface/4.3.0.11766/sonar-scanner-java-library-batch-interface-4.3.0.11766.pom (555 B at 5.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza/10.1.0/ayza-10.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom (27 kB at 601 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson-parent/2.15.0/gson-parent-2.15.0.pom (27 kB at 403 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza/10.1.0/ayza-10.1.0.pom (5.5 kB at 135 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza-parent/10.1.0/ayza-parent-10.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom (5.7 kB at 105 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza-parent/10.1.0/ayza-parent-10.1.0.pom (14 kB at 285 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/siegmar/fastcsv/3.7.0/fastcsv-3.7.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza-bom/10.1.0/ayza-bom-10.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.pom (1.2 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/siegmar/fastcsv/3.7.0/fastcsv-3.7.0.pom (1.4 kB at 35 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza-bom/10.1.0/ayza-bom-10.1.0.pom (6.5 kB at 168 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-download-cache/4.3.0.11766/sonar-scanner-download-cache-4.3.0.11766.pom (2.1 kB at 7.4 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.pom (25 kB at 88 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/sude/2.0.2/sude-2.0.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/laleler/1.0.0/laleler-1.0.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.pom (4.3 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.50.0/error_prone_parent-2.50.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.pom (18 kB at 546 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/sude/2.0.2/sude-2.0.2.pom (13 kB at 322 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.pom (20 kB at 512 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/desidero/1.0.1/desidero-1.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/laleler/1.0.0/laleler-1.0.0.pom (12 kB at 261 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.50.0/error_prone_parent-2.50.0.pom (16 kB at 331 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/desidero/1.0.1/desidero-1.0.1.pom (14 kB at 291 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-sec-dispatcher/2.0/plexus-sec-dispatcher-2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-sec-dispatcher/2.0/plexus-sec-dispatcher-2.0.jar (24 kB at 674 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library/4.3.0.11766/sonar-scanner-java-library-4.3.0.11766.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.4.1/plexus-utils-3.4.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-cipher/2.0/plexus-cipher-2.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-cipher/2.0/plexus-cipher-2.0.jar (13 kB at 250 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar (703 kB at 12 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-download-cache/4.3.0.11766/sonar-scanner-download-cache-4.3.0.11766.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library/4.3.0.11766/sonar-scanner-java-library-4.3.0.11766.jar (130 kB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-batch-interface/4.3.0.11766/sonar-scanner-java-library-batch-interface-4.3.0.11766.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0.jar (316 kB at 3.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza/10.1.0/ayza-10.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.4.1/plexus-utils-3.4.1.jar (264 kB at 2.7 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-java-library-batch-interface/4.3.0.11766/sonar-scanner-java-library-batch-interface-4.3.0.11766.jar (4.7 kB at 48 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/siegmar/fastcsv/3.7.0/fastcsv-3.7.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar (1.1 MB at 9.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/ayza/10.1.0/ayza-10.1.0.jar (184 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/siegmar/fastcsv/3.7.0/fastcsv-3.7.0.jar (82 kB at 529 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar (20 kB at 126 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/sude/2.0.2/sude-2.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/sude/2.0.2/sude-2.0.2.jar (8.6 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/laleler/1.0.0/laleler-1.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar (7.2 MB at 33 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/github/hakky54/desidero/1.0.1/desidero-1.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonarsource/scanner/lib/sonar-scanner-download-cache/4.3.0.11766/sonar-scanner-download-cache-4.3.0.11766.jar (9.5 kB at 42 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar (375 kB at 1.6 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/laleler/1.0.0/laleler-1.0.0.jar (20 kB at 84 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/github/hakky54/desidero/1.0.1/desidero-1.0.1.jar (26 kB at 100 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar (564 kB at 1.7 MB/s)
+[INFO] Java 21.0.13 Eclipse Adoptium (64-bit)
+[INFO] Windows 11 10.0 (amd64)
+[INFO] Communicating with SonarQube Community Build 26.11.0.134175
+[INFO] JRE provisioning: os[windows], arch[amd64]
+[INFO] Starting SonarScanner Engine...
+[INFO] Java 21.0.13 Eclipse Adoptium (64-bit)
+[INFO] Load global settings
+[INFO] Load global settings (done) | time=134ms
+[INFO] Server id: 147B411E-AaHxTLmTsrCFeW2uggu_
+[INFO] Loading required plugins
+[INFO] Load plugins index
+[INFO] Load plugins index (done) | time=51ms
+[INFO] Load/download plugins
+[INFO] Load/download plugins (done) | time=233ms
+[INFO] Load project settings for component key: 'barberagenda'
+[INFO] Failed to load settings with NOT_FOUND error, which can happen if the project does not exist yet
+[INFO] Process project properties
+[INFO] Process project properties (done) | time=14ms
+[INFO] Project key: barberagenda
+[INFO] Base dir: C:\Users\Admin\Desktop\P2 ELVIO
+[INFO] Working dir: C:\Users\Admin\Desktop\P2 ELVIO\target\sonar
+[INFO] Load quality profiles
+[INFO] Load quality profiles (done) | time=62ms
+[INFO] Load active rules
+[INFO] Load active rules (done) | time=217ms
+[INFO] Load analysis cache
+[INFO] Load analysis cache (404) | time=5ms
+[INFO] Preprocessing files...
+[INFO] 2 languages detected in 58 preprocessed files (done) | time=137ms
+[INFO] 0 files ignored because of scm ignore settings
+[INFO] Loading plugins for detected languages
+[INFO] Load/download plugins
+[INFO] Load/download plugins (done) | time=138ms
+[INFO] Load project repositories
+[INFO] Load project repositories (done) | time=5ms
+[INFO] Indexing files...
+[INFO] Project configuration:
+[INFO] 58 files indexed (done) | time=20ms
+[INFO] Quality profile for java: Sonar way core
+[INFO] Quality profile for xml: Sonar way core
+[INFO] ------------- Run sensors on module BarberAgenda
+[INFO] Load metrics repository
+[INFO] Load metrics repository (done) | time=17ms
+[INFO] Sensor IaC YAML File Type Classification Sensor [iac]
+[INFO] Sensor IaC YAML File Type Classification Sensor [iac] (done) | time=2ms
+[INFO] Sensor JavaSensor [java]
+[INFO] Configured Java source version (sonar.java.source): 21, preview features enabled (sonar.java.enablePreview): false
+[INFO] Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+[INFO] Using ECJ batch to parse 51 Main java source files with batch size 427 KB.
+[INFO] Starting batch processing.
+[INFO] The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+[INFO] 100% analyzed
+[INFO] Batch processing: Done.
+[INFO] Did not optimize analysis for any files, performed a full analysis for all 51 files.
+[INFO] Using ECJ batch to parse 5 Test java source files with batch size 427 KB.
+[INFO] Starting batch processing.
+[INFO] 100% analyzed
+[INFO] Batch processing: Done.
+[INFO] Did not optimize analysis for any files, performed a full analysis for all 5 files.
+[INFO] No "Generated" source files to scan.
+[INFO] Sensor JavaSensor [java] (done) | time=2408ms
+[INFO] Sensor JaCoCo XML Report Importer [jacoco]
+[INFO] Importing 1 report(s). Turn your logs in debug mode in order to see the exhaustive list.
+[INFO] Sensor JaCoCo XML Report Importer [jacoco] (done) | time=68ms
+[INFO] Sensor IaC hadolint report Sensor [iac]
+[INFO] Sensor IaC hadolint report Sensor [iac] (done) | time=0ms
+[INFO] Sensor Java Config Sensor [iac]
+[INFO] There are no files to be analyzed for the Java language
+[INFO] Sensor Java Config Sensor [iac] (done) | time=0ms
+[INFO] Sensor IaC Docker Sensor [iac]
+[INFO] There are no files to be analyzed for the Docker language
+[INFO] Sensor IaC Docker Sensor [iac] (done) | time=4ms
+[INFO] Sensor SurefireSensor [java]
+[INFO] parsing [C:\Users\Admin\Desktop\P2 ELVIO\target\surefire-reports]
+[INFO] Sensor SurefireSensor [java] (done) | time=51ms
+[INFO] Sensor XML Sensor [xml]
+[INFO] 1 source file to be analyzed
+[INFO] 1/1 source file has been analyzed
+[INFO] Sensor XML Sensor [xml] (done) | time=113ms
+[INFO] Sensor TextAndSecretsSensor [text]
+[INFO] Available processors: 12
+[INFO] Using 12 threads for analysis.
+[INFO] Start fetching files for the text and secrets analysis
+[INFO] Using Git CLI to retrieve dirty files
+[INFO] Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+[INFO] Starting the text and secrets analysis
+[INFO] 57 source files to be analyzed for the text and secrets analysis
+[INFO] 57/57 source files have been analyzed for the text and secrets analysis
+[INFO] Sensor TextAndSecretsSensor [text] (done) | time=533ms
+[INFO] ------------- Run sensors on project
+[INFO] Sensor JaCoCo Aggregate XML Report Importer [jacoco]
+[INFO] Sensor JaCoCo Aggregate XML Report Importer [jacoco] (done) | time=0ms
+[INFO] Sensor IaC Project Sensor [iac]
+[INFO] Sensor IaC Project Sensor [iac] (done) | time=1ms
+[INFO] Sensor Java SpringContextModelSensor [java]
+[INFO] Sensor Java SpringContextModelSensor [java] (done) | time=24ms
+[INFO] Sensor Zero Coverage Sensor
+[INFO] Sensor Zero Coverage Sensor (done) | time=1ms
+[INFO] Sensor Java CPD Block Indexer
+[INFO] Sensor Java CPD Block Indexer (done) | time=39ms
+[INFO] Sensor JavaProjectSensor [java]
+[INFO] Sensor JavaProjectSensor [java] (done) | time=1ms
+[INFO] ------------- Gather SCA dependencies on project
+[INFO] Dependency analysis skipped
+[INFO] SCM Publisher SCM provider for this project is: git
+[INFO] SCM Publisher 57 source files to be analyzed
+[INFO] SCM Publisher 51/57 source files have been analyzed (done) | time=1632ms
+[WARNING] Missing blame information for the following files:
+[WARNING]   * src/test/java/br/com/barberagenda/unit/AgendamentoServiceTest.java
+[WARNING]   * src/test/java/br/com/barberagenda/unit/CadastroServiceTest.java
+[WARNING]   * src/test/java/br/com/barberagenda/unit/DadosTeste.java
+[WARNING]   * pom.xml
+[WARNING]   * src/test/java/br/com/barberagenda/unit/RegrasAgendamentoTest.java
+[WARNING]   * src/test/java/br/com/barberagenda/unit/ValidacaoEntradaTest.java
+[WARNING] This may lead to missing/broken features in SonarQube
+[INFO] CPD Executor 25 files had no CPD blocks
+[INFO] CPD Executor Calculating CPD for 26 files
+[INFO] CPD Executor CPD calculation finished (done) | time=17ms
+[INFO] SCM revision ID 'a82e0fb0d789668af8999d710e643838a5112110'
+[INFO] Analysis report generated in 204ms, dir size=383.4 kB
+[INFO] Analysis report compressed in 182ms, zip size=169.8 kB
+[INFO] Analysis report uploaded in 1394ms
+[INFO] ANALYSIS SUCCESSFUL, you can find the results at: http://localhost:9000/dashboard?id=barberagenda
+[INFO] Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO] More about the report processing at http://localhost:9000/api/ce/task?id=a4a943ec-4b03-4502-90fc-6cdb04cbf7cc
+[INFO] Analysis total time: 11.580 s
+[INFO] SonarScanner Engine completed successfully
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  25.350 s
+[INFO] Finished at: 2026-11-18T21:57:40-03:00
+[INFO] ------------------------------------------------------------------------

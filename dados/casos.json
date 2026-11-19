@@ -1,352 +1,1133 @@
 [
   {
-    "id": "CT-001", "titulo": "Cadastrar cliente com dados válidos",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-01", "RN-02", "RN-03"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (classes válidas)", "classificacao": "Positivo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-001",
+    "titulo": "Cadastrar cliente com dados válidos",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-01",
+      "RN-02",
+      "RN-03"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (classes válidas)",
+    "classificacao": "Positivo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "Nome: Marina Lopes Teixeira; Telefone: 14988776655; E-mail: marina.<AAAAMMDD>@exemplo.com",
-    "passos": ["Abrir http://localhost:8080/cadastro.html.", "Preencher Nome, Telefone e E-mail com os dados.", "Clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir http://localhost:8080/cadastro.html.",
+      "Preencher Nome, Telefone e E-mail com os dados.",
+      "Clicar em \"Cadastrar\"."
+    ],
     "esperado": "Mensagem \"Cadastro realizado com sucesso! Código do cliente: N.\" (N = número) e botão \"Agendar um horário\" visível. Campos do formulário limpos.",
-    "automacao": {"candidato": "Sim", "nivel": "Interface (Selenium) e API (Postman)", "justificativa": "Fluxo principal e repetido em toda regressão."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Interface (Selenium) e API (Postman)",
+      "justificativa": "Fluxo principal e repetido em toda regressão.",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: CadastroServiceTest#deveCadastrarClienteComDadosValidos"
+    }
   },
   {
-    "id": "CT-002", "titulo": "Cadastro aceita nome e telefone nos limites válidos",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-01", "RN-02"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite", "classificacao": "Fronteira", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-002",
+    "titulo": "Cadastro aceita nome e telefone nos limites válidos",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-01",
+      "RN-02"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "(a) Nome com 3 caracteres \"Léa\", telefone com 10 dígitos 1432221100, e-mail lea.<AAAAMMDD>@exemplo.com. (b) Nome com 60 caracteres \"Maria Eduarda Fernandes Albuquerque Cavalcanti Souza Ribeiro\", telefone com 11 dígitos 14999990000, e-mail maria.eduarda.<AAAAMMDD>@exemplo.com",
-    "passos": ["Abrir a tela de cadastro.", "Preencher com os dados (a) e clicar em \"Cadastrar\".", "Preencher com os dados (b) e clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir a tela de cadastro.",
+      "Preencher com os dados (a) e clicar em \"Cadastrar\".",
+      "Preencher com os dados (b) e clicar em \"Cadastrar\"."
+    ],
     "esperado": "Nos dois cadastros, mensagem \"Cadastro realizado com sucesso!\" com o código do cliente.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (validação de ClienteRequest)", "justificativa": "Limites são regras estáveis e baratas de verificar a cada build."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (validação de ClienteRequest)",
+      "justificativa": "Limites são regras estáveis e baratas de verificar a cada build.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarNomeETelefoneNosLimitesValidos"
+    }
   },
   {
-    "id": "CT-003", "titulo": "Cadastro recusa nome com 2 e com 61 caracteres",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-01"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite", "classificacao": "Fronteira", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-003",
+    "titulo": "Cadastro recusa nome com 2 e com 61 caracteres",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-01"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "(a) Nome \"Al\" (2 caracteres). (b) Nome com 61 caracteres \"Maria Eduarda Fernandes Albuquerque Cavalcanti Souza Ribeiros\". Telefone 14988776655 e e-mail nome.limite.<AAAAMMDD>@exemplo.com nos dois.",
-    "passos": ["Abrir a tela de cadastro.", "Preencher com o nome (a) e os demais dados; clicar em \"Cadastrar\".", "Trocar o nome para (b) e clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir a tela de cadastro.",
+      "Preencher com o nome (a) e os demais dados; clicar em \"Cadastrar\".",
+      "Trocar o nome para (b) e clicar em \"Cadastrar\"."
+    ],
     "esperado": "Nas duas tentativas: mensagem \"O nome deve ter entre 3 e 60 caracteres.\" abaixo do campo Nome, mensagem geral \"Existem campos inválidos.\" e nenhum código de cliente exibido.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (validação de ClienteRequest)", "justificativa": "Limites inválidos complementam CT-002 na mesma suíte."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (validação de ClienteRequest)",
+      "justificativa": "Limites inválidos complementam CT-002 na mesma suíte.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarNomeForaDoLimite"
+    }
   },
   {
-    "id": "CT-004", "titulo": "Cadastro recusa telefone fora do padrão",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-02"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite e particionamento (classe com não dígitos)", "classificacao": "Negativo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-004",
+    "titulo": "Cadastro recusa telefone fora do padrão",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-02"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite e particionamento (classe com não dígitos)",
+    "classificacao": "Negativo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "Nome: Rodrigo Teste; e-mail rodrigo.<AAAAMMDD>@exemplo.com; telefones: (a) 149887766 (9 dígitos); (b) 149887766551 (12 dígitos); (c) 14-98877-6655 (com hífens).",
-    "passos": ["Abrir a tela de cadastro.", "Para cada telefone (a), (b) e (c): preencher os dados e clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir a tela de cadastro.",
+      "Para cada telefone (a), (b) e (c): preencher os dados e clicar em \"Cadastrar\"."
+    ],
     "esperado": "Nas três tentativas: mensagem \"O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD).\" abaixo do campo Telefone e nenhum cadastro realizado.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (validação de ClienteRequest)", "justificativa": "Regra de formato estável, rápida de verificar."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (validação de ClienteRequest)",
+      "justificativa": "Regra de formato estável, rápida de verificar.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarTelefoneForaDoPadrao"
+    }
   },
   {
-    "id": "CT-005", "titulo": "Cadastro recusa e-mail em formato inválido",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-03"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (classes inválidas)", "classificacao": "Negativo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-005",
+    "titulo": "Cadastro recusa e-mail em formato inválido",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-03"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (classes inválidas)",
+    "classificacao": "Negativo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "Nome: Paula Teste; telefone 14988776655; e-mails: (a) paula.exemplo.com (sem @); (b) paula@exemplo (sem domínio de topo).",
-    "passos": ["Abrir a tela de cadastro.", "Para cada e-mail (a) e (b): preencher os dados e clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir a tela de cadastro.",
+      "Para cada e-mail (a) e (b): preencher os dados e clicar em \"Cadastrar\"."
+    ],
     "esperado": "Nas duas tentativas: mensagem \"O e-mail informado é inválido.\" abaixo do campo E-mail e nenhum cadastro realizado.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman, fluxo negativo de POST /api/clientes)", "justificativa": "Operação crítica precisa de ao menos um fluxo negativo na coleção."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman, fluxo negativo de POST /api/clientes)",
+      "justificativa": "Operação crítica precisa de ao menos um fluxo negativo na coleção.",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarEmailEmFormatoInvalido"
+    }
   },
   {
-    "id": "CT-006", "titulo": "Cadastro recusa e-mail já cadastrado, mesmo com maiúsculas",
-    "requisitos": ["RF-01"], "riscos": ["R-05"], "regras": ["RN-03"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (e-mail existente)", "classificacao": "Exceção", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-006",
+    "titulo": "Cadastro recusa e-mail já cadastrado, mesmo com maiúsculas",
+    "requisitos": [
+      "RF-01"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-03"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (e-mail existente)",
+    "classificacao": "Exceção",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO (cliente ana.rocha@exemplo.com existe na massa).",
     "dados": "Nome: Ana Repetida; telefone 14988776655; e-mail ANA.ROCHA@EXEMPLO.COM",
-    "passos": ["Abrir a tela de cadastro.", "Preencher os dados e clicar em \"Cadastrar\"."],
+    "passos": [
+      "Abrir a tela de cadastro.",
+      "Preencher os dados e clicar em \"Cadastrar\"."
+    ],
     "esperado": "Mensagem \"Já existe um cliente cadastrado com este e-mail.\" (HTTP 409) e nenhum cadastro realizado.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (ClienteService com mock) e API (Postman)", "justificativa": "Regra de unicidade crítica para identificar o cliente no agendamento."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (ClienteService com mock) e API (Postman)",
+      "justificativa": "Regra de unicidade crítica para identificar o cliente no agendamento.",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: CadastroServiceTest#deveRejeitarCadastroComEmailJaCadastrado"
+    }
   },
   {
-    "id": "CT-007", "titulo": "Horários disponíveis respeitam funcionamento, intervalo e duração do serviço",
-    "requisitos": ["RF-02"], "riscos": ["R-02"], "regras": ["RN-04", "RN-05"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (último início possível)", "classificacao": "Positivo", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-007",
+    "titulo": "Horários disponíveis respeitam funcionamento, intervalo e duração do serviço",
+    "requisitos": [
+      "RF-02"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-04",
+      "RN-05"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (último início possível)",
+    "classificacao": "Positivo",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Carlos Navalha não tem agendamentos em DF3.",
     "dados": "Barbeiro: Carlos Navalha; Serviço: Corte e barba (60 min); Data: DF3",
-    "passos": ["Abrir http://localhost:8080/agendar.html.", "Selecionar barbeiro, serviço e data.", "Clicar em \"Ver horários disponíveis\"."],
+    "passos": [
+      "Abrir http://localhost:8080/agendar.html.",
+      "Selecionar barbeiro, serviço e data.",
+      "Clicar em \"Ver horários disponíveis\"."
+    ],
     "esperado": "19 horários, de 09:00 a 18:00, de 30 em 30 minutos (09:00, 09:30, ..., 18:00). Não aparecem 18:30 nem horários antes de 09:00.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.gerarHorariosDoDia com Clock fixo)", "justificativa": "Cálculo determinístico e central para o agendamento."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.gerarHorariosDoDia com Clock fixo)",
+      "justificativa": "Cálculo determinístico e central para o agendamento.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveGerarHorariosDe09hA18hParaServicoDe60Minutos"
+    }
   },
   {
-    "id": "CT-008", "titulo": "Horários ocupados pelo barbeiro não são oferecidos",
-    "requisitos": ["RF-02", "RF-04"], "riscos": ["R-01", "R-02"], "regras": ["RN-07"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (vizinhos do horário ocupado)", "classificacao": "Alternativo", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-008",
+    "titulo": "Horários ocupados pelo barbeiro não são oferecidos",
+    "requisitos": [
+      "RF-02",
+      "RF-04"
+    ],
+    "riscos": [
+      "R-01",
+      "R-02"
+    ],
+    "regras": [
+      "RN-07"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (vizinhos do horário ocupado)",
+    "classificacao": "Alternativo",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Rafael Tesoura tem agendamento (SEMENTE3) em DF1, 14:00–15:00.",
     "dados": "Barbeiro: Rafael Tesoura; Serviço: Corte de cabelo (30 min); Data: DF1",
-    "passos": ["Abrir a tela de agendamento.", "Selecionar barbeiro, serviço e data.", "Clicar em \"Ver horários disponíveis\"."],
+    "passos": [
+      "Abrir a tela de agendamento.",
+      "Selecionar barbeiro, serviço e data.",
+      "Clicar em \"Ver horários disponíveis\"."
+    ],
     "esperado": "Não aparecem 14:00 nem 14:30. Aparecem 13:30 e 15:00. Total de 18 horários (09:00 a 18:30, menos os 2 ocupados).",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (AgendamentoService.horariosDisponiveis com mocks)", "justificativa": "Filtro de ocupação é regra de alto risco (R-01)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (AgendamentoService.horariosDisponiveis com mocks)",
+      "justificativa": "Filtro de ocupação é regra de alto risco (R-01).",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#naoDeveOferecerHorariosOcupadosPeloBarbeiro"
+    }
   },
   {
-    "id": "CT-009", "titulo": "Datas sem atendimento retornam lista de horários vazia",
-    "requisitos": ["RF-02"], "riscos": ["R-04"], "regras": ["RN-04", "RN-06"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (datas inválidas)", "classificacao": "Alternativo", "prioridade": "Média", "interface": "API",
+    "id": "CT-009",
+    "titulo": "Datas sem atendimento retornam lista de horários vazia",
+    "requisitos": [
+      "RF-02"
+    ],
+    "riscos": [
+      "R-04"
+    ],
+    "regras": [
+      "RN-04",
+      "RN-06"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (datas inválidas)",
+    "classificacao": "Alternativo",
+    "prioridade": "Média",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Ids de Carlos Navalha e Corte de cabelo obtidos em GET /api/barbeiros e GET /api/servicos.",
     "dados": "Datas: (a) DOM; (b) D+31; (c) ONTEM",
-    "passos": ["Para cada data, enviar GET /api/horarios-disponiveis?barbeiroId={Carlos}&servicoId={Corte}&data=<data>."],
+    "passos": [
+      "Para cada data, enviar GET /api/horarios-disponiveis?barbeiroId={Carlos}&servicoId={Corte}&data=<data>."
+    ],
     "esperado": "As três respostas têm HTTP 200 e \"horarios\": [] (lista vazia).",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.dataAceitaAgendamentos com Clock fixo)", "justificativa": "Regra de data sensível a limites; deve ser verificada a cada build."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.dataAceitaAgendamentos com Clock fixo)",
+      "justificativa": "Regra de data sensível a limites; deve ser verificada a cada build.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRetornarListaVaziaParaDataSemAtendimento"
+    }
   },
   {
-    "id": "CT-010", "titulo": "Agendar horário pela tela com sucesso",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-04", "RN-05", "RN-06", "RN-10"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Caso de uso (fluxo principal)", "classificacao": "Positivo", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-010",
+    "titulo": "Agendar horário pela tela com sucesso",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-04",
+      "RN-05",
+      "RN-06",
+      "RN-10"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Caso de uso (fluxo principal)",
+    "classificacao": "Positivo",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Cliente camila.prado@exemplo.com sem agendamentos ativos.",
     "dados": "E-mail: camila.prado@exemplo.com; Barbeiro: Carlos Navalha; Serviço: Barba; Data: DF3; Horário: 11:00",
-    "passos": ["Abrir a tela de agendamento.", "Informar o e-mail; selecionar barbeiro, serviço e data.", "Clicar em \"Ver horários disponíveis\" e escolher 11:00.", "Clicar em \"Confirmar agendamento\"."],
+    "passos": [
+      "Abrir a tela de agendamento.",
+      "Informar o e-mail; selecionar barbeiro, serviço e data.",
+      "Clicar em \"Ver horários disponíveis\" e escolher 11:00.",
+      "Clicar em \"Confirmar agendamento\"."
+    ],
     "esperado": "Mensagem \"Agendamento realizado com sucesso! Código de acesso: XXXXXXXX.\" e quadro \"Agendamento confirmado\" com código de 8 caracteres, Carlos Navalha, Barba, data DF3 11:00 e status AGENDADO.",
-    "automacao": {"candidato": "Sim", "nivel": "Interface (Selenium) e API (Postman)", "justificativa": "Fluxo mais importante do sistema."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Interface (Selenium) e API (Postman)",
+      "justificativa": "Fluxo mais importante do sistema.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-011", "titulo": "Agendamento aceito no primeiro e no último horário do dia",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-04"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (abertura 09:00; término 19:00)", "classificacao": "Fronteira", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-011",
+    "titulo": "Agendamento aceito no primeiro e no último horário do dia",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-04"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (abertura 09:00; término 19:00)",
+    "classificacao": "Fronteira",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Cliente felipe.nunes@exemplo.com sem agendamentos ativos.",
     "dados": "E-mail: felipe.nunes@exemplo.com; Barbeiro: Carlos Navalha; Serviço: Corte de cabelo (30 min); Data: DF3; Horários: (a) 09:00; (b) 18:30 (termina 19:00)",
-    "passos": ["Na tela de agendamento, agendar o horário (a).", "Recarregar a página e agendar o horário (b)."],
+    "passos": [
+      "Na tela de agendamento, agendar o horário (a).",
+      "Recarregar a página e agendar o horário (b)."
+    ],
     "esperado": "Os dois agendamentos são confirmados com status AGENDADO e código de acesso.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)", "justificativa": "Limites da regra de maior risco."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)",
+      "justificativa": "Limites da regra de maior risco.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoNosLimitesDoFuncionamento"
+    }
   },
   {
-    "id": "CT-012", "titulo": "Agendamento recusado quando começa antes de 09:00 ou termina depois de 19:00",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-04"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite", "classificacao": "Fronteira", "prioridade": "Alta", "interface": "API",
+    "id": "CT-012",
+    "titulo": "Agendamento recusado quando começa antes de 09:00 ou termina depois de 19:00",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-04"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite",
+    "classificacao": "Fronteira",
+    "prioridade": "Alta",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Ids de Carlos Navalha, Corte de cabelo (30 min) e Corte e barba (60 min) obtidos nas consultas públicas.",
     "dados": "emailCliente: gabriela.teixeira@exemplo.com; barbeiro Carlos; (a) Corte de cabelo, DF3T08:30:00; (b) Corte e barba, DF3T18:30:00 (terminaria 19:30); (c) Corte e barba, DF3T18:00:00 (termina 19:00)",
-    "passos": ["Para cada combinação, enviar POST /api/agendamentos com {\"emailCliente\", \"barbeiroId\", \"servicoId\", \"dataHoraInicio\"}."],
+    "passos": [
+      "Para cada combinação, enviar POST /api/agendamentos com {\"emailCliente\", \"barbeiroId\", \"servicoId\", \"dataHoraInicio\"}."
+    ],
     "esperado": "(a) e (b): HTTP 400 com mensagem \"O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00.\" (c): HTTP 201, status AGENDADO.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)", "justificativa": "Limites só alcançáveis pela API; regra de maior risco."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)",
+      "justificativa": "Limites só alcançáveis pela API; regra de maior risco.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoForaDoHorarioDeFuncionamento"
+    }
   },
   {
-    "id": "CT-013", "titulo": "Agendamento recusado fora dos intervalos de 30 minutos",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-05"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (minutos diferentes de 00 e 30) e valor limite", "classificacao": "Negativo", "prioridade": "Alta", "interface": "API",
+    "id": "CT-013",
+    "titulo": "Agendamento recusado fora dos intervalos de 30 minutos",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-05"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (minutos diferentes de 00 e 30) e valor limite",
+    "classificacao": "Negativo",
+    "prioridade": "Alta",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Ids de Carlos Navalha e Corte de cabelo obtidos nas consultas públicas.",
     "dados": "emailCliente: gabriela.teixeira@exemplo.com; dataHoraInicio: (a) DF3T10:15:00; (b) DF3T10:01:00",
-    "passos": ["Para cada horário, enviar POST /api/agendamentos."],
+    "passos": [
+      "Para cada horário, enviar POST /api/agendamentos."
+    ],
     "esperado": "HTTP 400 com mensagem \"Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30).\" e campo dataHoraInicio em \"campos\".",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarIntervalo)", "justificativa": "Regra simples e estável."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarIntervalo)",
+      "justificativa": "Regra simples e estável.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarInicioForaDoIntervaloDe30Minutos"
+    }
   },
   {
-    "id": "CT-014", "titulo": "Agendamento recusado no domingo",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-04"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (dia da semana)", "classificacao": "Negativo", "prioridade": "Alta", "interface": "API",
+    "id": "CT-014",
+    "titulo": "Agendamento recusado no domingo",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-04"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (dia da semana)",
+    "classificacao": "Negativo",
+    "prioridade": "Alta",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Ids de Carlos Navalha e Corte de cabelo obtidos nas consultas públicas.",
     "dados": "emailCliente: gabriela.teixeira@exemplo.com; dataHoraInicio: DOMT10:00:00",
-    "passos": ["Enviar POST /api/agendamentos com os dados."],
+    "passos": [
+      "Enviar POST /api/agendamentos com os dados."
+    ],
     "esperado": "HTTP 400 com mensagem \"A barbearia não abre aos domingos.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)", "justificativa": "Regra de calendário verificável com Clock fixo."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)",
+      "justificativa": "Regra de calendário verificável com Clock fixo.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoDomingo"
+    }
   },
   {
-    "id": "CT-015", "titulo": "Antecedência: aceita D+30 e recusa D+31",
-    "requisitos": ["RF-03"], "riscos": ["R-04"], "regras": ["RN-06"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite", "classificacao": "Fronteira", "prioridade": "Média", "interface": "API",
+    "id": "CT-015",
+    "titulo": "Antecedência: aceita D+30 e recusa D+31",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-04"
+    ],
+    "regras": [
+      "RN-06"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. D+30 não pode cair em domingo (se cair, registrar \"Bloqueado\" e executar no dia seguinte). Ids de Carlos Navalha e Corte de cabelo obtidos.",
     "dados": "emailCliente: heitor.moreira@exemplo.com; dataHoraInicio: (a) D+30T10:00:00; (b) D+31T10:00:00",
-    "passos": ["Enviar POST /api/agendamentos com a data (a).", "Enviar POST /api/agendamentos com a data (b)."],
+    "passos": [
+      "Enviar POST /api/agendamentos com a data (a).",
+      "Enviar POST /api/agendamentos com a data (b)."
+    ],
     "esperado": "(a): HTTP 201, status AGENDADO. (b): HTTP 400 com mensagem \"A antecedência máxima para agendamento é de 30 dias.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo)", "justificativa": "Limite dependente de data; Clock fixo torna o teste estável."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo)",
+      "justificativa": "Limite dependente de data; Clock fixo torna o teste estável.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoComTrintaDiasDeAntecedencia; #deveRejeitarAgendamentoComTrintaEUmDiasDeAntecedencia"
+    }
   },
   {
-    "id": "CT-016", "titulo": "Agendamento recusado em data ou horário que já passou",
-    "requisitos": ["RF-03"], "riscos": ["R-04"], "regras": ["RN-06"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (agora) e particionamento (passado)", "classificacao": "Negativo", "prioridade": "Média", "interface": "API",
+    "id": "CT-016",
+    "titulo": "Agendamento recusado em data ou horário que já passou",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-04"
+    ],
+    "regras": [
+      "RN-06"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (agora) e particionamento (passado)",
+    "classificacao": "Negativo",
+    "prioridade": "Média",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Para o dado (b), executar de segunda a sábado depois das 09:30.",
     "dados": "emailCliente: heitor.moreira@exemplo.com; Carlos; Corte de cabelo; dataHoraInicio: (a) ONTEMT10:00:00; (b) hoje às 09:00",
-    "passos": ["Enviar POST /api/agendamentos com (a).", "Enviar POST /api/agendamentos com (b)."],
+    "passos": [
+      "Enviar POST /api/agendamentos com (a).",
+      "Enviar POST /api/agendamentos com (b)."
+    ],
     "esperado": "Nas duas: HTTP 400 com mensagem \"Não é permitido agendar em data ou horário que já passou.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo)", "justificativa": "Depende do momento atual; automação com Clock fixo elimina a restrição de horário."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo)",
+      "justificativa": "Depende do momento atual; automação com Clock fixo elimina a restrição de horário.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoPassado; #deveAceitarProximoHorarioDoDiaDeHoje"
+    }
   },
   {
-    "id": "CT-017", "titulo": "Barbeiro e serviço inativos não são oferecidos nem aceitos",
-    "requisitos": ["RF-03"], "riscos": ["R-02"], "regras": ["RN-10"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (ativo × inativo)", "classificacao": "Exceção", "prioridade": "Média", "interface": "Tela e API",
+    "id": "CT-017",
+    "titulo": "Barbeiro e serviço inativos não são oferecidos nem aceitos",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [
+      "RN-10"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (ativo × inativo)",
+    "classificacao": "Exceção",
+    "prioridade": "Média",
+    "interface": "Tela e API",
     "precondicoes": "PC-PADRÃO (Diego Máquina e Relaxamento capilar estão inativos na massa). Ids obtidos em GET /api/admin/barbeiros e /api/admin/servicos (admin:admin123).",
     "dados": "emailCliente: gabriela.teixeira@exemplo.com; DF3T10:00:00; (a) Diego Máquina + Corte de cabelo; (b) Carlos Navalha + Relaxamento capilar",
-    "passos": ["Abrir a tela de agendamento e abrir as listas de barbeiros e serviços.", "Enviar POST /api/agendamentos com (a).", "Enviar POST /api/agendamentos com (b)."],
+    "passos": [
+      "Abrir a tela de agendamento e abrir as listas de barbeiros e serviços.",
+      "Enviar POST /api/agendamentos com (a).",
+      "Enviar POST /api/agendamentos com (b)."
+    ],
     "esperado": "Passo 1: Diego Máquina e Relaxamento capilar não aparecem. (a): HTTP 400 \"O barbeiro selecionado está inativo.\" (b): HTTP 400 \"O serviço selecionado está inativo.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (AgendamentoService com mocks)", "justificativa": "Regra simples de verificar isoladamente."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (AgendamentoService com mocks)",
+      "justificativa": "Regra simples de verificar isoladamente.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoComBarbeiroInativo; #deveRejeitarAgendamentoComServicoInativo"
+    }
   },
   {
-    "id": "CT-018", "titulo": "Agendamento com e-mail não cadastrado é recusado",
-    "requisitos": ["RF-03"], "riscos": ["R-05"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (cliente inexistente)", "classificacao": "Exceção", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-018",
+    "titulo": "Agendamento com e-mail não cadastrado é recusado",
+    "requisitos": [
+      "RF-03"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (cliente inexistente)",
+    "classificacao": "Exceção",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "E-mail: nao.cadastrado@exemplo.com; Carlos Navalha; Barba; DF3; 15:00",
-    "passos": ["Na tela de agendamento, preencher os dados, buscar horários e escolher 15:00.", "Clicar em \"Confirmar agendamento\"."],
+    "passos": [
+      "Na tela de agendamento, preencher os dados, buscar horários e escolher 15:00.",
+      "Clicar em \"Confirmar agendamento\"."
+    ],
     "esperado": "Mensagem \"Cliente não encontrado para o e-mail informado. Faça o cadastro antes de agendar.\" e nenhum código de acesso exibido.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman, fluxo negativo de POST /api/agendamentos)", "justificativa": "Fluxo negativo da operação crítica de agendamento."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman, fluxo negativo de POST /api/agendamentos)",
+      "justificativa": "Fluxo negativo da operação crítica de agendamento.",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoDeClienteNaoCadastrado"
+    }
   },
   {
-    "id": "CT-019", "titulo": "Agendamento sobreposto ao de outro cliente com o mesmo barbeiro é recusado",
-    "requisitos": ["RF-04"], "riscos": ["R-01"], "regras": ["RN-07"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (sobreposição parcial no início e no fim)", "classificacao": "Negativo", "prioridade": "Alta", "interface": "API",
+    "id": "CT-019",
+    "titulo": "Agendamento sobreposto ao de outro cliente com o mesmo barbeiro é recusado",
+    "requisitos": [
+      "RF-04"
+    ],
+    "riscos": [
+      "R-01"
+    ],
+    "regras": [
+      "RN-07"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (sobreposição parcial no início e no fim)",
+    "classificacao": "Negativo",
+    "prioridade": "Alta",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Rafael Tesoura tem SEMENTE3 em DF1, 14:00–15:00. Ids obtidos nas consultas públicas.",
     "dados": "emailCliente: joao.mendes@exemplo.com; Rafael; (a) Corte de cabelo DF1T14:30:00 (14:30–15:00); (b) Corte e barba DF1T13:30:00 (13:30–14:30)",
-    "passos": ["Enviar POST /api/agendamentos com (a).", "Enviar POST /api/agendamentos com (b)."],
+    "passos": [
+      "Enviar POST /api/agendamentos com (a).",
+      "Enviar POST /api/agendamentos com (b)."
+    ],
     "esperado": "Nas duas: HTTP 409 com mensagem \"O barbeiro já possui agendamento nesse horário.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (AgendamentoService com mock) e API (Postman)", "justificativa": "Risco mais alto do produto (R-01)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (AgendamentoService com mock) e API (Postman)",
+      "justificativa": "Risco mais alto do produto (R-01).",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoQuandoHorarioConflitaComOutroDoMesmoBarbeiro"
+    }
   },
   {
-    "id": "CT-020", "titulo": "Horário encostado e mesmo horário com outro barbeiro são aceitos",
-    "requisitos": ["RF-04"], "riscos": ["R-01"], "regras": ["RN-07"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (intervalos que se tocam)", "classificacao": "Fronteira", "prioridade": "Alta", "interface": "API",
+    "id": "CT-020",
+    "titulo": "Horário encostado e mesmo horário com outro barbeiro são aceitos",
+    "requisitos": [
+      "RF-04"
+    ],
+    "riscos": [
+      "R-01"
+    ],
+    "regras": [
+      "RN-07"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (intervalos que se tocam)",
+    "classificacao": "Fronteira",
+    "prioridade": "Alta",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Rafael Tesoura tem SEMENTE3 em DF1, 14:00–15:00. Ids obtidos.",
     "dados": "emailCliente: isabela.pires@exemplo.com; Corte de cabelo (30 min); (a) Rafael DF1T13:30:00 (termina 14:00); (b) Rafael DF1T15:00:00 (começa às 15:00); (c) Carlos DF1T14:00:00",
-    "passos": ["Enviar POST /api/agendamentos com (a), (b) e (c), nesta ordem."],
+    "passos": [
+      "Enviar POST /api/agendamentos com (a), (b) e (c), nesta ordem."
+    ],
     "esperado": "As três respostas: HTTP 201 com status AGENDADO.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman)", "justificativa": "O limite depende da consulta ao banco; precisa de teste integrado."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman)",
+      "justificativa": "O limite depende da consulta ao banco; precisa de teste integrado.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-021", "titulo": "Limite de agendamentos ativos: 3º aceito e 4º recusado",
-    "requisitos": ["RF-04"], "riscos": ["R-06"], "regras": ["RN-08"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite (3 e 4)", "classificacao": "Fronteira", "prioridade": "Média", "interface": "API",
+    "id": "CT-021",
+    "titulo": "Limite de agendamentos ativos: 3º aceito e 4º recusado",
+    "requisitos": [
+      "RF-04"
+    ],
+    "riscos": [
+      "R-06"
+    ],
+    "regras": [
+      "RN-08"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite (3 e 4)",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Ids de Carlos Navalha e Corte de cabelo obtidos.",
     "dados": "Cliente novo: nome \"Cliente Limite\", telefone 14977770021, e-mail ct021.<AAAAMMDD>@exemplo.com; agendamentos com Carlos, Corte de cabelo, DF3: 09:00, 09:30, 10:00 e 10:30",
-    "passos": ["Cadastrar o cliente: POST /api/clientes.", "Enviar POST /api/agendamentos para 09:00, 09:30 e 10:00.", "Enviar POST /api/agendamentos para 10:30."],
+    "passos": [
+      "Cadastrar o cliente: POST /api/clientes.",
+      "Enviar POST /api/agendamentos para 09:00, 09:30 e 10:00.",
+      "Enviar POST /api/agendamentos para 10:30."
+    ],
     "esperado": "Passo 2: três respostas HTTP 201 (o 3º agendamento é aceito). Passo 3: HTTP 409 com mensagem \"O cliente já possui 3 agendamentos ativos, que é o limite permitido.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (AgendamentoService com mock da contagem)", "justificativa": "Limite numérico estável."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (AgendamentoService com mock da contagem)",
+      "justificativa": "Limite numérico estável.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarQuartoAgendamentoAtivoDoCliente; #deveAceitarTerceiroAgendamentoAtivoDoCliente"
+    }
   },
   {
-    "id": "CT-022", "titulo": "Após cancelar um agendamento, cliente no limite volta a poder agendar",
-    "requisitos": ["RF-04", "RF-05"], "riscos": ["R-06"], "regras": ["RN-08"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Transição de estados (AGENDADO → CANCELADO libera vaga)", "classificacao": "Alternativo", "prioridade": "Média", "interface": "Tela e API",
+    "id": "CT-022",
+    "titulo": "Após cancelar um agendamento, cliente no limite volta a poder agendar",
+    "requisitos": [
+      "RF-04",
+      "RF-05"
+    ],
+    "riscos": [
+      "R-06"
+    ],
+    "regras": [
+      "RN-08"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Transição de estados (AGENDADO → CANCELADO libera vaga)",
+    "classificacao": "Alternativo",
+    "prioridade": "Média",
+    "interface": "Tela e API",
     "precondicoes": "PC-PADRÃO. Cliente ct022.<AAAAMMDD>@exemplo.com cadastrado com 3 agendamentos ativos com Carlos em DF3 (09:00, 09:30, 10:00), criados como em CT-021; anotar o código de acesso do agendamento das 09:00.",
     "dados": "Código de acesso do agendamento das 09:00; e-mail ct022.<AAAAMMDD>@exemplo.com; novo agendamento: Carlos, Corte de cabelo, DF3T10:30:00",
-    "passos": ["Abrir http://localhost:8080/consulta.html, informar código e e-mail e clicar em \"Consultar\".", "Clicar em \"Cancelar agendamento\" e em \"Sim, cancelar\".", "Enviar POST /api/agendamentos para DF3T10:30:00."],
+    "passos": [
+      "Abrir http://localhost:8080/consulta.html, informar código e e-mail e clicar em \"Consultar\".",
+      "Clicar em \"Cancelar agendamento\" e em \"Sim, cancelar\".",
+      "Enviar POST /api/agendamentos para DF3T10:30:00."
+    ],
     "esperado": "Passo 2: status CANCELADO. Passo 3: HTTP 201 (o cliente volta a ter 3 ativos).",
-    "automacao": {"candidato": "Não", "nivel": "—", "justificativa": "Cenário com várias etapas e estado; o limite já é automatizado em CT-021 e o cancelamento em CT-025."}
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Cenário com várias etapas e estado; o limite já é automatizado em CT-021 e o cancelamento em CT-025.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-023", "titulo": "Consultar agendamento com código de acesso (em minúsculas) e e-mail",
-    "requisitos": ["RF-05"], "riscos": ["R-07"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Tabela de decisão (código certo × e-mail certo)", "classificacao": "Positivo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-023",
+    "titulo": "Consultar agendamento com código de acesso (em minúsculas) e e-mail",
+    "requisitos": [
+      "RF-05"
+    ],
+    "riscos": [
+      "R-07"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Tabela de decisão (código certo × e-mail certo)",
+    "classificacao": "Positivo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO (SEMENTE2 pertence a ana.rocha@exemplo.com).",
     "dados": "Código: semente2 (minúsculas); E-mail: ana.rocha@exemplo.com",
-    "passos": ["Abrir http://localhost:8080/consulta.html.", "Informar código e e-mail e clicar em \"Consultar\"."],
+    "passos": [
+      "Abrir http://localhost:8080/consulta.html.",
+      "Informar código e e-mail e clicar em \"Consultar\"."
+    ],
     "esperado": "Quadro \"Agendamento SEMENTE2\" com Cliente Ana Beatriz Rocha, Barbeiro Carlos Navalha, Serviço Corte de cabelo (30 min), Data DF1 10:00, Valor R$ 45,00, Status AGENDADO e botão \"Cancelar agendamento\" visível.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman, GET encadeado após o agendamento) e Interface (Selenium, no fluxo de cancelamento)", "justificativa": "Operação usada em todo cancelamento."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman, GET encadeado após o agendamento) e Interface (Selenium, no fluxo de cancelamento)",
+      "justificativa": "Operação usada em todo cancelamento.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-024", "titulo": "Consulta recusada quando código e e-mail não conferem",
-    "requisitos": ["RF-05"], "riscos": ["R-07"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional (segurança)", "tecnica": "Tabela de decisão", "classificacao": "Negativo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-024",
+    "titulo": "Consulta recusada quando código e e-mail não conferem",
+    "requisitos": [
+      "RF-05"
+    ],
+    "riscos": [
+      "R-07"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional (segurança)",
+    "tecnica": "Tabela de decisão",
+    "classificacao": "Negativo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "(a) SEMENTE2 + bruno.lima@exemplo.com (e-mail de outro cliente); (b) ZZZZ9999 + ana.rocha@exemplo.com (código inexistente); (c) 1 + ana.rocha@exemplo.com (número sequencial)",
-    "passos": ["Abrir a tela de consulta.", "Para cada combinação, informar código e e-mail e clicar em \"Consultar\"."],
+    "passos": [
+      "Abrir a tela de consulta.",
+      "Para cada combinação, informar código e e-mail e clicar em \"Consultar\"."
+    ],
     "esperado": "Nas três: mensagem \"Agendamento não encontrado para o código de acesso e o e-mail informados.\" e nenhum dado de agendamento exibido.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman, fluxo negativo de GET /api/agendamentos/{codigo})", "justificativa": "Protege dados de terceiros (R-07)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman, fluxo negativo de GET /api/agendamentos/{codigo})",
+      "justificativa": "Protege dados de terceiros (R-07).",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRecusarConsultaComEmailDeOutroCliente"
+    }
   },
   {
-    "id": "CT-025", "titulo": "Cancelar agendamento pela tela libera o horário",
-    "requisitos": ["RF-05"], "riscos": ["R-07"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Transição de estados (AGENDADO → CANCELADO)", "classificacao": "Positivo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-025",
+    "titulo": "Cancelar agendamento pela tela libera o horário",
+    "requisitos": [
+      "RF-05"
+    ],
+    "riscos": [
+      "R-07"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Transição de estados (AGENDADO → CANCELADO)",
+    "classificacao": "Positivo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO (SEMENTE6: eduarda.costa@exemplo.com, Carlos Navalha, Sobrancelha, DF2 16:00, AGENDADO).",
     "dados": "Código: SEMENTE6; E-mail: eduarda.costa@exemplo.com",
-    "passos": ["Na tela de consulta, consultar o agendamento.", "Clicar em \"Cancelar agendamento\" e depois em \"Sim, cancelar\".", "Abrir a tela de agendamento e listar horários de Carlos Navalha, Sobrancelha, DF2."],
+    "passos": [
+      "Na tela de consulta, consultar o agendamento.",
+      "Clicar em \"Cancelar agendamento\" e depois em \"Sim, cancelar\".",
+      "Abrir a tela de agendamento e listar horários de Carlos Navalha, Sobrancelha, DF2."
+    ],
     "esperado": "Passo 2: mensagem \"Agendamento cancelado com sucesso.\", status CANCELADO e botão de cancelar oculto. Passo 3: o horário 16:00 aparece na lista.",
-    "automacao": {"candidato": "Sim", "nivel": "Interface (Selenium)", "justificativa": "Fluxo ponta a ponta exigido pelo manual (cancelamento)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Interface (Selenium)",
+      "justificativa": "Fluxo ponta a ponta exigido pelo manual (cancelamento).",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: AgendamentoServiceTest#deveCancelarAgendamentoAtivoDoCliente; #deveOferecerHorarioDeAgendamentoCancelado"
+    }
   },
   {
-    "id": "CT-026", "titulo": "Cancelar agendamento já cancelado ou concluído é recusado",
-    "requisitos": ["RF-05"], "riscos": ["R-07"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Transição de estados (transições inválidas)", "classificacao": "Alternativo", "prioridade": "Média", "interface": "Tela e API",
+    "id": "CT-026",
+    "titulo": "Cancelar agendamento já cancelado ou concluído é recusado",
+    "requisitos": [
+      "RF-05"
+    ],
+    "riscos": [
+      "R-07"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Transição de estados (transições inválidas)",
+    "classificacao": "Alternativo",
+    "prioridade": "Média",
+    "interface": "Tela e API",
     "precondicoes": "PC-PADRÃO (SEMENTE4: camila.prado, CANCELADO; SEMENTE5: daniel.alves, CONCLUIDO).",
     "dados": "(a) SEMENTE4 + camila.prado@exemplo.com; (b) SEMENTE5 + daniel.alves@exemplo.com",
-    "passos": ["Na tela de consulta, consultar (a).", "Enviar PATCH /api/agendamentos/SEMENTE4/cancelar com {\"email\": \"camila.prado@exemplo.com\"}.", "Enviar PATCH /api/agendamentos/SEMENTE5/cancelar com {\"email\": \"daniel.alves@exemplo.com\"}."],
+    "passos": [
+      "Na tela de consulta, consultar (a).",
+      "Enviar PATCH /api/agendamentos/SEMENTE4/cancelar com {\"email\": \"camila.prado@exemplo.com\"}.",
+      "Enviar PATCH /api/agendamentos/SEMENTE5/cancelar com {\"email\": \"daniel.alves@exemplo.com\"}."
+    ],
     "esperado": "Passo 1: status CANCELADO e botão \"Cancelar agendamento\" não exibido. Passos 2 e 3: HTTP 409 com mensagem \"Somente agendamentos com status AGENDADO podem ser cancelados.\"",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman)", "justificativa": "Transição inválida só alcançável pela API."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman)",
+      "justificativa": "Transição inválida só alcançável pela API.",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoDeAgendamentoJaCancelado"
+    }
   },
   {
-    "id": "CT-027", "titulo": "Login do administrador com credencial válida e saída",
-    "requisitos": ["RF-06"], "riscos": ["R-03"], "regras": ["RN-11"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Caso de uso (fluxo principal)", "classificacao": "Positivo", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-027",
+    "titulo": "Login do administrador com credencial válida e saída",
+    "requisitos": [
+      "RF-06"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [
+      "RN-11"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Caso de uso (fluxo principal)",
+    "classificacao": "Positivo",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Navegador sem sessão administrativa aberta.",
     "dados": "Usuário: admin; Senha: admin123 (credencial fictícia)",
-    "passos": ["Abrir http://localhost:8080/admin/.", "Informar usuário e senha e clicar em \"Entrar\".", "Clicar em \"Sair\".", "Abrir novamente http://localhost:8080/admin/index.html."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/.",
+      "Informar usuário e senha e clicar em \"Entrar\".",
+      "Clicar em \"Sair\".",
+      "Abrir novamente http://localhost:8080/admin/index.html."
+    ],
     "esperado": "Passo 1: tela de login. Passo 2: \"Painel administrativo\" com \"Usuário: admin\". Passo 3: tela de login com \"Você saiu da área administrativa.\" Passo 4: redirecionamento para a tela de login.",
-    "automacao": {"candidato": "Sim", "nivel": "Interface (Selenium, junto com o cadastro de serviço)", "justificativa": "Fluxo ponta a ponta exigido pelo manual (login admin)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Interface (Selenium, junto com o cadastro de serviço)",
+      "justificativa": "Fluxo ponta a ponta exigido pelo manual (login admin).",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-028", "titulo": "Login com senha incorreta é recusado",
-    "requisitos": ["RF-06"], "riscos": ["R-03"], "regras": ["RN-11"],
-    "nivel_tipo": "Sistema / Funcional (segurança)", "tecnica": "Particionamento de equivalência (credencial inválida)", "classificacao": "Negativo", "prioridade": "Alta", "interface": "Tela",
+    "id": "CT-028",
+    "titulo": "Login com senha incorreta é recusado",
+    "requisitos": [
+      "RF-06"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [
+      "RN-11"
+    ],
+    "nivel_tipo": "Sistema / Funcional (segurança)",
+    "tecnica": "Particionamento de equivalência (credencial inválida)",
+    "classificacao": "Negativo",
+    "prioridade": "Alta",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO.",
     "dados": "Usuário: admin; Senha: senhaerrada",
-    "passos": ["Abrir http://localhost:8080/admin/login.html.", "Informar usuário e senha e clicar em \"Entrar\"."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/login.html.",
+      "Informar usuário e senha e clicar em \"Entrar\"."
+    ],
     "esperado": "Mensagem \"Usuário ou senha inválidos.\" e permanência na tela de login.",
-    "automacao": {"candidato": "Não", "nivel": "—", "justificativa": "Verificação simples e de baixo custo manual; o controle de acesso já é automatizado em CT-029."}
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Verificação simples e de baixo custo manual; o controle de acesso já é automatizado em CT-029.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-029", "titulo": "Área administrativa e dados de clientes inacessíveis sem login",
-    "requisitos": ["RF-06"], "riscos": ["R-03"], "regras": ["RN-11"],
-    "nivel_tipo": "Sistema / Funcional (segurança)", "tecnica": "Particionamento de equivalência (sem credencial)", "classificacao": "Exceção", "prioridade": "Alta", "interface": "Tela e API",
+    "id": "CT-029",
+    "titulo": "Área administrativa e dados de clientes inacessíveis sem login",
+    "requisitos": [
+      "RF-06"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [
+      "RN-11"
+    ],
+    "nivel_tipo": "Sistema / Funcional (segurança)",
+    "tecnica": "Particionamento de equivalência (sem credencial)",
+    "classificacao": "Exceção",
+    "prioridade": "Alta",
+    "interface": "Tela e API",
     "precondicoes": "PC-PADRÃO. Navegador e ferramenta de API sem sessão nem credenciais.",
     "dados": "Página /admin/agenda.html; GET /api/admin/barbeiros; GET /api/clientes; POST /api/admin/servicos com {\"nome\": \"Serviço Invasor\", \"duracaoMinutos\": 30, \"preco\": 10.00}",
-    "passos": ["Abrir http://localhost:8080/admin/agenda.html.", "Enviar GET /api/admin/barbeiros.", "Enviar GET /api/clientes.", "Enviar POST /api/admin/servicos com o corpo dos dados.", "Enviar GET /api/servicos."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/agenda.html.",
+      "Enviar GET /api/admin/barbeiros.",
+      "Enviar GET /api/clientes.",
+      "Enviar POST /api/admin/servicos com o corpo dos dados.",
+      "Enviar GET /api/servicos."
+    ],
     "esperado": "Passo 1: redirecionamento para a tela de login. Passos 2 e 3: HTTP 401 com mensagem \"Autenticação necessária.\" e sem dados. Passo 4: HTTP 403. Passo 5: \"Serviço Invasor\" não aparece.",
-    "automacao": {"candidato": "Sim", "nivel": "API (Postman)", "justificativa": "Controle de acesso é risco Alto (R-03) e deve entrar em toda regressão."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "API (Postman)",
+      "justificativa": "Controle de acesso é risco Alto (R-03) e deve entrar em toda regressão.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-030", "titulo": "Cadastrar serviços com duração e preço nos limites válidos",
-    "requisitos": ["RF-07"], "riscos": ["R-05"], "regras": ["RN-09"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite", "classificacao": "Fronteira", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-030",
+    "titulo": "Cadastrar serviços com duração e preço nos limites válidos",
+    "requisitos": [
+      "RF-07"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-09"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite",
+    "classificacao": "Fronteira",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Administrador autenticado.",
     "dados": "(a) Nome \"Acabamento\", duração 15, preço 1,00; (b) Nome \"Tratamento completo\", duração 180, preço 1000,00",
-    "passos": ["Abrir http://localhost:8080/admin/servicos.html.", "Preencher (a) e clicar em \"Salvar\".", "Preencher (b) e clicar em \"Salvar\"."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/servicos.html.",
+      "Preencher (a) e clicar em \"Salvar\".",
+      "Preencher (b) e clicar em \"Salvar\"."
+    ],
     "esperado": "Para cada um: mensagem \"Serviço cadastrado (código N).\" e linha na tabela com \"15 min / R$ 1,00\" e \"180 min / R$ 1.000,00\", situação Ativo.",
-    "automacao": {"candidato": "Sim", "nivel": "Interface (Selenium, junto com o login do administrador)", "justificativa": "Fluxo ponta a ponta exigido pelo manual (cadastro de serviço)."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Interface (Selenium, junto com o login do administrador)",
+      "justificativa": "Fluxo ponta a ponta exigido pelo manual (cadastro de serviço).",
+      "automatizado": "Parcial",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarServicoNosLimitesValidos"
+    }
   },
   {
-    "id": "CT-031", "titulo": "Cadastro de serviço recusa duração e preço fora dos limites",
-    "requisitos": ["RF-07"], "riscos": ["R-05"], "regras": ["RN-09"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Análise de valor limite e particionamento (múltiplo de 15)", "classificacao": "Negativo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-031",
+    "titulo": "Cadastro de serviço recusa duração e preço fora dos limites",
+    "requisitos": [
+      "RF-07"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-09"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Análise de valor limite e particionamento (múltiplo de 15)",
+    "classificacao": "Negativo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Administrador autenticado.",
     "dados": "Nome \"Serviço Limite\"; (a) duração 14, preço 10; (b) duração 20, preço 10; (c) duração 195, preço 10; (d) duração 30, preço 0,99; (e) duração 30, preço 1000,01",
-    "passos": ["Abrir a tela de serviços.", "Para cada combinação, preencher e clicar em \"Salvar\"."],
+    "passos": [
+      "Abrir a tela de serviços.",
+      "Para cada combinação, preencher e clicar em \"Salvar\"."
+    ],
     "esperado": "(a) Mensagem de erro no campo Duração — 14 viola o mínimo e o múltiplo de 15 ao mesmo tempo, então \"A duração deve ser de no mínimo 15 minutos.\" ou \"A duração deve ser múltipla de 15 minutos.\" é aceita. (b) \"A duração deve ser múltipla de 15 minutos.\" (c) \"A duração deve ser de no máximo 180 minutos.\" (d) \"O preço deve ser de no mínimo R$ 1,00.\" (e) \"O preço deve ser de no máximo R$ 1.000,00.\" Nenhum serviço cadastrado.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (validação de ServicoRequest)", "justificativa": "Cinco limites verificáveis em milissegundos."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (validação de ServicoRequest)",
+      "justificativa": "Cinco limites verificáveis em milissegundos.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarDuracaoForaDosLimites; #deveRejeitarPrecoForaDosLimites"
+    }
   },
   {
-    "id": "CT-032", "titulo": "Barbeiro desativado deixa de aparecer para o cliente",
-    "requisitos": ["RF-07"], "riscos": ["R-05"], "regras": ["RN-10"],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (ativo × inativo)", "classificacao": "Alternativo", "prioridade": "Baixa", "interface": "Tela",
+    "id": "CT-032",
+    "titulo": "Barbeiro desativado deixa de aparecer para o cliente",
+    "requisitos": [
+      "RF-07"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [
+      "RN-10"
+    ],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (ativo × inativo)",
+    "classificacao": "Alternativo",
+    "prioridade": "Baixa",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Administrador autenticado. Restaurar os dados ao final.",
     "dados": "Barbeiro: Rafael Tesoura",
-    "passos": ["Abrir http://localhost:8080/admin/barbeiros.html.", "Clicar em \"Editar\" na linha de Rafael Tesoura, desmarcar \"Ativo\" e clicar em \"Salvar\".", "Abrir http://localhost:8080/agendar.html e abrir a lista de barbeiros."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/barbeiros.html.",
+      "Clicar em \"Editar\" na linha de Rafael Tesoura, desmarcar \"Ativo\" e clicar em \"Salvar\".",
+      "Abrir http://localhost:8080/agendar.html e abrir a lista de barbeiros."
+    ],
     "esperado": "Passo 2: mensagem \"Barbeiro atualizado.\" e situação Inativo. Passo 3: Rafael Tesoura não aparece.",
-    "automacao": {"candidato": "Não", "nivel": "—", "justificativa": "Prioridade baixa; a regra de inativos já é automatizada em CT-017."}
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Prioridade baixa; a regra de inativos já é automatizada em CT-017.",
+      "automatizado": "Não",
+      "referencia": ""
+    }
   },
   {
-    "id": "CT-033", "titulo": "Excluir barbeiro: recusado com agendamentos e aceito sem agendamentos",
-    "requisitos": ["RF-07"], "riscos": ["R-05"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Particionamento de equivalência (com × sem agendamentos)", "classificacao": "Exceção", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-033",
+    "titulo": "Excluir barbeiro: recusado com agendamentos e aceito sem agendamentos",
+    "requisitos": [
+      "RF-07"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Particionamento de equivalência (com × sem agendamentos)",
+    "classificacao": "Exceção",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Administrador autenticado.",
     "dados": "(a) Carlos Navalha (tem agendamentos); (b) novo barbeiro \"Barbeiro Temporário\"",
-    "passos": ["Na tela de barbeiros, clicar em \"Excluir\" e em \"Confirmar exclusão\" na linha de Carlos Navalha.", "Cadastrar \"Barbeiro Temporário\".", "Clicar em \"Excluir\" e em \"Confirmar exclusão\" na linha de Barbeiro Temporário."],
+    "passos": [
+      "Na tela de barbeiros, clicar em \"Excluir\" e em \"Confirmar exclusão\" na linha de Carlos Navalha.",
+      "Cadastrar \"Barbeiro Temporário\".",
+      "Clicar em \"Excluir\" e em \"Confirmar exclusão\" na linha de Barbeiro Temporário."
+    ],
     "esperado": "Passo 1: mensagem \"O barbeiro possui agendamentos e não pode ser excluído. Desative-o em vez de excluir.\" e Carlos continua na tabela. Passo 3: mensagem \"Barbeiro excluído.\" e a linha some.",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (BarbeiroService.excluir com mock)", "justificativa": "Regra de integridade simples de isolar."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (BarbeiroService.excluir com mock)",
+      "justificativa": "Regra de integridade simples de isolar.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: CadastroServiceTest#deveRejeitarExclusaoDeBarbeiroComAgendamentos; #deveExcluirBarbeiroSemAgendamentos"
+    }
   },
   {
-    "id": "CT-034", "titulo": "Agenda do dia exibe os agendamentos e permite concluir atendimento",
-    "requisitos": ["RF-08"], "riscos": ["R-03"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Transição de estados (AGENDADO → CONCLUIDO)", "classificacao": "Positivo", "prioridade": "Média", "interface": "Tela",
+    "id": "CT-034",
+    "titulo": "Agenda do dia exibe os agendamentos e permite concluir atendimento",
+    "requisitos": [
+      "RF-08"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Transição de estados (AGENDADO → CONCLUIDO)",
+    "classificacao": "Positivo",
+    "prioridade": "Média",
+    "interface": "Tela",
     "precondicoes": "PC-PADRÃO. Administrador autenticado.",
     "dados": "Barbeiro: Rafael Tesoura; Data: DF1",
-    "passos": ["Abrir http://localhost:8080/admin/agenda.html.", "Selecionar barbeiro e data e clicar em \"Ver agenda\".", "Clicar em \"Concluir\" na linha das 14:00."],
+    "passos": [
+      "Abrir http://localhost:8080/admin/agenda.html.",
+      "Selecionar barbeiro e data e clicar em \"Ver agenda\".",
+      "Clicar em \"Concluir\" na linha das 14:00."
+    ],
     "esperado": "Passo 2: linha \"14:00 – 15:00\", Bruno Henrique Lima, Corte e barba, status AGENDADO, botão \"Concluir\"; nenhum código de acesso exibido. Passo 3: mensagem \"Atendimento #N marcado como concluído.\", status CONCLUIDO e botão oculto.",
-    "automacao": {"candidato": "Não", "nivel": "—", "justificativa": "Fluxo administrativo de menor risco; a transição inválida é automatizada em CT-035."}
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Fluxo administrativo de menor risco; a transição inválida é automatizada em CT-035.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveConcluirAgendamentoAtivo"
+    }
   },
   {
-    "id": "CT-035", "titulo": "Concluir agendamento cancelado é recusado",
-    "requisitos": ["RF-08"], "riscos": ["R-03"], "regras": [],
-    "nivel_tipo": "Sistema / Funcional", "tecnica": "Transição de estados (transição inválida)", "classificacao": "Alternativo", "prioridade": "Média", "interface": "API",
+    "id": "CT-035",
+    "titulo": "Concluir agendamento cancelado é recusado",
+    "requisitos": [
+      "RF-08"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Funcional",
+    "tecnica": "Transição de estados (transição inválida)",
+    "classificacao": "Alternativo",
+    "prioridade": "Média",
+    "interface": "API",
     "precondicoes": "PC-PADRÃO. Credencial de administrador (admin:admin123) via HTTP Basic.",
     "dados": "Barbeiro: Carlos Navalha; Data: DF2; agendamento das 09:30 (SEMENTE4, CANCELADO)",
-    "passos": ["Enviar GET /api/admin/agenda?barbeiroId={Carlos}&data=DF2 e anotar o id do agendamento das 09:30.", "Enviar PATCH /api/admin/agendamentos/{id}/concluir."],
+    "passos": [
+      "Enviar GET /api/admin/agenda?barbeiroId={Carlos}&data=DF2 e anotar o id do agendamento das 09:30.",
+      "Enviar PATCH /api/admin/agendamentos/{id}/concluir."
+    ],
     "esperado": "Passo 1: o agendamento das 09:30 tem status CANCELADO. Passo 2: HTTP 409 com mensagem \"Somente agendamentos com status AGENDADO podem ser concluídos.\"",
-    "automacao": {"candidato": "Sim", "nivel": "Unidade (AgendamentoService.concluir com mock)", "justificativa": "Transição inválida simples de isolar."}
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Unidade (AgendamentoService.concluir com mock)",
+      "justificativa": "Transição inválida simples de isolar.",
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarConclusaoDeAgendamentoCancelado"
+    }
   }
 ]

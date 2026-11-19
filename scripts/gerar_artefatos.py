@@ -64,6 +64,7 @@ def validar(requisitos, riscos, casos, execucoes, defeitos):
         for r in c["riscos"]:
             assert r in ids_risco, f"{c['id']}: risco desconhecido {r}"
         assert c["automacao"]["candidato"] in ("Sim", "Não"), c["id"]
+        assert c["automacao"].get("automatizado", "Não") in ("Sim", "Parcial", "Não"), c["id"]
     for e in execucoes:
         assert e["caso"] in ids_caso, f"{e['execucao']}: caso desconhecido {e['caso']}"
         assert e["resultado"] in ("Aprovado", "Reprovado", "Bloqueado", "Não executado"), e["execucao"]
@@ -77,6 +78,9 @@ def gerar_p04(requisitos, casos):
     for c in casos:
         a = c["automacao"]
         candidato = a["candidato"] + (f" — {a['nivel']}" if a["candidato"] == "Sim" else "") + f". {a['justificativa']}"
+        situacao = a.get("automatizado", "Não")
+        if situacao != "Não":
+            candidato += f" **Automatizado: {situacao}** ({a.get('referencia', '')})"
         passos = "<br>".join(f"{i}. {p}" for i, p in enumerate(c["passos"], 1))
         regras = ", ".join(c["regras"]) if c["regras"] else "—"
         partes += [
@@ -129,7 +133,11 @@ def gerar_p04(requisitos, casos):
                 por_nivel[rotulo].append(c["id"])
     for nivel in ("Unidade (JUnit)", "API (Postman)", "Interface (Selenium)"):
         partes.append(f"| {nivel} | {', '.join(por_nivel[nivel])} |")
-    partes += ["", f"**Total de casos manuais: {len(casos)}** (mínimo do manual: 24).", ""]
+    situacoes = Counter(c["automacao"].get("automatizado", "Não") for c in candidatos)
+    partes += ["", f"Situação da automação dos candidatos: {situacoes.get('Sim', 0)} automatizados em todos os níveis "
+               f"planejados, {situacoes.get('Parcial', 0)} parcialmente (faltam API/interface) e "
+               f"{situacoes.get('Não', 0)} ainda não automatizados.", "",
+               f"**Total de casos manuais: {len(casos)}** (mínimo do manual: 24).", ""]
 
     P04.write_text("\n".join(partes), encoding="utf-8")
 

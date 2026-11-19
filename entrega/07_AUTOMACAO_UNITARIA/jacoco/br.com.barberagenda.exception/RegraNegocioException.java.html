@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegraNegocioException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.exception</a> &gt; <span class="el_source">RegraNegocioException.java</span></div><h1>RegraNegocioException.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.exception;
+
+/**
+ * Violação de regra de negócio que não depende de outros registros
+ * (ex.: horário fora do funcionamento). Convertida em HTTP 400.
+ * Quando {@code campo} é informado, aparece no mapa &quot;campos&quot; da resposta de erro.
+ */
+public class RegraNegocioException extends RuntimeException {
+
+    private final String campo;
+
+    public RegraNegocioException(String mensagem) {
+<span class="nc" id="L13">        this(null, mensagem);</span>
+<span class="nc" id="L14">    }</span>
+
+    public RegraNegocioException(String campo, String mensagem) {
+<span class="fc" id="L17">        super(mensagem);</span>
+<span class="fc" id="L18">        this.campo = campo;</span>
+<span class="fc" id="L19">    }</span>
+
+    public String getCampo() {
+<span class="nc" id="L22">        return campo;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RespostaJson.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.security</a> &gt; <span class="el_source">RespostaJson.java</span></div><h1>RespostaJson.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.security;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.barberagenda.dto.ErroResponse;
+import jakarta.servlet.http.HttpServletResponse;
+
+/** Escreve respostas JSON nos filtros de segurança, que rodam antes dos controllers. */
+@Component
+public class RespostaJson {
+
+    private final ObjectMapper mapeador;
+
+<span class="nc" id="L21">    public RespostaJson(ObjectMapper mapeador) {</span>
+<span class="nc" id="L22">        this.mapeador = mapeador;</span>
+<span class="nc" id="L23">    }</span>
+
+    public void erro(HttpServletResponse resposta, HttpStatus status, String mensagem) throws IOException {
+<span class="nc" id="L26">        escrever(resposta, status, ErroResponse.de(status.value(), status.getReasonPhrase(), mensagem));</span>
+<span class="nc" id="L27">    }</span>
+
+    public void escrever(HttpServletResponse resposta, HttpStatus status, Object corpo) throws IOException {
+<span class="nc" id="L30">        resposta.setStatus(status.value());</span>
+<span class="nc" id="L31">        resposta.setContentType(MediaType.APPLICATION_JSON_VALUE);</span>
+<span class="nc" id="L32">        resposta.setCharacterEncoding(StandardCharsets.UTF_8.name());</span>
+<span class="nc" id="L33">        mapeador.writeValue(resposta.getOutputStream(), corpo);</span>
+<span class="nc" id="L34">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BarbeiroService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.service</a> &gt; <span class="el_source">BarbeiroService.java</span></div><h1>BarbeiroService.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.barberagenda.dto.BarbeiroRequest;
+import br.com.barberagenda.exception.ConflitoException;
+import br.com.barberagenda.exception.RecursoNaoEncontradoException;
+import br.com.barberagenda.model.Barbeiro;
+import br.com.barberagenda.repository.AgendamentoRepository;
+import br.com.barberagenda.repository.BarbeiroRepository;
+
+@Service
+public class BarbeiroService {
+
+    private final BarbeiroRepository barbeiroRepository;
+    private final AgendamentoRepository agendamentoRepository;
+
+<span class="fc" id="L21">    public BarbeiroService(BarbeiroRepository barbeiroRepository, AgendamentoRepository agendamentoRepository) {</span>
+<span class="fc" id="L22">        this.barbeiroRepository = barbeiroRepository;</span>
+<span class="fc" id="L23">        this.agendamentoRepository = agendamentoRepository;</span>
+<span class="fc" id="L24">    }</span>
+
+    @Transactional(readOnly = true)
+    public List&lt;Barbeiro&gt; listarAtivos() {
+<span class="nc" id="L28">        return barbeiroRepository.findByAtivoTrueOrderByNomeAsc();</span>
+    }
+
+    @Transactional(readOnly = true)
+    public List&lt;Barbeiro&gt; listarTodos() {
+<span class="nc" id="L33">        return barbeiroRepository.findAllByOrderByNomeAsc();</span>
+    }
+
+    @Transactional(readOnly = true)
+    public Barbeiro buscar(Long id) {
+<span class="fc" id="L38">        return barbeiroRepository.findById(id)</span>
+<span class="pc" id="L39">                .orElseThrow(() -&gt; new RecursoNaoEncontradoException(&quot;Barbeiro não encontrado.&quot;));</span>
+    }
+
+    @Transactional
+    public Barbeiro cadastrar(BarbeiroRequest dados) {
+<span class="nc" id="L44">        return barbeiroRepository.save(new Barbeiro(dados.nome(), dados.ativoOuPadrao()));</span>
+    }
+
+    @Transactional
+    public Barbeiro atualizar(Long id, BarbeiroRequest dados) {
+<span class="nc" id="L49">        Barbeiro barbeiro = buscar(id);</span>
+<span class="nc" id="L50">        barbeiro.atualizar(dados.nome(), dados.ativoOuPadrao());</span>
+<span class="nc" id="L51">        return barbeiro;</span>
+    }
+
+    /** Exclui o barbeiro. Se ele já possui agendamentos, a exclusão é recusada (use a desativação). */
+    @Transactional
+    public void excluir(Long id) {
+<span class="fc" id="L57">        Barbeiro barbeiro = buscar(id);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (agendamentoRepository.existsByBarbeiroId(id)) {</span>
+<span class="fc" id="L59">            throw new ConflitoException(</span>
+                    &quot;O barbeiro possui agendamentos e não pode ser excluído. Desative-o em vez de excluir.&quot;);
+        }
+<span class="fc" id="L62">        barbeiroRepository.delete(barbeiro);</span>
+<span class="fc" id="L63">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>

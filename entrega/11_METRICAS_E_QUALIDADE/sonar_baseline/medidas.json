@@ -1,0 +1,92 @@
+{
+  "component": {
+    "key": "barberagenda",
+    "name": "BarberAgenda",
+    "description": "Sistema de agendamento de barbearia - objeto de teste do Projeto Integrado P2 (Testes e Qualidade de Software)",
+    "qualifier": "TRK",
+    "measures": [
+      {
+        "metric": "coverage",
+        "value": "38.9",
+        "bestValue": false
+      },
+      {
+        "metric": "complexity",
+        "value": "241"
+      },
+      {
+        "metric": "reliability_rating",
+        "value": "4.0",
+        "bestValue": false
+      },
+      {
+        "metric": "code_smells",
+        "value": "0",
+        "bestValue": true
+      },
+      {
+        "metric": "duplicated_lines_density",
+        "value": "0.0",
+        "bestValue": true
+      },
+      {
+        "metric": "security_rating",
+        "value": "4.0",
+        "bestValue": false
+      },
+      {
+        "metric": "sqale_debt_ratio",
+        "value": "0.0",
+        "bestValue": true
+      },
+      {
+        "metric": "security_hotspots",
+        "value": "0",
+        "bestValue": true
+      },
+      {
+        "metric": "sqale_index",
+        "value": "0",
+        "bestValue": true
+      },
+      {
+        "metric": "sqale_rating",
+        "value": "1.0",
+        "bestValue": true
+      },
+      {
+        "metric": "bugs",
+        "value": "3",
+        "bestValue": false
+      },
+      {
+        "metric": "tests",
+        "value": "52"
+      },
+      {
+        "metric": "branch_coverage",
+        "value": "50.9",
+        "bestValue": false
+      },
+      {
+        "metric": "duplicated_blocks",
+        "value": "0",
+        "bestValue": true
+      },
+      {
+        "metric": "ncloc",
+        "value": "1756"
+      },
+      {
+        "metric": "vulnerabilities",
+        "value": "2",
+        "bestValue": false
+      },
+      {
+        "metric": "line_coverage",
+        "value": "36.4",
+        "bestValue": false
+      }
+    ]
+  }
+}

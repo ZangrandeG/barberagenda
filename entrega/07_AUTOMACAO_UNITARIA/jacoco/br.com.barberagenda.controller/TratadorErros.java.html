@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TratadorErros.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BarberAgenda</a> &gt; <a href="index.source.html" class="el_package">br.com.barberagenda.controller</a> &gt; <span class="el_source">TratadorErros.java</span></div><h1>TratadorErros.java</h1><pre class="source lang-java linenums">package br.com.barberagenda.controller;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import br.com.barberagenda.dto.ErroResponse;
+import br.com.barberagenda.exception.ConflitoException;
+import br.com.barberagenda.exception.RecursoNaoEncontradoException;
+import br.com.barberagenda.exception.RegraNegocioException;
+
+/**
+ * Converte exceções em respostas JSON no formato padronizado
+ * {status, erro, mensagem, campos}. Nunca expõe stack trace ao cliente.
+ */
+@RestControllerAdvice
+<span class="nc" id="L32">public class TratadorErros {</span>
+
+<span class="nc" id="L34">    private static final Logger LOG = LoggerFactory.getLogger(TratadorErros.class);</span>
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;ErroResponse&gt; validacao(MethodArgumentNotValidException ex) {
+<span class="nc" id="L38">        Map&lt;String, String&gt; campos = new LinkedHashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (FieldError erro : ex.getBindingResult().getFieldErrors()) {</span>
+<span class="nc" id="L40">            campos.putIfAbsent(erro.getField(), erro.getDefaultMessage());</span>
+<span class="nc" id="L41">        }</span>
+<span class="nc" id="L42">        return resposta(HttpStatus.BAD_REQUEST, &quot;Existem campos inválidos.&quot;, campos);</span>
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity&lt;ErroResponse&gt; parametroAusente(MissingServletRequestParameterException ex) {
+<span class="nc" id="L47">        return resposta(HttpStatus.BAD_REQUEST, &quot;Parâmetro obrigatório ausente.&quot;,</span>
+<span class="nc" id="L48">                Map.of(ex.getParameterName(), &quot;O parâmetro é obrigatório.&quot;));</span>
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity&lt;ErroResponse&gt; tipoInvalido(MethodArgumentTypeMismatchException ex) {
+<span class="nc" id="L53">        return resposta(HttpStatus.BAD_REQUEST, &quot;Parâmetro com valor inválido.&quot;,</span>
+<span class="nc" id="L54">                Map.of(ex.getName(), &quot;Valor inválido.&quot;));</span>
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity&lt;ErroResponse&gt; corpoInvalido(HttpMessageNotReadableException ex) {
+<span class="nc" id="L59">        return resposta(HttpStatus.BAD_REQUEST, &quot;Corpo da requisição ausente ou em formato inválido.&quot;, Map.of());</span>
+    }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity&lt;ErroResponse&gt; regraNegocio(RegraNegocioException ex) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        Map&lt;String, String&gt; campos = ex.getCampo() == null ? Map.of() : Map.of(ex.getCampo(), ex.getMessage());</span>
+<span class="nc" id="L65">        return resposta(HttpStatus.BAD_REQUEST, ex.getMessage(), campos);</span>
+    }
+
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
+    public ResponseEntity&lt;ErroResponse&gt; naoEncontrado(RecursoNaoEncontradoException ex) {
+<span class="nc" id="L70">        return resposta(HttpStatus.NOT_FOUND, ex.getMessage(), Map.of());</span>
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity&lt;ErroResponse&gt; rotaInexistente(NoResourceFoundException ex) {
+<span class="nc" id="L75">        return resposta(HttpStatus.NOT_FOUND, &quot;Recurso não encontrado.&quot;, Map.of());</span>
+    }
+
+    @ExceptionHandler(ConflitoException.class)
+    public ResponseEntity&lt;ErroResponse&gt; conflito(ConflitoException ex) {
+<span class="nc" id="L80">        return resposta(HttpStatus.CONFLICT, ex.getMessage(), Map.of());</span>
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity&lt;ErroResponse&gt; integridade(DataIntegrityViolationException ex) {
+<span class="nc" id="L85">        LOG.warn(&quot;Violação de integridade de dados: {}&quot;, ex.getMostSpecificCause().getMessage());</span>
+<span class="nc" id="L86">        return resposta(HttpStatus.CONFLICT, &quot;A operação conflita com dados já existentes.&quot;, Map.of());</span>
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity&lt;ErroResponse&gt; metodoNaoSuportado(HttpRequestMethodNotSupportedException ex) {
+<span class="nc" id="L91">        return resposta(HttpStatus.METHOD_NOT_ALLOWED, &quot;Método HTTP não suportado para este recurso.&quot;, Map.of());</span>
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity&lt;ErroResponse&gt; tipoConteudo(HttpMediaTypeNotSupportedException ex) {
+<span class="nc" id="L96">        return resposta(HttpStatus.UNSUPPORTED_MEDIA_TYPE, &quot;Tipo de conteúdo não suportado. Use application/json.&quot;,</span>
+<span class="nc" id="L97">                Map.of());</span>
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;ErroResponse&gt; inesperado(Exception ex) {
+<span class="nc" id="L102">        LOG.error(&quot;Erro inesperado ao processar a requisição&quot;, ex);</span>
+<span class="nc" id="L103">        return resposta(HttpStatus.INTERNAL_SERVER_ERROR, &quot;Erro interno. Tente novamente mais tarde.&quot;, Map.of());</span>
+    }
+
+    private static ResponseEntity&lt;ErroResponse&gt; resposta(HttpStatus status, String mensagem,
+                                                         Map&lt;String, String&gt; campos) {
+<span class="nc" id="L108">        ErroResponse corpo = new ErroResponse(status.value(), status.getReasonPhrase(), mensagem, campos);</span>
+<span class="nc" id="L109">        return ResponseEntity.status(status).body(corpo);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.16.202610240946</span></div></body></html>
