@@ -1,0 +1,43 @@
+{
+  "casos_planejados": 48,
+  "casos_executados": 42,
+  "aprovados": 42,
+  "reprovados": 0,
+  "por_resultado": {
+    "Aprovado": 42,
+    "Bloqueado": 1,
+    "Não executado": 5
+  },
+  "percentual_execucao": 87.5,
+  "taxa_aprovacao": 100.0,
+  "taxa_reprovacao": 0.0,
+  "requisitos_no_escopo": 14,
+  "requisitos_com_teste_executado": 12,
+  "requisitos_sem_teste_executado": [
+    "RF-09",
+    "RNF-05"
+  ],
+  "cobertura_requisitos": 85.7,
+  "casos_planejados_automacao": 39,
+  "casos_automatizados": 39,
+  "taxa_automacao": 100.0,
+  "defeitos_total": 0,
+  "defeitos_por_severidade": {
+    "Crítica": 0,
+    "Alta": 0,
+    "Média": 0,
+    "Baixa": 0
+  },
+  "defeitos_por_status": {
+    "Novo": 0,
+    "Em análise": 0,
+    "Em correção": 0,
+    "Pronto para reteste": 0,
+    "Encerrado": 0,
+    "Reaberto": 0
+  },
+  "defeitos_retestados": 0,
+  "defeitos_reabertos": 0,
+  "taxa_reabertura": null,
+  "execucoes_registradas": 46
+}

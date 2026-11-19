@@ -30,8 +30,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 6 — Automação unitária + Sonar linha de base (P08) | Marco 5 | Concluída em 2026-11-18 — tag `marco-5` |
 | 7 — Integração/API e sistema/interface (P08) | Marco 6 | Concluída em 2026-11-18 — tag `marco-6` |
 | 8 — Aceitação e não funcionais (P09) | Marco 7 | Concluída em 2026-11-18 — tag `marco-7` (aceitação e usabilidade aguardam pessoa externa) |
-| 9 — TDD, CI/CD e melhoria (P11) | Marco 9 | Não iniciada |
-| 10 — Métricas (P10) | Marco 8 | Não iniciada |
+| 9 — TDD, CI/CD e melhoria (P11) | Marco 9 | Concluída em 2026-11-18 — TDD da RF-09 (RED `35ce2a2`, GREEN `c9c6e4c`, REFACTOR `78b44e3`), versão 1.2.0, pipeline verde e falha controlada, 2ª análise Sonar — tag `marco-9` |
+| 10 — Métricas (P10) | Marco 8 | Concluída em 2026-11-18 — execução 87,5%, aprovação 100%, cobertura de requisitos 85,7%, automação 100%, 0 defeitos — tag `marco-8` |
 | 11 — Entrega final (P12, P13, P14, Drive) | Entrega final | Não iniciada |
 
 ## Produtos
@@ -49,8 +49,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P07 | Registro de defeitos | GitHub Issues (etiqueta `defeito`) + `entrega/06_DEFEITOS/` | Nenhum defeito encontrado na execução dos casos; exportação em 2026-11-18 |
 | P08 | Scripts de automação | `src/test/java/.../unit/` e `.../e2e/`; `postman/`; `entrega/07`, `08` e `09` | Concluído: unidade (52 execuções), API (26 requisições/63 asserções), interface (5 testes); 31/31 candidatos automatizados |
 | P09 | Aceitação e não funcionais | `entrega/10_ACEITACAO_NAO_FUNCIONAIS/` | 7 testes não funcionais executados e aprovados (desempenho, segurança ×3, confiabilidade ×2, compatibilidade); usabilidade e 4 cenários de aceitação preparados, pendentes de pessoa externa |
-| P10 | Métricas e indicadores | — | Não iniciado |
-| P11 | TDD, CI/CD e melhoria contínua | — | Não iniciado |
+| P10 | Métricas e indicadores | `entrega/11_METRICAS_E_QUALIDADE/P10_Metricas_e_Indicadores.md`, `metricas/` | 8 métricas com gráficos e interpretação (`scripts/metricas.py`) |
+| P11 | TDD, CI/CD e melhoria contínua | `entrega/12_TDD_CICD_MELHORIA/` | Ciclo Red-Green-Refactor, pipeline, comparação Sonar e plano de melhoria (M-01 a M-07) |
 | P12 | Relatório final | — | Não iniciado |
 | P13 | Apresentação e roteiro de demonstração | — | Não iniciado |
 | P14 | Diário de participação | `entrega/15_DIARIO_DE_PARTICIPACAO/P14_Diario_Participacao.md` | Modelo criado — preenchimento contínuo pelo grupo |

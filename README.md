@@ -142,7 +142,15 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 
 ## 11. Acesso ao pipeline
 
-GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions (pipeline a configurar no Marco 9).
+GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions — workflow `.github/workflows/ci.yml` (gatilhos: `push`, `pull_request` para `main` e manual).
+
+| Job | O que faz |
+|---|---|
+| Unidade + integração + cobertura | `./mvnw -B verify` (58 testes) e JaCoCo |
+| Integração/API | Sobe a aplicação no perfil `test` e roda a coleção no Newman |
+| Sistema/interface | `./mvnw test -Pe2e` no Chrome headless |
+
+Relatórios (Surefire, JaCoCo, Newman, capturas do Selenium) ficam nos artefatos de cada execução. Execuções documentadas (verde, falha proposital e correção) no [P11](entrega/12_TDD_CICD_MELHORIA/P11_TDD_CICD_Melhoria.md).
 
 ## 12. Localização dos documentos
 
