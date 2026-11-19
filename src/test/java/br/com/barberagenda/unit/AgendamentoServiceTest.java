@@ -40,6 +40,7 @@ import br.com.barberagenda.repository.ClienteRepository;
 import br.com.barberagenda.repository.ServicoRepository;
 import br.com.barberagenda.service.AgendamentoService;
 import br.com.barberagenda.service.GeradorCodigoAcesso;
+import br.com.barberagenda.service.PoliticaCancelamento;
 import br.com.barberagenda.service.RegrasAgendamento;
 
 @ExtendWith(MockitoExtension.class)
@@ -64,7 +65,7 @@ class AgendamentoServiceTest {
     @BeforeEach
     void criarServico() {
         service = new AgendamentoService(agendamentoRepository, clienteRepository, barbeiroRepository,
-                servicoRepository, new RegrasAgendamento(RELOGIO), geradorCodigo);
+                servicoRepository, new RegrasAgendamento(RELOGIO), geradorCodigo, new PoliticaCancelamento());
     }
 
     /** Cliente, barbeiro e serviço existentes; barbeiro e serviço com a situação informada. */

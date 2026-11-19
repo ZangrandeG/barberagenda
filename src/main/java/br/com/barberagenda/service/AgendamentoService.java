@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barberagenda.dto.AgendamentoRequest;
-import br.com.barberagenda.exception.CancelamentoForaDoPrazoException;
 import br.com.barberagenda.exception.ConflitoException;
 import br.com.barberagenda.exception.RecursoNaoEncontradoException;
 import br.com.barberagenda.exception.RegraNegocioException;
@@ -37,19 +36,22 @@ public class AgendamentoService {
     private final ServicoRepository servicoRepository;
     private final RegrasAgendamento regras;
     private final GeradorCodigoAcesso geradorCodigo;
+    private final PoliticaCancelamento politicaCancelamento;
 
     public AgendamentoService(AgendamentoRepository agendamentoRepository,
                               ClienteRepository clienteRepository,
                               BarbeiroRepository barbeiroRepository,
                               ServicoRepository servicoRepository,
                               RegrasAgendamento regras,
-                              GeradorCodigoAcesso geradorCodigo) {
+                              GeradorCodigoAcesso geradorCodigo,
+                              PoliticaCancelamento politicaCancelamento) {
         this.agendamentoRepository = agendamentoRepository;
         this.clienteRepository = clienteRepository;
         this.barbeiroRepository = barbeiroRepository;
         this.servicoRepository = servicoRepository;
         this.regras = regras;
         this.geradorCodigo = geradorCodigo;
+        this.politicaCancelamento = politicaCancelamento;
     }
 
     /**
@@ -100,17 +102,17 @@ public class AgendamentoService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException(NAO_ENCONTRADO_PARA_CLIENTE));
     }
 
-    /** Cancelamento feito pelo cliente. Somente agendamentos com status AGENDADO podem ser cancelados. */
+    /**
+     * Cancelamento feito pelo cliente. Somente agendamentos com status AGENDADO (409 nos demais) e respeitando a
+     * antecedência mínima da {@link PoliticaCancelamento} (422).
+     */
     @Transactional
     public Agendamento cancelarPeloCliente(String codigoAcesso, String email) {
         Agendamento agendamento = consultarPeloCliente(codigoAcesso, email);
         if (!agendamento.isAgendado()) {
             throw new ConflitoException("Somente agendamentos com status AGENDADO podem ser cancelados.");
         }
-        if (agendamento.getDataHoraInicio().isBefore(regras.agora().plusHours(2))) {
-            throw new CancelamentoForaDoPrazoException(
-                    "O cancelamento só pode ser feito com no mínimo 2 horas de antecedência.");
-        }
+        politicaCancelamento.validarPrazo(agendamento, regras.agora());
         agendamento.cancelar();
         return agendamento;
     }
