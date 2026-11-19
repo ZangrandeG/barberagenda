@@ -1,0 +1,123 @@
+{
+  "total": 2,
+  "p": 1,
+  "ps": 500,
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 2
+  },
+  "effortTotal": 15,
+  "issues": [
+    {
+      "key": "e77369ea-3278-4514-8fe8-a25b8f3fab12",
+      "rule": "java:S3330",
+      "severity": "MINOR",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "project": "barberagenda",
+      "line": 75,
+      "hash": "6c2f743661b309d0dc88368dda99bf8e",
+      "textRange": {
+        "startLine": 75,
+        "endLine": 75,
+        "startOffset": 80,
+        "endOffset": 82
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Make sure creating this cookie without the \"HttpOnly\" flag is safe.",
+      "effort": "10min",
+      "debt": "10min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "cwe",
+        "privacy",
+        "former-hotspot"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "VULNERABILITY",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    },
+    {
+      "key": "50656254-46bc-4a82-a82a-c45ecb337572",
+      "rule": "java:S4502",
+      "severity": "CRITICAL",
+      "component": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "project": "barberagenda",
+      "line": 77,
+      "hash": "fa18d05a8b192be7cb5c83b237b2bbcf",
+      "textRange": {
+        "startLine": 77,
+        "endLine": 77,
+        "startOffset": 17,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Make sure disabling Spring Security's CSRF protection is safe here.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "149721041+zangrandeg@users.noreply.github.com",
+      "tags": [
+        "cwe",
+        "spring",
+        "former-hotspot"
+      ],
+      "creationDate": "2026-11-18T17:22:12-0300",
+      "updateDate": "2026-11-18T21:57:32-0300",
+      "type": "VULNERABILITY",
+      "scope": "MAIN",
+      "quickFixAvailable": false,
+      "messageFormattings": [],
+      "codeVariants": [],
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "prioritizedRule": false,
+      "fromSonarQubeUpdate": false,
+      "internalTags": [],
+      "linkedTicketStatus": "NOT_LINKED"
+    }
+  ],
+  "components": [
+    {
+      "key": "barberagenda:src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "SecurityConfig.java",
+      "longName": "src/main/java/br/com/barberagenda/security/SecurityConfig.java",
+      "path": "src/main/java/br/com/barberagenda/security/SecurityConfig.java"
+    },
+    {
+      "key": "barberagenda",
+      "enabled": true,
+      "qualifier": "TRK",
+      "name": "BarberAgenda",
+      "longName": "BarberAgenda"
+    }
+  ],
+  "facets": []
+}

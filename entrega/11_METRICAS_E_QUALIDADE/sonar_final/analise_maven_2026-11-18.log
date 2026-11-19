@@ -1,0 +1,259 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24540 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] 
+[INFO] ------------------< br.com.barberagenda:barberagenda >------------------
+[INFO] Building BarberAgenda 1.2.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ barberagenda ---
+[INFO] Deleting C:\Users\Admin\Desktop\P2 ELVIO\target
+[INFO] 
+[INFO] --- jacoco:0.8.16:prepare-agent (preparar-agente) @ barberagenda ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Admin\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.16\\org.jacoco.agent-0.8.16-runtime.jar=destfile=C:\\Users\\Admin\\Desktop\\P2 ELVIO\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ barberagenda ---
+[INFO] Copying 4 resources from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ barberagenda ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 53 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ barberagenda ---
+[INFO] skip non existing resourceDirectory C:\Users\Admin\Desktop\P2 ELVIO\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ barberagenda ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 20 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ barberagenda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running Integração — antecedência mínima para cancelamento (RF-09)
+23:05:53.376 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration br.com.barberagenda.BarberAgendaApplication for test class br.com.barberagenda.integration.CancelamentoAntecedenciaIntegracaoTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-18T23:05:54.102-03:00  INFO 12880 --- [barberagenda] [           main] i.CancelamentoAntecedenciaIntegracaoTest : Starting CancelamentoAntecedenciaIntegracaoTest using Java 21.0.13 with PID 12880 (started by Admin in C:\Users\Admin\Desktop\P2 ELVIO)
+2026-11-18T23:05:54.103-03:00  INFO 12880 --- [barberagenda] [           main] i.CancelamentoAntecedenciaIntegracaoTest : The following 1 profile is active: "test"
+2026-11-18T23:05:54.994-03:00  INFO 12880 --- [barberagenda] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18T23:05:55.096-03:00  INFO 12880 --- [barberagenda] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 5 JPA repository interfaces.
+2026-11-18T23:05:55.709-03:00  INFO 12880 --- [barberagenda] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-18T23:05:55.790-03:00  INFO 12880 --- [barberagenda] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.53.Final
+2026-11-18T23:05:55.833-03:00  INFO 12880 --- [barberagenda] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-18T23:05:56.252-03:00  INFO 12880 --- [barberagenda] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18T23:05:56.302-03:00  INFO 12880 --- [barberagenda] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-18T23:05:56.653-03:00  INFO 12880 --- [barberagenda] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:barberagenda user=SA
+2026-11-18T23:05:56.656-03:00  INFO 12880 --- [barberagenda] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-18T23:05:56.748-03:00  INFO 12880 --- [barberagenda] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-18T23:05:57.958-03:00  INFO 12880 --- [barberagenda] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18T23:05:58.044-03:00  INFO 12880 --- [barberagenda] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18T23:05:58.335-03:00  INFO 12880 --- [barberagenda] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-18T23:05:59.278-03:00  INFO 12880 --- [barberagenda] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-11-18T23:05:59.441-03:00  INFO 12880 --- [barberagenda] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name usuarioDetailsService
+2026-11-18T23:05:59.901-03:00  INFO 12880 --- [barberagenda] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-18T23:05:59.901-03:00  INFO 12880 --- [barberagenda] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-18T23:05:59.902-03:00  INFO 12880 --- [barberagenda] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-18T23:05:59.949-03:00  INFO 12880 --- [barberagenda] [           main] i.CancelamentoAntecedenciaIntegracaoTest : Started CancelamentoAntecedenciaIntegracaoTest in 6.302 seconds (process running for 7.941)
+2026-11-18T23:06:00.190-03:00  INFO 12880 --- [barberagenda] [           main] b.c.b.security.InicializadorAdmin        : Usuário administrador 'admin' criado.
+2026-11-18T23:06:00.231-03:00  INFO 12880 --- [barberagenda] [           main] b.c.b.seed.InicializadorDadosFicticios   : Massa de dados fictícios carregada: ResumoCarga[barbeiros=3, servicos=5, clientes=10, agendamentos=5]
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\Admin\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.155 s -- in Integração — antecedência mínima para cancelamento (RF-09)
+[INFO] Running AgendamentoService — criação, conflitos, consulta e mudança de status
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.060 s -- in AgendamentoService — criação, conflitos, consulta e mudança de status
+[INFO] Running ClienteService e BarbeiroService — unicidade de e-mail e exclusão de barbeiro
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in ClienteService e BarbeiroService — unicidade de e-mail e exclusão de barbeiro
+[INFO] Running RegrasAgendamento — funcionamento, intervalo e antecedência (RN-04, RN-05, RN-06)
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.055 s -- in RegrasAgendamento — funcionamento, intervalo e antecedência (RN-04, RN-05, RN-06)
+[INFO] Running Validação de entrada — RN-01, RN-02, RN-03 e RN-09
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in Validação de entrada — RN-01, RN-02, RN-03 e RN-09
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 58, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.16:report (relatorio) @ barberagenda ---
+[INFO] Loading execution data file C:\Users\Admin\Desktop\P2 ELVIO\target\jacoco.exec
+[INFO] Analyzed bundle 'BarberAgenda' with 48 classes
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ barberagenda ---
+[INFO] Building jar: C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.2.0.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.16:repackage (repackage) @ barberagenda ---
+[INFO] Replacing main artifact C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.2.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Admin\Desktop\P2 ELVIO\target\barberagenda-1.2.0.jar.original
+[INFO] 
+[INFO] ------------------< br.com.barberagenda:barberagenda >------------------
+[INFO] Building BarberAgenda 1.2.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- sonar:5.9.0.7382:sonar (default-cli) @ barberagenda ---
+[INFO] Java 21.0.13 Eclipse Adoptium (64-bit)
+[INFO] Windows 11 10.0 (amd64)
+[INFO] Communicating with SonarQube Community Build 26.11.0.134175
+[INFO] JRE provisioning: os[windows], arch[amd64]
+[INFO] Starting SonarScanner Engine...
+[INFO] Java 21.0.13 Eclipse Adoptium (64-bit)
+[INFO] Load global settings
+[INFO] Load global settings (done) | time=100ms
+[INFO] Server id: 147B411E-AaHxTLmTsrCFeW2uggu_
+[INFO] Loading required plugins
+[INFO] Load plugins index
+[INFO] Load plugins index (done) | time=14ms
+[INFO] Load/download plugins
+[INFO] Load/download plugins (done) | time=8ms
+[INFO] Load project settings for component key: 'barberagenda'
+[INFO] Load project settings for component key: 'barberagenda' (done) | time=15ms
+[INFO] Process project properties
+[INFO] Process project properties (done) | time=14ms
+[INFO] Project key: barberagenda
+[INFO] Base dir: C:\Users\Admin\Desktop\P2 ELVIO
+[INFO] Working dir: C:\Users\Admin\Desktop\P2 ELVIO\target\sonar
+[INFO] Load quality profiles
+[INFO] Load quality profiles (done) | time=29ms
+[INFO] Load active rules
+[INFO] Load active rules (done) | time=164ms
+[INFO] Load analysis cache
+[INFO] Load analysis cache (5.7 kB) | time=11ms
+[INFO] Preprocessing files...
+[INFO] 3 languages detected in 76 preprocessed files (done) | time=179ms
+[INFO] 0 files ignored because of scm ignore settings
+[INFO] Loading plugins for detected languages
+[INFO] Load/download plugins
+[INFO] Load/download plugins (done) | time=15ms
+[INFO] Load project repositories
+[INFO] Load project repositories (done) | time=93ms
+[INFO] Indexing files...
+[INFO] Project configuration:
+[INFO] 76 files indexed (done) | time=18ms
+[INFO] Quality profile for java: Sonar way core
+[INFO] Quality profile for xml: Sonar way core
+[INFO] Quality profile for yaml: Sonar way comprehensive
+[INFO] ------------- Run sensors on module BarberAgenda
+[INFO] Load metrics repository
+[INFO] Load metrics repository (done) | time=17ms
+[INFO] Sensor IaC YAML File Type Classification Sensor [iac]
+[INFO] Sensor IaC YAML File Type Classification Sensor [iac] (done) | time=3ms
+[INFO] Sensor JavaSensor [java]
+[INFO] Configured Java source version (sonar.java.source): 21, preview features enabled (sonar.java.enablePreview): false
+[INFO] Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+[INFO] Using ECJ batch to parse 53 Main java source files with batch size 427 KB.
+[INFO] Starting batch processing.
+[INFO] The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+[INFO] 100% analyzed
+[INFO] Batch processing: Done.
+[INFO] Did not optimize analysis for any files, performed a full analysis for all 53 files.
+[INFO] Using ECJ batch to parse 20 Test java source files with batch size 427 KB.
+[INFO] Starting batch processing.
+[INFO] 100% analyzed
+[INFO] Batch processing: Done.
+[INFO] Did not optimize analysis for any files, performed a full analysis for all 20 files.
+[INFO] No "Generated" source files to scan.
+[INFO] Sensor JavaSensor [java] (done) | time=2590ms
+[INFO] Sensor JaCoCo XML Report Importer [jacoco]
+[INFO] Importing 1 report(s). Turn your logs in debug mode in order to see the exhaustive list.
+[INFO] Sensor JaCoCo XML Report Importer [jacoco] (done) | time=73ms
+[INFO] Sensor IaC CloudFormation Sensor [iac]
+[INFO] There are no files to be analyzed for the CloudFormation language
+[INFO] Sensor IaC CloudFormation Sensor [iac] (done) | time=1ms
+[INFO] Sensor IaC cfn-lint report Sensor [iac]
+[INFO] Sensor IaC cfn-lint report Sensor [iac] (done) | time=0ms
+[INFO] Sensor IaC Kustomization Sensor [iac]
+[INFO] Sensor IaC Kustomization Sensor [iac] (done) | time=0ms
+[INFO] Sensor IaC hadolint report Sensor [iac]
+[INFO] Sensor IaC hadolint report Sensor [iac] (done) | time=0ms
+[INFO] Sensor Java Config Sensor [iac]
+[INFO] There are no files to be analyzed for the Java language
+[INFO] Sensor Java Config Sensor [iac] (done) | time=0ms
+[INFO] Sensor IaC Docker Sensor [iac]
+[INFO] There are no files to be analyzed for the Docker language
+[INFO] Sensor IaC Docker Sensor [iac] (done) | time=5ms
+[INFO] Sensor SurefireSensor [java]
+[INFO] parsing [C:\Users\Admin\Desktop\P2 ELVIO\target\surefire-reports]
+[INFO] Sensor SurefireSensor [java] (done) | time=68ms
+[INFO] Sensor XML Sensor [xml]
+[INFO] 1 source file to be analyzed
+[INFO] 1/1 source file has been analyzed
+[INFO] Sensor XML Sensor [xml] (done) | time=109ms
+[INFO] Sensor IaC Kubernetes Sensor [iac]
+[INFO] There are no files to be analyzed for the Kubernetes language
+[INFO] Sensor IaC Kubernetes Sensor [iac] (done) | time=73ms
+[INFO] Sensor TextAndSecretsSensor [text]
+[INFO] Available processors: 12
+[INFO] Using 12 threads for analysis.
+[INFO] Start fetching files for the text and secrets analysis
+[INFO] Using Git CLI to retrieve dirty files
+[INFO] Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+[INFO] Starting the text and secrets analysis
+[INFO] 75 source files to be analyzed for the text and secrets analysis
+[INFO] 75/75 source files have been analyzed for the text and secrets analysis
+[INFO] Sensor TextAndSecretsSensor [text] (done) | time=511ms
+[INFO] ------------- Run sensors on project
+[INFO] Sensor JaCoCo Aggregate XML Report Importer [jacoco]
+[INFO] Sensor JaCoCo Aggregate XML Report Importer [jacoco] (done) | time=1ms
+[INFO] Sensor JavaScript/TypeScript/CSS analysis [javascript]
+[INFO] No input files found for analysis
+[INFO] Hit the cache for 0 out of 0
+[INFO] Miss the cache for 0 out of 0
+[INFO] Sensor JavaScript/TypeScript/CSS analysis [javascript] (done) | time=4ms
+[INFO] Sensor IaC Project Sensor [iac]
+[INFO] Sensor IaC Project Sensor [iac] (done) | time=1ms
+[INFO] Sensor Java SpringContextModelSensor [java]
+[INFO] Sensor Java SpringContextModelSensor [java] (done) | time=21ms
+[INFO] Sensor Zero Coverage Sensor
+[INFO] Sensor Zero Coverage Sensor (done) | time=2ms
+[INFO] Sensor Java CPD Block Indexer
+[INFO] Sensor Java CPD Block Indexer (done) | time=42ms
+[INFO] Sensor JavaProjectSensor [java]
+[INFO] Sensor JavaProjectSensor [java] (done) | time=2ms
+[INFO] ------------- Gather SCA dependencies on project
+[INFO] Dependency analysis skipped
+[INFO] SCM Publisher SCM provider for this project is: git
+[INFO] SCM Publisher 1 source file to be analyzed
+[INFO] SCM Publisher 0/1 source files have been analyzed (done) | time=376ms
+[WARNING] Missing blame information for the following files:
+[WARNING]   * src/test/java/br/com/barberagenda/e2e/TesteE2EBase.java
+[WARNING] This may lead to missing/broken features in SonarQube
+[INFO] CPD Executor 27 files had no CPD blocks
+[INFO] CPD Executor Calculating CPD for 26 files
+[INFO] CPD Executor CPD calculation finished (done) | time=17ms
+[INFO] SCM revision ID '3d4f5c0d2b50e881db75df8c59483efa1639316f'
+[INFO] Analysis report generated in 126ms, dir size=432.2 kB
+[INFO] Analysis report compressed in 214ms, zip size=202.5 kB
+[INFO] Analysis report uploaded in 22ms
+[INFO] ANALYSIS SUCCESSFUL, you can find the results at: http://localhost:9000/dashboard?id=barberagenda
+[INFO] Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO] More about the report processing at http://localhost:9000/api/ce/task?id=3acf3263-3cef-481d-a5c7-a5e62611cb87
+[INFO] Analysis total time: 8.880 s
+[INFO] SonarScanner Engine completed successfully
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  27.388 s
+[INFO] Finished at: 2026-11-18T23:06:15-03:00
+[INFO] ------------------------------------------------------------------------

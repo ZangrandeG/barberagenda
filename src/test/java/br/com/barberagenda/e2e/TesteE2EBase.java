@@ -58,7 +58,7 @@ abstract class TesteE2EBase {
     /** Data de agendamento longe dos agendamentos da massa: 7 dias à frente, pulando domingo. */
     protected static LocalDate dataLivre() {
         LocalDate data = LocalDate.now().plusDays(7);
-        return data.getDayOfWeek() == DayOfWeek.SUNDAY ? data.plusDays(1) : data;
+        return DayOfWeek.SUNDAY.equals(data.getDayOfWeek()) ? data.plusDays(1) : data;
     }
 
     WebDriver driver() {
