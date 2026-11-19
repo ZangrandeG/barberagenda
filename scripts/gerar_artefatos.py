@@ -417,14 +417,17 @@ def main():
     requisitos = ler_json("requisitos.json")
     riscos = ler_json("riscos.json")
     casos = ler_json("casos.json")
+    # Testes não funcionais (TNF) e cenários de aceitação (CA) do P09: entram na planilha P05, não no P04/P06.
+    complementares = ler_json("testes_complementares.json") if (DADOS / "testes_complementares.json").exists() else []
     execucoes = ler_csv("execucoes.csv")
     defeitos = ler_csv("defeitos.csv")
-    validar(requisitos, riscos, casos, execucoes, defeitos)
+    validar(requisitos, riscos, casos + complementares, execucoes, defeitos)
     SAIDA.mkdir(parents=True, exist_ok=True)
     SAIDA_P06.mkdir(parents=True, exist_ok=True)
+    ids_manuais = {c["id"] for c in casos}
     gerar_p04(requisitos, casos)
-    gerar_p06(casos, execucoes)
-    gerar_p05(requisitos, riscos, casos, execucoes, defeitos)
+    gerar_p06(casos, [e for e in execucoes if e["caso"] in ids_manuais])
+    gerar_p05(requisitos, riscos, casos + complementares, execucoes, defeitos)
     print(f"P04: {P04.relative_to(RAIZ)} ({len(casos)} casos)")
     print(f"P06: {P06_CHECKLIST.relative_to(RAIZ)} e {P06_REGISTRO.name}")
     print(f"P05: {P05.relative_to(RAIZ)} ({len(requisitos)} requisitos, {len(riscos)} riscos, "

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.com.barberagenda.e2e.CompatibilidadeE2ETest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.995 s -- in br.com.barberagenda.e2e.CompatibilidadeE2ETest

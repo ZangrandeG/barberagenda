@@ -1,0 +1,41 @@
+{
+  "inicio": "2026-11-18 22:48:20",
+  "porta": 8099,
+  "perfil": "dev",
+  "banco": "H2 em arquivo temporário",
+  "criado_antes_da_parada": {
+    "cliente_status": 201,
+    "agendamento_status": 201,
+    "codigoAcesso": "TDESX7X4"
+  },
+  "parada": "processo encerrado (terminate) às 2026-11-18 22:48:28",
+  "senha": {
+    "prefixo_hash": "$2a$10$",
+    "tamanho_hash": 60,
+    "texto_original_no_banco": false,
+    "bcrypt": true
+  },
+  "depois_do_reinicio": {
+    "status": 200,
+    "dados": {
+      "id": 6,
+      "codigoAcesso": "TDESX7X4",
+      "clienteId": 11,
+      "clienteNome": "Cliente Reinício",
+      "clienteEmail": "reinicio.1795052905@exemplo.com",
+      "barbeiroId": 1,
+      "barbeiroNome": "Carlos Navalha",
+      "servicoId": 1,
+      "servicoNome": "Corte de cabelo",
+      "duracaoMinutos": 30,
+      "preco": 45.0,
+      "dataHoraInicio": "2026-11-25T15:00:00",
+      "dataHoraFim": "2026-11-25T15:30:00",
+      "status": "AGENDADO",
+      "dataCriacao": "2026-11-18T22:48:25.845146"
+    }
+  },
+  "TNF-05_atende": true,
+  "TNF-03_atende": true,
+  "fim": "2026-11-18 22:48:34"
+}

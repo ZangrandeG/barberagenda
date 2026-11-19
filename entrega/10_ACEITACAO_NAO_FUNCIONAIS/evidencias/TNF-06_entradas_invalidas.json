@@ -1,0 +1,130 @@
+[
+  {
+    "entrada": "JSON malformado",
+    "metodo": "POST",
+    "rota": "/api/clientes",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "corpo vazio",
+    "metodo": "POST",
+    "rota": "/api/agendamentos",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "tipo errado em barbeiroId",
+    "metodo": "POST",
+    "rota": "/api/agendamentos",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "data em formato inválido",
+    "metodo": "POST",
+    "rota": "/api/agendamentos",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "campos nulos",
+    "metodo": "POST",
+    "rota": "/api/agendamentos",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "número gigante",
+    "metodo": "POST",
+    "rota": "/api/agendamentos",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "texto de 10.000 caracteres",
+    "metodo": "POST",
+    "rota": "/api/clientes",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "parâmetro ausente",
+    "metodo": "GET",
+    "rota": "/api/horarios-disponiveis?barbeiroId=13",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "parâmetro de tipo errado",
+    "metodo": "GET",
+    "rota": "/api/horarios-disponiveis?barbeiroId=abc&servicoId=21&data=2030-01-07",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "data inexistente",
+    "metodo": "GET",
+    "rota": "/api/horarios-disponiveis?barbeiroId=13&servicoId=21&data=2030-02-30",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "barbeiro inexistente",
+    "metodo": "GET",
+    "rota": "/api/horarios-disponiveis?barbeiroId=999999&servicoId=21&data=2030-01-07",
+    "status": 404,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "código com caracteres especiais",
+    "metodo": "GET",
+    "rota": "/api/agendamentos/%3Cscript%3E?email=ana.rocha@exemplo.com",
+    "status": 404,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "rota inexistente",
+    "metodo": "GET",
+    "rota": "/api/nao-existe",
+    "status": 404,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "método não suportado",
+    "metodo": "DELETE",
+    "rota": "/api/barbeiros",
+    "status": 405,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "tipo de conteúdo não suportado",
+    "metodo": "POST",
+    "rota": "/api/clientes",
+    "status": 415,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  },
+  {
+    "entrada": "cancelamento sem e-mail",
+    "metodo": "PATCH",
+    "rota": "/api/agendamentos/SEMENTE2/cancelar",
+    "status": 400,
+    "detalhe_interno_exposto": false,
+    "ok": true
+  }
+]

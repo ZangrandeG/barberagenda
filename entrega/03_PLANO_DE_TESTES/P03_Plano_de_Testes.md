@@ -6,6 +6,7 @@
 | Versão | Data | Descrição |
 |---|---|---|
 | v1.0 | 2026-11-18 | Primeira versão do plano (Marco 2), com todos os itens da seção 9.4 e do Apêndice D do manual |
+| v1.1 | 2026-11-18 | Responsabilidades, IDE e canal de comunicação preenchidos (a confirmar pelo grupo) |
 
 > Elaborado antes da decisão do professor sobre a ficha P01, por decisão do grupo. Este plano é um documento vivo: cada mudança gera nova versão nesta tabela e um commit no repositório.
 
@@ -102,7 +103,7 @@ As partições e os limites de cada regra serão documentados explicitamente no 
 
 | Ferramenta | Uso no projeto | Situação |
 |---|---|---|
-| IntelliJ IDEA ou VS Code | Edição de código e testes | [PREENCHER IDE usada por cada integrante] |
+| Visual Studio Code (Extension Pack for Java) | Edição de código e testes | Em uso |
 | Git e GitHub | Versionamento, tags por marco, histórico | Em uso |
 | JUnit 5 + AssertJ + Mockito | Testes de unidade | Incluídos no `spring-boot-starter-test` |
 | Postman + Newman | Testes de integração/API, executados por linha de comando e no pipeline | A instalar no Marco 6 |
@@ -120,9 +121,9 @@ Papéis da seção 4.2 do manual. Em grupos de dois integrantes os papéis são 
 
 | Papel | Responsabilidades principais | Responsável principal | Apoio |
 |---|---|---|---|
-| Coordenação e planejamento | Prazos, plano de testes, riscos, versões, integração dos documentos, comunicação com o professor | [PREENCHER PELO GRUPO] | [PREENCHER] |
-| Análise e execução manual | Requisitos, casos de teste, dados, execução manual, registro de defeitos, retestes | [PREENCHER PELO GRUPO] | [PREENCHER] |
-| Automação e qualidade | Ferramentas, scripts automatizados, métricas, SonarQube, TDD e CI/CD | [PREENCHER PELO GRUPO] | [PREENCHER] |
+| Coordenação e planejamento | Prazos, plano de testes, riscos, versões, integração dos documentos, comunicação com o professor | Guilherme Ribeiro Zangrande | José Paulo Dassie Felippi |
+| Análise e execução manual | Requisitos, casos de teste, dados, execução manual, registro de defeitos, retestes | José Paulo Dassie Felippi | Guilherme Ribeiro Zangrande |
+| Automação e qualidade | Ferramentas, scripts automatizados, métricas, SonarQube, TDD e CI/CD | Guilherme Ribeiro Zangrande | José Paulo Dassie Felippi |
 | Representante do usuário (aceitação e usabilidade) | Executar os cenários de aceitação e o roteiro de usabilidade | [PREENCHER — pessoa externa ao grupo] | — |
 
 ## 11. Dados de teste
@@ -229,7 +230,7 @@ As 8 métricas da seção 9.13 do manual, calculadas a partir da planilha de exe
 | Com quem | Canal | Conteúdo |
 |---|---|---|
 | Professor | Aulas, Connect+ e canal definido na disciplina | Aprovação do sistema, mudanças de escopo e exceções (sempre por escrito) |
-| Entre os integrantes | [PREENCHER canal do grupo] | Divisão de tarefas e andamento |
+| Entre os integrantes | Grupo de mensagens dos integrantes e issues do GitHub | Divisão de tarefas e andamento |
 | Registro de andamento | `docs/PROGRESSO.md` no repositório | Situação de cada fase e produto, decisões e pendências |
 | Defeitos | GitHub Issues | Registro, discussão e acompanhamento até o encerramento |
 | Participação | Diário de Participação (P14), atualizado a cada atividade | Quem fez o quê, quando e com qual evidência |

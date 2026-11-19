@@ -1,0 +1,367 @@
+[
+  {
+    "id": "TNF-01",
+    "titulo": "Desempenho básico: p95 < 500 ms",
+    "requisitos": [
+      "RNF-01"
+    ],
+    "riscos": [
+      "R-11"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (desempenho)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Média",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "scripts/nf/desempenho.py"
+    ],
+    "esperado": "p95 < 500 ms nas duas operações",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "scripts/nf/desempenho.py"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-02",
+    "titulo": "Segurança: rotas restritas sem credencial",
+    "requisitos": [
+      "RNF-02",
+      "RF-06"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (segurança)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Alta",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "scripts/nf/seguranca_robustez.py"
+    ],
+    "esperado": "401/403 sem dados nem detalhes internos",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "scripts/nf/seguranca_robustez.py"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-03",
+    "titulo": "Segurança: senha armazenada com hash BCrypt",
+    "requisitos": [
+      "RNF-02"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (segurança)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Alta",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "scripts/nf/reinicio_e_senha.py"
+    ],
+    "esperado": "Hash BCrypt, sem a senha em texto",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "scripts/nf/reinicio_e_senha.py"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-04",
+    "titulo": "Segurança: HTML/script digitado não é executado",
+    "requisitos": [
+      "RNF-02"
+    ],
+    "riscos": [
+      "R-08"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (segurança)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Alta",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "SegurancaE2ETest"
+    ],
+    "esperado": "Texto literal, sem elemento criado nem alerta",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "Interface (Selenium): SegurancaE2ETest"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-05",
+    "titulo": "Confiabilidade: dados preservados após reinício",
+    "requisitos": [
+      "RNF-04"
+    ],
+    "riscos": [
+      "R-10"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (confiabilidade)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Média",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "scripts/nf/reinicio_e_senha.py"
+    ],
+    "esperado": "Dados iguais após reiniciar",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "scripts/nf/reinicio_e_senha.py"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-06",
+    "titulo": "Confiabilidade: entradas inválidas sem HTTP 500",
+    "requisitos": [
+      "RNF-04"
+    ],
+    "riscos": [
+      "R-05"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (confiabilidade)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Média",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "scripts/nf/seguranca_robustez.py"
+    ],
+    "esperado": "Sempre 4xx, nunca 500",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "scripts/nf/seguranca_robustez.py"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-07",
+    "titulo": "Compatibilidade: Chrome/Firefox em 1366×768 e 375×667",
+    "requisitos": [
+      "RNF-03"
+    ],
+    "riscos": [
+      "R-09"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (compatibilidade)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Média",
+    "interface": "API/Interface (script)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "./mvnw test -Pe2e -Dnavegador -Djanela"
+    ],
+    "esperado": "Todos os E2E aprovados; sem rolagem horizontal",
+    "automacao": {
+      "candidato": "Sim",
+      "nivel": "Script/teste automatizado",
+      "justificativa": "Medição repetível",
+      "automatizado": "Sim",
+      "referencia": "Interface (Selenium): suíte E2E + CompatibilidadeE2ETest"
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "TNF-08",
+    "titulo": "Usabilidade: cadastro + agendamento em até 5 min, nota ≥ 4",
+    "requisitos": [
+      "RNF-05"
+    ],
+    "riscos": [
+      "R-09"
+    ],
+    "regras": [],
+    "nivel_tipo": "Sistema / Não funcional (usabilidade)",
+    "tecnica": "Verificação não funcional (Apêndice I)",
+    "classificacao": "Não funcional",
+    "prioridade": "Média",
+    "interface": "Tela (participante externo)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "P09_Roteiro_Usabilidade.md"
+    ],
+    "esperado": "Até 5 min sem ajuda; nota ≥ 4",
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Exige participante humano",
+      "automatizado": "Não",
+      "referencia": ""
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
+  },
+  {
+    "id": "CA-01",
+    "titulo": "Cliente novo agenda o primeiro corte",
+    "requisitos": [
+      "RF-01",
+      "RF-02",
+      "RF-03"
+    ],
+    "riscos": [
+      "R-02"
+    ],
+    "regras": [],
+    "nivel_tipo": "Aceitação / Funcional",
+    "tecnica": "Cenário Dado/Quando/Então",
+    "classificacao": "Aceitação",
+    "prioridade": "Média",
+    "interface": "Tela (pessoa externa)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "P09, Parte A"
+    ],
+    "esperado": "Decisão Aceito",
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Executado por pessoa externa ao grupo",
+      "automatizado": "Não",
+      "referencia": ""
+    },
+    "responsavel": "Pessoa externa (a definir)"
+  },
+  {
+    "id": "CA-02",
+    "titulo": "Cliente cancela o agendamento",
+    "requisitos": [
+      "RF-05"
+    ],
+    "riscos": [
+      "R-07"
+    ],
+    "regras": [],
+    "nivel_tipo": "Aceitação / Funcional",
+    "tecnica": "Cenário Dado/Quando/Então",
+    "classificacao": "Aceitação",
+    "prioridade": "Média",
+    "interface": "Tela (pessoa externa)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "P09, Parte A"
+    ],
+    "esperado": "Decisão Aceito",
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Executado por pessoa externa ao grupo",
+      "automatizado": "Não",
+      "referencia": ""
+    },
+    "responsavel": "Pessoa externa (a definir)"
+  },
+  {
+    "id": "CA-03",
+    "titulo": "Sistema protege a agenda do barbeiro",
+    "requisitos": [
+      "RF-04"
+    ],
+    "riscos": [
+      "R-01"
+    ],
+    "regras": [],
+    "nivel_tipo": "Aceitação / Funcional",
+    "tecnica": "Cenário Dado/Quando/Então",
+    "classificacao": "Aceitação",
+    "prioridade": "Média",
+    "interface": "Tela (pessoa externa)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "P09, Parte A"
+    ],
+    "esperado": "Decisão Aceito",
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Executado por pessoa externa ao grupo",
+      "automatizado": "Não",
+      "referencia": ""
+    },
+    "responsavel": "Pessoa externa (a definir)"
+  },
+  {
+    "id": "CA-04",
+    "titulo": "Dono organiza o dia de trabalho",
+    "requisitos": [
+      "RF-06",
+      "RF-07",
+      "RF-08"
+    ],
+    "riscos": [
+      "R-03"
+    ],
+    "regras": [],
+    "nivel_tipo": "Aceitação / Funcional",
+    "tecnica": "Cenário Dado/Quando/Então",
+    "classificacao": "Aceitação",
+    "prioridade": "Média",
+    "interface": "Tela (pessoa externa)",
+    "precondicoes": "Ver P09",
+    "dados": "Ver P09",
+    "passos": [
+      "P09, Parte A"
+    ],
+    "esperado": "Decisão Aceito",
+    "automacao": {
+      "candidato": "Não",
+      "nivel": "—",
+      "justificativa": "Executado por pessoa externa ao grupo",
+      "automatizado": "Não",
+      "referencia": ""
+    },
+    "responsavel": "Pessoa externa (a definir)"
+  }
+]

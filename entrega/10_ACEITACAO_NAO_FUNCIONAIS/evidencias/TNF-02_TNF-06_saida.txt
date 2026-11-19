@@ -1,0 +1,18 @@
+TNF-02 acesso restrito: 28/28 verificações OK
+TNF-06 entradas inválidas: 16/16 sem HTTP 500 nem detalhe interno
+  OK     400  JSON malformado
+  OK     400  corpo vazio
+  OK     400  tipo errado em barbeiroId
+  OK     400  data em formato inválido
+  OK     400  campos nulos
+  OK     400  número gigante
+  OK     400  texto de 10.000 caracteres
+  OK     400  parâmetro ausente
+  OK     400  parâmetro de tipo errado
+  OK     400  data inexistente
+  OK     404  barbeiro inexistente
+  OK     404  código com caracteres especiais
+  OK     404  rota inexistente
+  OK     405  método não suportado
+  OK     415  tipo de conteúdo não suportado
+  OK     400  cancelamento sem e-mail

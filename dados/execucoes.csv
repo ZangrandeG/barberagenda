@@ -1,1 +1,8 @@
 execucao,caso,data,versao,executor,resultado,evidencia,defeito,observacoes
+EX-001,TNF-01,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-01_desempenho_resultado.json,,"p95 26,2 ms (GET) e 33,6 ms (POST)"
+EX-002,TNF-02,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-02_seguranca_acesso.json,,28/28
+EX-003,TNF-03,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-05_TNF-03_resultado.json,,"hash $2a$10$, 60 caracteres"
+EX-004,TNF-04,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-07_compatibilidade/,,"Chrome e Firefox, 1366x768 e 375x667"
+EX-005,TNF-05,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-05_TNF-03_resultado.json,,dados iguais após reinício
+EX-006,TNF-06,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-06_entradas_invalidas.json,,16/16 sem HTTP 500
+EX-007,TNF-07,2026-11-18,1.1.0 (marco-6),"Claude (IA) — script/teste automatizado, a pedido do grupo",Aprovado,entrega/10_ACEITACAO_NAO_FUNCIONAIS/evidencias/TNF-07_compatibilidade/,,44/44 (4 combinações × 11 testes)

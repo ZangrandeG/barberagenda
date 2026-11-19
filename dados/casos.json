@@ -32,7 +32,8 @@
       "justificativa": "Fluxo principal e repetido em toda regressão.",
       "automatizado": "Sim",
       "referencia": "Unidade: CadastroServiceTest#deveCadastrarClienteComDadosValidos; API (Postman): 01 Clientes › CT-001; Interface (Selenium): CadastroClienteE2ETest#deveCadastrarClientePelaTela"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-002",
@@ -66,7 +67,8 @@
       "justificativa": "Limites são regras estáveis e baratas de verificar a cada build.",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarNomeETelefoneNosLimitesValidos"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-003",
@@ -99,7 +101,8 @@
       "justificativa": "Limites inválidos complementam CT-002 na mesma suíte.",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarNomeForaDoLimite; Interface (Selenium): CadastroClienteE2ETest#deveRecusarNomeCurtoPelaTela"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-004",
@@ -131,7 +134,8 @@
       "justificativa": "Regra de formato estável, rápida de verificar.",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarTelefoneForaDoPadrao"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-005",
@@ -163,7 +167,8 @@
       "justificativa": "Operação crítica precisa de ao menos um fluxo negativo na coleção.",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarEmailEmFormatoInvalido; API (Postman): 01 Clientes › CT-005"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-006",
@@ -195,7 +200,8 @@
       "justificativa": "Regra de unicidade crítica para identificar o cliente no agendamento.",
       "automatizado": "Sim",
       "referencia": "Unidade: CadastroServiceTest#deveRejeitarCadastroComEmailJaCadastrado; API (Postman): 01 Clientes › CT-006"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-007",
@@ -229,7 +235,8 @@
       "justificativa": "Cálculo determinístico e central para o agendamento.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveGerarHorariosDe09hA18hParaServicoDe60Minutos"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-008",
@@ -264,7 +271,8 @@
       "justificativa": "Filtro de ocupação é regra de alto risco (R-01).",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#naoDeveOferecerHorariosOcupadosPeloBarbeiro"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-009",
@@ -296,7 +304,8 @@
       "justificativa": "Regra de data sensível a limites; deve ser verificada a cada build.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveRetornarListaVaziaParaDataSemAtendimento"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-010",
@@ -333,7 +342,8 @@
       "justificativa": "Fluxo mais importante do sistema.",
       "automatizado": "Sim",
       "referencia": "API (Postman): 02 Agendamento encadeado › CT-010; Interface (Selenium): AgendamentoE2ETest#deveAgendarHorarioPelaTela"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-011",
@@ -365,7 +375,8 @@
       "justificativa": "Limites da regra de maior risco.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoNosLimitesDoFuncionamento"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-012",
@@ -396,7 +407,8 @@
       "justificativa": "Limites só alcançáveis pela API; regra de maior risco.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoForaDoHorarioDeFuncionamento; API (Postman): 03 Regras › CT-012"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-013",
@@ -427,7 +439,8 @@
       "justificativa": "Regra simples e estável.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarInicioForaDoIntervaloDe30Minutos"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-014",
@@ -458,7 +471,8 @@
       "justificativa": "Regra de calendário verificável com Clock fixo.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoDomingo"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-015",
@@ -490,7 +504,8 @@
       "justificativa": "Limite dependente de data; Clock fixo torna o teste estável.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoComTrintaDiasDeAntecedencia; #deveRejeitarAgendamentoComTrintaEUmDiasDeAntecedencia"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-016",
@@ -522,7 +537,8 @@
       "justificativa": "Depende do momento atual; automação com Clock fixo elimina a restrição de horário.",
       "automatizado": "Sim",
       "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoPassado; #deveAceitarProximoHorarioDoDiaDeHoje"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-017",
@@ -555,7 +571,8 @@
       "justificativa": "Regra simples de verificar isoladamente.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoComBarbeiroInativo; #deveRejeitarAgendamentoComServicoInativo"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-018",
@@ -585,7 +602,8 @@
       "justificativa": "Fluxo negativo da operação crítica de agendamento.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoDeClienteNaoCadastrado; API (Postman): 03 Regras › CT-018"
-    }
+    },
+    "responsavel": "José Paulo Dassie Felippi"
   },
   {
     "id": "CT-019",
@@ -617,7 +635,8 @@
       "justificativa": "Risco mais alto do produto (R-01).",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoQuandoHorarioConflitaComOutroDoMesmoBarbeiro; API (Postman): 03 Regras › CT-019"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-020",
@@ -648,7 +667,8 @@
       "justificativa": "O limite depende da consulta ao banco; precisa de teste integrado.",
       "automatizado": "Sim",
       "referencia": "API (Postman): 03 Regras › CT-020"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-021",
@@ -681,7 +701,8 @@
       "justificativa": "Limite numérico estável.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarQuartoAgendamentoAtivoDoCliente; #deveAceitarTerceiroAgendamentoAtivoDoCliente"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-022",
@@ -715,7 +736,8 @@
       "justificativa": "Cenário com várias etapas e estado; o limite já é automatizado em CT-021 e o cancelamento em CT-025.",
       "automatizado": "Não",
       "referencia": ""
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-023",
@@ -745,7 +767,8 @@
       "justificativa": "Operação usada em todo cancelamento.",
       "automatizado": "Sim",
       "referencia": "API (Postman): 02 Agendamento encadeado › CT-023; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-024",
@@ -775,7 +798,8 @@
       "justificativa": "Protege dados de terceiros (R-07).",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRecusarConsultaComEmailDeOutroCliente; API (Postman): 04 Consulta › CT-024 (2 requisições)"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-025",
@@ -806,7 +830,8 @@
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (cancelamento).",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveCancelarAgendamentoAtivoDoCliente; #deveOferecerHorarioDeAgendamentoCancelado; API (Postman): 02 Agendamento encadeado › CT-025; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-026",
@@ -837,7 +862,8 @@
       "justificativa": "Transição inválida só alcançável pela API.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoDeAgendamentoJaCancelado; API (Postman): 02 Agendamento encadeado › CT-026"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-027",
@@ -871,7 +897,8 @@
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (login admin).",
       "automatizado": "Sim",
       "referencia": "Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-028",
@@ -903,7 +930,8 @@
       "justificativa": "Verificação simples e de baixo custo manual; o controle de acesso já é automatizado em CT-029.",
       "automatizado": "Não",
       "referencia": ""
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-029",
@@ -938,7 +966,8 @@
       "justificativa": "Controle de acesso é risco Alto (R-03) e deve entrar em toda regressão.",
       "automatizado": "Sim",
       "referencia": "API (Postman): 05 Segurança › CT-029 (4 requisições)"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-030",
@@ -971,7 +1000,8 @@
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (cadastro de serviço).",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarServicoNosLimitesValidos; Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-031",
@@ -1003,7 +1033,8 @@
       "justificativa": "Cinco limites verificáveis em milissegundos.",
       "automatizado": "Sim",
       "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarDuracaoForaDosLimites; #deveRejeitarPrecoForaDosLimites; API (Postman): 06 Administração › CT-031"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-032",
@@ -1036,7 +1067,8 @@
       "justificativa": "Prioridade baixa; a regra de inativos já é automatizada em CT-017.",
       "automatizado": "Não",
       "referencia": ""
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-033",
@@ -1067,7 +1099,8 @@
       "justificativa": "Regra de integridade simples de isolar.",
       "automatizado": "Sim",
       "referencia": "Unidade: CadastroServiceTest#deveRejeitarExclusaoDeBarbeiroComAgendamentos; #deveExcluirBarbeiroSemAgendamentos"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-034",
@@ -1098,7 +1131,8 @@
       "justificativa": "Fluxo administrativo de menor risco; a transição inválida é automatizada em CT-035.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveConcluirAgendamentoAtivo"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   },
   {
     "id": "CT-035",
@@ -1128,6 +1162,7 @@
       "justificativa": "Transição inválida simples de isolar.",
       "automatizado": "Sim",
       "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarConclusaoDeAgendamentoCancelado"
-    }
+    },
+    "responsavel": "Guilherme Ribeiro Zangrande"
   }
 ]

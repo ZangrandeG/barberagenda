@@ -1,0 +1,226 @@
+[
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/barbeiros",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/barbeiros",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/servicos",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/servicos",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/sessao",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/sessao",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/agenda?barbeiroId=1&data=2030-01-07",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/admin/agenda?barbeiroId=1&data=2030-01-07",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/clientes",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/clientes",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/clientes/1",
+    "cenario": "sem credencial",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "GET",
+    "rota": "/api/clientes/1",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/admin/barbeiros",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/admin/barbeiros",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PUT",
+    "rota": "/api/admin/barbeiros/1",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PUT",
+    "rota": "/api/admin/barbeiros/1",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "DELETE",
+    "rota": "/api/admin/barbeiros/1",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "DELETE",
+    "rota": "/api/admin/barbeiros/1",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/admin/servicos",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/admin/servicos",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PUT",
+    "rota": "/api/admin/servicos/1",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PUT",
+    "rota": "/api/admin/servicos/1",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "DELETE",
+    "rota": "/api/admin/servicos/1",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "DELETE",
+    "rota": "/api/admin/servicos/1",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PATCH",
+    "rota": "/api/admin/agendamentos/1/concluir",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "PATCH",
+    "rota": "/api/admin/agendamentos/1/concluir",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/dev/reset",
+    "cenario": "sem credencial",
+    "status": 403,
+    "corpo_somente_erro": true,
+    "ok": true
+  },
+  {
+    "metodo": "POST",
+    "rota": "/api/dev/reset",
+    "cenario": "senha errada",
+    "status": 401,
+    "corpo_somente_erro": true,
+    "ok": true
+  }
+]

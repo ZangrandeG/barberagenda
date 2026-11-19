@@ -97,7 +97,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/cadastro.html.<br>2. Preencher Nome, Telefone e E-mail com os dados.<br>3. Clicar em "Cadastrar". |
 | Resultado esperado | Mensagem "Cadastro realizado com sucesso! Código do cliente: N." (N = número) e botão "Agendar um horário" visível. Campos do formulário limpos. |
 | Candidato à automação | Sim — Interface (Selenium) e API (Postman). Fluxo principal e repetido em toda regressão. **Automatizado: Sim** (Unidade: CadastroServiceTest#deveCadastrarClienteComDadosValidos; API (Postman): 01 Clientes › CT-001; Interface (Selenium): CadastroClienteE2ETest#deveCadastrarClientePelaTela) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-002 — Cadastro aceita nome e telefone nos limites válidos
 
@@ -114,7 +114,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de cadastro.<br>2. Preencher com os dados (a) e clicar em "Cadastrar".<br>3. Preencher com os dados (b) e clicar em "Cadastrar". |
 | Resultado esperado | Nos dois cadastros, mensagem "Cadastro realizado com sucesso!" com o código do cliente. |
 | Candidato à automação | Sim — Unidade (validação de ClienteRequest). Limites são regras estáveis e baratas de verificar a cada build. **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveAceitarNomeETelefoneNosLimitesValidos) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-003 — Cadastro recusa nome com 2 e com 61 caracteres
 
@@ -131,7 +131,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de cadastro.<br>2. Preencher com o nome (a) e os demais dados; clicar em "Cadastrar".<br>3. Trocar o nome para (b) e clicar em "Cadastrar". |
 | Resultado esperado | Nas duas tentativas: mensagem "O nome deve ter entre 3 e 60 caracteres." abaixo do campo Nome, mensagem geral "Existem campos inválidos." e nenhum código de cliente exibido. |
 | Candidato à automação | Sim — Unidade (validação de ClienteRequest). Limites inválidos complementam CT-002 na mesma suíte. **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveRejeitarNomeForaDoLimite; Interface (Selenium): CadastroClienteE2ETest#deveRecusarNomeCurtoPelaTela) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-004 — Cadastro recusa telefone fora do padrão
 
@@ -148,7 +148,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de cadastro.<br>2. Para cada telefone (a), (b) e (c): preencher os dados e clicar em "Cadastrar". |
 | Resultado esperado | Nas três tentativas: mensagem "O telefone deve conter somente dígitos, com 10 ou 11 dígitos (incluindo DDD)." abaixo do campo Telefone e nenhum cadastro realizado. |
 | Candidato à automação | Sim — Unidade (validação de ClienteRequest). Regra de formato estável, rápida de verificar. **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveRejeitarTelefoneForaDoPadrao) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-005 — Cadastro recusa e-mail em formato inválido
 
@@ -165,7 +165,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de cadastro.<br>2. Para cada e-mail (a) e (b): preencher os dados e clicar em "Cadastrar". |
 | Resultado esperado | Nas duas tentativas: mensagem "O e-mail informado é inválido." abaixo do campo E-mail e nenhum cadastro realizado. |
 | Candidato à automação | Sim — API (Postman, fluxo negativo de POST /api/clientes). Operação crítica precisa de ao menos um fluxo negativo na coleção. **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveRejeitarEmailEmFormatoInvalido; API (Postman): 01 Clientes › CT-005) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-006 — Cadastro recusa e-mail já cadastrado, mesmo com maiúsculas
 
@@ -182,7 +182,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de cadastro.<br>2. Preencher os dados e clicar em "Cadastrar". |
 | Resultado esperado | Mensagem "Já existe um cliente cadastrado com este e-mail." (HTTP 409) e nenhum cadastro realizado. |
 | Candidato à automação | Sim — Unidade (ClienteService com mock) e API (Postman). Regra de unicidade crítica para identificar o cliente no agendamento. **Automatizado: Sim** (Unidade: CadastroServiceTest#deveRejeitarCadastroComEmailJaCadastrado; API (Postman): 01 Clientes › CT-006) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-007 — Horários disponíveis respeitam funcionamento, intervalo e duração do serviço
 
@@ -199,7 +199,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/agendar.html.<br>2. Selecionar barbeiro, serviço e data.<br>3. Clicar em "Ver horários disponíveis". |
 | Resultado esperado | 19 horários, de 09:00 a 18:00, de 30 em 30 minutos (09:00, 09:30, ..., 18:00). Não aparecem 18:30 nem horários antes de 09:00. |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.gerarHorariosDoDia com Clock fixo). Cálculo determinístico e central para o agendamento. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveGerarHorariosDe09hA18hParaServicoDe60Minutos) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-008 — Horários ocupados pelo barbeiro não são oferecidos
 
@@ -216,7 +216,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de agendamento.<br>2. Selecionar barbeiro, serviço e data.<br>3. Clicar em "Ver horários disponíveis". |
 | Resultado esperado | Não aparecem 14:00 nem 14:30. Aparecem 13:30 e 15:00. Total de 18 horários (09:00 a 18:30, menos os 2 ocupados). |
 | Candidato à automação | Sim — Unidade (AgendamentoService.horariosDisponiveis com mocks). Filtro de ocupação é regra de alto risco (R-01). **Automatizado: Sim** (Unidade: AgendamentoServiceTest#naoDeveOferecerHorariosOcupadosPeloBarbeiro) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-009 — Datas sem atendimento retornam lista de horários vazia
 
@@ -233,7 +233,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Para cada data, enviar GET /api/horarios-disponiveis?barbeiroId={Carlos}&servicoId={Corte}&data=<data>. |
 | Resultado esperado | As três respostas têm HTTP 200 e "horarios": [] (lista vazia). |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.dataAceitaAgendamentos com Clock fixo). Regra de data sensível a limites; deve ser verificada a cada build. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveRetornarListaVaziaParaDataSemAtendimento) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-010 — Agendar horário pela tela com sucesso
 
@@ -250,7 +250,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de agendamento.<br>2. Informar o e-mail; selecionar barbeiro, serviço e data.<br>3. Clicar em "Ver horários disponíveis" e escolher 11:00.<br>4. Clicar em "Confirmar agendamento". |
 | Resultado esperado | Mensagem "Agendamento realizado com sucesso! Código de acesso: XXXXXXXX." e quadro "Agendamento confirmado" com código de 8 caracteres, Carlos Navalha, Barba, data DF3 11:00 e status AGENDADO. |
 | Candidato à automação | Sim — Interface (Selenium) e API (Postman). Fluxo mais importante do sistema. **Automatizado: Sim** (API (Postman): 02 Agendamento encadeado › CT-010; Interface (Selenium): AgendamentoE2ETest#deveAgendarHorarioPelaTela) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-011 — Agendamento aceito no primeiro e no último horário do dia
 
@@ -267,7 +267,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Na tela de agendamento, agendar o horário (a).<br>2. Recarregar a página e agendar o horário (b). |
 | Resultado esperado | Os dois agendamentos são confirmados com status AGENDADO e código de acesso. |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarFuncionamento). Limites da regra de maior risco. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoNosLimitesDoFuncionamento) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-012 — Agendamento recusado quando começa antes de 09:00 ou termina depois de 19:00
 
@@ -284,7 +284,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Para cada combinação, enviar POST /api/agendamentos com {"emailCliente", "barbeiroId", "servicoId", "dataHoraInicio"}. |
 | Resultado esperado | (a) e (b): HTTP 400 com mensagem "O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00." (c): HTTP 201, status AGENDADO. |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarFuncionamento). Limites só alcançáveis pela API; regra de maior risco. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoForaDoHorarioDeFuncionamento; API (Postman): 03 Regras › CT-012) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-013 — Agendamento recusado fora dos intervalos de 30 minutos
 
@@ -301,7 +301,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Para cada horário, enviar POST /api/agendamentos. |
 | Resultado esperado | HTTP 400 com mensagem "Os agendamentos devem começar em intervalos de 30 minutos (ex.: 09:00, 09:30)." e campo dataHoraInicio em "campos". |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarIntervalo). Regra simples e estável. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveRejeitarInicioForaDoIntervaloDe30Minutos) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-014 — Agendamento recusado no domingo
 
@@ -318,7 +318,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar POST /api/agendamentos com os dados. |
 | Resultado esperado | HTTP 400 com mensagem "A barbearia não abre aos domingos." |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarFuncionamento). Regra de calendário verificável com Clock fixo. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoDomingo) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-015 — Antecedência: aceita D+30 e recusa D+31
 
@@ -335,7 +335,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar POST /api/agendamentos com a data (a).<br>2. Enviar POST /api/agendamentos com a data (b). |
 | Resultado esperado | (a): HTTP 201, status AGENDADO. (b): HTTP 400 com mensagem "A antecedência máxima para agendamento é de 30 dias." |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo). Limite dependente de data; Clock fixo torna o teste estável. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveAceitarAgendamentoComTrintaDiasDeAntecedencia; #deveRejeitarAgendamentoComTrintaEUmDiasDeAntecedencia) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-016 — Agendamento recusado em data ou horário que já passou
 
@@ -352,7 +352,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar POST /api/agendamentos com (a).<br>2. Enviar POST /api/agendamentos com (b). |
 | Resultado esperado | Nas duas: HTTP 400 com mensagem "Não é permitido agendar em data ou horário que já passou." |
 | Candidato à automação | Sim — Unidade (RegrasAgendamento.validarAntecedencia com Clock fixo). Depende do momento atual; automação com Clock fixo elimina a restrição de horário. **Automatizado: Sim** (Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoNoPassado; #deveAceitarProximoHorarioDoDiaDeHoje) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-017 — Barbeiro e serviço inativos não são oferecidos nem aceitos
 
@@ -369,7 +369,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de agendamento e abrir as listas de barbeiros e serviços.<br>2. Enviar POST /api/agendamentos com (a).<br>3. Enviar POST /api/agendamentos com (b). |
 | Resultado esperado | Passo 1: Diego Máquina e Relaxamento capilar não aparecem. (a): HTTP 400 "O barbeiro selecionado está inativo." (b): HTTP 400 "O serviço selecionado está inativo." |
 | Candidato à automação | Sim — Unidade (AgendamentoService com mocks). Regra simples de verificar isoladamente. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoComBarbeiroInativo; #deveRejeitarAgendamentoComServicoInativo) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-018 — Agendamento com e-mail não cadastrado é recusado
 
@@ -386,7 +386,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Na tela de agendamento, preencher os dados, buscar horários e escolher 15:00.<br>2. Clicar em "Confirmar agendamento". |
 | Resultado esperado | Mensagem "Cliente não encontrado para o e-mail informado. Faça o cadastro antes de agendar." e nenhum código de acesso exibido. |
 | Candidato à automação | Sim — API (Postman, fluxo negativo de POST /api/agendamentos). Fluxo negativo da operação crítica de agendamento. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoDeClienteNaoCadastrado; API (Postman): 03 Regras › CT-018) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | José Paulo Dassie Felippi |
 
 ### CT-019 — Agendamento sobreposto ao de outro cliente com o mesmo barbeiro é recusado
 
@@ -403,7 +403,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar POST /api/agendamentos com (a).<br>2. Enviar POST /api/agendamentos com (b). |
 | Resultado esperado | Nas duas: HTTP 409 com mensagem "O barbeiro já possui agendamento nesse horário." |
 | Candidato à automação | Sim — Unidade (AgendamentoService com mock) e API (Postman). Risco mais alto do produto (R-01). **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoQuandoHorarioConflitaComOutroDoMesmoBarbeiro; API (Postman): 03 Regras › CT-019) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-020 — Horário encostado e mesmo horário com outro barbeiro são aceitos
 
@@ -420,7 +420,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar POST /api/agendamentos com (a), (b) e (c), nesta ordem. |
 | Resultado esperado | As três respostas: HTTP 201 com status AGENDADO. |
 | Candidato à automação | Sim — API (Postman). O limite depende da consulta ao banco; precisa de teste integrado. **Automatizado: Sim** (API (Postman): 03 Regras › CT-020) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-021 — Limite de agendamentos ativos: 3º aceito e 4º recusado
 
@@ -437,7 +437,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Cadastrar o cliente: POST /api/clientes.<br>2. Enviar POST /api/agendamentos para 09:00, 09:30 e 10:00.<br>3. Enviar POST /api/agendamentos para 10:30. |
 | Resultado esperado | Passo 2: três respostas HTTP 201 (o 3º agendamento é aceito). Passo 3: HTTP 409 com mensagem "O cliente já possui 3 agendamentos ativos, que é o limite permitido." |
 | Candidato à automação | Sim — Unidade (AgendamentoService com mock da contagem). Limite numérico estável. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarQuartoAgendamentoAtivoDoCliente; #deveAceitarTerceiroAgendamentoAtivoDoCliente) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-022 — Após cancelar um agendamento, cliente no limite volta a poder agendar
 
@@ -454,7 +454,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/consulta.html, informar código e e-mail e clicar em "Consultar".<br>2. Clicar em "Cancelar agendamento" e em "Sim, cancelar".<br>3. Enviar POST /api/agendamentos para DF3T10:30:00. |
 | Resultado esperado | Passo 2: status CANCELADO. Passo 3: HTTP 201 (o cliente volta a ter 3 ativos). |
 | Candidato à automação | Não. Cenário com várias etapas e estado; o limite já é automatizado em CT-021 e o cancelamento em CT-025. |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-023 — Consultar agendamento com código de acesso (em minúsculas) e e-mail
 
@@ -471,7 +471,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/consulta.html.<br>2. Informar código e e-mail e clicar em "Consultar". |
 | Resultado esperado | Quadro "Agendamento SEMENTE2" com Cliente Ana Beatriz Rocha, Barbeiro Carlos Navalha, Serviço Corte de cabelo (30 min), Data DF1 10:00, Valor R$ 45,00, Status AGENDADO e botão "Cancelar agendamento" visível. |
 | Candidato à automação | Sim — API (Postman, GET encadeado após o agendamento) e Interface (Selenium, no fluxo de cancelamento). Operação usada em todo cancelamento. **Automatizado: Sim** (API (Postman): 02 Agendamento encadeado › CT-023; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-024 — Consulta recusada quando código e e-mail não conferem
 
@@ -488,7 +488,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de consulta.<br>2. Para cada combinação, informar código e e-mail e clicar em "Consultar". |
 | Resultado esperado | Nas três: mensagem "Agendamento não encontrado para o código de acesso e o e-mail informados." e nenhum dado de agendamento exibido. |
 | Candidato à automação | Sim — API (Postman, fluxo negativo de GET /api/agendamentos/{codigo}). Protege dados de terceiros (R-07). **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRecusarConsultaComEmailDeOutroCliente; API (Postman): 04 Consulta › CT-024 (2 requisições)) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-025 — Cancelar agendamento pela tela libera o horário
 
@@ -505,7 +505,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Na tela de consulta, consultar o agendamento.<br>2. Clicar em "Cancelar agendamento" e depois em "Sim, cancelar".<br>3. Abrir a tela de agendamento e listar horários de Carlos Navalha, Sobrancelha, DF2. |
 | Resultado esperado | Passo 2: mensagem "Agendamento cancelado com sucesso.", status CANCELADO e botão de cancelar oculto. Passo 3: o horário 16:00 aparece na lista. |
 | Candidato à automação | Sim — Interface (Selenium). Fluxo ponta a ponta exigido pelo manual (cancelamento). **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveCancelarAgendamentoAtivoDoCliente; #deveOferecerHorarioDeAgendamentoCancelado; API (Postman): 02 Agendamento encadeado › CT-025; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-026 — Cancelar agendamento já cancelado ou concluído é recusado
 
@@ -522,7 +522,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Na tela de consulta, consultar (a).<br>2. Enviar PATCH /api/agendamentos/SEMENTE4/cancelar com {"email": "camila.prado@exemplo.com"}.<br>3. Enviar PATCH /api/agendamentos/SEMENTE5/cancelar com {"email": "daniel.alves@exemplo.com"}. |
 | Resultado esperado | Passo 1: status CANCELADO e botão "Cancelar agendamento" não exibido. Passos 2 e 3: HTTP 409 com mensagem "Somente agendamentos com status AGENDADO podem ser cancelados." |
 | Candidato à automação | Sim — API (Postman). Transição inválida só alcançável pela API. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoDeAgendamentoJaCancelado; API (Postman): 02 Agendamento encadeado › CT-026) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-027 — Login do administrador com credencial válida e saída
 
@@ -539,7 +539,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/.<br>2. Informar usuário e senha e clicar em "Entrar".<br>3. Clicar em "Sair".<br>4. Abrir novamente http://localhost:8080/admin/index.html. |
 | Resultado esperado | Passo 1: tela de login. Passo 2: "Painel administrativo" com "Usuário: admin". Passo 3: tela de login com "Você saiu da área administrativa." Passo 4: redirecionamento para a tela de login. |
 | Candidato à automação | Sim — Interface (Selenium, junto com o cadastro de serviço). Fluxo ponta a ponta exigido pelo manual (login admin). **Automatizado: Sim** (Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-028 — Login com senha incorreta é recusado
 
@@ -556,7 +556,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/login.html.<br>2. Informar usuário e senha e clicar em "Entrar". |
 | Resultado esperado | Mensagem "Usuário ou senha inválidos." e permanência na tela de login. |
 | Candidato à automação | Não. Verificação simples e de baixo custo manual; o controle de acesso já é automatizado em CT-029. |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-029 — Área administrativa e dados de clientes inacessíveis sem login
 
@@ -573,7 +573,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/agenda.html.<br>2. Enviar GET /api/admin/barbeiros.<br>3. Enviar GET /api/clientes.<br>4. Enviar POST /api/admin/servicos com o corpo dos dados.<br>5. Enviar GET /api/servicos. |
 | Resultado esperado | Passo 1: redirecionamento para a tela de login. Passos 2 e 3: HTTP 401 com mensagem "Autenticação necessária." e sem dados. Passo 4: HTTP 403. Passo 5: "Serviço Invasor" não aparece. |
 | Candidato à automação | Sim — API (Postman). Controle de acesso é risco Alto (R-03) e deve entrar em toda regressão. **Automatizado: Sim** (API (Postman): 05 Segurança › CT-029 (4 requisições)) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-030 — Cadastrar serviços com duração e preço nos limites válidos
 
@@ -590,7 +590,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/servicos.html.<br>2. Preencher (a) e clicar em "Salvar".<br>3. Preencher (b) e clicar em "Salvar". |
 | Resultado esperado | Para cada um: mensagem "Serviço cadastrado (código N)." e linha na tabela com "15 min / R$ 1,00" e "180 min / R$ 1.000,00", situação Ativo. |
 | Candidato à automação | Sim — Interface (Selenium, junto com o login do administrador). Fluxo ponta a ponta exigido pelo manual (cadastro de serviço). **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveAceitarServicoNosLimitesValidos; Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-031 — Cadastro de serviço recusa duração e preço fora dos limites
 
@@ -607,7 +607,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir a tela de serviços.<br>2. Para cada combinação, preencher e clicar em "Salvar". |
 | Resultado esperado | (a) Mensagem de erro no campo Duração — 14 viola o mínimo e o múltiplo de 15 ao mesmo tempo, então "A duração deve ser de no mínimo 15 minutos." ou "A duração deve ser múltipla de 15 minutos." é aceita. (b) "A duração deve ser múltipla de 15 minutos." (c) "A duração deve ser de no máximo 180 minutos." (d) "O preço deve ser de no mínimo R$ 1,00." (e) "O preço deve ser de no máximo R$ 1.000,00." Nenhum serviço cadastrado. |
 | Candidato à automação | Sim — Unidade (validação de ServicoRequest). Cinco limites verificáveis em milissegundos. **Automatizado: Sim** (Unidade: ValidacaoEntradaTest#deveRejeitarDuracaoForaDosLimites; #deveRejeitarPrecoForaDosLimites; API (Postman): 06 Administração › CT-031) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-032 — Barbeiro desativado deixa de aparecer para o cliente
 
@@ -624,7 +624,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/barbeiros.html.<br>2. Clicar em "Editar" na linha de Rafael Tesoura, desmarcar "Ativo" e clicar em "Salvar".<br>3. Abrir http://localhost:8080/agendar.html e abrir a lista de barbeiros. |
 | Resultado esperado | Passo 2: mensagem "Barbeiro atualizado." e situação Inativo. Passo 3: Rafael Tesoura não aparece. |
 | Candidato à automação | Não. Prioridade baixa; a regra de inativos já é automatizada em CT-017. |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-033 — Excluir barbeiro: recusado com agendamentos e aceito sem agendamentos
 
@@ -641,7 +641,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Na tela de barbeiros, clicar em "Excluir" e em "Confirmar exclusão" na linha de Carlos Navalha.<br>2. Cadastrar "Barbeiro Temporário".<br>3. Clicar em "Excluir" e em "Confirmar exclusão" na linha de Barbeiro Temporário. |
 | Resultado esperado | Passo 1: mensagem "O barbeiro possui agendamentos e não pode ser excluído. Desative-o em vez de excluir." e Carlos continua na tabela. Passo 3: mensagem "Barbeiro excluído." e a linha some. |
 | Candidato à automação | Sim — Unidade (BarbeiroService.excluir com mock). Regra de integridade simples de isolar. **Automatizado: Sim** (Unidade: CadastroServiceTest#deveRejeitarExclusaoDeBarbeiroComAgendamentos; #deveExcluirBarbeiroSemAgendamentos) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-034 — Agenda do dia exibe os agendamentos e permite concluir atendimento
 
@@ -658,7 +658,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Abrir http://localhost:8080/admin/agenda.html.<br>2. Selecionar barbeiro e data e clicar em "Ver agenda".<br>3. Clicar em "Concluir" na linha das 14:00. |
 | Resultado esperado | Passo 2: linha "14:00 – 15:00", Bruno Henrique Lima, Corte e barba, status AGENDADO, botão "Concluir"; nenhum código de acesso exibido. Passo 3: mensagem "Atendimento #N marcado como concluído.", status CONCLUIDO e botão oculto. |
 | Candidato à automação | Não. Fluxo administrativo de menor risco; a transição inválida é automatizada em CT-035. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveConcluirAgendamentoAtivo) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ### CT-035 — Concluir agendamento cancelado é recusado
 
@@ -675,7 +675,7 @@ Barbeiro inativo: Diego Máquina. Serviço inativo: Relaxamento capilar (90 min)
 | Passos numerados | 1. Enviar GET /api/admin/agenda?barbeiroId={Carlos}&data=DF2 e anotar o id do agendamento das 09:30.<br>2. Enviar PATCH /api/admin/agendamentos/{id}/concluir. |
 | Resultado esperado | Passo 1: o agendamento das 09:30 tem status CANCELADO. Passo 2: HTTP 409 com mensagem "Somente agendamentos com status AGENDADO podem ser concluídos." |
 | Candidato à automação | Sim — Unidade (AgendamentoService.concluir com mock). Transição inválida simples de isolar. **Automatizado: Sim** (Unidade: AgendamentoServiceTest#deveRejeitarConclusaoDeAgendamentoCancelado) |
-| Responsável | [PREENCHER PELO GRUPO] |
+| Responsável | Guilherme Ribeiro Zangrande |
 
 ## 4. Resumo
 

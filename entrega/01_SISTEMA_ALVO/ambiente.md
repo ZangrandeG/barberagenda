@@ -1,6 +1,6 @@
 ﻿# Ambiente de execução e testes
 
-Gerado por `scripts/registrar-ambiente.ps1` em 2026-11-18 17:19.
+Gerado por `scripts/registrar-ambiente.ps1` em 2026-11-18 22:49.
 
 | Item | Versão |
 |---|---|
@@ -13,7 +13,7 @@ Gerado por `scripts/registrar-ambiente.ps1` em 2026-11-18 17:19.
 | Node.js / npm | v24.21.0 / 11.19.0 |
 | Python | Python 3.11.9 |
 | Google Chrome | 157.0.8103.79 |
-| Mozilla Firefox | não instalado |
+| Mozilla Firefox | 160.0 |
 | ChromeDriver | Resolvido automaticamente pelo Selenium Manager na Fase 7 (registrar a versão usada no log dos testes) |
-| Newman | não encontrado |
+| Newman | 6.2.3 |
 | Docker | não encontrado |
