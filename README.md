@@ -121,8 +121,8 @@ PostgreSQL opcional (exige Docker): `docker compose up -d` e depois `./mvnw spri
 | Unitários (JUnit 5 + Mockito + AssertJ) | `./mvnw test` | Disponível — 35 métodos, 52 execuções, 0 falhas ([P08](entrega/07_AUTOMACAO_UNITARIA/P08_Testes_Unitarios.md)) |
 | Cobertura (JaCoCo 0.8.16) | `./mvnw test` → `target/site/jacoco/index.html` | Disponível — 36,4% das linhas (serviços: 76,8%) |
 | Análise de qualidade (SonarQube) | Ver "SonarQube local" abaixo; `./mvnw verify sonar:sonar -Dsonar.host.url=http://localhost:9000` com a variável `SONAR_TOKEN` | Linha de base em [entrega/11_METRICAS_E_QUALIDADE/sonar_baseline](entrega/11_METRICAS_E_QUALIDADE/sonar_baseline) |
-| Integração/API (Postman + Newman) | A documentar no Marco 6 (`postman/`) | A implementar |
-| Sistema/interface (Selenium) | A documentar no Marco 6 | A implementar |
+| Integração/API (Postman + Newman) | Com a aplicação no ar (perfil `test`): `newman run postman/BarberAgenda.postman_collection.json -e postman/BarberAgenda.postman_environment.json --reporters cli,junit,htmlextra` | Disponível — 26 requisições, 63 asserções, 0 falhas ([P08 API](entrega/08_INTEGRACAO_API/P08_Testes_Integracao_API.md)) |
+| Sistema/interface (Selenium) | `./mvnw test -Pe2e` (opções `-Dnavegador=chrome\|firefox`, `-Djanela=375x667`, `-Dheadless=false`) | Disponível — 5 testes, 0 falhas ([P08 interface](entrega/09_SISTEMA_INTERFACE/P08_Testes_Sistema_Interface.md)) |
 | Gerar catálogo (P04), matriz (P05), checklist e registro de execução (P06) | `python scripts/gerar_artefatos.py` (requer `pip install openpyxl`; com LibreOffice instalado, a planilha já sai com os valores calculados) | Disponível |
 | Execução manual (P06) | Roteiro em `entrega/05_EXECUCAO_MANUAL/P06_Roteiro_Execucao.md`; datas e ids do dia: `python scripts/datas_teste.py` | Disponível — execução pelo grupo |
 | Exportar defeitos do GitHub Issues (P07) | `python scripts/exportar_defeitos.py` (requer `gh auth login`) | Disponível |
@@ -155,6 +155,9 @@ GitHub Actions: https://github.com/ZangrandeG/barberagenda/actions (pipeline a c
 | `entrega/05_EXECUCAO_MANUAL/` | Roteiro, checklist, registro de execução (P06) e `evidencias/` |
 | `entrega/06_DEFEITOS/` | Exportação dos defeitos do GitHub Issues (P07) |
 | `entrega/07_AUTOMACAO_UNITARIA/` | Testes de unidade (P08): documento, log, relatórios Surefire e JaCoCo |
+| `entrega/08_INTEGRACAO_API/` | Testes de API (P08): coleção e ambiente do Postman exportados, relatórios do Newman |
+| `entrega/09_SISTEMA_INTERFACE/` | Testes Selenium (P08): documento, log, relatórios e capturas |
+| `postman/` | Coleção e ambiente usados na execução (gerados por `scripts/gerar_colecao_postman.py`) |
 | `entrega/11_METRICAS_E_QUALIDADE/sonar_baseline/` | Linha de base do SonarQube (medidas, problemas, quality gate, log) |
 | `dados/` | Fonte única de requisitos, riscos, casos (JSON), execuções e defeitos (CSV) usada para gerar P04, P05 e P06 |
 | `entrega/15_DIARIO_DE_PARTICIPACAO/` | Diário de participação (P14) |

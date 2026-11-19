@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="BarberAgenda — testes de integração/API" tests="26" time="0.882">
+  <testsuite name="00 Preparação / Restaurar dados fictícios (administrador)" id="fbd3ddff-4a9a-44e2-aafd-6b1a58e037d8" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.188">
+    <testcase name="HTTP 200" time="0.188" classname="00PreparacaoRestaurarDadosFicticiosAdministrador"/>
+    <testcase name="massa restaurada: 3 barbeiros, 5 serviços, 10 clientes, 5 agendamentos" time="0.188" classname="00PreparacaoRestaurarDadosFicticiosAdministrador"/>
+  </testsuite>
+  <testsuite name="00 Preparação / Listar barbeiros ativos" id="70039b83-4434-440f-83b3-703073a4e2d8" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.015">
+    <testcase name="HTTP 200" time="0.015" classname="00PreparacaoListarBarbeirosAtivos"/>
+    <testcase name="contrato: lista de {id: número, nome: texto, ativo: verdadeiro}" time="0.015" classname="00PreparacaoListarBarbeirosAtivos"/>
+    <testcase name="RN-10: barbeiro inativo (Diego Máquina) não é listado" time="0.015" classname="00PreparacaoListarBarbeirosAtivos"/>
+  </testsuite>
+  <testsuite name="00 Preparação / Listar serviços ativos" id="67f29874-c682-48a5-aacb-0ae71cbf46c8" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.011">
+    <testcase name="HTTP 200" time="0.011" classname="00PreparacaoListarServicosAtivos"/>
+    <testcase name="contrato: duracaoMinutos e preco numéricos" time="0.011" classname="00PreparacaoListarServicosAtivos"/>
+    <testcase name="RN-10: serviço inativo (Relaxamento capilar) não é listado" time="0.011" classname="00PreparacaoListarServicosAtivos"/>
+  </testsuite>
+  <testsuite name="01 Clientes — POST /api/clientes / CT-001 / RF-01 — cadastrar cliente válido" id="64edbabb-0057-4b3d-9de7-8704e8b71c60" timestamp="2026-11-19T01:11:55.566Z" tests="4" failures="0" errors="0" time="0.103">
+    <testcase name="HTTP 201 Created" time="0.103" classname="01ClientesPostApiClientesCt001Rf01CadastrarClienteValido"/>
+    <testcase name="contrato: id, nome, telefone, email, dataCadastro" time="0.103" classname="01ClientesPostApiClientesCt001Rf01CadastrarClienteValido"/>
+    <testcase name="nome sem espaços nas pontas e e-mail em minúsculas" time="0.103" classname="01ClientesPostApiClientesCt001Rf01CadastrarClienteValido"/>
+    <testcase name="cabeçalho Location aponta para o cliente criado" time="0.103" classname="01ClientesPostApiClientesCt001Rf01CadastrarClienteValido"/>
+  </testsuite>
+  <testsuite name="01 Clientes — POST /api/clientes / CT-005 / RF-01 — e-mail em formato inválido" id="6ddeee7e-e690-4eac-840e-d50a2febc015" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.013">
+    <testcase name="HTTP 400" time="0.013" classname="01ClientesPostApiClientesCt005Rf01EMailEmFormatoInvalido"/>
+    <testcase name="contrato de erro padronizado, sem detalhes internos" time="0.013" classname="01ClientesPostApiClientesCt005Rf01EMailEmFormatoInvalido"/>
+    <testcase name="mensagem do campo email" time="0.013" classname="01ClientesPostApiClientesCt005Rf01EMailEmFormatoInvalido"/>
+  </testsuite>
+  <testsuite name="01 Clientes — POST /api/clientes / CT-006 / RF-01 — e-mail já cadastrado (em maiúsculas)" id="9bf6cad3-6080-487c-a06b-344300b13f85" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.008">
+    <testcase name="HTTP 409 Conflict" time="0.008" classname="01ClientesPostApiClientesCt006Rf01EMailJaCadastradoEmMaiusculas"/>
+    <testcase name="contrato de erro padronizado" time="0.008" classname="01ClientesPostApiClientesCt006Rf01EMailJaCadastradoEmMaiusculas"/>
+    <testcase name="mensagem de e-mail repetido" time="0.008" classname="01ClientesPostApiClientesCt006Rf01EMailJaCadastradoEmMaiusculas"/>
+  </testsuite>
+  <testsuite name="02 Agendamento encadeado / CT-010 / RF-03 — agendar para o cliente recém-cadastrado" id="f9f246d3-fb07-4bbd-8a6e-e9ba3fa9e6a2" timestamp="2026-11-19T01:11:55.566Z" tests="5" failures="0" errors="0" time="0.055">
+    <testcase name="HTTP 201 Created" time="0.055" classname="02AgendamentoEncadeadoCt010Rf03AgendarParaOClienteRecemCadastrado"/>
+    <testcase name="código de acesso com 8 caracteres do alfabeto sem ambíguos" time="0.055" classname="02AgendamentoEncadeadoCt010Rf03AgendarParaOClienteRecemCadastrado"/>
+    <testcase name="status AGENDADO, término = início + 30 min" time="0.055" classname="02AgendamentoEncadeadoCt010Rf03AgendarParaOClienteRecemCadastrado"/>
+    <testcase name="dados encadeados: cliente, barbeiro e serviço corretos" time="0.055" classname="02AgendamentoEncadeadoCt010Rf03AgendarParaOClienteRecemCadastrado"/>
+    <testcase name="Location aponta para o código de acesso" time="0.055" classname="02AgendamentoEncadeadoCt010Rf03AgendarParaOClienteRecemCadastrado"/>
+  </testsuite>
+  <testsuite name="02 Agendamento encadeado / CT-023 / RF-05 — consultar pelo código de acesso e e-mail" id="82191693-5ddb-4ed4-be0f-8ca9f1201569" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.015">
+    <testcase name="HTTP 200" time="0.015" classname="02AgendamentoEncadeadoCt023Rf05ConsultarPeloCodigoDeAcessoEEMail"/>
+    <testcase name="é o agendamento criado, ainda AGENDADO" time="0.015" classname="02AgendamentoEncadeadoCt023Rf05ConsultarPeloCodigoDeAcessoEEMail"/>
+  </testsuite>
+  <testsuite name="02 Agendamento encadeado / CT-025 / RF-05 — cancelar o agendamento" id="69763ed8-1141-49c7-b8d1-2bbb5f748fdf" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.018">
+    <testcase name="HTTP 200" time="0.018" classname="02AgendamentoEncadeadoCt025Rf05CancelarOAgendamento"/>
+    <testcase name="status CANCELADO" time="0.018" classname="02AgendamentoEncadeadoCt025Rf05CancelarOAgendamento"/>
+  </testsuite>
+  <testsuite name="02 Agendamento encadeado / CT-026 / RF-05 — cancelar de novo é recusado" id="810bcbf0-047b-42cb-8f59-d061a0433e2e" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.009">
+    <testcase name="HTTP 409" time="0.009" classname="02AgendamentoEncadeadoCt026Rf05CancelarDeNovoERecusado"/>
+    <testcase name="contrato de erro padronizado" time="0.009" classname="02AgendamentoEncadeadoCt026Rf05CancelarDeNovoERecusado"/>
+    <testcase name="mensagem de transição inválida" time="0.009" classname="02AgendamentoEncadeadoCt026Rf05CancelarDeNovoERecusado"/>
+  </testsuite>
+  <testsuite name="03 Regras de agendamento — POST /api/agendamentos / Obter SEMENTE3 (base dos testes de conflito)" id="180c24c1-a025-4aee-b283-1468da4726e5" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.007">
+    <testcase name="HTTP 200" time="0.007" classname="03RegrasDeAgendamentoPostApiAgendamentosObterSemente3BaseDosTestesDeConflito"/>
+    <testcase name="SEMENTE3 é do Rafael Tesoura, 60 min, AGENDADO" time="0.007" classname="03RegrasDeAgendamentoPostApiAgendamentosObterSemente3BaseDosTestesDeConflito"/>
+  </testsuite>
+  <testsuite name="03 Regras de agendamento — POST /api/agendamentos / CT-019 / RF-04 — sobreposição com agendamento do mesmo barbeiro" id="b72782ba-8c10-468e-a59e-9437acce3c62" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.010">
+    <testcase name="HTTP 409" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt019Rf04SobreposicaoComAgendamentoDoMesmoBarbeiro"/>
+    <testcase name="contrato de erro padronizado" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt019Rf04SobreposicaoComAgendamentoDoMesmoBarbeiro"/>
+    <testcase name="mensagem de horário ocupado" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt019Rf04SobreposicaoComAgendamentoDoMesmoBarbeiro"/>
+  </testsuite>
+  <testsuite name="03 Regras de agendamento — POST /api/agendamentos / CT-020 / RF-04 — horário encostado no término é aceito" id="52ba9bff-e604-4939-bfb0-8025c6a68a39" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.015">
+    <testcase name="HTTP 201" time="0.015" classname="03RegrasDeAgendamentoPostApiAgendamentosCt020Rf04HorarioEncostadoNoTerminoEAceito"/>
+    <testcase name="começa exatamente quando o outro termina" time="0.015" classname="03RegrasDeAgendamentoPostApiAgendamentosCt020Rf04HorarioEncostadoNoTerminoEAceito"/>
+  </testsuite>
+  <testsuite name="03 Regras de agendamento — POST /api/agendamentos / CT-012 / RF-03 — início às 08:30 é recusado" id="dbc5ab99-2cd2-43f4-ae6d-3a06d22d4fad" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.010">
+    <testcase name="HTTP 400" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt012Rf03InicioAs0830ERecusado"/>
+    <testcase name="contrato de erro padronizado" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt012Rf03InicioAs0830ERecusado"/>
+    <testcase name="erro no campo dataHoraInicio" time="0.010" classname="03RegrasDeAgendamentoPostApiAgendamentosCt012Rf03InicioAs0830ERecusado"/>
+  </testsuite>
+  <testsuite name="03 Regras de agendamento — POST /api/agendamentos / CT-018 / RF-03 — e-mail não cadastrado" id="cff35fc5-4fa1-43b5-b0df-41ef0d3a8c1e" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.007">
+    <testcase name="HTTP 404" time="0.007" classname="03RegrasDeAgendamentoPostApiAgendamentosCt018Rf03EMailNaoCadastrado"/>
+    <testcase name="contrato de erro padronizado" time="0.007" classname="03RegrasDeAgendamentoPostApiAgendamentosCt018Rf03EMailNaoCadastrado"/>
+    <testcase name="mensagem orienta o cadastro" time="0.007" classname="03RegrasDeAgendamentoPostApiAgendamentosCt018Rf03EMailNaoCadastrado"/>
+  </testsuite>
+  <testsuite name="04 Consulta — GET /api/agendamentos/{codigo} / CT-024 / RF-05 — código certo, e-mail de outro cliente" id="2dc1746a-b329-43f5-ba2a-066d5ef48f9c" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="HTTP 404" time="0.008" classname="04ConsultaGetApiAgendamentosCodigoCt024Rf05CodigoCertoEMailDeOutroCliente"/>
+    <testcase name="contrato e mensagem sem revelar o agendamento" time="0.008" classname="04ConsultaGetApiAgendamentosCodigoCt024Rf05CodigoCertoEMailDeOutroCliente"/>
+  </testsuite>
+  <testsuite name="04 Consulta — GET /api/agendamentos/{codigo} / CT-024 / RF-05 — número sequencial no lugar do código" id="ddc754b1-2270-4bc7-87a5-ed4c2c37f9bd" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="HTTP 404" time="0.005" classname="04ConsultaGetApiAgendamentosCodigoCt024Rf05NumeroSequencialNoLugarDoCodigo"/>
+    <testcase name="mesma mensagem" time="0.005" classname="04ConsultaGetApiAgendamentosCodigoCt024Rf05NumeroSequencialNoLugarDoCodigo"/>
+  </testsuite>
+  <testsuite name="05 Segurança — sem credenciais (CT-029) / CT-029 / RF-06 — listar barbeiros (admin) sem credenciais" id="2baeda09-fa1d-4ae9-bd65-ab42ceefab1c" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.020">
+    <testcase name="HTTP 401" time="0.020" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ListarBarbeirosAdminSemCredenciais"/>
+    <testcase name="corpo é só o erro padronizado, sem dados" time="0.020" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ListarBarbeirosAdminSemCredenciais"/>
+  </testsuite>
+  <testsuite name="05 Segurança — sem credenciais (CT-029) / CT-029 / RF-06 — listar clientes sem credenciais" id="3d9ed3aa-6e1e-41ab-9c06-af6ec04e3743" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="HTTP 401" time="0.003" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ListarClientesSemCredenciais"/>
+    <testcase name="nenhum e-mail de cliente no corpo" time="0.003" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ListarClientesSemCredenciais"/>
+  </testsuite>
+  <testsuite name="05 Segurança — sem credenciais (CT-029) / CT-029 / RF-06 — cadastrar serviço sem credenciais" id="44953743-03ac-4e77-8c5f-61e7e074c423" timestamp="2026-11-19T01:11:55.566Z" tests="1" failures="0" errors="0" time="0.004">
+    <testcase name="HTTP 403 (token CSRF verificado antes da autenticação)" time="0.004" classname="05SegurancaSemCredenciaisCt029Ct029Rf06CadastrarServicoSemCredenciais"/>
+  </testsuite>
+  <testsuite name="05 Segurança — sem credenciais (CT-029) / CT-029 / RF-06 — serviço invasor não foi criado" id="b341800a-4929-423e-9b87-03da3b82b5ac" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="HTTP 200" time="0.005" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ServicoInvasorNaoFoiCriado"/>
+    <testcase name="&quot;Serviço Invasor&quot; não existe" time="0.005" classname="05SegurancaSemCredenciaisCt029Ct029Rf06ServicoInvasorNaoFoiCriado"/>
+  </testsuite>
+  <testsuite name="06 Administração — HTTP Basic / RF-07 — cadastrar serviço válido" id="11c9bae4-7ff7-4212-b485-62b32f4969af" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.081">
+    <testcase name="HTTP 201" time="0.081" classname="06AdministracaoHttpBasicRf07CadastrarServicoValido"/>
+    <testcase name="contrato do serviço" time="0.081" classname="06AdministracaoHttpBasicRf07CadastrarServicoValido"/>
+  </testsuite>
+  <testsuite name="06 Administração — HTTP Basic / CT-031 / RF-07 — duração não múltipla de 15" id="d78281c0-4063-4a21-9b91-8cecd1dff99c" timestamp="2026-11-19T01:11:55.566Z" tests="2" failures="0" errors="0" time="0.061">
+    <testcase name="HTTP 400" time="0.061" classname="06AdministracaoHttpBasicCt031Rf07DuracaoNaoMultiplaDe15"/>
+    <testcase name="erro no campo duracaoMinutos" time="0.061" classname="06AdministracaoHttpBasicCt031Rf07DuracaoNaoMultiplaDe15"/>
+  </testsuite>
+  <testsuite name="06 Administração — HTTP Basic / RF-07 — excluir serviço sem agendamentos" id="4b61a59e-3d9a-4860-8348-0d57c6354968" timestamp="2026-11-19T01:11:55.566Z" tests="1" failures="0" errors="0" time="0.070">
+    <testcase name="HTTP 204 No Content" time="0.070" classname="06AdministracaoHttpBasicRf07ExcluirServicoSemAgendamentos"/>
+  </testsuite>
+  <testsuite name="06 Administração — HTTP Basic / RF-08 — agenda do dia não expõe códigos de acesso" id="b3a67012-8c96-43f9-af1d-9a1eb8f45f2d" timestamp="2026-11-19T01:11:55.566Z" tests="3" failures="0" errors="0" time="0.070">
+    <testcase name="HTTP 200" time="0.070" classname="06AdministracaoHttpBasicRf08AgendaDoDiaNaoExpoeCodigosDeAcesso"/>
+    <testcase name="lista os agendamentos do dia em ordem de horário" time="0.070" classname="06AdministracaoHttpBasicRf08AgendaDoDiaNaoExpoeCodigosDeAcesso"/>
+    <testcase name="nenhum agendamento traz codigoAcesso" time="0.070" classname="06AdministracaoHttpBasicRf08AgendaDoDiaNaoExpoeCodigosDeAcesso"/>
+  </testsuite>
+  <testsuite name="07 Limpeza / Restaurar dados fictícios ao final" id="f9ca872c-ba4b-462e-9124-4e902bcd8512" timestamp="2026-11-19T01:11:55.566Z" tests="1" failures="0" errors="0" time="0.071">
+    <testcase name="HTTP 200" time="0.071" classname="07LimpezaRestaurarDadosFicticiosAoFinal"/>
+  </testsuite>
+</testsuites>

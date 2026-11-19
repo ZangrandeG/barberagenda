@@ -26,6 +26,11 @@
         <sonar.projectKey>barberagenda</sonar.projectKey>
         <sonar.projectName>BarberAgenda</sonar.projectName>
         <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <!-- Selenium (sobrescreve a versão gerenciada pelo Spring Boot) -->
+        <selenium.version>4.53.0</selenium.version>
+        <!-- Testes de interface (@Tag("e2e")) ficam fora do "./mvnw test" padrão; rodam com "./mvnw test -Pe2e" -->
+        <grupos.incluidos></grupos.incluidos>
+        <grupos.excluidos>e2e</grupos.excluidos>
     </properties>
 
     <dependencies>
@@ -67,6 +72,11 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -100,6 +110,14 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <groups>${grupos.incluidos}</groups>
+                        <excludedGroups>${grupos.excluidos}</excludedGroups>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar-maven-plugin.version}</version>
@@ -107,4 +125,16 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <!-- Testes de sistema/interface com Selenium: ./mvnw test -Pe2e
+             Opções: -Dnavegador=chrome|firefox  -Djanela=1366x768  -Dheadless=true|false -->
+        <profile>
+            <id>e2e</id>
+            <properties>
+                <grupos.incluidos>e2e</grupos.incluidos>
+                <grupos.excluidos>nenhum</grupos.excluidos>
+            </properties>
+        </profile>
+    </profiles>
 </project>

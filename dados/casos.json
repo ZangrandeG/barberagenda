@@ -30,8 +30,8 @@
       "candidato": "Sim",
       "nivel": "Interface (Selenium) e API (Postman)",
       "justificativa": "Fluxo principal e repetido em toda regressão.",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: CadastroServiceTest#deveCadastrarClienteComDadosValidos"
+      "automatizado": "Sim",
+      "referencia": "Unidade: CadastroServiceTest#deveCadastrarClienteComDadosValidos; API (Postman): 01 Clientes › CT-001; Interface (Selenium): CadastroClienteE2ETest#deveCadastrarClientePelaTela"
     }
   },
   {
@@ -98,7 +98,7 @@
       "nivel": "Unidade (validação de ClienteRequest)",
       "justificativa": "Limites inválidos complementam CT-002 na mesma suíte.",
       "automatizado": "Sim",
-      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarNomeForaDoLimite"
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarNomeForaDoLimite; Interface (Selenium): CadastroClienteE2ETest#deveRecusarNomeCurtoPelaTela"
     }
   },
   {
@@ -161,8 +161,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman, fluxo negativo de POST /api/clientes)",
       "justificativa": "Operação crítica precisa de ao menos um fluxo negativo na coleção.",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarEmailEmFormatoInvalido"
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarEmailEmFormatoInvalido; API (Postman): 01 Clientes › CT-005"
     }
   },
   {
@@ -193,8 +193,8 @@
       "candidato": "Sim",
       "nivel": "Unidade (ClienteService com mock) e API (Postman)",
       "justificativa": "Regra de unicidade crítica para identificar o cliente no agendamento.",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: CadastroServiceTest#deveRejeitarCadastroComEmailJaCadastrado"
+      "automatizado": "Sim",
+      "referencia": "Unidade: CadastroServiceTest#deveRejeitarCadastroComEmailJaCadastrado; API (Postman): 01 Clientes › CT-006"
     }
   },
   {
@@ -331,8 +331,8 @@
       "candidato": "Sim",
       "nivel": "Interface (Selenium) e API (Postman)",
       "justificativa": "Fluxo mais importante do sistema.",
-      "automatizado": "Não",
-      "referencia": ""
+      "automatizado": "Sim",
+      "referencia": "API (Postman): 02 Agendamento encadeado › CT-010; Interface (Selenium): AgendamentoE2ETest#deveAgendarHorarioPelaTela"
     }
   },
   {
@@ -395,7 +395,7 @@
       "nivel": "Unidade (RegrasAgendamento.validarFuncionamento)",
       "justificativa": "Limites só alcançáveis pela API; regra de maior risco.",
       "automatizado": "Sim",
-      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoForaDoHorarioDeFuncionamento"
+      "referencia": "Unidade: RegrasAgendamentoTest#deveRejeitarAgendamentoForaDoHorarioDeFuncionamento; API (Postman): 03 Regras › CT-012"
     }
   },
   {
@@ -583,8 +583,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman, fluxo negativo de POST /api/agendamentos)",
       "justificativa": "Fluxo negativo da operação crítica de agendamento.",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoDeClienteNaoCadastrado"
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoDeClienteNaoCadastrado; API (Postman): 03 Regras › CT-018"
     }
   },
   {
@@ -615,8 +615,8 @@
       "candidato": "Sim",
       "nivel": "Unidade (AgendamentoService com mock) e API (Postman)",
       "justificativa": "Risco mais alto do produto (R-01).",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoQuandoHorarioConflitaComOutroDoMesmoBarbeiro"
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarAgendamentoQuandoHorarioConflitaComOutroDoMesmoBarbeiro; API (Postman): 03 Regras › CT-019"
     }
   },
   {
@@ -646,8 +646,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman)",
       "justificativa": "O limite depende da consulta ao banco; precisa de teste integrado.",
-      "automatizado": "Não",
-      "referencia": ""
+      "automatizado": "Sim",
+      "referencia": "API (Postman): 03 Regras › CT-020"
     }
   },
   {
@@ -743,8 +743,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman, GET encadeado após o agendamento) e Interface (Selenium, no fluxo de cancelamento)",
       "justificativa": "Operação usada em todo cancelamento.",
-      "automatizado": "Não",
-      "referencia": ""
+      "automatizado": "Sim",
+      "referencia": "API (Postman): 02 Agendamento encadeado › CT-023; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario"
     }
   },
   {
@@ -773,8 +773,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman, fluxo negativo de GET /api/agendamentos/{codigo})",
       "justificativa": "Protege dados de terceiros (R-07).",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: AgendamentoServiceTest#deveRecusarConsultaComEmailDeOutroCliente"
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRecusarConsultaComEmailDeOutroCliente; API (Postman): 04 Consulta › CT-024 (2 requisições)"
     }
   },
   {
@@ -804,8 +804,8 @@
       "candidato": "Sim",
       "nivel": "Interface (Selenium)",
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (cancelamento).",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: AgendamentoServiceTest#deveCancelarAgendamentoAtivoDoCliente; #deveOferecerHorarioDeAgendamentoCancelado"
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveCancelarAgendamentoAtivoDoCliente; #deveOferecerHorarioDeAgendamentoCancelado; API (Postman): 02 Agendamento encadeado › CT-025; Interface (Selenium): CancelamentoE2ETest#deveConsultarECancelarAgendamentoLiberandoOHorario"
     }
   },
   {
@@ -835,8 +835,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman)",
       "justificativa": "Transição inválida só alcançável pela API.",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoDeAgendamentoJaCancelado"
+      "automatizado": "Sim",
+      "referencia": "Unidade: AgendamentoServiceTest#deveRejeitarCancelamentoDeAgendamentoJaCancelado; API (Postman): 02 Agendamento encadeado › CT-026"
     }
   },
   {
@@ -869,8 +869,8 @@
       "candidato": "Sim",
       "nivel": "Interface (Selenium, junto com o cadastro de serviço)",
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (login admin).",
-      "automatizado": "Não",
-      "referencia": ""
+      "automatizado": "Sim",
+      "referencia": "Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair"
     }
   },
   {
@@ -936,8 +936,8 @@
       "candidato": "Sim",
       "nivel": "API (Postman)",
       "justificativa": "Controle de acesso é risco Alto (R-03) e deve entrar em toda regressão.",
-      "automatizado": "Não",
-      "referencia": ""
+      "automatizado": "Sim",
+      "referencia": "API (Postman): 05 Segurança › CT-029 (4 requisições)"
     }
   },
   {
@@ -969,8 +969,8 @@
       "candidato": "Sim",
       "nivel": "Interface (Selenium, junto com o login do administrador)",
       "justificativa": "Fluxo ponta a ponta exigido pelo manual (cadastro de serviço).",
-      "automatizado": "Parcial",
-      "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarServicoNosLimitesValidos"
+      "automatizado": "Sim",
+      "referencia": "Unidade: ValidacaoEntradaTest#deveAceitarServicoNosLimitesValidos; Interface (Selenium): AdminServicoE2ETest#deveEntrarCadastrarServicoESair"
     }
   },
   {
@@ -1002,7 +1002,7 @@
       "nivel": "Unidade (validação de ServicoRequest)",
       "justificativa": "Cinco limites verificáveis em milissegundos.",
       "automatizado": "Sim",
-      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarDuracaoForaDosLimites; #deveRejeitarPrecoForaDosLimites"
+      "referencia": "Unidade: ValidacaoEntradaTest#deveRejeitarDuracaoForaDosLimites; #deveRejeitarPrecoForaDosLimites; API (Postman): 06 Administração › CT-031"
     }
   },
   {

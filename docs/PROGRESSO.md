@@ -13,6 +13,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 - Fase 5 em andamento: **o grupo executa os 35 casos** (decisão de 2026-11-18). Preparação pronta: roteiro, checklist, registro, convenção de evidências, `scripts/datas_teste.py`, modelo de issue "Defeito", etiquetas no GitHub e `scripts/exportar_defeitos.py`. Nenhum caso executado ainda.
 - Ao trazer resultados: lançar em `dados/execucoes.csv`, abrir issues para reprovações, rodar `exportar_defeitos.py` e `gerar_artefatos.py`; depois, tag `marco-4`.
 - Fase 6 concluída (adiantada enquanto o grupo executa a Fase 5): 35 métodos de teste de unidade (52 execuções, 0 falhas), JaCoCo (36,4% linhas; serviços 76,8%) e linha de base do SonarQube (3 bugs, 2 vulnerabilidades, 0 code smells, 0% duplicação, cobertura 38,9%) — tag `marco-5`.
+- Fase 7 concluída: Postman/Newman (26 requisições, 63 asserções, 0 falhas) e Selenium (5 testes E2E, Chrome headless, 0 falhas) — tag `marco-6`. Taxa de automação 31/31.
 - SonarQube: Community Build 26.11 em zip (sem Docker) em `C:\Users\Admin\Ferramentas`, dados em `D:\SonarQubeDados` (o C: tem menos de 10% livre). Senha do admin e tokens só em `C:\Users\Admin\Ferramentas\SONARQUBE_LOCAL.txt` (fora do Git). Capturas de tela do painel não foram feitas: exigem login (a liberação de acesso anônimo foi negada); evidência = exportação pela API.
 
 ## Fases
@@ -26,7 +27,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 4 — Especificação (P04, P05) | Marco 3 | Concluída em 2026-11-18 — tag `marco-3` |
 | 5 — Execução manual e defeitos (P06, P07) | Marco 4 | Em andamento — preparação concluída; execução pelo grupo pendente |
 | 6 — Automação unitária + Sonar linha de base (P08) | Marco 5 | Concluída em 2026-11-18 — tag `marco-5` |
-| 7 — Integração/API e sistema/interface (P08) | Marco 6 | Não iniciada |
+| 7 — Integração/API e sistema/interface (P08) | Marco 6 | Concluída em 2026-11-18 — tag `marco-6` |
 | 8 — Aceitação e não funcionais (P09) | Marco 7 | Não iniciada |
 | 9 — TDD, CI/CD e melhoria (P11) | Marco 9 | Não iniciada |
 | 10 — Métricas (P10) | Marco 8 | Não iniciada |
@@ -45,7 +46,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P05 | Matriz de rastreabilidade | `entrega/04_CASOS_E_RASTREABILIDADE/P05_Matriz_Rastreabilidade.xlsx` | v1.0 — 7 abas com fórmulas; execuções e defeitos vazios até o Marco 4 |
 | P06 | Evidências de execução manual | `entrega/05_EXECUCAO_MANUAL/` (roteiro, checklist, registro, evidencias/) | Preparado — 0 de 35 casos executados |
 | P07 | Registro de defeitos | GitHub Issues (etiqueta `defeito`) + `entrega/06_DEFEITOS/` | Preparado — modelo, etiquetas e exportação prontos; 0 defeitos |
-| P08 | Scripts de automação | `src/test/java/.../unit/`; `entrega/07_AUTOMACAO_UNITARIA/P08_Testes_Unitarios.md` | Unidade concluída (35 métodos, 52 execuções); API e interface no Marco 6 |
+| P08 | Scripts de automação | `src/test/java/.../unit/` e `.../e2e/`; `postman/`; `entrega/07`, `08` e `09` | Concluído: unidade (52 execuções), API (26 requisições/63 asserções), interface (5 testes); 31/31 candidatos automatizados |
 | P09 | Aceitação e não funcionais | — | Não iniciado |
 | P10 | Métricas e indicadores | — | Não iniciado |
 | P11 | TDD, CI/CD e melhoria contínua | — | Não iniciado |

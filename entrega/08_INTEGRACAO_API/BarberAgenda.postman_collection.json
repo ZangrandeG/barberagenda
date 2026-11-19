@@ -1,0 +1,1127 @@
+{
+  "info": {
+    "name": "BarberAgenda — testes de integração/API",
+    "description": "Projeto Integrado P2 (Testes e Qualidade de Software). Cada requisição indica o caso de teste (CT) e o requisito (RF) que representa. Dados fictícios; credencial de administrador fictícia no ambiente. Gerada por scripts/gerar_colecao_postman.py.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "item": [
+    {
+      "name": "00 Preparação",
+      "description": "Restaura a massa fictícia e obtém ids e datas usados nas próximas requisições.",
+      "item": [
+        {
+          "name": "Restaurar dados fictícios (administrador)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function doisDigitos(n) { return String(n).padStart(2, '0'); }",
+                  "function formatarData(d) { return d.getFullYear() + '-' + doisDigitos(d.getMonth() + 1) + '-' + doisDigitos(d.getDate()); }",
+                  "function formatarDataHora(d) { return formatarData(d) + 'T' + doisDigitos(d.getHours()) + ':' + doisDigitos(d.getMinutes()) + ':00'; }",
+                  "function somarMinutos(isoLocal, minutos) { const d = new Date(isoLocal); d.setMinutes(d.getMinutes() + minutos); return formatarDataHora(d); }",
+                  "",
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('massa restaurada: 3 barbeiros, 5 serviços, 10 clientes, 5 agendamentos', () => {",
+                  "    pm.expect(pm.response.json()).to.eql({ barbeiros: 3, servicos: 5, clientes: 10, agendamentos: 5 });",
+                  "});",
+                  "// Data dos novos agendamentos: 7 dias à frente (pulando domingo), longe dos agendamentos da massa.",
+                  "const d = new Date(); d.setDate(d.getDate() + 7); if (d.getDay() === 0) { d.setDate(d.getDate() + 1); }",
+                  "pm.collectionVariables.set('dataAgendamento', formatarData(d));",
+                  "pm.collectionVariables.set('sufixo', String(Date.now()));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/dev/reset",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar barbeiros ativos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const lista = pm.response.json();",
+                  "pm.test('contrato: lista de {id: número, nome: texto, ativo: verdadeiro}', () => {",
+                  "    pm.expect(lista).to.be.an('array').that.is.not.empty;",
+                  "    lista.forEach(b => { pm.expect(b.id).to.be.a('number'); pm.expect(b.nome).to.be.a('string'); pm.expect(b.ativo).to.eql(true); });",
+                  "});",
+                  "pm.test('RN-10: barbeiro inativo (Diego Máquina) não é listado', () => pm.expect(lista.map(b => b.nome)).to.not.include('Diego Máquina'));",
+                  "pm.collectionVariables.set('carlosId', lista.find(b => b.nome === 'Carlos Navalha').id);",
+                  "pm.collectionVariables.set('rafaelId', lista.find(b => b.nome === 'Rafael Tesoura').id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/barbeiros",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Listar serviços ativos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const lista = pm.response.json();",
+                  "pm.test('contrato: duracaoMinutos e preco numéricos', () => lista.forEach(s => {",
+                  "    pm.expect(s.duracaoMinutos).to.be.a('number'); pm.expect(s.preco).to.be.a('number');",
+                  "}));",
+                  "pm.test('RN-10: serviço inativo (Relaxamento capilar) não é listado', () => pm.expect(lista.map(s => s.nome)).to.not.include('Relaxamento capilar'));",
+                  "pm.collectionVariables.set('corteId', lista.find(s => s.nome === 'Corte de cabelo').id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicos",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 Clientes — POST /api/clientes",
+      "description": "Operação crítica de cadastro: fluxo positivo e negativos.",
+      "item": [
+        {
+          "name": "CT-001 / RF-01 — cadastrar cliente válido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201 Created', () => pm.response.to.have.status(201));",
+                  "const c = pm.response.json();",
+                  "pm.test('contrato: id, nome, telefone, email, dataCadastro', () => {",
+                  "    pm.expect(c).to.have.all.keys('id', 'nome', 'telefone', 'email', 'dataCadastro');",
+                  "    pm.expect(c.id).to.be.a('number');",
+                  "    pm.expect(c.dataCadastro).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}/);",
+                  "});",
+                  "pm.test('nome sem espaços nas pontas e e-mail em minúsculas', () => {",
+                  "    pm.expect(c.nome).to.eql('Cliente Postman');",
+                  "    pm.expect(c.email).to.eql(('postman.' + pm.collectionVariables.get('sufixo') + '@exemplo.com'));",
+                  "});",
+                  "pm.test('cabeçalho Location aponta para o cliente criado', () => pm.expect(pm.response.headers.get('Location')).to.match(new RegExp('/api/clientes/' + c.id + '$')));",
+                  "pm.collectionVariables.set('clienteEmail', c.email);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clientes",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"  Cliente Postman \",\n  \"telefone\": \"14988887777\",\n  \"email\": \"Postman.{{sufixo}}@Exemplo.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-005 / RF-01 — e-mail em formato inválido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado, sem detalhes internos', () => verificarContratoDeErro(e, 400));",
+                  "pm.test('mensagem do campo email', () => pm.expect(e.campos.email).to.eql('O e-mail informado é inválido.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clientes",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Paula Teste\",\n  \"telefone\": \"14988776655\",\n  \"email\": \"paula@exemplo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-006 / RF-01 — e-mail já cadastrado (em maiúsculas)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 409 Conflict', () => pm.response.to.have.status(409));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado', () => verificarContratoDeErro(e, 409));",
+                  "pm.test('mensagem de e-mail repetido', () => pm.expect(e.mensagem).to.eql('Já existe um cliente cadastrado com este e-mail.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clientes",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Repetida\",\n  \"telefone\": \"14988776655\",\n  \"email\": \"ANA.ROCHA@EXEMPLO.COM\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Agendamento encadeado",
+      "description": "Cadastrar → agendar → consultar → cancelar, reaproveitando e-mail e código de acesso.",
+      "item": [
+        {
+          "name": "CT-010 / RF-03 — agendar para o cliente recém-cadastrado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function doisDigitos(n) { return String(n).padStart(2, '0'); }",
+                  "function formatarData(d) { return d.getFullYear() + '-' + doisDigitos(d.getMonth() + 1) + '-' + doisDigitos(d.getDate()); }",
+                  "function formatarDataHora(d) { return formatarData(d) + 'T' + doisDigitos(d.getHours()) + ':' + doisDigitos(d.getMinutes()) + ':00'; }",
+                  "function somarMinutos(isoLocal, minutos) { const d = new Date(isoLocal); d.setMinutes(d.getMinutes() + minutos); return formatarDataHora(d); }",
+                  "",
+                  "pm.test('HTTP 201 Created', () => pm.response.to.have.status(201));",
+                  "const a = pm.response.json();",
+                  "const inicio = pm.collectionVariables.get('dataAgendamento') + 'T10:00:00';",
+                  "pm.test('código de acesso com 8 caracteres do alfabeto sem ambíguos', () => pm.expect(a.codigoAcesso).to.match(/^[A-HJKMNP-Z2-9]{8}$/));",
+                  "pm.test('status AGENDADO, término = início + 30 min', () => {",
+                  "    pm.expect(a.status).to.eql('AGENDADO');",
+                  "    pm.expect(a.dataHoraInicio).to.eql(inicio);",
+                  "    pm.expect(a.dataHoraFim).to.eql(somarMinutos(inicio, 30));",
+                  "});",
+                  "pm.test('dados encadeados: cliente, barbeiro e serviço corretos', () => {",
+                  "    pm.expect(a.clienteEmail).to.eql(pm.collectionVariables.get('clienteEmail'));",
+                  "    pm.expect(a.barbeiroId).to.eql(Number(pm.collectionVariables.get('carlosId')));",
+                  "    pm.expect(a.servicoNome).to.eql('Corte de cabelo');",
+                  "});",
+                  "pm.test('Location aponta para o código de acesso', () => pm.expect(pm.response.headers.get('Location')).to.match(new RegExp('/api/agendamentos/' + a.codigoAcesso + '$')));",
+                  "pm.collectionVariables.set('codigoAcesso', a.codigoAcesso);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailCliente\": \"{{clienteEmail}}\",\n  \"barbeiroId\": {{carlosId}},\n  \"servicoId\": {{corteId}},\n  \"dataHoraInicio\": \"{{dataAgendamento}}T10:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-023 / RF-05 — consultar pelo código de acesso e e-mail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const a = pm.response.json();",
+                  "pm.test('é o agendamento criado, ainda AGENDADO', () => {",
+                  "    pm.expect(a.codigoAcesso).to.eql(pm.collectionVariables.get('codigoAcesso'));",
+                  "    pm.expect(a.status).to.eql('AGENDADO');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/agendamentos/{{codigoAcesso}}?email={{clienteEmail}}",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "CT-025 / RF-05 — cancelar o agendamento",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('status CANCELADO', () => pm.expect(pm.response.json().status).to.eql('CANCELADO'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos/{{codigoAcesso}}/cancelar",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{clienteEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-026 / RF-05 — cancelar de novo é recusado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 409', () => pm.response.to.have.status(409));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado', () => verificarContratoDeErro(e, 409));",
+                  "pm.test('mensagem de transição inválida', () => pm.expect(e.mensagem).to.eql('Somente agendamentos com status AGENDADO podem ser cancelados.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos/{{codigoAcesso}}/cancelar",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{clienteEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Regras de agendamento — POST /api/agendamentos",
+      "description": "Negativos e fronteiras da operação crítica de agendamento.",
+      "item": [
+        {
+          "name": "Obter SEMENTE3 (base dos testes de conflito)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function doisDigitos(n) { return String(n).padStart(2, '0'); }",
+                  "function formatarData(d) { return d.getFullYear() + '-' + doisDigitos(d.getMonth() + 1) + '-' + doisDigitos(d.getDate()); }",
+                  "function formatarDataHora(d) { return formatarData(d) + 'T' + doisDigitos(d.getHours()) + ':' + doisDigitos(d.getMinutes()) + ':00'; }",
+                  "function somarMinutos(isoLocal, minutos) { const d = new Date(isoLocal); d.setMinutes(d.getMinutes() + minutos); return formatarDataHora(d); }",
+                  "",
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const a = pm.response.json();",
+                  "pm.test('SEMENTE3 é do Rafael Tesoura, 60 min, AGENDADO', () => {",
+                  "    pm.expect(a.barbeiroId).to.eql(Number(pm.collectionVariables.get('rafaelId')));",
+                  "    pm.expect(a.duracaoMinutos).to.eql(60);",
+                  "    pm.expect(a.status).to.eql('AGENDADO');",
+                  "});",
+                  "pm.collectionVariables.set('dataSemente3', a.dataHoraInicio.substring(0, 10));",
+                  "pm.collectionVariables.set('horarioConflito', somarMinutos(a.dataHoraInicio, 30));",
+                  "pm.collectionVariables.set('horarioEncostado', a.dataHoraFim);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/agendamentos/SEMENTE3?email=bruno.lima@exemplo.com",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "CT-019 / RF-04 — sobreposição com agendamento do mesmo barbeiro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 409', () => pm.response.to.have.status(409));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado', () => verificarContratoDeErro(e, 409));",
+                  "pm.test('mensagem de horário ocupado', () => pm.expect(e.mensagem).to.eql('O barbeiro já possui agendamento nesse horário.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailCliente\": \"joao.mendes@exemplo.com\",\n  \"barbeiroId\": {{rafaelId}},\n  \"servicoId\": {{corteId}},\n  \"dataHoraInicio\": \"{{horarioConflito}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-020 / RF-04 — horário encostado no término é aceito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+                  "pm.test('começa exatamente quando o outro termina', () => pm.expect(pm.response.json().dataHoraInicio).to.eql(pm.collectionVariables.get('horarioEncostado')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailCliente\": \"joao.mendes@exemplo.com\",\n  \"barbeiroId\": {{rafaelId}},\n  \"servicoId\": {{corteId}},\n  \"dataHoraInicio\": \"{{horarioEncostado}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-012 / RF-03 — início às 08:30 é recusado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado', () => verificarContratoDeErro(e, 400));",
+                  "pm.test('erro no campo dataHoraInicio', () => pm.expect(e.campos.dataHoraInicio).to.eql('O atendimento deve ocorrer entre 09:00 e 19:00 e o serviço precisa terminar até 19:00.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailCliente\": \"joao.mendes@exemplo.com\",\n  \"barbeiroId\": {{carlosId}},\n  \"servicoId\": {{corteId}},\n  \"dataHoraInicio\": \"{{dataAgendamento}}T08:30:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-018 / RF-03 — e-mail não cadastrado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+                  "const e = pm.response.json();",
+                  "pm.test('contrato de erro padronizado', () => verificarContratoDeErro(e, 404));",
+                  "pm.test('mensagem orienta o cadastro', () => pm.expect(e.mensagem).to.eql('Cliente não encontrado para o e-mail informado. Faça o cadastro antes de agendar.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/agendamentos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailCliente\": \"nao.cadastrado.{{sufixo}}@exemplo.com\",\n  \"barbeiroId\": {{carlosId}},\n  \"servicoId\": {{corteId}},\n  \"dataHoraInicio\": \"{{dataAgendamento}}T15:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Consulta — GET /api/agendamentos/{codigo}",
+      "description": "Negativos da consulta pelo cliente (tabela de decisão do P04).",
+      "item": [
+        {
+          "name": "CT-024 / RF-05 — código certo, e-mail de outro cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+                  "pm.test('contrato e mensagem sem revelar o agendamento', () => {",
+                  "    verificarContratoDeErro(pm.response.json(), 404);",
+                  "    pm.expect(pm.response.json().mensagem).to.eql('Agendamento não encontrado para o código de acesso e o e-mail informados.');",
+                  "    pm.expect(pm.response.text()).to.not.include('Ana Beatriz');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/agendamentos/SEMENTE2?email=bruno.lima@exemplo.com",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "CT-024 / RF-05 — número sequencial no lugar do código",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+                  "pm.test('mesma mensagem', () => pm.expect(pm.response.json().mensagem).to.eql('Agendamento não encontrado para o código de acesso e o e-mail informados.'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/agendamentos/1?email=ana.rocha@exemplo.com",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Segurança — sem credenciais (CT-029)",
+      "description": "Área administrativa e dados pessoais não podem ser acessados sem login (RN-11, RNF-02).",
+      "item": [
+        {
+          "name": "CT-029 / RF-06 — listar barbeiros (admin) sem credenciais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 401', () => pm.response.to.have.status(401));",
+                  "const e = pm.response.json();",
+                  "pm.test('corpo é só o erro padronizado, sem dados', () => { verificarContratoDeErro(e, 401); pm.expect(e.mensagem).to.eql('Autenticação necessária.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/barbeiros",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "CT-029 / RF-06 — listar clientes sem credenciais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 401', () => pm.response.to.have.status(401));",
+                  "pm.test('nenhum e-mail de cliente no corpo', () => pm.expect(pm.response.text()).to.not.include('@exemplo.com'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/clientes",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "CT-029 / RF-06 — cadastrar serviço sem credenciais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 403 (token CSRF verificado antes da autenticação)', () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Serviço Invasor\",\n  \"duracaoMinutos\": 30,\n  \"preco\": 10.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-029 / RF-06 — serviço invasor não foi criado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('\"Serviço Invasor\" não existe', () => pm.expect(pm.response.json().map(s => s.nome)).to.not.include('Serviço Invasor'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicos",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Administração — HTTP Basic",
+      "description": "Cadastro de serviço e agenda do dia com credencial (fictícia) de administrador.",
+      "item": [
+        {
+          "name": "RF-07 — cadastrar serviço válido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+                  "const s = pm.response.json();",
+                  "pm.test('contrato do serviço', () => {",
+                  "    pm.expect(s).to.have.all.keys('id', 'nome', 'duracaoMinutos', 'preco', 'ativo');",
+                  "    pm.expect(s.preco).to.eql(55.9);",
+                  "    pm.expect(s.ativo).to.eql(true);",
+                  "});",
+                  "pm.collectionVariables.set('servicoTemporarioId', s.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Hidratação Postman\",\n  \"duracaoMinutos\": 45,\n  \"preco\": 55.9\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "CT-031 / RF-07 — duração não múltipla de 15",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function verificarContratoDeErro(json, status) {",
+                  "    pm.expect(json).to.have.all.keys('status', 'erro', 'mensagem', 'campos');",
+                  "    pm.expect(json.status).to.eql(status);",
+                  "    pm.expect(json.mensagem).to.be.a('string').and.not.empty;",
+                  "    pm.expect(json.campos).to.be.an('object');",
+                  "    pm.expect(JSON.stringify(json)).to.not.match(/Exception|at br\\.com|\\.java/);",
+                  "}",
+                  "",
+                  "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                  "const e = pm.response.json();",
+                  "pm.test('erro no campo duracaoMinutos', () => { verificarContratoDeErro(e, 400); pm.expect(e.campos.duracaoMinutos).to.eql('A duração deve ser múltipla de 15 minutos.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Serviço Limite\",\n  \"duracaoMinutos\": 20,\n  \"preco\": 10.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "RF-07 — excluir serviço sem agendamentos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204 No Content', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos/{{servicoTemporarioId}}",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-08 — agenda do dia não expõe códigos de acesso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const agenda = pm.response.json();",
+                  "pm.test('lista os agendamentos do dia em ordem de horário', () => {",
+                  "    pm.expect(agenda.length).to.be.at.least(2);",
+                  "    const inicios = agenda.map(a => a.dataHoraInicio);",
+                  "    pm.expect(inicios).to.eql([...inicios].sort());",
+                  "});",
+                  "pm.test('nenhum agendamento traz codigoAcesso', () => agenda.forEach(a => pm.expect(a).to.not.have.property('codigoAcesso')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/agenda?barbeiroId={{rafaelId}}&data={{dataSemente3}}",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Limpeza",
+      "description": "Deixa o ambiente como estava.",
+      "item": [
+        {
+          "name": "Restaurar dados fictícios ao final",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/dev/reset",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "dataAgendamento",
+      "value": ""
+    },
+    {
+      "key": "sufixo",
+      "value": ""
+    },
+    {
+      "key": "carlosId",
+      "value": ""
+    },
+    {
+      "key": "rafaelId",
+      "value": ""
+    },
+    {
+      "key": "corteId",
+      "value": ""
+    },
+    {
+      "key": "clienteEmail",
+      "value": ""
+    },
+    {
+      "key": "codigoAcesso",
+      "value": ""
+    },
+    {
+      "key": "dataSemente3",
+      "value": ""
+    },
+    {
+      "key": "horarioConflito",
+      "value": ""
+    },
+    {
+      "key": "horarioEncostado",
+      "value": ""
+    },
+    {
+      "key": "servicoTemporarioId",
+      "value": ""
+    }
+  ]
+}
