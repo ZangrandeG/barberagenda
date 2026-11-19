@@ -41,7 +41,7 @@ class RegrasAgendamentoTest {
     void deveGerarHorariosDe09hA18hParaServicoDe60Minutos() {
         List<LocalDateTime> horarios = regras.gerarHorariosDoDia(DF3, 60);
 
-        assertThat(horarios).hasSize(20); // QUEBRA PROPOSITAL: demonstração de falha no pipeline (não é defeito do sistema)
+        assertThat(horarios).hasSize(19);
         assertThat(horarios.get(0)).isEqualTo(DF3.atTime(9, 0));
         assertThat(horarios.get(horarios.size() - 1)).isEqualTo(DF3.atTime(18, 0));
         assertThat(horarios).extracting(LocalDateTime::getMinute).containsOnly(0, 30);
