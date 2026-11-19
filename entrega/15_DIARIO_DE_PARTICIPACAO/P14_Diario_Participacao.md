@@ -26,4 +26,5 @@
 | 2026-11-18 | Marco 4: execução assistida dos 35 casos manuais (35 aprovados) e exportação de defeitos (nenhum) — executada por Claude (IA) a pedido do grupo [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/05_EXECUCAO_MANUAL/`; EX-008 a EX-042; tag `marco-4` |
 | 2026-11-18 | Marco 9: TDD da RF-09 (Red-Green-Refactor), pipeline GitHub Actions (verde, falha proposital e correção), 2ª análise SonarQube e plano de melhoria (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/12_TDD_CICD_MELHORIA/`; tags `v1.2.0-sistema` e `marco-9` |
 | 2026-11-18 | Marco 8: cálculo das 8 métricas, gráficos e interpretação (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/11_METRICAS_E_QUALIDADE/`; tag `marco-8` |
+| 2026-11-18 | Entrega final: relatório (DOCX/PDF), apresentação (PPTX/PDF), roteiros, comprovante, checklist e backup (com apoio de IA) [SUGESTÃO — REVISAR] | [PREENCHER] | [PREENCHER] | [PREENCHER] | `entrega/13_RELATORIO_FINAL/`, `entrega/14_APRESENTACAO_E_VIDEO_CONTINGENCIA/`; tag `entrega-final` |
 | | | | | | |

@@ -32,7 +32,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | 8 — Aceitação e não funcionais (P09) | Marco 7 | Concluída em 2026-11-18 — tag `marco-7` (aceitação e usabilidade aguardam pessoa externa) |
 | 9 — TDD, CI/CD e melhoria (P11) | Marco 9 | Concluída em 2026-11-18 — TDD da RF-09 (RED `35ce2a2`, GREEN `c9c6e4c`, REFACTOR `78b44e3`), versão 1.2.0, pipeline verde e falha controlada, 2ª análise Sonar — tag `marco-9` |
 | 10 — Métricas (P10) | Marco 8 | Concluída em 2026-11-18 — execução 87,5%, aprovação 100%, cobertura de requisitos 85,7%, automação 100%, 0 defeitos — tag `marco-8` |
-| 11 — Entrega final (P12, P13, P14, Drive) | Entrega final | Não iniciada |
+| 11 — Entrega final (P12, P13, P14, Drive) | Entrega final | Concluída pela IA em 2026-11-18 — relatório DOCX/PDF, apresentação PPTX/PDF, roteiros, comprovante, checklist e backup (tag `entrega-final`); pendências humanas em `docs/REVISAR_NO_FINAL.md` |
 
 ## Produtos
 
@@ -51,8 +51,8 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P09 | Aceitação e não funcionais | `entrega/10_ACEITACAO_NAO_FUNCIONAIS/` | 7 testes não funcionais executados e aprovados (desempenho, segurança ×3, confiabilidade ×2, compatibilidade); usabilidade e 4 cenários de aceitação preparados, pendentes de pessoa externa |
 | P10 | Métricas e indicadores | `entrega/11_METRICAS_E_QUALIDADE/P10_Metricas_e_Indicadores.md`, `metricas/` | 8 métricas com gráficos e interpretação (`scripts/metricas.py`) |
 | P11 | TDD, CI/CD e melhoria contínua | `entrega/12_TDD_CICD_MELHORIA/` | Ciclo Red-Green-Refactor, pipeline, comparação Sonar e plano de melhoria (M-01 a M-07) |
-| P12 | Relatório final | — | Não iniciado |
-| P13 | Apresentação e roteiro de demonstração | — | Não iniciado |
+| P12 | Relatório final | `entrega/13_RELATORIO_FINAL/` | DOCX + PDF (gerado do DOCX) |
+| P13 | Apresentação e roteiro de demonstração | `entrega/14_APRESENTACAO_E_VIDEO_CONTINGENCIA/` | PPTX + PDF (8 slides com notas) e roteiros; vídeo a gravar |
 | P14 | Diário de participação | `entrega/15_DIARIO_DE_PARTICIPACAO/P14_Diario_Participacao.md` | Modelo criado — preenchimento contínuo pelo grupo |
 
 ## Decisões registradas

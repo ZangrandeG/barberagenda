@@ -171,7 +171,13 @@ Relatórios (Surefire, JaCoCo, Newman, capturas do Selenium) ficam nos artefatos
 | `postman/` | Coleção e ambiente usados na execução (gerados por `scripts/gerar_colecao_postman.py`) |
 | `entrega/11_METRICAS_E_QUALIDADE/sonar_baseline/` | Linha de base do SonarQube (medidas, problemas, quality gate, log) |
 | `dados/` | Fonte única de requisitos, riscos, casos (JSON), execuções e defeitos (CSV) usada para gerar P04, P05 e P06 |
+| `entrega/11_METRICAS_E_QUALIDADE/` | Métricas (P10), gráficos e análises do SonarQube (linha de base e final) |
+| `entrega/12_TDD_CICD_MELHORIA/` | TDD, pipeline e plano de melhoria (P11) |
+| `entrega/13_RELATORIO_FINAL/` | Relatório final (P12) em DOCX e PDF |
+| `entrega/14_APRESENTACAO_E_VIDEO_CONTINGENCIA/` | Apresentação (P13) em PPTX e PDF, roteiros de demonstração e do vídeo |
 | `entrega/15_DIARIO_DE_PARTICIPACAO/` | Diário de participação (P14) |
+| `entrega/16_BACKUP_ENTREGA/` | Cópia de segurança do repositório na versão de entrega |
+| `docs/REVISAR_NO_FINAL.md` | O que o grupo precisa revisar, completar ou decidir |
 | `docs/PROGRESSO.md` | Situação de cada fase e produto |
 | `docs/ESPECIFICACAO_SISTEMA.md` | Regras de negócio, API, códigos de resposta e decisões de projeto |
 | `scripts/` | Verificação, restauração de dados, registro do ambiente e geração do P04/P05 |

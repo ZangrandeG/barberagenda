@@ -5,13 +5,17 @@ lang: pt-BR
 ---
 
 **UNISAGRADO — Centro Universitário Sagrado Coração**
+
 **Curso de Ciência da Computação**
+
 **Disciplina:** Testes e Qualidade de Software
+
 **Professor:** Prof. Dr. Elvio Gilberto da Silva
 
 **Sistema testado:** BarberAgenda — sistema web de agendamento de barbearia (versão 1.2.0)
 
 **Integrantes:** Guilherme Ribeiro Zangrande (RA 23110757) e José Paulo Dassie Felippi (RA 24111563)
+
 **Turma:** A — **Grupo:** [PREENCHER número do grupo]
 
 Bauru, 2026
