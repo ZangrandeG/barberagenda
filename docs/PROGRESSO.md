@@ -51,7 +51,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 | P09 | Aceitação e não funcionais | `entrega/10_ACEITACAO_NAO_FUNCIONAIS/` | 7 testes não funcionais executados e aprovados (desempenho, segurança ×3, confiabilidade ×2, compatibilidade); usabilidade e 4 cenários de aceitação preparados, pendentes de pessoa externa |
 | P10 | Métricas e indicadores | `entrega/11_METRICAS_E_QUALIDADE/P10_Metricas_e_Indicadores.md`, `metricas/` | 8 métricas com gráficos e interpretação (`scripts/metricas.py`) |
 | P11 | TDD, CI/CD e melhoria contínua | `entrega/12_TDD_CICD_MELHORIA/` | Ciclo Red-Green-Refactor, pipeline, comparação Sonar e plano de melhoria (M-01 a M-07) |
-| P12 | Relatório final | `entrega/13_RELATORIO_FINAL/` | DOCX + PDF (gerado do DOCX) |
+| P12 | Relatório final | `entrega/13_RELATORIO_FINAL/` | MD + DOCX + PDF gerados por `scripts/gerar_relatorio.py` (modelo em `scripts/relatorio/P12_modelo.md`) |
 | P13 | Apresentação e roteiro de demonstração | `entrega/14_APRESENTACAO_E_VIDEO_CONTINGENCIA/` | PPTX + PDF (8 slides com notas) e roteiros; vídeo a gravar |
 | P14 | Diário de participação | `entrega/15_DIARIO_DE_PARTICIPACAO/P14_Diario_Participacao.md` | Modelo criado — preenchimento contínuo pelo grupo |
 

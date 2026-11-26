@@ -18,7 +18,7 @@ Lista final (2026-11-18), a pedido do grupo: "preencha o que falta e no final in
 | A10 | Copiar `entrega/` para a pasta do Drive do professor com o nome `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA` e dar permissão de visualização/download | Drive | Entrega oficial é pelo Drive |
 | A11 | Informar a **data da P2** e preencher as datas-limite | P03, seção 15 | Não informada |
 
-Depois de A4, A5 e do CT-036: lançar as execuções em `dados/execucoes.csv`, rodar `python scripts/gerar_artefatos.py` e `python scripts/metricas.py`, atualizar os números do P10/P12 e regerar o DOCX/PDF (comandos no README).
+Depois de A4, A5 e do CT-036: lançar as execuções em `dados/execucoes.csv`, rodar `python scripts/gerar_artefatos.py` e `python scripts/metricas.py`, atualizar os números do P10 e rodar `python scripts/gerar_relatorio.py`, que regenera o P12 (MD, DOCX e PDF) com os dados novos.
 
 ## B. Preenchido por mim por suposição — confirmar ou corrigir
 
@@ -37,7 +37,7 @@ Depois de A4, A5 e do CT-036: lançar as execuções em `dados/execucoes.csv`, r
 |---|---|---|
 | Execução dos 36 casos manuais (P06) | Executados por Claude (IA) com `scripts/execucao_assistida.py`, registrados como tal; 35 aprovados, CT-036 bloqueado (exige horário comercial; foi executado às 23h) | Executar o CT-036 entre 09:00 e 16:30 e, se quiserem, reexecutar alguns casos à mão (novas linhas EX com o nome de vocês) |
 | Sistema, testes, scripts e documentos | Construídos com apoio de IA | Ler e conseguir explicar cada parte (manual 13.2); as "3 perguntas do professor" de cada fase ajudam |
-| Relatório final (P12) | Formatação padrão do pandoc | Se o professor exigir ABNT/fonte específica, ajustar estilos no DOCX e exportar o PDF de novo pelo próprio Word/LibreOffice |
+| Relatório final (P12) | Ampliado em 2026-11-26 (99 páginas, padrão ABNT: Arial 12, espaçamento 1,5, margens 3/2 cm, sumário, listas de figuras e tabelas, 10 apêndices), gerado por `scripts/gerar_relatorio.py` a partir de `scripts/relatorio/P12_modelo.md` e dos dados reais | Ler o relatório inteiro; para mudar o texto, editar o modelo (não o arquivo gerado) e rodar o script de novo |
 
 ## D. Decisões técnicas que vocês devem conhecer (para responder ao professor)
 

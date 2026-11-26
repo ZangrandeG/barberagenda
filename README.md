@@ -173,7 +173,7 @@ Relatórios (Surefire, JaCoCo, Newman, capturas do Selenium) ficam nos artefatos
 | `dados/` | Fonte única de requisitos, riscos, casos (JSON), execuções e defeitos (CSV) usada para gerar P04, P05 e P06 |
 | `entrega/11_METRICAS_E_QUALIDADE/` | Métricas (P10), gráficos e análises do SonarQube (linha de base e final) |
 | `entrega/12_TDD_CICD_MELHORIA/` | TDD, pipeline e plano de melhoria (P11) |
-| `entrega/13_RELATORIO_FINAL/` | Relatório final (P12) em DOCX e PDF |
+| `entrega/13_RELATORIO_FINAL/` | Relatório final (P12) em DOCX e PDF, gerado por `python scripts/gerar_relatorio.py` |
 | `entrega/14_APRESENTACAO_E_VIDEO_CONTINGENCIA/` | Apresentação (P13) em PPTX e PDF, roteiros de demonstração e do vídeo |
 | `entrega/15_DIARIO_DE_PARTICIPACAO/` | Diário de participação (P14) |
 | `entrega/16_BACKUP_ENTREGA/` | Cópia de segurança do repositório na versão de entrega |
