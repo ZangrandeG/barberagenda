@@ -351,7 +351,7 @@ Figura 1 – Tela inicial do BarberAgenda
 :::
 
 ::: {custom-style="Figura"}
-![](../14_APRESENTACAO_E_VIDEO_CONTINGENCIA/imagens/tela_inicio.png){width=78%}
+![](figuras/tela_inicio.png){width=78%}
 :::
 
 ::: {custom-style="Fonte"}
@@ -1052,7 +1052,7 @@ Figura 6 – EX-022 (CT-003): cadastro recusado com nome de 2 caracteres, abaixo
 :::
 
 ::: {custom-style="Figura"}
-![](../05_EXECUCAO_MANUAL/evidencias/EX-022_CT-003_2026-11-18_a.png){width=80%}
+![](figuras/ex022_cadastro_nome_curto.png){width=80%}
 :::
 
 ::: {custom-style="Fonte"}
@@ -1065,7 +1065,7 @@ Figura 7 – EX-034 (CT-024): consulta recusada quando o código SEMENTE2 é usa
 :::
 
 ::: {custom-style="Figura"}
-![](../05_EXECUCAO_MANUAL/evidencias/EX-034_CT-024_2026-11-18_a.png){width=80%}
+![](figuras/ex034_consulta_recusada.png){width=80%}
 :::
 
 ::: {custom-style="Fonte"}
@@ -1224,7 +1224,7 @@ Figura 8 – Teste Selenium do agendamento completo (CT-010): mensagem de sucess
 :::
 
 ::: {custom-style="Figura"}
-![](../09_SISTEMA_INTERFACE/capturas/AgendamentoE2ETest_deveAgendarHorarioPelaTela_chrome_1366x768_OK.png){width=80%}
+![](figuras/selenium_agendamento_desktop.png){width=80%}
 :::
 
 ::: {custom-style="Fonte"}
@@ -1288,7 +1288,7 @@ Figura 9 – Agenda do dia na área administrativa após marcar um atendimento c
 :::
 
 ::: {custom-style="Figura"}
-![](../05_EXECUCAO_MANUAL/evidencias/EX-040_CT-034_2026-11-18_b.png){width=80%}
+![](figuras/ex040_agenda_concluido.png){width=80%}
 :::
 
 ::: {custom-style="Fonte"}

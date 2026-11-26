@@ -165,7 +165,7 @@ Tabela: Usuários do BarberAgenda e o que cada um pode fazer
 | Cliente | Pessoa que agenda um serviço | Cadastrar-se; ver horários livres; agendar; consultar e cancelar o próprio agendamento | Sem login: usa o código de acesso de 8 caracteres recebido ao agendar, junto com o e-mail |
 | Administrador (dono) | Responsável pela barbearia | Cadastrar, editar, desativar e excluir barbeiros e serviços; ver a agenda do dia de cada barbeiro; marcar atendimentos como concluídos | Usuário e senha (login por formulário ou HTTP Basic na API) |
 
-![Tela inicial do BarberAgenda](../14_APRESENTACAO_E_VIDEO_CONTINGENCIA/imagens/tela_inicio.png){width=78%}
+![Tela inicial do BarberAgenda](figuras/tela_inicio.png){width=78%}
 
 ## 2.2 Tecnologias e arquitetura
 
@@ -468,9 +468,9 @@ Tabela: Resultado de cada execução dos casos manuais (detalhes no Apêndice B)
 
 As figuras a seguir mostram duas evidências da execução: a recusa de um nome abaixo do limite no cadastro e a recusa de uma consulta com o código de outra pessoa.
 
-![EX-022 (CT-003): cadastro recusado com nome de 2 caracteres, abaixo do limite de 3](../05_EXECUCAO_MANUAL/evidencias/EX-022_CT-003_2026-11-18_a.png){width=80%}
+![EX-022 (CT-003): cadastro recusado com nome de 2 caracteres, abaixo do limite de 3](figuras/ex022_cadastro_nome_curto.png){width=80%}
 
-![EX-034 (CT-024): consulta recusada quando o código SEMENTE2 é usado com o e-mail de outro cliente](../05_EXECUCAO_MANUAL/evidencias/EX-034_CT-024_2026-11-18_a.png){width=80%}
+![EX-034 (CT-024): consulta recusada quando o código SEMENTE2 é usado com o e-mail de outro cliente](figuras/ex034_consulta_recusada.png){width=80%}
 
 ## 6.3 Caso bloqueado
 
@@ -558,7 +558,7 @@ Tabela: Testes de interface por classe (Chrome, 1366×768)
 
 {{E2E_CLASSES}}
 
-![Teste Selenium do agendamento completo (CT-010): mensagem de sucesso com o código de acesso gerado](../09_SISTEMA_INTERFACE/capturas/AgendamentoE2ETest_deveAgendarHorarioPelaTela_chrome_1366x768_OK.png){width=80%}
+![Teste Selenium do agendamento completo (CT-010): mensagem de sucesso com o código de acesso gerado](figuras/selenium_agendamento_desktop.png){width=80%}
 
 ## 7.5 Como executar
 
@@ -604,7 +604,7 @@ Tabela: Integrações validadas e resultado
 
 **Fluxos ponta a ponta executados:** cadastro até a mensagem de sucesso; cadastro inválido até a mensagem do campo; escolha de barbeiro, serviço, data e horário até a confirmação com o código de acesso; consulta pelo código até o cancelamento e a liberação do horário; login do administrador, cadastro de serviço e saída; agenda do dia até a conclusão do atendimento.
 
-![Agenda do dia na área administrativa após marcar um atendimento como concluído (EX-040, CT-034)](../05_EXECUCAO_MANUAL/evidencias/EX-040_CT-034_2026-11-18_b.png){width=80%}
+![Agenda do dia na área administrativa após marcar um atendimento como concluído (EX-040, CT-034)](figuras/ex040_agenda_concluido.png){width=80%}
 
 # 9 TESTES DE ACEITAÇÃO E NÃO FUNCIONAIS
 
