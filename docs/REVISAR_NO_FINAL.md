@@ -8,7 +8,7 @@ Lista final (2026-11-18), a pedido do grupo: "preencha o que falta e no final in
 |---|---|---|---|
 | A1 | ~~Número do grupo~~ — **feito (2026-11-25)**: o grupo é identificado pelos integrantes ("Grupo Guilherme e José Paulo"); pasta do Drive `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA`. Se o professor atribuir um número, trocar | P01, README, P12, comprovante | Feito |
 | A2 | ~~Aprovação da ficha P01~~ — **feito**: aprovada pelo professor em 2026-11-19, sem ajustes (registrado em 2026-11-25) | P01 | Feito |
-| A3 | Confirmar a **regra do professor sobre uso de IA** e manter/ajustar a declaração | P01 e P12 (folha de identificação) | Manual, seção 15 |
+| A3 | ~~Regra do professor sobre uso de IA~~ — **feito**: uso de IA autorizado pelo professor; declaração mantida em P01 e P12 (registrado em 2026-11-25) | P01, P12 | Feito |
 | A4 | **Aceitação** (CA-01 a CA-04) com pessoa externa ao grupo e registro da decisão | P09, parte A; depois `dados/execucoes.csv` | Não pode ser simulado |
 | A5 | **Usabilidade** (TNF-08) com participante externo, usando o roteiro e o questionário | `P09_Roteiro_Usabilidade.md` | Não pode ser simulado |
 | A6 | **Gravar o vídeo de contingência** (até 5 min, MP4) | `14_APRESENTACAO_E_VIDEO_CONTINGENCIA/` (roteiro na seção 6) | Manual 13.2 |

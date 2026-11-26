@@ -100,4 +100,4 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 - [x] Grupo identificado pelos integrantes (sem número) — 2026-11-25.
 - [ ] Confirmar a licença (MIT) e a opção preferencial.
 - [ ] Apresentar a ficha ao professor e registrar a decisão, os ajustes e a data.
-- [ ] Informar: orientação do professor sobre uso de IA, data da P2, marcos já entregues, repositório público ou privado.
+- [ ] Informar (uso de IA: autorizado pelo professor): data da P2, marcos já entregues, repositório público ou privado.

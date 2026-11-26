@@ -42,7 +42,7 @@ Integrante 1: ______________________________ Data: ___/___/______
 
 Integrante 2: ______________________________ Data: ___/___/______
 
-**Declaração de uso de inteligência artificial (seção 15 do manual).** O grupo utilizou ferramenta de IA generativa (Claude Code) como apoio na construção do sistema, dos scripts e dos documentos e, a pedido do grupo, na execução assistida dos casos de teste, sempre registrada como tal (coluna Executor). Todos os resultados vêm de execuções reais e verificáveis no repositório; os integrantes são responsáveis por compreender, validar e explicar todo o conteúdo.
+**Declaração de uso de inteligência artificial (seção 15 do manual).** O grupo utilizou ferramenta de IA generativa (Claude Code) como apoio na construção do sistema, dos scripts e dos documentos e, a pedido do grupo, na execução assistida dos casos de teste, sempre registrada como tal (coluna Executor). Todos os resultados vêm de execuções reais e verificáveis no repositório; os integrantes são responsáveis por compreender, validar e explicar todo o conteúdo. O uso de IA foi autorizado pelo professor.
 
 ```{=openxml}
 <w:p><w:r><w:br w:type="page"/></w:r></w:p>
