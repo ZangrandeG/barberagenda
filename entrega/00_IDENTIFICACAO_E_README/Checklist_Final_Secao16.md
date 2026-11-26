@@ -4,7 +4,7 @@ Legenda: **OK** = pronto e verificado · **Parcial** = pronto com pendência ind
 
 | # | Item da seção 16 | Situação | Evidência / o que falta |
 |---|---|---|---|
-| 1 | O sistema aprovado está executável e corresponde à versão informada | **Parcial** | BarberAgenda 1.2.0 (tag `v1.2.0-sistema`) compila, sobe e passa em todas as suítes; **falta a aprovação do professor** (P01) |
+| 1 | O sistema aprovado está executável e corresponde à versão informada | **Sim** | BarberAgenda 1.2.0 (tag `v1.2.0-sistema`) compila, sobe e passa em todas as suítes; aprovado pelo professor em 2026-11-19 (P01) |
 | 2 | O README permite instalar, configurar, executar e testar o projeto | **OK** | `README.md` (ordem da seção 11.4); cópia nesta pasta; clone limpo testado em 2026-11-18 |
 | 3 | O escopo, requisitos e riscos estão identificados e rastreáveis | **OK** | P02 v1.1 (14 requisitos, 12 riscos); P05 abas Requisitos/Riscos/Rastreabilidade |
 | 4 | O plano de testes está completo e atualizado | **Parcial** | P03 v1.1; **falta**: datas-limite do cronograma (data da P2) e confirmar papéis |

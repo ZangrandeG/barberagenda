@@ -9,10 +9,13 @@ Professor: Prof. Dr. Elvio Gilberto da Silva
 | v1.0 | 2026-11-18 | Primeira versão da ficha, com duas opções de sistema para aprovação | Guilherme Ribeiro Zangrande; José Paulo Dassie Felippi |
 | v1.1 | 2026-11-18 | Opção 1: sistema base implementado e verificado (tag `v1.0-sistema-base`) | Guilherme Ribeiro Zangrande; José Paulo Dassie Felippi |
 | v1.2 | 2026-11-18 | Opção 1: consulta/cancelamento por código de acesso aleatório + e-mail (versão 1.1.0, tag `v1.1.0-sistema-base`) | Guilherme Ribeiro Zangrande; José Paulo Dassie Felippi |
+| v1.3 | 2026-11-25 | Registro da decisão do professor: Opção 1 (BarberAgenda) aprovada em 2026-11-19 | Guilherme Ribeiro Zangrande; José Paulo Dassie Felippi |
 
 > Conforme a seção 5.5 do manual, o grupo apresenta **duas opções** de sistema. A documentação definitiva (P02 em diante) só será iniciada após a decisão do professor.
 >
-> **Opção preferencial do grupo:** Opção 1 — BarberAgenda. [CONFIRMAR PELO GRUPO]
+> **Opção preferencial do grupo:** Opção 1 — BarberAgenda.
+>
+> **Decisão:** o professor aprovou a Opção 1 (BarberAgenda) em 2026-11-19.
 
 ---
 
@@ -32,9 +35,9 @@ Professor: Prof. Dr. Elvio Gilberto da Silva
 | **Integrações existentes** | Interface web (JavaScript) ↔ API REST (HTTP/JSON); camada de controle ↔ camada de serviço (regras de negócio) ↔ repositórios Spring Data JPA ↔ banco H2; Spring Security ↔ área administrativa; repositório GitHub ↔ pipeline GitHub Actions. |
 | **Justificativa da escolha** | (a) Domínio simples e conhecido, fácil de explicar e de avaliar do ponto de vista do usuário (cliente e dono da barbearia), o que favorece os testes de aceitação. (b) Regras de negócio com intervalos, tamanhos, quantidades e datas — tamanho do nome, quantidade de dígitos do telefone, horário de funcionamento, intervalos de 30 minutos, antecedência máxima de 30 dias, limite de agendamentos ativos, duração e preço de serviços —, adequadas ao particionamento de equivalência e à análise de valor limite. (c) API REST própria, que permite testes de integração com Postman/Newman, incluindo encadeamento de dados. (d) Interface web com fluxos ponta a ponta para Selenium. (e) Código-fonte completo sob controle do grupo, viabilizando testes unitários, TDD, análise com SonarQube e CI/CD. (f) Banco H2 sem instalação, o que facilita a execução no laboratório. (g) Tamanho compatível com o período da disciplina. |
 | **Riscos de viabilidade** | 1. Sistema construído pelo próprio grupo no início do projeto: mudanças de escopo pedidas pelo professor exigem ajuste de código — mitigação: escopo fechado nesta ficha e versão base já disponível. 2. Regras que dependem de data e hora podem gerar testes instáveis — mitigação: relógio (`Clock`) injetável e dados com datas relativas. 3. Ambiente: SonarQube local exige Docker caso o repositório seja privado. 4. Sistema recém-construído pode apresentar poucos defeitos — serão registrados apenas os defeitos reais (seção 9.7). 5. A política do professor sobre uso de IA pode restringir esta opção — nesse caso, a Opção 2 é a alternativa. |
-| **Decisão do professor** | ( ) Aprovado  ( ) Aprovado com ajustes  ( ) Não aprovado |
-| **Ajustes solicitados** | |
-| **Data da aprovação** | |
+| **Decisão do professor** | (X) Aprovado  ( ) Aprovado com ajustes  ( ) Não aprovado |
+| **Ajustes solicitados** | Nenhum |
+| **Data da aprovação** | 2026-11-19 |
 
 ### Escopo funcional previsto (resumo das regras de negócio)
 
@@ -72,9 +75,9 @@ Professor: Prof. Dr. Elvio Gilberto da Silva
 | **Integrações existentes** | Navegador ↔ controladores Spring MVC/Thymeleaf ↔ repositórios Spring Data JPA ↔ banco H2 (ou MySQL/PostgreSQL por perfil). |
 | **Justificativa da escolha** | Projeto maduro, documentado e de instalação simples; código Java (JUnit aplicável); formulários com validações (por exemplo, telefone com exatamente 10 dígitos e campos obrigatórios); licença compatível com uso acadêmico e modificação. |
 | **Riscos de viabilidade** | 1. Não possui API REST no repositório principal; os testes com Postman ficariam restritos a requisições HTTP de formulário, reduzindo o valor dos testes de integração/API. 2. Poucas regras numéricas, o que limita a aplicação de valor limite. 3. O projeto já contém testes dos autores; os testes do grupo precisariam ser separados e identificados (seção 15). 4. Projeto muito conhecido: risco de semelhança com trabalhos de outros grupos. 5. Banco em memória por padrão: os dados se perdem ao reiniciar, exigindo perfil persistente para o teste de confiabilidade. |
-| **Decisão do professor** | ( ) Aprovado  ( ) Aprovado com ajustes  ( ) Não aprovado |
-| **Ajustes solicitados** | |
-| **Data da aprovação** | |
+| **Decisão do professor** | Não se aplica — a Opção 1 foi aprovada |
+| **Ajustes solicitados** | — |
+| **Data da aprovação** | — |
 
 ---
 

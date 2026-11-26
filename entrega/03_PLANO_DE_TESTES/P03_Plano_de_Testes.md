@@ -174,7 +174,7 @@ Alinhado aos marcos da seção 7 do manual. As datas-limite dependem do calendá
 | Marco | Atividades principais | Produtos | Data-limite | Situação |
 |---|---|---|---|---|
 | 0 e 1 — Fundamentos | Grupo, duas opções de sistema, níveis e justificativa; sistema base | P01, documento do Marco 1 | [PREENCHER] | Concluído em 2026-11-18 (tag `marco-1`) |
-| 2 — Planejamento | Requisitos, escopo, riscos e plano de testes | P02, P03 | [PREENCHER] | Concluído em 2026-11-18 (tag `marco-2`), aguardando aprovação do sistema |
+| 2 — Planejamento | Requisitos, escopo, riscos e plano de testes | P02, P03 | [PREENCHER] | Concluído em 2026-11-18 (tag `marco-2`), sistema aprovado pelo professor em 2026-11-19 |
 | 3 — Especificação | ≥ 24 casos com partições e limites; matriz de rastreabilidade em XLSX | P04, P05 | [PREENCHER] | Planejado |
 | 4 — Execução e defeitos | Execução manual com evidências; defeitos no GitHub Issues; retestes | P06, P07 | [PREENCHER] | Planejado |
 | 5 — Automação e suporte | ≥ 6 testes de unidade; JaCoCo; SonarQube linha de base | P08 (unidade) | [PREENCHER] | Planejado |

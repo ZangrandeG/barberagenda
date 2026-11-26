@@ -8,7 +8,7 @@ Arquivo de acompanhamento para retomar o trabalho entre sessões. Atualizado a c
 
 - Fase 1 concluída: ficha P01 (v1.2) e sistema base, versão atual 1.1.0 (tag `v1.1.0-sistema-base`). O grupo decidiu construir o sistema antes da decisão do professor sobre a ficha.
 - Fase 2 concluída: Marco 1 (níveis, tipos e estratégia) — tag `marco-1`.
-- Fase 3 concluída: Marco 2 (P02 e P03) — tag `marco-2`. Feita antes da aprovação do professor, por decisão do grupo (o manual pede o sistema aprovado no Marco 2).
+- Fase 3 concluída: Marco 2 (P02 e P03) — tag `marco-2`. Feita antes da aprovação do professor, por decisão do grupo; a aprovação veio em 2026-11-19 (o manual pede o sistema aprovado no Marco 2).
 - Fase 4 concluída: Marco 3 (P04 com 35 casos e P05 em XLSX) — tag `marco-3`. Fonte única em `dados/`; gerador `scripts/gerar_artefatos.py`.
 - Fase 5 em andamento: **o grupo executa os 35 casos** (decisão de 2026-11-18). Preparação pronta: roteiro, checklist, registro, convenção de evidências, `scripts/datas_teste.py`, modelo de issue "Defeito", etiquetas no GitHub e `scripts/exportar_defeitos.py`. Nenhum caso executado ainda.
 - Ao trazer resultados: lançar em `dados/execucoes.csv`, abrir issues para reprovações, rodar `exportar_defeitos.py` e `gerar_artefatos.py`; depois, tag `marco-4`.

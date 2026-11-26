@@ -7,7 +7,7 @@ Lista final (2026-11-18), a pedido do grupo: "preencha o que falta e no final in
 | # | O que fazer | Onde | Por quê |
 |---|---|---|---|
 | A1 | ~~Número do grupo~~ — **feito (2026-11-25)**: o grupo é identificado pelos integrantes ("Grupo Guilherme e José Paulo"); pasta do Drive `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA`. Se o professor atribuir um número, trocar | P01, README, P12, comprovante | Feito |
-| A2 | Levar a **ficha P01 ao professor** e registrar decisão, ajustes e data | P01 | Manual 5.5: o sistema precisa estar aprovado |
+| A2 | ~~Aprovação da ficha P01~~ — **feito**: aprovada pelo professor em 2026-11-19, sem ajustes (registrado em 2026-11-25) | P01 | Feito |
 | A3 | Confirmar a **regra do professor sobre uso de IA** e manter/ajustar a declaração | P01 e P12 (folha de identificação) | Manual, seção 15 |
 | A4 | **Aceitação** (CA-01 a CA-04) com pessoa externa ao grupo e registro da decisão | P09, parte A; depois `dados/execucoes.csv` | Não pode ser simulado |
 | A5 | **Usabilidade** (TNF-08) com participante externo, usando o roteiro e o questionário | `P09_Roteiro_Usabilidade.md` | Não pode ser simulado |
@@ -41,7 +41,7 @@ Depois de A4, A5 e do CT-036: lançar as execuções em `dados/execucoes.csv`, r
 
 ## D. Decisões técnicas que vocês devem conhecer (para responder ao professor)
 
-- Construímos o sistema antes da aprovação da ficha (decisão de vocês em 2026-11-18).
+- Construímos o sistema antes da aprovação da ficha (decisão de vocês em 2026-11-18); o professor aprovou a ficha em 2026-11-19.
 - Revisão de segurança antes dos testes gerou as versões 1.0.1 (reset protegido) e 1.1.0 (código de acesso aleatório); não foram registradas como defeitos porque não vieram da execução de casos.
 - SonarQube roda localmente em zip (sem Docker), com dados em `D:\SonarQubeDados` (o disco C: tem menos de 10% livre). Senha e tokens em `C:\Users\Admin\Ferramentas\SONARQUBE_LOCAL.txt` (fora do Git). Não há capturas de tela do painel: exigem login.
 - A branch `demo/falha-pipeline` contém a falha **proposital** do pipeline (demonstração exigida) e não deve ser integrada à `main`.
