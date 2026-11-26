@@ -6,13 +6,15 @@
 
 | Slide | Conteúdo (seção 13.1 do manual) | Quem fala | Tempo |
 |---|---|---|---|
-| 1–2 | Identificação, objetivo e escopo | Guilherme | 2 min |
-| 3 | Riscos e estratégia de teste | José Paulo | 2 min |
-| 4 | Caso manual, evidência e defeitos | José Paulo | 2 min |
-| 5 | Automação em vários níveis + **demonstração 1** | Guilherme | 3 min |
-| 6 | Aceitação, não funcionais e métricas | José Paulo | 2 min |
-| 7 | TDD e CI/CD + **demonstração 2** | Guilherme | 2 min |
-| 8 | Conclusão e melhorias | José Paulo | 1 min |
+| 1–3 | Abertura, o sistema e como foi construído | Guilherme | 2 min |
+| 4–5 | Riscos e estratégia de teste (pirâmide) | José Paulo | 2 min |
+| 6 | Casos de teste, execução e defeitos | José Paulo | 2 min |
+| 7 | Automação + **demonstração 1** | Guilherme | 3 min |
+| 8–9 | Não funcionais e métricas | José Paulo | 2 min |
+| 10–11 | TDD e pipeline CI/CD + **demonstração 2** | Guilherme | 2 min |
+| 12–13 | Qualidade do código (SonarQube) e conclusão | José Paulo | 1–2 min |
+
+Os slides têm pouco texto de propósito: o que falar está nas **notas do apresentador** de cada slide.
 
 ## 2. Preparação (antes da aula)
 
@@ -21,7 +23,7 @@
 3. Terminal 1: `java -jar target/barberagenda-1.2.0.jar --spring.profiles.active=test` (deixar rodando).
 4. Testar o roteiro inteiro uma vez e conferir que o vídeo de contingência abre no computador da sala.
 
-## 3. Demonstração 1 — automação (slide 5)
+## 3. Demonstração 1 — automação (slide 7)
 
 ```bash
 ./mvnw test                                   # 58 testes de unidade e integração, ~30 s
@@ -30,7 +32,7 @@ newman run postman/BarberAgenda.postman_collection.json -e postman/BarberAgenda.
 
 Mostrar: "Tests run: 58, Failures: 0" e a tabela final do Newman (26 requisições, 63 asserções, 0 falhas). Se houver tempo: `./mvnw test -Pe2e -Dtest=AgendamentoE2ETest -Dheadless=false` para o navegador abrir e agendar sozinho.
 
-## 4. Demonstração 2 — TDD e pipeline (slide 7)
+## 4. Demonstração 2 — TDD e pipeline (slides 10–11)
 
 ```bash
 git log --oneline 35ce2a2 -1    # RED
