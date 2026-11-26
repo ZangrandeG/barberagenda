@@ -205,4 +205,5 @@ Relatórios (Surefire, JaCoCo, Newman, capturas do Selenium) ficam nos artefatos
 ## 15. Contato do grupo
 
 - Issues do repositório: https://github.com/ZangrandeG/barberagenda/issues
-- E-mails institucionais: [PREENCHER PELO GRUPO]
+- E-mails institucionais: guilhermezangrande130@gmail.com - zepadf2002@gmail.com
+  
