@@ -21,6 +21,6 @@ Legenda: **OK** = pronto e verificado · **Parcial** = pronto com pendência ind
 | 15 | O relatório final está em DOCX e PDF e corresponde aos arquivos técnicos | **Parcial** | `13_RELATORIO_FINAL/P12_Relatorio_Final.docx` e `.pdf` (PDF gerado do DOCX); **falta** número do grupo e assinaturas |
 | 16 | A apresentação e o vídeo de contingência estão na pasta correta | **Parcial** | PPTX + PDF e roteiros em `14_APRESENTACAO_E_VIDEO_CONTINGENCIA/`; **falta gravar o vídeo** |
 | 17 | O Diário de Participação está atualizado e coerente | **Grupo** | Linhas sugeridas em P14; **revisar e preencher responsáveis, colaboradores e tempo** |
-| 18 | O Drive possui a estrutura obrigatória e todos os links funcionam | **Grupo** | `entrega/` tem as 17 pastas; **copiar para o Drive** na pasta `P2_TQS_2026_A_GRUPOXX_BARBERAGENDA` |
+| 18 | O Drive possui a estrutura obrigatória e todos os links funcionam | **Grupo** | `entrega/` tem as 17 pastas; **copiar para o Drive** na pasta `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA` |
 | 19 | As permissões foram testadas sem solicitar acesso | **Grupo** | O repositório está **privado**: tornar público ou dar acesso ao professor e testar em janela anônima |
 | 20 | A entrega foi concluída antes do horário limite da P2 | **Grupo** | Data da P2 não informada |

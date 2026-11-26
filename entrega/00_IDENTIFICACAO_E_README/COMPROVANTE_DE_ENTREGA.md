@@ -5,7 +5,7 @@ lang: pt-BR
 
 **Disciplina:** Testes e Qualidade de Software — Prof. Dr. Elvio Gilberto da Silva — UNISAGRADO 2026
 
-**Pasta:** P2_TQS_2026_A_GRUPO[XX]_BARBERAGENDA
+**Pasta:** P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA
 
 **Sistema:** BarberAgenda 1.2.0 — https://github.com/ZangrandeG/barberagenda
 

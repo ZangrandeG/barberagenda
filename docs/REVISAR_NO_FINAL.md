@@ -6,7 +6,7 @@ Lista final (2026-11-18), a pedido do grupo: "preencha o que falta e no final in
 
 | # | O que fazer | Onde | Por quê |
 |---|---|---|---|
-| A1 | Informar o **número do grupo** e substituir `[PREENCHER]`/`GRUPO[XX]` | P01, README (raiz e pasta 00), P03, P12 (capa e identificação), comprovante, nome da pasta do Drive | Não foi informado |
+| A1 | ~~Número do grupo~~ — **feito (2026-11-25)**: o grupo é identificado pelos integrantes ("Grupo Guilherme e José Paulo"); pasta do Drive `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA`. Se o professor atribuir um número, trocar | P01, README, P12, comprovante | Feito |
 | A2 | Levar a **ficha P01 ao professor** e registrar decisão, ajustes e data | P01 | Manual 5.5: o sistema precisa estar aprovado |
 | A3 | Confirmar a **regra do professor sobre uso de IA** e manter/ajustar a declaração | P01 e P12 (folha de identificação) | Manual, seção 15 |
 | A4 | **Aceitação** (CA-01 a CA-04) com pessoa externa ao grupo e registro da decisão | P09, parte A; depois `dados/execucoes.csv` | Não pode ser simulado |
@@ -15,7 +15,7 @@ Lista final (2026-11-18), a pedido do grupo: "preencha o que falta e no final in
 | A7 | **Diário de Participação**: revisar as linhas sugeridas e preencher responsável, colaboradores e tempo reais | P14 | Deve refletir a participação real |
 | A8 | Assinar a declaração do relatório e o **COMPROVANTE_DE_ENTREGA** (data, hora, checklist) | P12 e `00_IDENTIFICACAO_E_README/COMPROVANTE_DE_ENTREGA.pdf` | Manual 11.6 |
 | A9 | Decidir o **acesso ao repositório**: hoje está **privado**. Tornar público (`gh repo edit --visibility public`) ou adicionar o professor como colaborador; testar os links em janela anônima | GitHub | Manual 11.6, item 3 |
-| A10 | Copiar `entrega/` para a pasta do Drive do professor com o nome `P2_TQS_2026_A_GRUPOXX_BARBERAGENDA` e dar permissão de visualização/download | Drive | Entrega oficial é pelo Drive |
+| A10 | Copiar `entrega/` para a pasta do Drive do professor com o nome `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA` e dar permissão de visualização/download | Drive | Entrega oficial é pelo Drive |
 | A11 | Informar a **data da P2** e preencher as datas-limite | P03, seção 15 | Não informada |
 
 Depois de A4, A5 e do CT-036: lançar as execuções em `dados/execucoes.csv`, rodar `python scripts/gerar_artefatos.py` e `python scripts/metricas.py`, atualizar os números do P10/P12 e regerar o DOCX/PDF (comandos no README).

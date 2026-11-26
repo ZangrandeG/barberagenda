@@ -13,7 +13,7 @@ Sistema web de agendamento para uma barbearia **fictícia**, usado como objeto d
 | Guilherme Ribeiro Zangrande | 23110757 | `ZangrandeG` |
 | José Paulo Dassie Felippi | 24111563 | `zepadf` |
 
-Turma A — Grupo [PREENCHER número do grupo]
+Turma A — Grupo Guilherme e José Paulo
 
 ## 2. Nome e versão do sistema
 

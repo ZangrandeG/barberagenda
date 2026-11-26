@@ -16,7 +16,7 @@ lang: pt-BR
 
 **Integrantes:** Guilherme Ribeiro Zangrande (RA 23110757) e José Paulo Dassie Felippi (RA 24111563)
 
-**Turma:** A — **Grupo:** [PREENCHER número do grupo]
+**Turma:** A — **Grupo:** Guilherme e José Paulo
 
 Bauru, 2026
 
@@ -28,13 +28,13 @@ Bauru, 2026
 
 | Item | Informação |
 |---|---|
-| Grupo | Turma A — Grupo [PREENCHER] |
+| Grupo | Turma A — Grupo Guilherme e José Paulo |
 | Integrantes | Guilherme Ribeiro Zangrande (RA 23110757, GitHub `ZangrandeG`); José Paulo Dassie Felippi (RA 24111563, GitHub `zepadf`) |
 | Sistema | BarberAgenda 1.2.0 (tag `v1.2.0-sistema`) |
 | Repositório | https://github.com/ZangrandeG/barberagenda |
 | Pipeline (GitHub Actions) | https://github.com/ZangrandeG/barberagenda/actions |
 | Defeitos (GitHub Issues) | https://github.com/ZangrandeG/barberagenda/issues?q=label%3Adefeito |
-| Pasta de entrega | `P2_TQS_2026_A_GRUPO[XX]_BARBERAGENDA` (espelho em `entrega/` no repositório) |
+| Pasta de entrega | `P2_TQS_2026_A_GRUPO_GUILHERME_JOSEPAULO_BARBERAGENDA` (espelho em `entrega/` no repositório) |
 
 **Declaração de participação (Apêndice M).** Declaramos que os arquivos entregues representam o trabalho efetivamente realizado pelo grupo, que as execuções e métricas são reais, que os dados utilizados são fictícios e que respeitamos as autorizações, licenças e orientações da disciplina.
 

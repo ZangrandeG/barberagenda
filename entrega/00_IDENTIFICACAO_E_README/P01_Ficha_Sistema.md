@@ -20,7 +20,7 @@ Professor: Prof. Dr. Elvio Gilberto da Silva
 
 | Campo | Preenchimento do grupo |
 |---|---|
-| **Turma e grupo** | Turma A — Grupo [PREENCHER número do grupo] |
+| **Turma e grupo** | Turma A — Grupo Guilherme e José Paulo |
 | **Integrantes** | Guilherme Ribeiro Zangrande (RA 23110757); José Paulo Dassie Felippi (RA 24111563) |
 | **Nome do sistema** | BarberAgenda — Sistema de Agendamento de Barbearia (versão prevista para teste: 1.0) |
 | **Origem do sistema** | Sistema acadêmico desenvolvido pelo próprio grupo para esta disciplina (seção 5.2, segundo item). A construção é feita com apoio de ferramenta de inteligência artificial generativa (Claude Code), uso declarado conforme a seção 15 e sujeito às orientações do professor. **Situação atual:** versão base implementada e executável desde 2026-11-18 (versão atual 1.1.0, tag `v1.1.0-sistema-base`); funcionamento verificado conforme `entrega/01_SISTEMA_ALVO/verificacao_v1.1.0_2026-11-18.txt`. |
@@ -60,7 +60,7 @@ Professor: Prof. Dr. Elvio Gilberto da Silva
 
 | Campo | Preenchimento do grupo |
 |---|---|
-| **Turma e grupo** | Turma A — Grupo [PREENCHER número do grupo] |
+| **Turma e grupo** | Turma A — Grupo Guilherme e José Paulo |
 | **Integrantes** | Guilherme Ribeiro Zangrande (RA 23110757); José Paulo Dassie Felippi (RA 24111563) |
 | **Nome do sistema** | Spring PetClinic — aplicação de exemplo do ecossistema Spring para gestão de uma clínica veterinária (versão: commit a ser fixado no fork do grupo — [PREENCHER hash do commit]) |
 | **Origem do sistema** | Projeto de código aberto (seção 5.2, terceiro item), utilizado somente em ambiente local e de testes, por meio de fork no GitHub do grupo. |
