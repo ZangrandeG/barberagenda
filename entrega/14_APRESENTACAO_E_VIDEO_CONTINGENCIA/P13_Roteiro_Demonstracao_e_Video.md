@@ -14,7 +14,7 @@
 | 10–11 | TDD e pipeline CI/CD + **demonstração 2** | Guilherme | 2 min |
 | 12–13 | Qualidade do código (SonarQube) e conclusão | José Paulo | 1–2 min |
 
-Os slides têm pouco texto de propósito: o que falar está nas **notas do apresentador** de cada slide.
+Os slides têm pouco texto de propósito: o que falar está nas **notas do apresentador** de cada slide. O texto completo de cada fala, as demonstrações e as perguntas prováveis estão em **`P13_Roteiro_de_Fala.md`** (e no PDF de mesmo nome, para imprimir).
 
 ## 2. Preparação (antes da aula)
 
